@@ -1,12 +1,13 @@
-# Vite React Redux Template
+# Staycation
 
-My base template for React project.
+Aplikasi web untuk menemukan penyedia hotel, rumah, dan apartemen yang dekat dengan tempat wisata.
 
-The react-ts boilerplate from Vite doesn't include ESLint and Prettier, so I added those things into this template manually.
+<!-- > Proyek kursus [BWA Full-Stack JavaScript Developer: Website Travel](https://www.buildwithangga.com/kelas/full-stack-javascript-developer-website-travel)
 
-## Branches
+## Techstack
 
-| Branch      | Description                                        |
-| ----------- | -------------------------------------------------- |
-| master      | Vite + React + TypeScript + ESLint                 |
-| react-redux | Vite + React + TypeScript + Redux Toolkit + ESLint |
+Fullstack JavaScript MERN:
+- MongoDB
+- Express.js
+- React.js
+- Node.js -->
