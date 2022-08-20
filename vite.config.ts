@@ -1,3 +1,6 @@
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+
 import react from "@vitejs/plugin-react";
 import { dirname, resolve } from "path";
 import { fileURLToPath } from "url";
@@ -13,5 +16,10 @@ export default defineConfig({
     alias: {
       "~bootstrap": resolve(__dirname, "node_modules/bootstrap"),
     },
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./src/setup-tests.ts",
   },
 });
