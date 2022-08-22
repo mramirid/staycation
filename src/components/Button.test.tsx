@@ -1,16 +1,24 @@
 import { render } from "@testing-library/react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it } from "vitest";
-import Button from ".";
+import Button from "./Button";
 
 describe("<Button />", () => {
   it("Should not allowed click button if isDisabled is present", () => {
-    const { container } = render(<Button isDisabled>A</Button>);
+    const { container } = render(
+      <Button type="button" isDisabled>
+        A
+      </Button>
+    );
     expect(container.querySelector("button.disabled")).toBeInTheDocument();
   });
 
   it("Should render loading/spinner", () => {
-    const { container, getByText } = render(<Button isLoading>A</Button>);
+    const { container, getByText } = render(
+      <Button type="button" isLoading>
+        A
+      </Button>
+    );
 
     expect(getByText(/loading/i)).toBeInTheDocument();
     expect(container.querySelector("span")).toBeInTheDocument();
@@ -18,7 +26,7 @@ describe("<Button />", () => {
 
   it("Should render <a />", () => {
     const { container } = render(
-      <Button isLink isExternal href="#">
+      <Button type="external-link" href="#">
         A
       </Button>
     );
@@ -33,7 +41,7 @@ describe("<Button />", () => {
           <Route
             index
             element={
-              <Button isLink href="#">
+              <Button type="link" to="#">
                 A
               </Button>
             }
