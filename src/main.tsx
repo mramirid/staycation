@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { store } from "./app/store";
-import "./assets/scss/style.scss";
+import "./index.css";
 
 const rootElement = document.getElementById("root");
 if (rootElement === null) {

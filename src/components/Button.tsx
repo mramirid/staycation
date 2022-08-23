@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type StyleProps = {
   size?: "small" | "large";
@@ -7,12 +7,12 @@ type StyleProps = {
   className?: string;
   isPrimary?: boolean;
   isDisabled?: boolean;
+  isLoading?: boolean;
   isBlock?: boolean;
   hasShadow?: boolean;
 };
 
 type BaseProps = StyleProps & {
-  isLoading?: boolean;
   children: ReactNode;
   onClick?: () => void;
 };
@@ -21,53 +21,39 @@ type NormalButtonProps = BaseProps & { type: "button" };
 
 type InternalLinkProps = BaseProps & { type: "link"; to: string };
 
-type InternalNavLinkProps = BaseProps & {
-  type: "nav-link";
-  to: string;
-
-  //! Broken type
-  // className?: string | ((props: { isActive: boolean }) => string | undefined);
-};
-
 type ExternalLinkProps = BaseProps & {
   type: "external-link";
   href: string;
   isBlank?: boolean;
 };
 
-type AnchorLinkProps =
-  | InternalLinkProps
-  | InternalNavLinkProps
-  | ExternalLinkProps;
+type AnchorLinkProps = InternalLinkProps | ExternalLinkProps;
 
-export default function Button(props: NormalButtonProps | AnchorLinkProps) {
+type Props = NormalButtonProps | AnchorLinkProps;
+
+export default function Button(props: Props) {
   const className = buildClassName(props);
 
   const handleClick = () => {
     props.onClick?.();
   };
 
-  if (props.isLoading) {
-    return <LoadingIndicator />;
-  }
-
   if (props.type === "button") {
     return (
       <NormalButton {...props} className={className} onClick={handleClick} />
     );
   }
-
   return <AnchorLink {...props} className={className} onClick={handleClick} />;
 }
 
-function buildClassName(styleProps: StyleProps) {
-  const classNameSet = new Set(["btn", styleProps.className]);
+function buildClassName(props: Props) {
+  const classNameSet = new Set(["btn normal-case", props.className]);
 
-  if (styleProps.isPrimary) {
+  if (props.isPrimary) {
     classNameSet.add("btn-primary");
   }
 
-  switch (styleProps.size) {
+  switch (props.size) {
     case "small":
       classNameSet.add("btn-sm");
       break;
@@ -76,34 +62,31 @@ function buildClassName(styleProps: StyleProps) {
       break;
   }
 
-  if (styleProps.isBlock) {
+  if (props.isBlock) {
     classNameSet.add("btn-block");
   }
 
-  if (styleProps.hasShadow) {
+  if (props.hasShadow) {
     classNameSet.add("btn-shadow");
   }
 
-  if (styleProps.isDisabled) {
-    classNameSet.add("disabled");
+  if (props.isDisabled) {
+    classNameSet.add("btn-disabled");
+  }
+
+  if (props.isLoading) {
+    classNameSet.add("loading");
   }
 
   return Array.from(classNameSet).join(" ").trim();
 }
 
-function LoadingIndicator(props: StyleProps) {
-  return (
-    <span className={props.className} style={props.style}>
-      <span className="spinner-border spinner-border-sm mx-5" />
-      <span className="sr-only">Loading...</span>
-    </span>
-  );
-}
-
 function NormalButton(props: NormalButtonProps) {
+  const className = `${props.className} rounded font-medium`;
+
   return (
     <button
-      className={props.className}
+      className={className}
       style={props.style}
       onClick={props.onClick}
       disabled={props.isDisabled}
@@ -114,10 +97,12 @@ function NormalButton(props: NormalButtonProps) {
 }
 
 function AnchorLink(props: AnchorLinkProps) {
+  const className = `${props.className} btn-link`;
+
   if (props.type === "external-link") {
-    return <ExternalLink {...props} />;
+    return <ExternalLink {...props} className={className} />;
   }
-  return <InternalLink {...props} />;
+  return <InternalLink {...props} className={className} />;
 }
 
 function ExternalLink(props: ExternalLinkProps) {
@@ -137,16 +122,15 @@ function ExternalLink(props: ExternalLinkProps) {
   );
 }
 
-function InternalLink(props: InternalLinkProps | InternalNavLinkProps) {
-  const InternalLink = props.type === "nav-link" ? NavLink : Link;
+function InternalLink(props: InternalLinkProps) {
   return (
-    <InternalLink
+    <Link
       to={props.to}
       className={props.className}
       style={props.style}
       onClick={props.onClick}
     >
       {props.children}
-    </InternalLink>
+    </Link>
   );
 }

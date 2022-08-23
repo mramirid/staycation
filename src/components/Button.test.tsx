@@ -10,18 +10,17 @@ describe("<Button />", () => {
         A
       </Button>
     );
-    expect(container.querySelector("button.disabled")).toBeInTheDocument();
+    expect(container.querySelector("button.btn-disabled")).toBeInTheDocument();
   });
 
   it("Should render loading/spinner", () => {
-    const { container, getByText } = render(
+    const { container } = render(
       <Button type="button" isLoading>
         A
       </Button>
     );
 
-    expect(getByText(/loading/i)).toBeInTheDocument();
-    expect(container.querySelector("span")).toBeInTheDocument();
+    expect(container.querySelector(".loading")).toBeInTheDocument();
   });
 
   it("Should render <a />", () => {
