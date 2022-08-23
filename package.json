@@ -6,6 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
+    "test": "vitest",
     "prettier": "prettier --write src",
     "type-check": "tsc --noEmit",
     "lint": "eslint src",
@@ -31,22 +32,36 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.4",
+    "daisyui": "^2.24.0",
+    "lodash-es": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.2"
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/lodash-es": "^4.17.6",
+    "@types/node": "^18.7.9",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/testing-library__jest-dom": "^5.14.5",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
     "@vitejs/plugin-react": "^2.0.1",
+    "autoprefixer": "^10.4.8",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-jsx-a11y": "^6.6.1",
+    "jsdom": "^20.0.0",
+    "postcss": "^8.4.16",
     "prettier": "^2.7.1",
+    "tailwindcss": "^3.1.8",
     "typescript": "^4.6.4",
-    "vite": "^3.0.8"
+    "vite": "^3.0.8",
+    "vitest": "^0.22.1"
   }
 }

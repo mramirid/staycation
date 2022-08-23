@@ -1,6 +1,6 @@
 # Staycation
 
-<!-- Aplikasi web untuk menemukan penyedia hotel, rumah, dan apartemen yang dekat dengan tempat wisata.
+Aplikasi web untuk menemukan penyedia hotel, rumah, dan apartemen yang dekat dengan tempat wisata.
 
 > Proyek kursus [BWA Full-Stack JavaScript Developer: Website Travel](https://www.buildwithangga.com/kelas/full-stack-javascript-developer-website-travel)
 
@@ -10,8 +10,8 @@ Fullstack TypeScript MERN:
 
 - TypeScript
 - React.js
-- Boostrap
-- SASS
+- TailwindCSS
+- daisyUI
 - MongoDB
 - Node.js
-- Express.js -->
+- Express.js
