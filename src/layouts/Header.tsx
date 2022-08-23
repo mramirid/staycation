@@ -1,7 +1,5 @@
 import BrandText from "@/components/BrandText";
-import Button from "@/components/Button";
-import { isNull } from "lodash-es";
-import { useMatch } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
@@ -29,19 +27,16 @@ type NavItemProps = {
 };
 
 function NavItem(props: NavItemProps) {
-  const match = useMatch(props.to);
-
-  const activeClass = !isNull(match) ? "!text-primary" : "";
+  const classNameHandler = (props: { isActive: boolean }) => {
+    const className = "btn btn-link normal-case px-4 text-base font-normal ";
+    return className + (props.isActive ? "text-primary" : "text-secondary");
+  };
 
   return (
     <li>
-      <Button
-        className={`px-4 text-secondary text-base font-normal ${activeClass}`}
-        type="nav-link"
-        to={props.to}
-      >
+      <NavLink className={classNameHandler} to={props.to}>
         {props.children}
-      </Button>
+      </NavLink>
     </li>
   );
 }

@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type StyleProps = {
   size?: "small" | "large";
@@ -21,23 +21,13 @@ type NormalButtonProps = BaseProps & { type: "button" };
 
 type InternalLinkProps = BaseProps & { type: "link"; to: string };
 
-type InternalNavLinkProps = BaseProps & {
-  /** @deprecated nav-link is broken, use NavLink from react-router instead */
-  type: "nav-link";
-  to: string;
-  className?: string | ((props: { isActive: boolean }) => string | undefined);
-};
-
 type ExternalLinkProps = BaseProps & {
   type: "external-link";
   href: string;
   isBlank?: boolean;
 };
 
-type AnchorLinkProps =
-  | InternalLinkProps
-  | InternalNavLinkProps
-  | ExternalLinkProps;
+type AnchorLinkProps = InternalLinkProps | ExternalLinkProps;
 
 type Props = NormalButtonProps | AnchorLinkProps;
 
@@ -132,16 +122,15 @@ function ExternalLink(props: ExternalLinkProps) {
   );
 }
 
-function InternalLink(props: InternalLinkProps | InternalNavLinkProps) {
-  const InternalLink = props.type === "nav-link" ? NavLink : Link;
+function InternalLink(props: InternalLinkProps) {
   return (
-    <InternalLink
+    <Link
       to={props.to}
       className={props.className}
       style={props.style}
       onClick={props.onClick}
     >
       {props.children}
-    </InternalLink>
+    </Link>
   );
 }
