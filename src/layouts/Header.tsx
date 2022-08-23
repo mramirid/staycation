@@ -2,15 +2,16 @@ import BrandText from "@/components/BrandText";
 import Button from "@/components/Button";
 import { isNull } from "lodash-es";
 import { useMatch } from "react-router-dom";
-import classes from "./Header.module.scss";
 
 export default function Header() {
   return (
-    <header className={`${classes.header} spacing-sm`}>
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light d-flex justify-content-between">
-          <BrandText />
-          <ul className="navbar-nav">
+    <header className={`border-b border-grayE5`}>
+      <div className="the-container">
+        <nav className="navbar h-20">
+          <div className="flex-1">
+            <BrandText />
+          </div>
+          <ul className="flex-none">
             <NavItem to="/">Home</NavItem>
             <NavItem to="/browse-by">Browse By</NavItem>
             <NavItem to="/stories">Stories</NavItem>
@@ -30,11 +31,15 @@ type NavItemProps = {
 function NavItem(props: NavItemProps) {
   const match = useMatch(props.to);
 
-  const activeClass = !isNull(match) ? "active" : "";
+  const activeClass = !isNull(match) ? "!text-primary" : "";
 
   return (
-    <li className={`nav-item ${activeClass}`}>
-      <Button type="nav-link" to={props.to} className="nav-link">
+    <li>
+      <Button
+        className={`px-4 text-secondary text-base font-normal ${activeClass}`}
+        type="nav-link"
+        to={props.to}
+      >
         {props.children}
       </Button>
     </li>
