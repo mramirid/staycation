@@ -3,9 +3,6 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {},
-    colors: {
-      grayE5: "#E5E5E5",
-    },
   },
   daisyui: {
     themes: [
@@ -17,6 +14,8 @@ module.exports = {
           accent: "#FF498B",
           neutral: "#000000",
           "base-100": "#FFFFFF",
+          "base-200": "#E5E5E5",
+          "base-300": "#B0B0B0",
           success: "#1ABC9C",
           warning: "#FFCC47",
           error: "#E74C3C",

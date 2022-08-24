@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
 import { Link } from "react-router-dom";
+import classes from "./Button.module.css";
 
 type StyleProps = {
   size?: "small" | "large";
@@ -47,10 +48,13 @@ export default function Button(props: Props) {
 }
 
 function buildClassName(props: Props) {
-  const classNameSet = new Set(["btn normal-case", props.className]);
+  const classNameSet = new Set([
+    "btn normal-case text-[1.125rem] min-h-[3.125rem] leading-7",
+    props.className,
+  ]);
 
   if (props.isPrimary) {
-    classNameSet.add("btn-primary");
+    classNameSet.add("btn-primary").add(classes["btn-primary-shadow"]);
   }
 
   switch (props.size) {
