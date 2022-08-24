@@ -1,15 +1,16 @@
 /// <reference types="vite-plugin-svgr/client" />
 
+import landingPageData from "@/assets/data/landing-page.json";
 import { ReactComponent as IconCities } from "@/assets/icons/icon-cities.svg";
 import { ReactComponent as IconTraveler } from "@/assets/icons/icon-traveler.svg";
 import { ReactComponent as IconTreasure } from "@/assets/icons/icon-treasure.svg";
-import imageHero from "@/assets/images/hero.png";
+import imageHero from "@/assets/images/hero.jpg";
 import Button from "@/components/Button";
+import { clx } from "@/lib/styling";
 import { isNumber } from "lodash-es";
 import type { FunctionComponent, RefObject, SVGProps } from "react";
 
 type Props = {
-  statistics: { travelers: number; treasures: number; cities: number };
   mostPickedRef: RefObject<HTMLDivElement>;
 };
 
@@ -23,6 +24,8 @@ export default function Hero(props: Props) {
 }
 
 type HeroContentProps = Props & { className: string };
+
+const STATISTICS = landingPageData.hero;
 
 function HeroContent(props: HeroContentProps) {
   const scrollToMostPicked = () => {
@@ -57,19 +60,15 @@ function HeroContent(props: HeroContentProps) {
       <div className="mt-20 grid grid-cols-3 gap-x-12">
         <Statistic
           Icon={IconTraveler}
-          total={props.statistics.travelers}
+          total={STATISTICS.travelers}
           unit="travelers"
         />
         <Statistic
           Icon={IconTreasure}
-          total={props.statistics.treasures}
+          total={STATISTICS.treasures}
           unit="treasures"
         />
-        <Statistic
-          Icon={IconCities}
-          total={props.statistics.cities}
-          unit="cities"
-        />
+        <Statistic Icon={IconCities} total={STATISTICS.cities} unit="cities" />
       </div>
     </div>
   );
@@ -102,10 +101,13 @@ type HeroImageProps = {
 
 function HeroBanner(props: HeroImageProps) {
   return (
-    <div className={`relative ${props.className}`}>
+    <div className={clx("relative", props.className)}>
       <div className="absolute bottom-0 right-0 w-[31rem] aspect-[253/200] border-2 rounded-2xl" />
       <div
-        className={`absolute bg-cover bg-no-repeat w-[31rem] bottom-10 right-10 top-0 rounded-2xl rounded-tl-[100px]`}
+        className={clx(
+          "absolute bg-cover bg-no-repeat w-[31rem] bottom-10",
+          "right-10 top-0 rounded-2xl rounded-tl-[100px]"
+        )}
         style={{ backgroundImage: `url(${imageHero})` }}
       />
     </div>

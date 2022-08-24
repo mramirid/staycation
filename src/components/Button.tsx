@@ -1,7 +1,7 @@
 import { clx } from "@/lib/styling";
 import type { CSSProperties, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import classes from "./Button.module.css";
+import classes from "./Button.module.scss";
 
 type StyleProps = {
   size?: "small" | "large";
@@ -105,7 +105,7 @@ function NormalButton(props: NormalButtonProps) {
 }
 
 function AnchorLink(props: AnchorLinkProps) {
-  const className = clx(props.className, "btn-link");
+  const className = clx(props.className, "btn-link !p-0 h-fit min-h-fit");
 
   if (props.type === "external-link") {
     return <ExternalLink {...props} className={className} />;

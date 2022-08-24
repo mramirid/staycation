@@ -1,0 +1,50 @@
+.most-picked-item {
+  @apply card;
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale(1.1);
+    transition: transform 0.5s ease-in-out;
+    @apply bg-gradient-to-t from-black/50 to-transparent;
+  }
+
+  .img-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale(1.1);
+    transition: transform 0.25s ease-in-out;
+  }
+
+  .meta-wrapper {
+    position: absolute;
+    z-index: 1;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    color: white;
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover {
+    &:after {
+      transform: scale(1);
+    }
+
+    .img-wrapper {
+      transform: scale(1);
+    }
+
+    .meta-wrapper {
+      transform: translateY(-10px);
+    }
+  }
+}
