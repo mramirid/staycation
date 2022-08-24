@@ -34,7 +34,7 @@ type AnchorLinkProps = InternalLinkProps | ExternalLinkProps;
 type Props = NormalButtonProps | AnchorLinkProps;
 
 export default function Button(props: Props) {
-  const className = buildClassName(props);
+  const className = buildBaseClass(props);
 
   const handleClick = () => {
     props.onClick?.();
@@ -48,14 +48,14 @@ export default function Button(props: Props) {
   return <AnchorLink {...props} className={className} onClick={handleClick} />;
 }
 
-function buildClassName(props: Props) {
-  const classNameSet = new Set([
-    "btn normal-case text-[1.125rem] min-h-[3.125rem] leading-7",
-    props.className,
-  ]);
+function buildBaseClass(props: Props) {
+  const classNameSet = new Set(["btn normal-case", props.className]);
 
   if (props.isPrimary) {
-    classNameSet.add("btn-primary").add(classes["btn-primary-shadow"]);
+    classNameSet
+      .add("btn-primary")
+      .add("text-[1.125rem]")
+      .add(classes["btn-primary-shadow"]);
   }
 
   switch (props.size) {
@@ -87,7 +87,10 @@ function buildClassName(props: Props) {
 }
 
 function NormalButton(props: NormalButtonProps) {
-  const className = clx(props.className, "rounded font-medium");
+  const className = clx(
+    props.className,
+    "rounded font-medium min-h-[3.125rem] leading-7"
+  );
 
   return (
     <button
@@ -102,7 +105,7 @@ function NormalButton(props: NormalButtonProps) {
 }
 
 function AnchorLink(props: AnchorLinkProps) {
-  const className = `${props.className} btn-link`;
+  const className = clx(props.className, "btn-link");
 
   if (props.type === "external-link") {
     return <ExternalLink {...props} className={className} />;
