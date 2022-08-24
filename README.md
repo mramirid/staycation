@@ -1,8 +1,8 @@
 # Staycation
 
-Aplikasi web untuk menemukan penyedia hotel, rumah, dan apartemen yang dekat dengan tempat wisata.
+A web app to find providers of hotels, houses, and apartments that are closest to tourist attractions.
 
-> Proyek kursus [BWA Full-Stack JavaScript Developer: Website Travel](https://www.buildwithangga.com/kelas/full-stack-javascript-developer-website-travel)
+> A course project from [BWA Full-Stack JavaScript Developer: Website Travel](https://www.buildwithangga.com/kelas/full-stack-javascript-developer-website-travel).
 
 ## Techstack
 
