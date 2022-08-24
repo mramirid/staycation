@@ -1,3 +1,4 @@
+import { clx } from "@/lib/styling";
 import type { CSSProperties, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Button.module.css";
@@ -86,7 +87,7 @@ function buildClassName(props: Props) {
 }
 
 function NormalButton(props: NormalButtonProps) {
-  const className = `${props.className} rounded font-medium`;
+  const className = clx(props.className, "rounded font-medium");
 
   return (
     <button

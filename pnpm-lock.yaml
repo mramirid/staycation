@@ -14,6 +14,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.33.1
   '@vitejs/plugin-react': ^2.0.1
   autoprefixer: ^10.4.8
+  classnames: ^2.3.1
   daisyui: ^2.24.0
   eslint: ^8.22.0
   eslint-config-prettier: ^8.5.0
@@ -35,6 +36,7 @@ specifiers:
 
 dependencies:
   '@reduxjs/toolkit': 1.8.4_kkwg4cbsojnjnupd3btipussee
+  classnames: 2.3.1
   daisyui: 2.24.0_25hquoklqeoqwmt7fwvvcyxm5e
   lodash-es: 4.17.21
   react: 18.2.0
@@ -2487,6 +2489,10 @@ packages:
   /ci-info/3.3.2:
     resolution: {integrity: sha512-xmDt/QIAdeZ9+nfdPsaBCpMvHNLFiLdjj59qjqn+6iPe6YmHGQ35sBnQ8uslRBXFmXkiZQOJRjvQeoGppoTjjg==}
     dev: true
+
+  /classnames/2.3.1:
+    resolution: {integrity: sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA==}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}

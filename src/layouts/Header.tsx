@@ -1,4 +1,5 @@
 import BrandText from "@/components/BrandText";
+import { clx } from "@/lib/styling";
 import { NavLink } from "react-router-dom";
 
 export default function Header() {
@@ -28,9 +29,12 @@ type NavItemProps = {
 
 function NavItem(props: NavItemProps) {
   const getNavLinkClass = (props: { isActive: boolean }) => {
-    const className =
-      "btn btn-link normal-case px-4 text-base font-normal !p-0 ";
-    return className + (props.isActive ? "text-primary" : "text-secondary");
+    const textColor = props.isActive ? "text-primary" : "text-secondary";
+    const className = clx(
+      "btn btn-link normal-case px-4 text-base font-normal !p-0",
+      textColor
+    );
+    return className;
   };
 
   return (
