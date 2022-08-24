@@ -1,7 +1,7 @@
 import landingPageData from "@/assets/data/landing-page.json";
 import Button from "@/components/Button";
-import SectionTitle from "@/components/SectionTitle";
 import Tag from "@/components/Tag";
+import Section from "@/layouts/Section";
 import { formatToUSD } from "@/lib/format";
 import { clx } from "@/lib/styling";
 import { nanoid } from "@reduxjs/toolkit";
@@ -26,10 +26,9 @@ type Props = {
 const MOST_PICKED: MostPicked[] = landingPageData.mostPicked;
 
 const MostPickedSection = forwardRef<HTMLDivElement, Props>((props, ref) => (
-  <section ref={ref} className={props.className}>
-    <SectionTitle className="mb-5">Most Picked</SectionTitle>
+  <Section title="Most Picked" sectionClass={props.className} ref={ref}>
     <MostPickedList />
-  </section>
+  </Section>
 ));
 
 export default MostPickedSection;
