@@ -95,11 +95,11 @@ function Statistic(props: StatisticProps) {
   );
 }
 
-type HeroImageProps = {
+type HeroBannerProps = {
   className: string;
 };
 
-function HeroBanner(props: HeroImageProps) {
+function HeroBanner(props: HeroBannerProps) {
   return (
     <div className={clx("relative", props.className)}>
       <div className="absolute bottom-0 right-0 w-[31rem] aspect-[253/200] border-2 rounded-2xl" />
