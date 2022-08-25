@@ -1,10 +1,10 @@
-import landingPageData from "@/assets/data/landing-page.json";
 import Button from "@/components/Button";
 import Tag from "@/components/Tag";
 import Section from "@/layouts/Section";
 import { formatToUSD } from "@/lib/format";
 import { clx } from "@/lib/styling";
 import { forwardRef } from "react";
+import landingPageData from "../assets/data/landing-page.json";
 import classes from "./MostPicked.module.scss";
 
 type MostPicked = {

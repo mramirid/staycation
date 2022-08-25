@@ -1,14 +1,14 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import landingPageData from "@/assets/data/landing-page.json";
-import { ReactComponent as IconCities } from "@/assets/icons/icon-cities.svg";
-import { ReactComponent as IconTraveler } from "@/assets/icons/icon-traveler.svg";
-import { ReactComponent as IconTreasure } from "@/assets/icons/icon-treasure.svg";
-import imageHero from "@/assets/images/hero.jpg";
 import Button from "@/components/Button";
 import { clx } from "@/lib/styling";
 import { isNumber } from "lodash-es";
 import type { FunctionComponent, RefObject, SVGProps } from "react";
+import landingPageData from "../assets/data/landing-page.json";
+import { ReactComponent as IconCities } from "../assets/icons/icon-cities.svg";
+import { ReactComponent as IconTraveler } from "../assets/icons/icon-traveler.svg";
+import { ReactComponent as IconTreasure } from "../assets/icons/icon-treasure.svg";
+import imageHero from "../assets/images/hero.jpg";
 
 type Props = {
   mostPickedRef: RefObject<HTMLDivElement>;

@@ -1,9 +1,9 @@
-import landingPageData from "@/assets/data/landing-page.json";
 import Button from "@/components/Button";
 import Tag from "@/components/Tag";
 import Section from "@/layouts/Section";
 import { clx } from "@/lib/styling";
 import { isEmpty } from "lodash-es";
+import landingPageData from "../assets/data/landing-page.json";
 import type { Category, CategoryItem as CategoryItemType } from "../types";
 
 const CATEGORIES: Category[] = landingPageData.categories;

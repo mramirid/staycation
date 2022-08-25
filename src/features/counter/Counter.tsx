@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/store";
+import { useAppDispatch, useAppSelector } from "../../lib/store";
 import styles from "./Counter.module.css";
 import {
   decrement,

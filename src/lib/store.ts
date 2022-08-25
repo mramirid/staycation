@@ -1,3 +1,4 @@
+import { counterReducer } from "@/features/counter/counter.slice";
 import {
   configureStore,
   type Action,
@@ -8,7 +9,6 @@ import {
   useSelector,
   type TypedUseSelectorHook,
 } from "react-redux";
-import { counterReducer } from "../features/counter/counter.slice";
 
 export const store = configureStore({
   reducer: {
