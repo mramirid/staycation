@@ -1,3 +1,4 @@
+import Categories from "@/features/landing-page/components/Categories";
 import Hero from "@/features/landing-page/Hero";
 import MostPicked from "@/features/landing-page/MostPicked";
 import Header from "@/layouts/Header";
@@ -12,7 +13,8 @@ export default function LandingPage() {
       <Header />
       <MainContent>
         <Hero mostPickedRef={mostPickedRef} />
-        <MostPicked className="mt-[4.38rem]" ref={mostPickedRef} />
+        <MostPicked className="my-70px" ref={mostPickedRef} />
+        <Categories />
       </MainContent>
     </>
   );
