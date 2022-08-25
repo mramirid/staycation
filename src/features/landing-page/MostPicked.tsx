@@ -34,7 +34,7 @@ export default MostPickedSection;
 
 function MostPickedList() {
   return (
-    <div className="grid grid-rows-2 grid-cols-3 gap-[1.875rem] h-[28.75rem]">
+    <div className="grid grid-rows-2 grid-cols-3 gap-30px h-[28.75rem]">
       {MOST_PICKED.map((mostPicked, i) => (
         <MostPickedItem
           mostPicked={mostPicked}
@@ -61,17 +61,13 @@ function MostPickedItem({ mostPicked, isFirstItem }: MostPickedItemProps) {
       })}
     >
       <figure className={classes["img-wrapper"]}>
-        <img
-          src={mostPicked.imageUrl}
-          alt={mostPicked.name}
-          className="object-cover h-full w-full"
-        />
+        <img src={mostPicked.imageUrl} alt={mostPicked.name} />
       </figure>
       <div className={classes["meta-wrapper"]}>
         <Button
           type="link"
           to={`/properties/${mostPicked._id}`}
-          className="text-inherit text-xl text-left block"
+          className="text-inherit text-xl text-left font-normal block"
         >
           <h5>{mostPicked.name}</h5>
         </Button>

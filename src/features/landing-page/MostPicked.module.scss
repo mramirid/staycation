@@ -1,5 +1,5 @@
 .most-picked-item {
-  @apply card;
+  @apply card image-full;
 
   &:after {
     content: "";
@@ -14,11 +14,6 @@
   }
 
   .img-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
     transform: scale(1.1);
     transition: transform 0.25s ease-in-out;
   }
