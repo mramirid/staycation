@@ -4,9 +4,9 @@ import Button from "@/components/Button";
 import { clx } from "@/lib/styling";
 import type { FunctionComponent, RefObject, SVGProps } from "react";
 import landingPageData from "../assets/data/landing-page.json";
-import { ReactComponent as IconCities } from "../assets/icons/icon-cities.svg";
-import { ReactComponent as IconTraveler } from "../assets/icons/icon-traveler.svg";
-import { ReactComponent as IconTreasure } from "../assets/icons/icon-treasure.svg";
+import { ReactComponent as IconCities } from "../assets/icons/cities.svg";
+import { ReactComponent as IconTraveler } from "../assets/icons/traveler.svg";
+import { ReactComponent as IconTreasure } from "../assets/icons/treasure.svg";
 import imageHero from "../assets/images/hero.jpg";
 
 type Props = {
@@ -95,7 +95,7 @@ type HeroBannerProps = {
 function HeroBanner(props: HeroBannerProps) {
   return (
     <div className={clx("relative", props.className)}>
-      <div className="absolute bottom-0 right-0 w-[31rem] aspect-[253/200] border-2 rounded-2xl" />
+      <div className="absolute bottom-0 right-0 top-10 w-[31rem] border-2 rounded-2xl" />
       <div
         className={clx(
           "absolute bg-cover bg-no-repeat w-[31rem] bottom-10",
