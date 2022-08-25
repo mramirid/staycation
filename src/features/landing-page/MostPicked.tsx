@@ -4,7 +4,6 @@ import Tag from "@/components/Tag";
 import Section from "@/layouts/Section";
 import { formatToUSD } from "@/lib/format";
 import { clx } from "@/lib/styling";
-import { nanoid } from "@reduxjs/toolkit";
 import { forwardRef } from "react";
 import classes from "./MostPicked.module.scss";
 
@@ -40,7 +39,7 @@ function MostPickedList() {
         <MostPickedItem
           mostPicked={mostPicked}
           isFirstItem={i === 0}
-          key={nanoid()} // TODO: Change this to id
+          key={mostPicked._id}
         />
       ))}
     </div>
