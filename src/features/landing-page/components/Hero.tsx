@@ -2,7 +2,6 @@
 
 import Button from "@/components/Button";
 import { clx } from "@/lib/styling";
-import { isNumber } from "lodash-es";
 import type { FunctionComponent, RefObject, SVGProps } from "react";
 import landingPageData from "../assets/data/landing-page.json";
 import { ReactComponent as IconCities } from "../assets/icons/icon-cities.svg";
@@ -12,6 +11,7 @@ import imageHero from "../assets/images/hero.jpg";
 
 type Props = {
   mostPickedRef: RefObject<HTMLDivElement>;
+  onShowMeClicked: () => void;
 };
 
 export default function Hero(props: Props) {
@@ -28,13 +28,6 @@ type HeroContentProps = Props & { className: string };
 const STATISTICS = landingPageData.hero;
 
 function HeroContent(props: HeroContentProps) {
-  const scrollToMostPicked = () => {
-    const mostPickedOffsetTop = props.mostPickedRef.current?.offsetTop;
-    if (isNumber(mostPickedOffsetTop)) {
-      window.scrollTo({ behavior: "smooth", top: mostPickedOffsetTop - 30 });
-    }
-  };
-
   return (
     <div className={props.className}>
       <h1 className="text-[2.625rem] text-secondary font-bold">
@@ -52,7 +45,7 @@ function HeroContent(props: HeroContentProps) {
         type="button"
         isPrimary
         className="px-7 mt-[1.875rem] min-w-[13rem]"
-        onClick={scrollToMostPicked}
+        onClick={props.onShowMeClicked}
       >
         Show Me Now
       </Button>
