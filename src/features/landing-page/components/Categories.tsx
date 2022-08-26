@@ -30,7 +30,7 @@ export default function Categories() {
 
 function CategoryEmpty() {
   return (
-    <div className="col-span-4 text-base-300 font-light">
+    <div className="text-base-300 font-light">
       There is no property at this category
     </div>
   );
@@ -42,7 +42,7 @@ type CategoryListProps = {
 
 function CategoryList({ items }: CategoryListProps) {
   return (
-    <div className="grid grid-cols-4 gap-x-30px">
+    <div className="flex gap-x-30px">
       {items.map((categoryItem) => (
         <CategoryItem item={categoryItem} key={categoryItem._id} />
       ))}
