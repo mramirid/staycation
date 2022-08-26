@@ -19,10 +19,7 @@ export default function LandingPage() {
     <>
       <Header />
       <MainContent>
-        <Hero
-          mostPickedRef={mostPickedRef}
-          onShowMeClicked={scrollToMostPicked}
-        />
+        <Hero onShowMeClicked={scrollToMostPicked} />
         <MostPicked className="my-70px" ref={mostPickedRef} />
         <Categories />
         <Testimonial />

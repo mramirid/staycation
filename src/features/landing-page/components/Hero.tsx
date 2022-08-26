@@ -2,7 +2,7 @@
 
 import Button from "@/components/Button";
 import { clx } from "@/lib/styling";
-import type { FunctionComponent, RefObject, SVGProps } from "react";
+import type { FunctionComponent, SVGProps } from "react";
 import landingPageData from "../assets/data/landing-page.json";
 import { ReactComponent as IconCities } from "../assets/icons/cities.svg";
 import { ReactComponent as IconTraveler } from "../assets/icons/traveler.svg";
@@ -10,7 +10,6 @@ import { ReactComponent as IconTreasure } from "../assets/icons/treasure.svg";
 import imageHero from "../assets/images/hero.jpg";
 
 type Props = {
-  mostPickedRef: RefObject<HTMLDivElement>;
   onShowMeClicked: () => void;
 };
 
