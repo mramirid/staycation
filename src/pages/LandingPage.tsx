@@ -1,3 +1,4 @@
+import Testimonial from "@/components/Testimonial";
 import { Categories, Hero, MostPicked } from "@/features/landing-page";
 import Header from "@/layouts/Header";
 import MainContent from "@/layouts/MainContent";
@@ -24,6 +25,7 @@ export default function LandingPage() {
         />
         <MostPicked className="my-70px" ref={mostPickedRef} />
         <Categories />
+        <Testimonial />
       </MainContent>
     </>
   );
