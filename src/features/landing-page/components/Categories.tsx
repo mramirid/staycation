@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import Tag from "@/components/Tag";
-import Section from "@/layouts/Section";
+import TitledSection from "@/layouts/TitledSection";
 import { clx } from "@/lib/styling";
 import { isEmpty } from "lodash-es";
 import landingPageData from "../assets/data/landing-page.json";
@@ -12,7 +12,7 @@ export default function Categories() {
   return (
     <>
       {CATEGORIES.map((category) => (
-        <Section
+        <TitledSection
           title={category.name}
           key={category._id}
           sectionClass={clx("mt-70px")}
@@ -22,7 +22,7 @@ export default function Categories() {
           ) : (
             <CategoryList items={category.items} />
           )}
-        </Section>
+        </TitledSection>
       ))}
     </>
   );

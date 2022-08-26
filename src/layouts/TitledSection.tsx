@@ -8,7 +8,7 @@ type Props = {
   children: ReactElement;
 };
 
-const Section = forwardRef<HTMLDivElement, Props>((props, ref) => (
+const TitledSection = forwardRef<HTMLDivElement, Props>((props, ref) => (
   <section ref={ref} className={props.sectionClass}>
     <h4
       className={clx(
@@ -22,4 +22,4 @@ const Section = forwardRef<HTMLDivElement, Props>((props, ref) => (
   </section>
 ));
 
-export default Section;
+export default TitledSection;

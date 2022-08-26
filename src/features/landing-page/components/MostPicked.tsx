@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import Tag from "@/components/Tag";
-import Section from "@/layouts/Section";
+import TitledSection from "@/layouts/TitledSection";
 import { formatToUSD } from "@/lib/format";
 import { clx } from "@/lib/styling";
 import { forwardRef } from "react";
@@ -25,9 +25,9 @@ type Props = {
 const MOST_PICKED: MostPicked[] = landingPageData.mostPicked;
 
 const MostPickedSection = forwardRef<HTMLDivElement, Props>((props, ref) => (
-  <Section title="Most Picked" sectionClass={props.className} ref={ref}>
+  <TitledSection title="Most Picked" sectionClass={props.className} ref={ref}>
     <MostPickedList />
-  </Section>
+  </TitledSection>
 ));
 
 export default MostPickedSection;
