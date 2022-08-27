@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import classes from "./Button.module.scss";
 
 type StyleProps = {
-  size?: "small" | "large";
   style?: CSSProperties;
   className?: string;
   isPrimary?: boolean;
@@ -55,16 +54,9 @@ function buildBaseClass(props: Props) {
     classNameSet
       .add("btn-primary")
       .add("text-[1.125rem]")
+      .add("min-w-[13rem]")
+      .add("px-7")
       .add(classes["btn-primary-shadow"]);
-  }
-
-  switch (props.size) {
-    case "small":
-      classNameSet.add("btn-sm");
-      break;
-    case "large":
-      classNameSet.add("btn-lg");
-      break;
   }
 
   if (props.isBlock) {
@@ -76,7 +68,7 @@ function buildBaseClass(props: Props) {
   }
 
   if (props.isDisabled) {
-    classNameSet.add("btn-disabled");
+    classNameSet.add(classes.disabled);
   }
 
   if (props.isLoading) {
