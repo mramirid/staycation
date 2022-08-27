@@ -80,7 +80,7 @@ const siteMaps: SiteMapType[] = [
 export default function Footer() {
   return (
     <footer className="border-t border-base-200">
-      <div className="primary-container grid grid-cols-3 gap-x-30px mt-50px">
+      <div className="app-container grid grid-cols-3 gap-x-30px mt-50px">
         <Brand className="col-span-1" />
         <nav className="col-span-2 flex justify-between">
           {siteMaps.map((siteMap) => (
