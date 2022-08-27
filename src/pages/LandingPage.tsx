@@ -1,9 +1,16 @@
 import Testimonial from "@/components/Testimonial";
-import { Categories, Hero, MostPicked } from "@/features/landing-page";
+import {
+  Categories,
+  Hero,
+  landingPageData,
+  MostPicked,
+} from "@/features/landing-page";
 import Header from "@/layouts/Header";
 import MainContent from "@/layouts/MainContent";
 import { isNumber } from "lodash-es";
 import { createRef } from "react";
+
+const TESTIMONIAL = landingPageData.testimonial;
 
 export default function LandingPage() {
   const mostPickedRef = createRef<HTMLDivElement>();
@@ -22,7 +29,7 @@ export default function LandingPage() {
         <Hero onShowMeClicked={scrollToMostPicked} />
         <MostPicked className="my-70px" ref={mostPickedRef} />
         <Categories />
-        <Testimonial />
+        <Testimonial className="my-100px" testimonial={TESTIMONIAL} />
       </MainContent>
     </>
   );

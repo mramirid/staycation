@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 import StarRatings from "react-star-ratings";
 
-export default function Rating(props: ComponentProps<typeof StarRatings>) {
+export default function StarRating(props: ComponentProps<typeof StarRatings>) {
   return (
     <StarRatings
       {...props}
