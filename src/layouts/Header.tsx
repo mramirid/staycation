@@ -1,24 +1,27 @@
 import BrandText from "@/components/BrandText";
 import { clx } from "@/lib/styling";
+import Fade from "react-reveal/Fade";
 import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="border-b border-base-200">
-      <div className="app-container">
-        <nav className="navbar h-20 p-0">
-          <div className="flex-1">
-            <BrandText />
-          </div>
-          <ul className="flex-none flex gap-x-7">
-            <NavItem to="/">Home</NavItem>
-            <NavItem to="/browse-by">Browse By</NavItem>
-            <NavItem to="/stories">Stories</NavItem>
-            <NavItem to="/agents">Agents</NavItem>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <Fade>
+      <header className="border-b border-base-200">
+        <div className="app-container">
+          <nav className="navbar h-20 p-0">
+            <div className="flex-1">
+              <BrandText />
+            </div>
+            <ul className="flex-none flex gap-x-7">
+              <NavItem to="/">Home</NavItem>
+              <NavItem to="/browse-by">Browse By</NavItem>
+              <NavItem to="/stories">Stories</NavItem>
+              <NavItem to="/agents">Agents</NavItem>
+            </ul>
+          </nav>
+        </div>
+      </header>
+    </Fade>
   );
 }
 

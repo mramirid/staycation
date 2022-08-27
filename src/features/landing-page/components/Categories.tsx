@@ -2,6 +2,7 @@ import Tag from "@/components/Tag";
 import TitledSection from "@/layouts/TitledSection";
 import { clx } from "@/lib/styling";
 import { isEmpty } from "lodash-es";
+import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import landingPageData from "../assets/data/landing-page.json";
 import type { Category, CategoryItem as CategoryItemType } from "../types";
@@ -12,17 +13,15 @@ export default function Categories() {
   return (
     <>
       {CATEGORIES.map((category) => (
-        <TitledSection
-          title={category.name}
-          key={category._id}
-          sectionClass={clx("mt-70px")}
-        >
-          {isEmpty(category.items) ? (
-            <CategoryEmpty />
-          ) : (
-            <CategoryList items={category.items} />
-          )}
-        </TitledSection>
+        <Fade bottom key={category._id}>
+          <TitledSection title={category.name} sectionClass={clx("mt-70px")}>
+            {isEmpty(category.items) ? (
+              <CategoryEmpty />
+            ) : (
+              <CategoryList items={category.items} />
+            )}
+          </TitledSection>
+        </Fade>
       ))}
     </>
   );
@@ -43,8 +42,10 @@ type CategoryListProps = {
 function CategoryList({ items }: CategoryListProps) {
   return (
     <div className="flex gap-x-30px">
-      {items.map((categoryItem) => (
-        <CategoryItem item={categoryItem} key={categoryItem._id} />
+      {items.map((categoryItem, i) => (
+        <Fade bottom delay={300 * i} key={categoryItem._id}>
+          <CategoryItem item={categoryItem} />
+        </Fade>
       ))}
     </div>
   );

@@ -1,5 +1,6 @@
 import { clx } from "@/lib/styling";
-import type { Testimonial as TestimonialType } from "@/types";
+import type { Testimonial as TestimonialType } from "@/lib/types";
+import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 import StarRating from "./StarRating";
 
@@ -10,10 +11,12 @@ type Props = {
 
 export default function Testimonial(props: Props) {
   return (
-    <section className={clx("flex", props.className)}>
-      <TestimonialPortrait imageUrl={props.testimonial.imageUrl} />
-      <TestimonialContent className="ml-14" testimonial={props.testimonial} />
-    </section>
+    <Fade bottom>
+      <section className={clx("flex", props.className)}>
+        <TestimonialPortrait imageUrl={props.testimonial.imageUrl} />
+        <TestimonialContent className="ml-14" testimonial={props.testimonial} />
+      </section>
+    </Fade>
   );
 }
 

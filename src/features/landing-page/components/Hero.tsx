@@ -2,6 +2,7 @@
 
 import { clx } from "@/lib/styling";
 import type { FunctionComponent, SVGProps } from "react";
+import Fade from "react-reveal/Fade";
 import landingPageData from "../assets/data/landing-page.json";
 import { ReactComponent as IconCities } from "../assets/icons/cities.svg";
 import { ReactComponent as IconTraveler } from "../assets/icons/traveler.svg";
@@ -14,10 +15,12 @@ type Props = {
 
 export default function Hero(props: Props) {
   return (
-    <section className="mt-70px grid grid-cols-12">
-      <HeroContent className="col-span-5" {...props} />
-      <HeroBanner className="col-span-7" />
-    </section>
+    <Fade bottom>
+      <section className="mt-70px grid grid-cols-12">
+        <HeroContent className="col-span-5" {...props} />
+        <HeroBanner className="col-span-7" />
+      </section>
+    </Fade>
   );
 }
 
