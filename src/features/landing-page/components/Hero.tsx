@@ -14,7 +14,7 @@ type Props = {
 
 export default function Hero(props: Props) {
   return (
-    <section className="pt-[4.375rem] grid grid-cols-12">
+    <section className="mt-70px grid grid-cols-12">
       <HeroContent className="col-span-5" {...props} />
       <HeroBanner className="col-span-7" />
     </section>
@@ -33,7 +33,7 @@ function HeroContent(props: HeroContentProps) {
         <br /> Start Next Vacation
       </h1>
 
-      <p className="mt-5 font-light text-base-300 leading-7">
+      <p className="mt-5 text-light leading-7">
         We provide what you need to enjoy your
         <br /> holiday with family. Time to make another
         <br /> memorable moments.

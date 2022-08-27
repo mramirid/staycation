@@ -64,7 +64,10 @@ function MostPickedItem({ mostPicked, isFirstItem }: MostPickedItemProps) {
         <img src={mostPicked.imageUrl} alt={mostPicked.name} />
       </figure>
       <div className={classes["meta-wrapper"]}>
-        <Link to={`/properties/${mostPicked._id}`} className="app-link text-xl">
+        <Link
+          to={`/properties/${mostPicked._id}`}
+          className="app-link text-xl"
+        >
           <h5>{mostPicked.name}</h5>
         </Link>
         <span className="font-light">

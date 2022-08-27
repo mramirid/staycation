@@ -36,7 +36,7 @@ function TestimonialContent({ testimonial, className }: Props) {
       </span>
       <Link
         to="#"
-        className="app-btn app-btn-primary mt-[3.125rem]"
+        className="app-btn app-btn-primary mt-50px"
         onClick={gotoTestimonialStory}
       >
         Read Their Story

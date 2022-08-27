@@ -10,6 +10,16 @@
   }
 }
 
+@layer utilities {
+  .primary-container {
+    @apply container mx-auto px-36;
+  }
+
+  .text-light {
+    @apply font-light text-base-300;
+  }
+}
+
 @layer components {
   .app-btn {
     @apply btn normal-case;
@@ -24,7 +34,7 @@
     @apply btn-link;
   }
 
-  .app-btn-disabled {
+  .disabled {
     box-shadow: none;
     @apply btn-disabled;
   }
@@ -33,11 +43,5 @@
 @layer components {
   .app-link {
     @apply link link-hover;
-  }
-}
-
-@layer utilities {
-  .primary-container {
-    @apply container mx-auto px-36;
   }
 }

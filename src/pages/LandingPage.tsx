@@ -5,8 +5,9 @@ import {
   landingPageData,
   MostPicked,
 } from "@/features/landing-page";
+import Footer from "@/layouts/Footer";
 import Header from "@/layouts/Header";
-import MainContent from "@/layouts/MainContent";
+import Main from "@/layouts/Main";
 import { isNumber } from "lodash-es";
 import { createRef } from "react";
 
@@ -25,12 +26,13 @@ export default function LandingPage() {
   return (
     <>
       <Header />
-      <MainContent>
+      <Main withContainer>
         <Hero onShowMeClicked={scrollToMostPicked} />
         <MostPicked className="my-70px" ref={mostPickedRef} />
         <Categories />
         <Testimonial className="my-100px" testimonial={TESTIMONIAL} />
-      </MainContent>
+      </Main>
+      <Footer />
     </>
   );
 }

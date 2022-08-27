@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="border-b border-base-200 -mx-">
+    <header className="border-b border-base-200">
       <div className="primary-container">
         <nav className="navbar h-20 p-0">
           <div className="flex-1">
