@@ -65,7 +65,7 @@ function MostPickedItem({ mostPicked, isFirstItem }: MostPickedItemProps) {
       </figure>
       <div className={classes["meta-wrapper"]}>
         <Button
-          type="link"
+          kind="link"
           to={`/properties/${mostPicked._id}`}
           className="text-inherit text-xl text-left font-normal block"
         >

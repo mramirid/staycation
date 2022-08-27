@@ -4,7 +4,7 @@ export default function BrandText() {
   return (
     <Button
       className="text-[1.625rem] text-primary font-medium hover:no-underline p-0"
-      type="link"
+      kind="link"
       to="/"
     >
       Stay<span className="text-secondary">cation.</span>

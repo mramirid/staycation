@@ -41,9 +41,10 @@ function HeroContent(props: HeroContentProps) {
       </p>
 
       <Button
+        kind="button"
         type="button"
         isPrimary
-        className="px-7 mt-[1.875rem] min-w-[13rem]"
+        className="mt-[1.875rem]"
         onClick={props.onShowMeClicked}
       >
         Show Me Now

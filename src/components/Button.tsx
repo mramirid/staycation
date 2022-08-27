@@ -18,12 +18,15 @@ type BaseProps = StyleProps & {
   onClick?: () => void;
 };
 
-type NormalButtonProps = BaseProps & { type: "button" };
+type NormalButtonProps = BaseProps & {
+  kind: "button";
+  type?: "button" | "submit" | "reset";
+};
 
-type InternalLinkProps = BaseProps & { type: "link"; to: string };
+type InternalLinkProps = BaseProps & { kind: "link"; to: string };
 
 type ExternalLinkProps = BaseProps & {
-  type: "external-link";
+  kind: "external-link";
   href: string;
   isBlank?: boolean;
 };
@@ -39,7 +42,7 @@ export default function Button(props: Props) {
     props.onClick?.();
   };
 
-  if (props.type === "button") {
+  if (props.kind === "button") {
     return (
       <NormalButton {...props} className={className} onClick={handleClick} />
     );
@@ -88,6 +91,7 @@ function NormalButton(props: NormalButtonProps) {
     <button
       className={className}
       style={props.style}
+      type={props.type ?? "button"}
       onClick={props.onClick}
       disabled={props.isDisabled}
     >
@@ -99,7 +103,7 @@ function NormalButton(props: NormalButtonProps) {
 function AnchorLink(props: AnchorLinkProps) {
   const className = clx(props.className, "btn-link !p-0 h-fit min-h-fit");
 
-  if (props.type === "external-link") {
+  if (props.kind === "external-link") {
     return <ExternalLink {...props} className={className} />;
   }
   return <InternalLink {...props} className={className} />;

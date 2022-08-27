@@ -6,7 +6,7 @@ import Button from "./Button";
 describe("<Button />", () => {
   it("Should not allowed click button if isDisabled is present", () => {
     const { container } = render(
-      <Button type="button" isDisabled>
+      <Button kind="button" isDisabled>
         A
       </Button>
     );
@@ -15,7 +15,7 @@ describe("<Button />", () => {
 
   it("Should render loading/spinner", () => {
     const { container } = render(
-      <Button type="button" isLoading>
+      <Button kind="button" isLoading>
         A
       </Button>
     );
@@ -25,7 +25,7 @@ describe("<Button />", () => {
 
   it("Should render <a />", () => {
     const { container } = render(
-      <Button type="external-link" href="#">
+      <Button kind="external-link" href="#">
         A
       </Button>
     );
@@ -40,7 +40,7 @@ describe("<Button />", () => {
           <Route
             index
             element={
-              <Button type="link" to="#">
+              <Button kind="link" to="#">
                 A
               </Button>
             }

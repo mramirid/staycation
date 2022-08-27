@@ -68,7 +68,7 @@ function CategoryItem({ item }: CategoryItemProps) {
         <img src={item.imageUrl} alt={item.name} className="object-cover" />
       </figure>
       <Button
-        type="link"
+        kind="link"
         to={`/properties/${item._id}`}
         className="text-secondary text-xl text-left font-normal block mt-4"
       >
