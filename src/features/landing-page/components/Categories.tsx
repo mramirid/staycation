@@ -69,7 +69,7 @@ function CategoryItem({ item }: CategoryItemProps) {
       </figure>
       <Link
         to={`/properties/${item._id}`}
-        className="app-link text-secondary text-xl text-left mt-4"
+        className="app-link stretched-link text-secondary text-xl text-left mt-4"
       >
         <h5>{item.name}</h5>
       </Link>

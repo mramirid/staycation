@@ -64,12 +64,7 @@ function MostPickedItem({ mostPicked, isFirstItem }: MostPickedItemProps) {
         <img src={mostPicked.imageUrl} alt={mostPicked.name} />
       </figure>
       <div className={classes["meta-wrapper"]}>
-        <Link
-          to={`/properties/${mostPicked._id}`}
-          className="app-link text-xl"
-        >
-          <h5>{mostPicked.name}</h5>
-        </Link>
+        <h5 className="text-xl">{mostPicked.name}</h5>
         <span className="font-light">
           {mostPicked.city},&nbsp;{mostPicked.country}
         </span>
@@ -78,6 +73,10 @@ function MostPickedItem({ mostPicked, isFirstItem }: MostPickedItemProps) {
         className="absolute z-10 right-0"
         highlightedText={formattedPrice}
         text={`per ${mostPicked.unit}`}
+      />
+      <Link
+        to={`/properties/${mostPicked._id}`}
+        className="app-link stretched-link"
       />
     </article>
   );
