@@ -1,8 +1,8 @@
-import Button from "@/components/Button";
 import Tag from "@/components/Tag";
 import TitledSection from "@/layouts/TitledSection";
 import { clx } from "@/lib/styling";
 import { isEmpty } from "lodash-es";
+import { Link } from "react-router-dom";
 import landingPageData from "../assets/data/landing-page.json";
 import type { Category, CategoryItem as CategoryItemType } from "../types";
 
@@ -67,13 +67,12 @@ function CategoryItem({ item }: CategoryItemProps) {
       <figure>
         <img src={item.imageUrl} alt={item.name} className="object-cover" />
       </figure>
-      <Button
-        kind="link"
+      <Link
         to={`/properties/${item._id}`}
-        className="text-secondary text-xl text-left font-normal block mt-4"
+        className="app-link text-secondary text-xl text-left mt-4"
       >
         <h5>{item.name}</h5>
-      </Button>
+      </Link>
       <span className="text-base-300 font-light">
         {item.city},&nbsp;{item.country}
       </span>

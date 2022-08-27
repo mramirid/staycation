@@ -1,6 +1,5 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import Button from "@/components/Button";
 import { clx } from "@/lib/styling";
 import type { FunctionComponent, SVGProps } from "react";
 import landingPageData from "../assets/data/landing-page.json";
@@ -40,15 +39,13 @@ function HeroContent(props: HeroContentProps) {
         <br /> memorable moments.
       </p>
 
-      <Button
-        kind="button"
-        type="button"
-        isPrimary
-        className="mt-[1.875rem]"
+      <button
+        className="app-btn app-btn-primary mt-[1.875rem]"
         onClick={props.onShowMeClicked}
+        type="button"
       >
         Show Me Now
-      </Button>
+      </button>
 
       <div className="mt-20 grid grid-cols-3 gap-x-12">
         <Statistic

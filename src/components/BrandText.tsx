@@ -1,13 +1,12 @@
-import Button from "./Button";
+import { Link } from "react-router-dom";
 
 export default function BrandText() {
   return (
-    <Button
-      className="text-[1.625rem] text-primary font-medium hover:no-underline p-0"
-      kind="link"
+    <Link
+      className="app-btn app-btn-link text-[1.625rem] text-primary font-medium hover:no-underline p-0"
       to="/"
     >
       Stay<span className="text-secondary">cation.</span>
-    </Button>
+    </Link>
   );
 }

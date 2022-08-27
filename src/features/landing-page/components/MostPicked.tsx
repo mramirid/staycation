@@ -1,9 +1,9 @@
-import Button from "@/components/Button";
 import Tag from "@/components/Tag";
 import TitledSection from "@/layouts/TitledSection";
 import { formatToUSD } from "@/lib/format";
 import { clx } from "@/lib/styling";
 import { forwardRef } from "react";
+import { Link } from "react-router-dom";
 import landingPageData from "../assets/data/landing-page.json";
 import classes from "./MostPicked.module.scss";
 
@@ -64,14 +64,10 @@ function MostPickedItem({ mostPicked, isFirstItem }: MostPickedItemProps) {
         <img src={mostPicked.imageUrl} alt={mostPicked.name} />
       </figure>
       <div className={classes["meta-wrapper"]}>
-        <Button
-          kind="link"
-          to={`/properties/${mostPicked._id}`}
-          className="text-inherit text-xl text-left font-normal block"
-        >
+        <Link to={`/properties/${mostPicked._id}`} className="app-link text-xl">
           <h5>{mostPicked.name}</h5>
-        </Button>
-        <span className="text-inherit font-light">
+        </Link>
+        <span className="font-light">
           {mostPicked.city},&nbsp;{mostPicked.country}
         </span>
       </div>
