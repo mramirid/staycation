@@ -69,5 +69,10 @@
     "vite": "^3.0.8",
     "vite-plugin-svgr": "^2.2.1",
     "vitest": "^0.22.1"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "react-reveal@1.2.2": "patches/react-reveal@1.2.2.patch"
+    }
   }
 }

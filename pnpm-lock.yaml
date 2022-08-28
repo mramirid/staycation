@@ -1,5 +1,10 @@
 lockfileVersion: 5.4
 
+patchedDependencies:
+  react-reveal@1.2.2:
+    hash: lmphvahuce4t6dhyjfjuz3m63q
+    path: patches/react-reveal@1.2.2.patch
+
 specifiers:
   '@reduxjs/toolkit': ^1.8.4
   '@testing-library/jest-dom': ^5.16.5
@@ -46,7 +51,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-redux: 8.0.2_ps4ywwwjjeajezffxxirqk36qa
-  react-reveal: 1.2.2_react@18.2.0
+  react-reveal: 1.2.2_lmphvahuce4t6dhyjfjuz3m63q_react@18.2.0
   react-router-dom: 6.3.0_biqbaboplfbrettd7655fr4n2y
   react-star-ratings: 2.3.0
 
@@ -4566,7 +4571,7 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /react-reveal/1.2.2_react@18.2.0:
+  /react-reveal/1.2.2_lmphvahuce4t6dhyjfjuz3m63q_react@18.2.0:
     resolution: {integrity: sha512-JCv3fAoU6Z+Lcd8U48bwzm4pMZ79qsedSXYwpwt6lJNtj/v5nKJYZZbw3yhaQPPgYePo3Y0NOCoYOq/jcsisuw==}
     peerDependencies:
       react: ^15.3.0 || ^16.0.0
@@ -4574,6 +4579,7 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
     dev: false
+    patched: true
 
   /react-router-dom/6.3.0_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-uaJj7LKytRxZNQV8+RbzJWnJ8K2nPsOOEuX7aQstlMZKQT0164C+X2w6bnkqU3sjtLvpd5ojrezAyfZ1+0sStw==}
