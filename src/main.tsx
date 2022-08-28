@@ -1,3 +1,4 @@
+import { isNull } from "lodash-es";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
@@ -7,7 +8,7 @@ import "./index.scss";
 import { store } from "./lib/store";
 
 const rootElement = document.getElementById("root");
-if (rootElement === null) {
+if (isNull(rootElement)) {
   throw new Error("The root element is undefined");
 }
 
