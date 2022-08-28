@@ -1,8 +1,9 @@
 import { clx } from "@/lib/styling";
 import type { Testimonial as TestimonialType } from "@/lib/types";
+import type { ComponentProps } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
-import StarRating from "./StarRating";
+import StarRatings from "react-star-ratings";
 
 type Props = {
   className: string;
@@ -45,6 +46,16 @@ function TestimonialContent({ testimonial, className }: Props) {
         Read Their Story
       </Link>
     </div>
+  );
+}
+
+function StarRating(props: ComponentProps<typeof StarRatings>) {
+  return (
+    <StarRatings
+      {...props}
+      starRatedColor="#FFCC47" //* warning
+      starEmptyColor="#B0B0B0" //* base-300
+    />
   );
 }
 
