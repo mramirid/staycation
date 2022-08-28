@@ -1,5 +1,5 @@
 .most-picked-item {
-  @apply card image-full;
+  @apply h-full w-full card image-full;
 
   &:after {
     content: "";

@@ -1,11 +1,11 @@
 import BrandText from "@/components/BrandText";
 import { clx } from "@/lib/styling";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
 import { NavLink } from "react-router-dom";
 
 export default function Header() {
   return (
-    <Fade>
+    <Fade triggerOnce>
       <header className="border-b border-base-200">
         <div className="app-container">
           <nav className="navbar h-20 p-0">

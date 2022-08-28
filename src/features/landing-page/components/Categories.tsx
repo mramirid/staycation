@@ -1,8 +1,7 @@
 import Tag from "@/components/Tag";
 import TitledSection from "@/layouts/TitledSection";
-import { clx } from "@/lib/styling";
 import { isEmpty } from "lodash-es";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
 import landingPageData from "../assets/data/landing-page.json";
 import type { Category, CategoryItem as CategoryItemType } from "../types";
@@ -11,19 +10,21 @@ const CATEGORIES: Category[] = landingPageData.categories;
 
 export default function Categories() {
   return (
-    <>
+    <Fade direction="up" triggerOnce cascade>
       {CATEGORIES.map((category) => (
-        <Fade bottom key={category._id}>
-          <TitledSection title={category.name} sectionClass={clx("mt-70px")}>
-            {isEmpty(category.items) ? (
-              <CategoryEmpty />
-            ) : (
-              <CategoryList items={category.items} />
-            )}
-          </TitledSection>
-        </Fade>
+        <TitledSection
+          title={category.name}
+          sectionClass="mt-70px"
+          key={category._id}
+        >
+          {isEmpty(category.items) ? (
+            <CategoryEmpty />
+          ) : (
+            <CategoryList items={category.items} />
+          )}
+        </TitledSection>
       ))}
-    </>
+    </Fade>
   );
 }
 
@@ -43,7 +44,7 @@ function CategoryList({ items }: CategoryListProps) {
   return (
     <div className="flex gap-x-30px">
       {items.map((categoryItem, i) => (
-        <Fade bottom delay={300 * i} key={categoryItem._id}>
+        <Fade direction="up" triggerOnce delay={300 * i} key={categoryItem._id}>
           <CategoryItem item={categoryItem} />
         </Fade>
       ))}

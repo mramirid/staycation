@@ -3,7 +3,7 @@ import TitledSection from "@/layouts/TitledSection";
 import { formatToUSD } from "@/lib/format";
 import { clx } from "@/lib/styling";
 import { forwardRef } from "react";
-import Fade from "react-reveal/Fade";
+import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
 import landingPageData from "../assets/data/landing-page.json";
 import classes from "./MostPicked.module.scss";
@@ -26,7 +26,7 @@ type Props = {
 const MOST_PICKED: MostPicked[] = landingPageData.mostPicked;
 
 const MostPickedSection = forwardRef<HTMLDivElement, Props>((props, ref) => (
-  <Fade bottom>
+  <Fade direction="up" triggerOnce>
     <TitledSection title="Most Picked" sectionClass={props.className} ref={ref}>
       <MostPickedList />
     </TitledSection>
@@ -39,51 +39,47 @@ function MostPickedList() {
   return (
     <div className="grid grid-rows-2 grid-cols-3 gap-30px h-[28.75rem]">
       {MOST_PICKED.map((mostPicked, i) => (
-        <MostPickedItem
-          index={i}
-          mostPicked={mostPicked}
+        <Fade
+          className={clx({ "row-span-2": i === 0 })}
+          direction="up"
+          triggerOnce
+          delay={500 * i}
           key={mostPicked._id}
-        />
+        >
+          <MostPickedItem mostPicked={mostPicked} />
+        </Fade>
       ))}
     </div>
   );
 }
 
 type MostPickedItemProps = {
-  index: number;
   mostPicked: MostPicked;
 };
 
-function MostPickedItem({ mostPicked, index }: MostPickedItemProps) {
-  const isFirstItem = index === 0;
+function MostPickedItem({ mostPicked }: MostPickedItemProps) {
   const formattedPrice = formatToUSD(mostPicked.price);
 
   return (
-    <Fade bottom delay={500 * index}>
-      <article
-        className={clx(classes["most-picked-item"], {
-          "row-span-2": isFirstItem,
-        })}
-      >
-        <figure className={classes["img-wrapper"]}>
-          <img src={mostPicked.imageUrl} alt={mostPicked.name} />
-        </figure>
-        <div className={classes["meta-wrapper"]}>
-          <h5 className="text-xl">{mostPicked.name}</h5>
-          <span className="font-light">
-            {mostPicked.city},&nbsp;{mostPicked.country}
-          </span>
-        </div>
-        <Tag
-          className="absolute z-10 right-0"
-          highlightedText={formattedPrice}
-          text={`per ${mostPicked.unit}`}
-        />
-        <Link
-          to={`/properties/${mostPicked._id}`}
-          className="app-link stretched-link"
-        />
-      </article>
-    </Fade>
+    <article className={classes["most-picked-item"]}>
+      <figure className={classes["img-wrapper"]}>
+        <img src={mostPicked.imageUrl} alt={mostPicked.name} />
+      </figure>
+      <div className={classes["meta-wrapper"]}>
+        <h5 className="text-xl">{mostPicked.name}</h5>
+        <span className="font-light">
+          {mostPicked.city},&nbsp;{mostPicked.country}
+        </span>
+      </div>
+      <Tag
+        className="absolute z-10 right-0"
+        highlightedText={formattedPrice}
+        text={`per ${mostPicked.unit}`}
+      />
+      <Link
+        to={`/properties/${mostPicked._id}`}
+        className="app-link stretched-link"
+      />
+    </article>
   );
 }
