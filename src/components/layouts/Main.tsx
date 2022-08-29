@@ -1,4 +1,4 @@
-import { clx } from "@/lib/styling";
+import { clx } from "@/utils/styling";
 import type { ReactNode } from "react";
 
 type Props = {

@@ -1,5 +1,5 @@
+import TitledSection from "@/components/layouts/TitledSection";
 import Tag from "@/components/Tag";
-import TitledSection from "@/layouts/TitledSection";
 import { isEmpty } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";

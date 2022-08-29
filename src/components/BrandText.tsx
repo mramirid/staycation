@@ -1,4 +1,4 @@
-import { clx } from "@/lib/styling";
+import { clx } from "@/utils/styling";
 import { Link } from "react-router-dom";
 
 export default function BrandText() {

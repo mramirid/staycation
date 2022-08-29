@@ -1,5 +1,5 @@
 import BrandText from "@/components/BrandText";
-import { clx } from "@/lib/styling";
+import { clx } from "@/utils/styling";
 import { nanoid } from "@reduxjs/toolkit";
 import type { HTMLProps, ReactElement } from "react";
 import { Link } from "react-router-dom";

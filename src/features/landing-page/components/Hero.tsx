@@ -1,6 +1,6 @@
 /// <reference types="vite-plugin-svgr/client" />
 
-import { clx } from "@/lib/styling";
+import { clx } from "@/utils/styling";
 import type { FunctionComponent, SVGProps } from "react";
 import { Fade } from "react-awesome-reveal";
 import landingPageData from "../assets/data/landing-page.json";

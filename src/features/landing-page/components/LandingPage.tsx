@@ -1,15 +1,13 @@
+import Footer from "@/components/layouts/Footer";
+import Header from "@/components/layouts/Header";
+import Main from "@/components/layouts/Main";
 import Testimonial from "@/components/Testimonial";
-import {
-  Categories,
-  Hero,
-  landingPageData,
-  MostPicked,
-} from "@/features/landing-page";
-import Footer from "@/layouts/Footer";
-import Header from "@/layouts/Header";
-import Main from "@/layouts/Main";
 import { isNumber } from "lodash-es";
 import { createRef } from "react";
+import landingPageData from "../assets/data/landing-page.json";
+import Categories from "./Categories";
+import Hero from "./Hero";
+import MostPicked from "./MostPicked";
 
 const TESTIMONIAL = landingPageData.testimonial;
 

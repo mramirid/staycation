@@ -1,5 +1,5 @@
-import { clx } from "@/lib/styling";
-import type { Testimonial as TestimonialType } from "@/lib/types";
+import type { Testimonial as TestimonialType } from "@/types";
+import { clx } from "@/utils/styling";
 import type { ComponentProps } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";

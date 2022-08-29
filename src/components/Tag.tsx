@@ -1,4 +1,4 @@
-import { clx } from "@/lib/styling";
+import { clx } from "@/utils/styling";
 
 type Props = {
   className: string;
