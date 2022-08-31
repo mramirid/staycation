@@ -13,13 +13,18 @@ import { ReactComponent as IconCalendar } from "../assets/icons/calendar.svg";
 
 type Props = {
   className?: string;
-  value: Range;
-  placeholder: string;
+  value?: Range;
   name: string;
   onChange: (range: Range) => void;
 };
 
 export default function InputDateRange(props: Props) {
+  const value: Range = props.value ?? {
+    startDate: new Date(),
+    endDate: addDays(new Date(), 7), // until next week
+    key: "selection",
+  };
+
   const [isShowed, setIsShowed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -36,11 +41,9 @@ export default function InputDateRange(props: Props) {
     };
   });
 
-  const startDate = isDate(props.value.startDate)
-    ? formatDate(props.value.startDate)
-    : "";
-  const endDate = isDate(props.value.endDate)
-    ? " - " + formatDate(props.value.endDate)
+  const startDate = isDate(value.startDate) ? formatDate(value.startDate) : "";
+  const endDate = isDate(value.endDate)
+    ? " - " + formatDate(value.endDate)
     : "";
 
   const datePickerChange = (rangesByKey: RangeKeyDict) => {
@@ -73,11 +76,16 @@ export default function InputDateRange(props: Props) {
           onChange={datePickerChange}
           moveRangeOnFirstSelection={false}
           onRangeFocusChange={check}
-          ranges={[props.value]}
+          ranges={[value]}
         />
       )}
     </div>
   );
+}
+
+function addDays(date: Date, number: number) {
+  const newDate = new Date(date);
+  return new Date(newDate.setDate(newDate.getDate() + number));
 }
 
 /**

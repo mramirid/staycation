@@ -21,16 +21,7 @@ function TestInputs() {
     "date-range": Range;
   };
 
-  const { handleSubmit, control } = useForm<IFormInputs>({
-    defaultValues: {
-      night: 1,
-      "date-range": {
-        startDate: new Date(),
-        endDate: new Date(new Date().setMonth(0, 1)),
-        key: "selection",
-      },
-    },
-  });
+  const { handleSubmit, control } = useForm<IFormInputs>();
 
   const onSubmit: SubmitHandler<IFormInputs> = (data) => console.log(data);
 
@@ -64,7 +55,6 @@ function TestInputs() {
             // className="w-[12rem] h-[12rem]"
             name={field.name}
             value={field.value}
-            placeholder="HOHOIHE"
             onChange={field.onChange}
           />
         )}

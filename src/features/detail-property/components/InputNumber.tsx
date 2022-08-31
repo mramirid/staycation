@@ -5,16 +5,21 @@ import { useState } from "react";
 type Props = {
   className?: string;
   name: string;
-  value: number;
+  value?: number;
   onChange: (newValue: number) => void;
   min?: number;
   max?: number;
   suffix?: { value: string; pluralValue?: string };
 };
 
-export default function InputNumber({ min = 1, max = 1, ...props }: Props) {
-  if (!inRange(props.value, min, max + 1)) {
-    throw new Error("The value is out of range");
+export default function InputNumber({
+  value = 1,
+  min = 1,
+  max = 1,
+  ...props
+}: Props) {
+  if (!inRange(value, min, max + 1)) {
+    throw new Error("The value is out of range. Check your min-max!");
   }
 
   const buildSuffix = (currentValue: number) => {
@@ -31,11 +36,11 @@ export default function InputNumber({ min = 1, max = 1, ...props }: Props) {
   };
 
   const [inputValue, setInputValue] = useState(
-    [props.value, buildSuffix(props.value)].join(" ")
+    [value, buildSuffix(value)].join(" ")
   );
 
   const onChange = (newValue: string) => {
-    const currentSuffix = buildSuffix(props.value);
+    const currentSuffix = buildSuffix(value);
     if (isString(currentSuffix)) {
       newValue = newValue.replace(currentSuffix, "");
     }
@@ -51,17 +56,17 @@ export default function InputNumber({ min = 1, max = 1, ...props }: Props) {
     }
   };
 
-  const hasReachedMin = props.value === min;
-  const hasReachedMax = props.value === max;
+  const hasReachedMin = value === min;
+  const hasReachedMax = value === max;
 
   const minus = () => {
     if (hasReachedMin) return;
-    onChange((props.value - 1).toString());
+    onChange((value - 1).toString());
   };
 
   const plus = () => {
     if (hasReachedMax) return;
-    onChange((props.value + 1).toString());
+    onChange((value + 1).toString());
   };
 
   return (

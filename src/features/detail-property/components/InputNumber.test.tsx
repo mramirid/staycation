@@ -3,8 +3,8 @@ import UserEvent from "@testing-library/user-event";
 import { useState } from "react";
 import InputNumber from "./InputNumber";
 
-function TestInput() {
-  const [value, setValue] = useState(2);
+function Form() {
+  const [value, setValue] = useState<number>(2);
 
   const handleChange = (newValue: number) => {
     setValue(newValue);
@@ -23,7 +23,7 @@ function TestInput() {
 
 describe("<InputNumber />", () => {
   it("Should able to change value", () => {
-    render(<TestInput />);
+    render(<Form />);
 
     const input = screen.getByRole("textbox") as HTMLInputElement;
     fireEvent.change(input, { target: { value: 50 } });
@@ -32,7 +32,7 @@ describe("<InputNumber />", () => {
   });
 
   it("Should not be able to change when it has reached max value", () => {
-    render(<TestInput />);
+    render(<Form />);
 
     const input = screen.getByRole("textbox") as HTMLInputElement;
     fireEvent.change(input, { target: { value: 51 } });
@@ -41,7 +41,7 @@ describe("<InputNumber />", () => {
   });
 
   it("Should increment when the plus button is pressed", async () => {
-    render(<TestInput />);
+    render(<Form />);
 
     const plusButton = screen.getByTestId("btn-plus") as HTMLButtonElement;
     await UserEvent.click(plusButton);
@@ -51,7 +51,7 @@ describe("<InputNumber />", () => {
   });
 
   it("Should decrement when the minus button is pressed", async () => {
-    render(<TestInput />);
+    render(<Form />);
 
     const plusButton = screen.getByTestId("btn-minus") as HTMLButtonElement;
     await UserEvent.click(plusButton);
