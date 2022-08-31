@@ -4,10 +4,12 @@ import { useState } from "react";
 import { type Range } from "react-date-range";
 import InputDateRange, { addDays } from "./InputDateRange";
 
+const AUGUST_31_2022 = new Date(2022, 7, 31);
+
 function Form() {
   const [value, setValue] = useState<Range>({
-    startDate: new Date(),
-    endDate: addDays(new Date(), 7),
+    startDate: AUGUST_31_2022,
+    endDate: addDays(AUGUST_31_2022, 7),
     key: "selection",
   });
 
@@ -21,6 +23,11 @@ function Form() {
 }
 
 describe("<InputDateRange />", () => {
+  it("Should match with the snapshot", () => {
+    const { container } = render(<Form />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
   it("Should show date picker when click input field", async () => {
     const { container } = render(<Form />);
 

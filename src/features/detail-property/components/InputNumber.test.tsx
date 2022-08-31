@@ -22,6 +22,11 @@ function Form() {
 }
 
 describe("<InputNumber />", () => {
+  it("Should match with the snapshot", () => {
+    const { container } = render(<Form />);
+    expect(container.firstChild).toMatchSnapshot();
+  });
+
   it("Should able to change value", () => {
     render(<Form />);
 

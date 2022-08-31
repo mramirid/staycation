@@ -1,0 +1,31 @@
+// Vitest Snapshot v1
+
+exports[`<InputNumber /> > Should match with the snapshot 1`] = `
+<div
+  class="custom-input-group"
+>
+  <button
+    class="side-icon btn btn-error !rounded-l"
+    data-testid="btn-minus"
+    type="button"
+  >
+    -
+  </button>
+  <input
+    class="text-input"
+    max="50"
+    min="1"
+    name="test-input"
+    pattern="[0-9]*"
+    type="text"
+    value="2 days"
+  />
+  <button
+    class="side-icon btn btn-success !rounded-r"
+    data-testid="btn-plus"
+    type="button"
+  >
+    +
+  </button>
+</div>
+`;
