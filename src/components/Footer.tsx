@@ -81,11 +81,7 @@ export default function Footer() {
     <footer className="border-t border-base-200">
       <div className="app-container grid grid-cols-3 gap-x-30px mt-50px">
         <Brand className="col-span-1" />
-        <nav className="col-span-2 flex justify-between">
-          {siteMaps.map((siteMap, i) => (
-            <SiteMap siteMap={siteMap} key={i} />
-          ))}
-        </nav>
+        <SiteMaps className="col-span-2" />
       </div>
       <Copyright className="mt-50px text-center mb-100px" />
     </footer>
@@ -105,6 +101,20 @@ function Brand({ className }: BrandProps) {
         <br /> instantly and memorable.
       </p>
     </div>
+  );
+}
+
+type SiteMapsProps = {
+  className: string;
+};
+
+function SiteMaps(props: SiteMapsProps) {
+  return (
+    <nav className={clx("flex justify-between", props.className)}>
+      {siteMaps.map((siteMap, i) => (
+        <SiteMap siteMap={siteMap} key={i} />
+      ))}
+    </nav>
   );
 }
 
