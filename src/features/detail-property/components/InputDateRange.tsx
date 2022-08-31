@@ -53,17 +53,15 @@ export default function InputDateRange(props: Props) {
 
   return (
     <div ref={containerRef}>
-      <div
-        className={clx("input-group max-h-fit items-stretch", props.className)}
-      >
-        <span className="input-side-icon bg-secondary !rounded-l cursor-pointer">
+      <div className={clx("app-input-group", props.className)}>
+        <span className="side !bg-secondary !rounded-l cursor-pointer">
           <IconCalendar className="h-[1.563rem] aspect-square" />
         </span>
         <input
           readOnly
           type="text"
           name={props.name}
-          className="bg-base-200 text-center !rounded-r focus:outline-none grow min-w-0 cursor-pointer"
+          className="textbox cursor-pointer"
           value={startDate + endDate}
         />
       </div>

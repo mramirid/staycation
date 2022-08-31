@@ -27,7 +27,8 @@
 
   .app-btn-primary {
     box-shadow: 0px 8px 15px rgba(50, 82, 223, 0.3);
-    @apply btn-primary rounded font-medium min-h-[3.125rem] min-w-[13rem] text-[1.125rem] px-7 leading-7;
+    @apply btn-primary rounded font-medium leading-7
+    min-h-[3.125rem] min-w-[13rem] text-[1.125rem] px-7;
   }
 
   .app-btn-link {
@@ -51,8 +52,17 @@
   }
 }
 
-@layer components {
-  .input-side-icon {
-    @apply min-w-[2.813rem] w-[2.813rem] min-h-[2.813rem] p-0 flex justify-center items-center;
+@layer utilities {
+  .app-input-group {
+    @apply input-group max-h-fit items-stretch;
+
+    .side {
+      @apply min-w-[2.813rem] w-[2.813rem] min-h-[2.813rem] p-0 
+      flex justify-center items-center h-full font-bold text-2xl;
+    }
+
+    .textbox {
+      @apply bg-base-200 text-center focus:outline-none grow min-w-0;
+    }
   }
 }
