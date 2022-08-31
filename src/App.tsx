@@ -1,6 +1,7 @@
-import { DateRange, type Range } from "react-date-range";
+import { type Range } from "react-date-range";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { Route, Routes } from "react-router-dom";
+import Breadcrumbs from "./features/detail-property/components/Breadcrumbs";
 import InputDateRange from "./features/detail-property/components/InputDateRange";
 import InputNumber from "./features/detail-property/components/InputNumber";
 import { LandingPage } from "./features/landing-page";
@@ -10,7 +11,7 @@ export default function App() {
     <Routes>
       <Route index element={<LandingPage />} />
       <Route path="/tests/inputs" element={<TestInputs />} />
-      <Route path="/tests/date-range" element={<TestDateRange />} />
+      <Route path="/tests/breadcrumbs" element={<TestBreadcrumbs />} />
     </Routes>
   );
 }
@@ -64,17 +65,12 @@ function TestInputs() {
   );
 }
 
-function TestDateRange() {
+function TestBreadcrumbs() {
   return (
-    <DateRange
-      editableDateInputs={true}
-      moveRangeOnFirstSelection={false}
-      ranges={[
-        {
-          startDate: new Date(),
-          endDate: new Date(new Date().setMonth(0, 1)),
-          key: "selection",
-        },
+    <Breadcrumbs
+      data={[
+        { label: "Home", to: "/" },
+        { label: "House Details", to: "/tests/breadcrumbs" },
       ]}
     />
   );
