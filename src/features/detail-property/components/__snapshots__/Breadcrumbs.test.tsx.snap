@@ -1,0 +1,27 @@
+// Vitest Snapshot v1
+
+exports[`<Breadcrumbs /> > Should match with the snapshot 1`] = `
+<nav
+  class="breadcrumbs font-light text-lg"
+>
+  <ul>
+    <li>
+      <a
+        aria-current="page"
+        class="text-secondary font-medium"
+        href="/"
+      >
+        Home
+      </a>
+    </li>
+    <li>
+      <a
+        class="text-base-300"
+        href="/house/1"
+      >
+        House Details
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
