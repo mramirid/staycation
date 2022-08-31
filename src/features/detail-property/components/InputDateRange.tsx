@@ -10,6 +10,7 @@ import {
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 import { ReactComponent as IconCalendar } from "../assets/icons/calendar.svg";
+import "./custom-input-group.scss";
 
 type Props = {
   className?: string;
@@ -57,15 +58,15 @@ export default function InputDateRange(props: Props) {
 
   return (
     <div ref={containerRef}>
-      <div className={clx("app-input-group", props.className)}>
-        <span className="side !bg-secondary !rounded-l cursor-pointer">
+      <div className={clx("custom-input-group", props.className)}>
+        <span className="side-icon !bg-secondary !rounded-l cursor-pointer">
           <IconCalendar className="h-[1.563rem] aspect-square" />
         </span>
         <input
           readOnly
           type="text"
           name={props.name}
-          className="textbox cursor-pointer"
+          className="text-input cursor-pointer"
           value={startDate + endDate}
         />
       </div>

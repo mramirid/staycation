@@ -1,0 +1,12 @@
+.custom-input-group {
+  @apply input-group max-h-fit items-stretch;
+
+  .side-icon {
+    @apply min-w-[2.813rem] w-[2.813rem] min-h-[2.813rem] p-0 
+    flex justify-center items-center h-full font-bold text-2xl;
+  }
+
+  .text-input {
+    @apply bg-base-200 text-center focus:outline-none grow min-w-0;
+  }
+}
