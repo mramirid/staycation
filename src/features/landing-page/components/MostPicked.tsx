@@ -1,5 +1,5 @@
-import TitledSection from "@/components/layouts/TitledSection";
 import Tag from "@/components/Tag";
+import TitledSection from "@/components/TitledSection";
 import { formatToUSD } from "@/utils/format";
 import { clx } from "@/utils/styling";
 import { forwardRef } from "react";

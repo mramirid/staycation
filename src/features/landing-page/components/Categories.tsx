@@ -1,4 +1,4 @@
-import TitledSection from "@/components/layouts/TitledSection";
+import TitledSection from "@/components/TitledSection";
 import Tag from "@/components/Tag";
 import { isEmpty } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
