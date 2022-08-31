@@ -1,7 +1,6 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@emotion/react': ^11.10.0
   '@reduxjs/toolkit': ^1.8.4
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.3.0
@@ -9,6 +8,7 @@ specifiers:
   '@types/lodash-es': ^4.17.6
   '@types/node': ^18.7.9
   '@types/react': ^18.0.17
+  '@types/react-date-range': ^1.4.4
   '@types/react-dom': ^18.0.6
   '@types/react-star-ratings': ^2.3.0
   '@types/testing-library__jest-dom': ^5.14.5
@@ -28,6 +28,7 @@ specifiers:
   prettier: ^2.7.1
   react: ^18.2.0
   react-awesome-reveal: ^4.0.1
+  react-date-range: ^1.4.0
   react-dom: ^18.2.0
   react-hook-form: ^7.34.2
   react-redux: ^8.0.2
@@ -41,13 +42,13 @@ specifiers:
   vitest: ^0.22.1
 
 dependencies:
-  '@emotion/react': 11.10.0_msmmgljd7hl2w2irtggflhmema
   '@reduxjs/toolkit': 1.8.4_kkwg4cbsojnjnupd3btipussee
   classnames: 2.3.1
   daisyui: 2.24.0_25hquoklqeoqwmt7fwvvcyxm5e
   lodash-es: 4.17.21
   react: 18.2.0
   react-awesome-reveal: 4.0.1_g566eayvhbit5eqxocdac5mhdm
+  react-date-range: 1.4.0_5oiey6di7lwi3i4adxmhjxbjq4
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.34.2_react@18.2.0
   react-redux: 8.0.2_ps4ywwwjjeajezffxxirqk36qa
@@ -61,6 +62,7 @@ devDependencies:
   '@types/lodash-es': 4.17.6
   '@types/node': 18.7.9
   '@types/react': 18.0.17
+  '@types/react-date-range': 1.4.4
   '@types/react-dom': 18.0.6
   '@types/react-star-ratings': 2.3.0
   '@types/testing-library__jest-dom': 5.14.5
@@ -1918,6 +1920,13 @@ packages:
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
 
+  /@types/react-date-range/1.4.4:
+    resolution: {integrity: sha512-9Y9NyNgaCsEVN/+O4HKuxzPbVjRVBGdOKRxMDcsTRWVG62lpYgnxefNckTXDWup8FvczoqPW0+ESZR6R1yymDg==}
+    dependencies:
+      '@types/react': 18.0.17
+      date-fns: 2.29.2
+    dev: true
+
   /@types/react-dom/18.0.6:
     resolution: {integrity: sha512-/5OFZgfIPSwy+YuIBP/FgJnQnsxhZhjjrnxudMddeblOouIodEQ75X14Rr4wGSG/bknL+Omy9iWlLo1u/9GzAA==}
     dependencies:
@@ -2711,6 +2720,10 @@ packages:
       whatwg-mimetype: 3.0.0
       whatwg-url: 11.0.0
     dev: true
+
+  /date-fns/2.29.2:
+    resolution: {integrity: sha512-0VNbwmWJDS/G3ySwFSJA3ayhbURMTJLtwM2DTxf9CWondCnh6DTNlO9JgRSq6ibf4eD0lfMJNBxUdEAHHix+bA==}
+    engines: {node: '>=0.11'}
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -4560,6 +4573,20 @@ packages:
       react-is: 18.2.0
     dev: false
 
+  /react-date-range/1.4.0_5oiey6di7lwi3i4adxmhjxbjq4:
+    resolution: {integrity: sha512-+9t0HyClbCqw1IhYbpWecjsiaftCeRN5cdhsi9v06YdimwyMR2yYHWcgVn3URwtN/txhqKpEZB6UX1fHpvK76w==}
+    peerDependencies:
+      date-fns: 2.0.0-alpha.7 || >=2.0.0
+      react: ^0.14 || ^15.0.0-rc || >=15.0
+    dependencies:
+      classnames: 2.3.1
+      date-fns: 2.29.2
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-list: 0.8.17_react@18.2.0
+      shallow-equal: 1.2.1
+    dev: false
+
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -4595,6 +4622,15 @@ packages:
 
   /react-is/18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+
+  /react-list/0.8.17_react@18.2.0:
+    resolution: {integrity: sha512-pgmzGi0G5uGrdHzMhgO7KR1wx5ZXVvI3SsJUmkblSAKtewIhMwbQiMuQiTE83ozo04BQJbe0r3WIWzSO0dR1xg==}
+    peerDependencies:
+      react: 0.14 || 15 - 18
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
 
   /react-redux/8.0.2_ps4ywwwjjeajezffxxirqk36qa:
     resolution: {integrity: sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA==}
@@ -4861,6 +4897,10 @@ packages:
     dependencies:
       lru-cache: 6.0.0
     dev: true
+
+  /shallow-equal/1.2.1:
+    resolution: {integrity: sha512-S4vJDjHHMBaiZuT9NPb616CSmLf618jawtv3sufLl6ivK8WocjAo58cXwbRV1cgqxH0Qbv+iUt6m05eqEa2IRA==}
+    dev: false
 
   /shebang-command/2.0.0:
     resolution: {integrity: sha512-kHxr2zZpYtdmrN1qDjrrX/Z1rR1kG8Dx+gkpK1G4eXmvXswmcE1hTWBWYUzlraYw1/yZp6YuDY77YtvbN0dmDA==}

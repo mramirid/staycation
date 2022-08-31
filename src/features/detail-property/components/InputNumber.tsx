@@ -69,7 +69,7 @@ export default function InputNumber({ min = 1, max = 1, ...props }: Props) {
       className={clx("input-group max-h-fit items-stretch", props.className)}
     >
       <button
-        className="btn btn-error !rounded-l font-bold text-2xl h-full"
+        className="input-side-icon btn btn-error !rounded-l font-bold text-2xl h-full"
         type="button"
         disabled={hasReachedMin}
         onClick={minus}
@@ -88,7 +88,7 @@ export default function InputNumber({ min = 1, max = 1, ...props }: Props) {
         onChange={(e) => onChange(e.target.value)}
       />
       <button
-        className="btn btn-success !rounded-r font-bold text-2xl h-full"
+        className="input-side-icon btn btn-success !rounded-r font-bold text-2xl h-full"
         type="button"
         disabled={hasReachedMax}
         onClick={plus}

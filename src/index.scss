@@ -50,3 +50,9 @@
     @apply z-10 absolute inset-0 bg-transparent pointer-events-auto;
   }
 }
+
+@layer components {
+  .input-side-icon {
+    @apply min-w-[2.813rem] w-[2.813rem] min-h-[2.813rem] p-0 flex justify-center items-center;
+  }
+}
