@@ -1,6 +1,5 @@
 import BrandText from "@/components/BrandText";
 import { clx } from "@/utils/styling";
-import { nanoid } from "@reduxjs/toolkit";
 import type { HTMLProps, ReactElement } from "react";
 import { Link } from "react-router-dom";
 
@@ -83,8 +82,8 @@ export default function Footer() {
       <div className="app-container grid grid-cols-3 gap-x-30px mt-50px">
         <Brand className="col-span-1" />
         <nav className="col-span-2 flex justify-between">
-          {siteMaps.map((siteMap) => (
-            <SiteMap siteMap={siteMap} key={nanoid()} />
+          {siteMaps.map((siteMap, i) => (
+            <SiteMap siteMap={siteMap} key={i} />
           ))}
         </nav>
       </div>
@@ -120,8 +119,8 @@ function SiteMap(props: SiteMapProps) {
         {props.siteMap.title}
       </h6>
       <ul className="mt-2 flex flex-col gap-y-2">
-        {props.siteMap.menus.map((menu) => (
-          <SiteMapMenu menu={menu} className="text-light" key={nanoid()} />
+        {props.siteMap.menus.map((menu, i) => (
+          <SiteMapMenu menu={menu} className="text-light" key={i} />
         ))}
       </ul>
     </div>
