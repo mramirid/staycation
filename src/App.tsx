@@ -45,7 +45,7 @@ function TestInputs() {
         rules={{ required: true }}
         render={({ field }) => (
           <InputNumber
-            className="w-[12rem] h-[12rem]"
+            // className="w-[12rem] h-[12rem]"
             name={field.name}
             value={field.value}
             suffix={{ value: "night", pluralValue: "nights" }}
@@ -61,7 +61,7 @@ function TestInputs() {
         rules={{ required: true }}
         render={({ field }) => (
           <InputDateRange
-            className="w-[12rem] h-[12rem]"
+            // className="w-[12rem] h-[12rem]"
             name={field.name}
             value={field.value}
             placeholder="HOHOIHE"
