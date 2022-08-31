@@ -63,7 +63,11 @@ function MostPickedItem({ mostPicked }: MostPickedItemProps) {
   return (
     <article className={classes["most-picked-item"]}>
       <figure className={classes["img-wrapper"]}>
-        <img src={mostPicked.imageUrl} alt={mostPicked.name} />
+        <img
+          src={mostPicked.imageUrl}
+          alt={mostPicked.name}
+          className="h-full object-cover"
+        />
       </figure>
       <div className={classes["meta-wrapper"]}>
         <h5 className="text-xl">{mostPicked.name}</h5>
