@@ -55,6 +55,7 @@ function TestInputs() {
             // className="w-[12rem] h-[12rem]"
             name={field.name}
             value={field.value}
+            minDate={new Date()}
             onChange={field.onChange}
           />
         )}

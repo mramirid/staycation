@@ -14,6 +14,7 @@ import { ReactComponent as IconCalendar } from "../assets/icons/calendar.svg";
 type Props = {
   className?: string;
   value?: Range;
+  minDate?: Date;
   name: string;
   onChange: (range: Range) => void;
 };
@@ -72,11 +73,12 @@ export default function InputDateRange(props: Props) {
       {isShowed && (
         <DateRange
           className="p-1 bg-white drop-shadow-[0_0_20px_rgba(0,0,0,0.1)] rounded"
-          editableDateInputs={true}
+          ranges={[value]}
+          minDate={props.minDate}
           onChange={datePickerChange}
+          editableDateInputs
           moveRangeOnFirstSelection={false}
           onRangeFocusChange={check}
-          ranges={[value]}
         />
       )}
     </div>
