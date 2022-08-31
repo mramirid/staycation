@@ -85,7 +85,7 @@ export default function InputDateRange(props: Props) {
   );
 }
 
-function addDays(date: Date, number: number) {
+export function addDays(date: Date, number: number) {
   const newDate = new Date(date);
   return new Date(newDate.setDate(newDate.getDate() + number));
 }
