@@ -11,7 +11,7 @@ export type BreadcrumbsData = {
 
 export default function Breadcrumbs(props: Props) {
   return (
-    <nav className="breadcrumbs font-light text-lg">
+    <nav className="breadcrumbs text-lg">
       <ul>
         {props.data.map((datum, i) => (
           <Breadcrumb to={datum.to} key={i}>
@@ -30,7 +30,7 @@ type BreadcrumbProps = {
 
 function Breadcrumb(props: BreadcrumbProps) {
   const getNavLinkClass = (props: { isActive: boolean }) => {
-    return props.isActive ? "text-secondary font-medium" : "text-base-300";
+    return props.isActive ? "text-secondary font-medium" : "text-light";
   };
 
   return (

@@ -83,8 +83,7 @@ function Statistic(props: StatisticProps) {
       <props.Icon width={32} height={32} />
 
       <h6 className="mt-3 text-secondary">
-        {formattedTotal}{" "}
-        <span className="text-base-300 font-light">{props.unit}</span>
+        {formattedTotal} <span className="text-light">{props.unit}</span>
       </h6>
     </div>
   );

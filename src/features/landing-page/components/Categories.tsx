@@ -28,9 +28,7 @@ export default function Categories() {
 
 function CategoryEmpty() {
   return (
-    <div className="text-base-300 font-light">
-      There is no property at this category
-    </div>
+    <div className="text-light">There is no property at this category</div>
   );
 }
 
@@ -73,7 +71,7 @@ function CategoryItem({ item }: CategoryItemProps) {
       >
         <h5>{item.name}</h5>
       </Link>
-      <span className="text-base-300 font-light">
+      <span className="text-light">
         {item.city},&nbsp;{item.country}
       </span>
     </article>
