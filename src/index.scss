@@ -18,6 +18,14 @@
   .text-light {
     @apply font-light text-base-300;
   }
+
+  .img-wrapper {
+    @apply h-full w-full;
+
+    img {
+      @apply h-full w-full object-cover;
+    }
+  }
 }
 
 @layer components {
