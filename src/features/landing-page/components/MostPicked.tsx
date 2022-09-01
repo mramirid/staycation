@@ -61,15 +61,15 @@ function MostPickedItem({ mostPicked }: MostPickedItemProps) {
   const formattedPrice = formatToUSD(mostPicked.price);
 
   return (
-    <article className={classes["most-picked-item"]}>
-      <figure className={classes["img-wrapper"]}>
+    <article className={classes.mostPickedItem}>
+      <figure className={classes.mostPickedItem__imgWrapper}>
         <img
           src={mostPicked.imageUrl}
           alt={mostPicked.name}
           className="h-full w-full object-cover"
         />
       </figure>
-      <div className={classes["meta-wrapper"]}>
+      <div className={classes.mostPickedItem__metaWrapper}>
         <h5 className="text-xl">{mostPicked.name}</h5>
         <span className="font-light">
           {mostPicked.city},&nbsp;{mostPicked.country}

@@ -1,7 +1,7 @@
 import { clx } from "@/utils/styling";
 import { inRange, isString, isUndefined } from "lodash-es";
 import { useState } from "react";
-import "./custom-input-group.scss";
+import classes from "./input-group.module.scss";
 
 type Props = {
   className?: string;
@@ -71,9 +71,12 @@ export default function InputNumber({
   };
 
   return (
-    <div className={clx("custom-input-group", props.className)}>
+    <div className={clx(classes.inputGroup, props.className)}>
       <button
-        className="side-icon btn btn-error !rounded-l"
+        className={clx(
+          classes.inputGroup__sideIcon,
+          "btn btn-error !rounded-l"
+        )}
         type="button"
         disabled={hasReachedMin}
         onClick={minus}
@@ -87,12 +90,15 @@ export default function InputNumber({
         max={max}
         name={props.name}
         pattern="[0-9]*"
-        className="text-input"
+        className={classes.inputGroup__textInput}
         value={inputValue}
         onChange={(e) => onChange(e.target.value)}
       />
       <button
-        className="side-icon btn btn-success !rounded-r"
+        className={clx(
+          classes.inputGroup__sideIcon,
+          "btn btn-success !rounded-r"
+        )}
         type="button"
         disabled={hasReachedMax}
         onClick={plus}
