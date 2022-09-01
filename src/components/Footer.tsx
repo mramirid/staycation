@@ -2,95 +2,21 @@ import BrandText from "@/components/BrandText";
 import { clx } from "@/utils/styling";
 import type { HTMLProps, ReactElement } from "react";
 import { Link } from "react-router-dom";
-
-type SiteMapType = {
-  title: string;
-  menus: SiteMapMenuType[];
-};
-
-type SiteMapMenuType = { label: string } & (
-  | { type: "internal-link"; to: string }
-  | { type: "external-link"; href: string }
-);
-
-const siteMaps: SiteMapType[] = [
-  {
-    title: "For Beginners",
-    menus: [
-      {
-        label: "New Account",
-        type: "internal-link",
-        to: "#",
-      },
-      {
-        label: "Start Booking a Room",
-        type: "internal-link",
-        to: "#",
-      },
-      {
-        label: "Use Payments",
-        type: "internal-link",
-        to: "#",
-      },
-    ],
-  },
-  {
-    title: "Explore Us",
-    menus: [
-      {
-        label: "Our Careers",
-        type: "internal-link",
-        to: "#",
-      },
-      {
-        label: "Privacy",
-        type: "internal-link",
-        to: "#",
-      },
-      {
-        label: "Terms & Conditions",
-        type: "internal-link",
-        to: "#",
-      },
-    ],
-  },
-  {
-    title: "Connect Us",
-    menus: [
-      {
-        label: "amir.muh.hakim@gmail.com",
-        type: "external-link",
-        href: "mailto:amir.muh.hakim@gmail.com",
-      },
-      {
-        label: "021 - 2208 - 1996",
-        type: "external-link",
-        href: "tel:+622122081996",
-      },
-      {
-        label: "Staycation, Surabaya, Indonesia",
-        type: "external-link",
-        href: "https://goo.gl/maps/agc1c6SxniyUuToj6",
-      },
-    ],
-  },
-];
+import classes from "./Footer.module.scss";
 
 export default function Footer() {
   return (
     <footer className="border-t border-base-200">
       <div className="app-container grid grid-cols-3 gap-x-30px mt-50px">
         <Brand className="col-span-1" />
-        <SiteMaps className="col-span-2" />
+        <Menu className="col-span-2" />
       </div>
       <Copyright className="mt-50px text-center mb-100px" />
     </footer>
   );
 }
 
-type BrandProps = {
-  className: string;
-};
+type BrandProps = { className: string };
 
 function Brand({ className }: BrandProps) {
   return (
@@ -104,68 +30,77 @@ function Brand({ className }: BrandProps) {
   );
 }
 
-type SiteMapsProps = {
-  className: string;
-};
+type MenuProps = { className: string };
 
-function SiteMaps(props: SiteMapsProps) {
+function Menu(props: MenuProps) {
   return (
     <nav className={clx("flex justify-between", props.className)}>
-      {siteMaps.map((siteMap, i) => (
-        <SiteMap siteMap={siteMap} key={i} />
-      ))}
+      <div>
+        <h6 className={classes.menu__title}>For Beginners</h6>
+        <ul className={classes.menu__list}>
+          <LinkItem label="New Account" type="internal-link" to="#" />
+          <LinkItem label="Start Booking a Room" type="internal-link" to="#" />
+          <LinkItem label="Use Payments" type="internal-link" to="#" />
+        </ul>
+      </div>
+      <div>
+        <h6 className={classes.menu__title}>Explore Us</h6>
+        <ul className={classes.menu__list}>
+          <LinkItem label="Our Careers" type="internal-link" to="#" />
+          <LinkItem label="Privacy" type="internal-link" to="#" />
+          <LinkItem label="Terms & Conditions" type="internal-link" to="#" />
+        </ul>
+      </div>
+      <div>
+        <h6 className={classes.menu__title}>Connect Us</h6>
+        <ul className={classes.menu__list}>
+          <LinkItem
+            label="amir.muh.hakim@gmail.com"
+            type="external-link"
+            href="mailto:amir.muh.hakim@gmail.com"
+          />
+          <LinkItem
+            label="021 - 2208 - 1996"
+            type="external-link"
+            href="tel:+622122081996"
+          />
+          <LinkItem
+            label="Staycation HQ, Surabaya, Indonesia"
+            type="external-link"
+            href="https://goo.gl/maps/agc1c6SxniyUuToj6"
+          />
+        </ul>
+      </div>
     </nav>
   );
 }
 
-type SiteMapProps = {
-  siteMap: SiteMapType;
-};
+type SitemapItemProps = { label: string } & (
+  | { type: "internal-link"; to: string }
+  | { type: "external-link"; href: string }
+);
 
-function SiteMap(props: SiteMapProps) {
-  return (
-    <div>
-      <h6 className="font-medium text-lg min-h-[45] leading-[3rem]">
-        {props.siteMap.title}
-      </h6>
-      <ul className="mt-2 flex flex-col gap-y-2">
-        {props.siteMap.menus.map((menu, i) => (
-          <SiteMapMenu menu={menu} className="text-light" key={i} />
-        ))}
-      </ul>
-    </div>
-  );
-}
+function LinkItem(props: SitemapItemProps) {
+  let link: ReactElement;
 
-type SitemapMenuProps = {
-  className: string;
-  menu: SiteMapMenuType;
-};
-
-function SiteMapMenu({ menu, className }: SitemapMenuProps) {
-  let content: ReactElement;
-
-  switch (menu.type) {
+  switch (props.type) {
     case "internal-link":
-      content = (
-        <Link to={menu.to} className={clx("link link-hover", className)}>
-          {menu.label}
+      link = (
+        <Link to={props.to} className={classes.menu__link}>
+          {props.label}
         </Link>
       );
       break;
     case "external-link":
-      content = (
-        <ExternalLink
-          href={menu.href}
-          className={clx("link link-hover", className)}
-        >
-          {menu.label}
+      link = (
+        <ExternalLink href={props.href} className={classes.menu__link}>
+          {props.label}
         </ExternalLink>
       );
       break;
   }
 
-  return <li>{content}</li>;
+  return <li>{link}</li>;
 }
 
 type ExternalLinkProps = Omit<HTMLProps<HTMLAnchorElement>, "target" | "rel">;
