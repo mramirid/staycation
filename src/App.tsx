@@ -1,15 +1,19 @@
 import { type Range } from "react-date-range";
 import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { Route, Routes } from "react-router-dom";
-import Breadcrumbs from "./features/detail-property/components/Breadcrumbs";
-import InputDateRange from "./features/detail-property/components/InputDateRange";
-import InputNumber from "./features/detail-property/components/InputNumber";
+import {
+  Breadcrumbs,
+  DetailPropertyPage,
+  InputDateRange,
+  InputNumber,
+} from "./features/detail-property";
 import { LandingPage } from "./features/landing-page";
 
 export default function App() {
   return (
     <Routes>
       <Route index element={<LandingPage />} />
+      <Route path="/properties/:id" element={<DetailPropertyPage />} />
       <Route path="/tests/inputs" element={<TestInputs />} />
       <Route path="/tests/breadcrumbs" element={<TestBreadcrumbs />} />
     </Routes>
