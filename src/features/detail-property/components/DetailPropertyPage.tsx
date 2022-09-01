@@ -5,6 +5,7 @@ import { Fade } from "react-awesome-reveal";
 import { useParams } from "react-router-dom";
 import property from "../assets/data/item-details.json";
 import Breadcrumbs, { type BreadcrumbsData } from "./Breadcrumbs";
+import FeaturedImages from "./FeaturedImages";
 import PageTitle from "./PageTitle";
 
 const DETAIL_PAGE_TITLE = "Detail Property";
@@ -25,8 +26,12 @@ export default function DetailPropertyPage() {
     <>
       <Header />
       <Main withContainer>
-        <Fade direction="up" triggerOnce className="my-50px">
-          <div className="grid grid-cols-4 items-center">
+        <Fade
+          direction="up"
+          triggerOnce
+          className="my-50px grid grid-cols-4 items-center"
+        >
+          <>
             <Breadcrumbs data={breadcrumbsData} />
             <PageTitle
               title={property.name}
@@ -34,8 +39,9 @@ export default function DetailPropertyPage() {
               country={property.country}
               className="col-span-2"
             />
-          </div>
+          </>
         </Fade>
+        <FeaturedImages imageUrls={property.imageUrls} />
       </Main>
     </>
   );

@@ -18,7 +18,7 @@ export type Property = {
   testimonial: Testimonial;
 };
 
-type ImageUrl = {
+export type ImageUrl = {
   _id: string;
   url: string;
 };

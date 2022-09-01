@@ -5,15 +5,15 @@
   "imageUrls": [
     {
       "_id": "67226305-083b-4e3c-aefc-b15e0d9a4b81",
-      "url": "/images/img-featured-1.jpg"
+      "url": "/src/features/detail-property/assets/images/featured-1.jpg"
     },
     {
       "_id": "b1d42fb4-0767-477b-9310-aafbe35477cb",
-      "url": "/images/img-featured-2.jpg"
+      "url": "/src/features/detail-property/assets/images/featured-2.jpg"
     },
     {
       "_id": "fc11bf85-58be-4239-9f55-9bacb148f945",
-      "url": "/images/img-featured-3.jpg"
+      "url": "/src/features/detail-property/assets/images/featured-3.jpg"
     }
   ],
   "country": "Indonesia",
