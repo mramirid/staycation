@@ -1,8 +1,6 @@
-import { clx } from "@/utils/styling";
 import { forwardRef, type ReactElement } from "react";
 
 type Props = {
-  titleClass?: string;
   sectionClass?: string;
   title: string;
   children: ReactElement;
@@ -10,14 +8,7 @@ type Props = {
 
 const TitledSection = forwardRef<HTMLDivElement, Props>((props, ref) => (
   <section ref={ref} className={props.sectionClass}>
-    <h4
-      className={clx(
-        "font-medium text-2xl text-secondary mb-5",
-        props.titleClass
-      )}
-    >
-      {props.title}
-    </h4>
+    <h4 className="font-medium text-2xl text-secondary mb-5">{props.title}</h4>
     {props.children}
   </section>
 ));
