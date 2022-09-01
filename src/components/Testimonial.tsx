@@ -12,8 +12,8 @@ type Props = {
 
 export default function Testimonial(props: Props) {
   return (
-    <Fade direction="up" triggerOnce>
-      <section className={clx("flex", props.className)}>
+    <Fade direction="up" triggerOnce className={props.className}>
+      <section className="flex">
         <TestimonialPortrait imageUrl={props.testimonial.imageUrl} />
         <TestimonialContent className="ml-14" testimonial={props.testimonial} />
       </section>
