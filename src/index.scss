@@ -19,6 +19,7 @@
     @apply font-light text-base-300;
   }
 
+  // For element with selector: figure > img
   .img-wrapper {
     @apply h-full w-full;
 
@@ -54,6 +55,7 @@
     @apply link link-hover;
   }
 
+  // To make parent block clickable
   .stretched-link::after {
     content: "";
     @apply z-10 absolute inset-0 bg-transparent pointer-events-auto;
