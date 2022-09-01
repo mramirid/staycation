@@ -1,17 +1,15 @@
-import TitledSection from "@/components/TitledSection";
 import Tag from "@/components/Tag";
+import TitledSection from "@/components/TitledSection";
 import { isEmpty } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
-import landingPageData from "../assets/data/landing-page.json";
-import type { Category, CategoryItem as CategoryItemType } from "../types";
-
-const CATEGORIES: Category[] = landingPageData.categories;
+import { categories } from "../assets/data/landing-page.json";
+import type { CategoryItem as CategoryItemType } from "../types";
 
 export default function Categories() {
   return (
     <Fade direction="up" triggerOnce cascade>
-      {CATEGORIES.map((category) => (
+      {categories.map((category) => (
         <TitledSection
           title={category.name}
           sectionClass="mt-70px"

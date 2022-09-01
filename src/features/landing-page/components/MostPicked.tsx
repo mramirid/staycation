@@ -5,7 +5,7 @@ import { clx } from "@/utils/styling";
 import { forwardRef } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
-import landingPageData from "../assets/data/landing-page.json";
+import { mostPicked as mostPickedList } from "../assets/data/landing-page.json";
 import classes from "./MostPicked.module.scss";
 
 type MostPicked = {
@@ -23,8 +23,6 @@ type Props = {
   className: string;
 };
 
-const MOST_PICKED: MostPicked[] = landingPageData.mostPicked;
-
 const MostPickedSection = forwardRef<HTMLDivElement, Props>((props, ref) => (
   <Fade direction="up" triggerOnce>
     <TitledSection title="Most Picked" sectionClass={props.className} ref={ref}>
@@ -38,7 +36,7 @@ export default MostPickedSection;
 function MostPickedList() {
   return (
     <div className="grid grid-rows-2 grid-cols-3 gap-30px h-[28.75rem]">
-      {MOST_PICKED.map((mostPicked, i) => (
+      {mostPickedList.map((mostPicked, i) => (
         <Fade
           className={clx({ "row-span-2": i === 0 })}
           direction="up"

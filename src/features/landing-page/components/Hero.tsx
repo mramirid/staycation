@@ -3,7 +3,7 @@
 import { clx } from "@/utils/styling";
 import type { FunctionComponent, SVGProps } from "react";
 import { Fade } from "react-awesome-reveal";
-import landingPageData from "../assets/data/landing-page.json";
+import { hero as heroStatistics } from "../assets/data/landing-page.json";
 import { ReactComponent as IconCities } from "../assets/icons/cities.svg";
 import { ReactComponent as IconTraveler } from "../assets/icons/traveler.svg";
 import { ReactComponent as IconTreasure } from "../assets/icons/treasure.svg";
@@ -25,8 +25,6 @@ export default function Hero(props: Props) {
 }
 
 type HeroContentProps = Props & { className: string };
-
-const STATISTICS = landingPageData.hero;
 
 function HeroContent(props: HeroContentProps) {
   return (
@@ -53,15 +51,19 @@ function HeroContent(props: HeroContentProps) {
       <div className="mt-20 grid grid-cols-3 gap-x-12">
         <Statistic
           Icon={IconTraveler}
-          total={STATISTICS.travelers}
+          total={heroStatistics.travelers}
           unit="travelers"
         />
         <Statistic
           Icon={IconTreasure}
-          total={STATISTICS.treasures}
+          total={heroStatistics.treasures}
           unit="treasures"
         />
-        <Statistic Icon={IconCities} total={STATISTICS.cities} unit="cities" />
+        <Statistic
+          Icon={IconCities}
+          total={heroStatistics.cities}
+          unit="cities"
+        />
       </div>
     </div>
   );
