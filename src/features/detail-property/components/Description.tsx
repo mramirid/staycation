@@ -10,7 +10,11 @@ type Props = {
 
 export default function Description(props: Props) {
   return (
-    <TitledSection title="About the property" sectionClass={props.className}>
+    <TitledSection
+      title="About the property"
+      sectionClass={props.className}
+      titleClass="mb-[0.625rem]"
+    >
       <div
         className="text-light leading-7"
         dangerouslySetInnerHTML={{ __html: props.description }}
