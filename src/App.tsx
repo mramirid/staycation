@@ -42,7 +42,6 @@ function TestInputs() {
         render={({ field }) => (
           <InputNumber
             // className="w-[12rem] h-[12rem]"
-            name={field.name}
             value={field.value}
             suffix={{ value: "night", pluralValue: "nights" }}
             min={1}
@@ -58,7 +57,6 @@ function TestInputs() {
         render={({ field }) => (
           <InputDateRange
             // className="w-[12rem] h-[12rem]"
-            name={field.name}
             value={field.value}
             minDate={new Date()}
             onChange={field.onChange}

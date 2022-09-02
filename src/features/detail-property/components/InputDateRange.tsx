@@ -16,7 +16,6 @@ type Props = {
   className?: string;
   value?: Range;
   minDate?: Date;
-  name: string;
   onChange: (range: Range) => void;
 };
 
@@ -70,7 +69,6 @@ export default function InputDateRange(props: Props) {
         <input
           readOnly
           type="text"
-          name={props.name}
           className={clx(classes.inputGroup__textInput, "cursor-pointer")}
           value={startDate + endDate}
         />

@@ -17,9 +17,7 @@ function Form() {
     setValue(newValue);
   };
 
-  return (
-    <InputDateRange name="test-input" value={value} onChange={handleChange} />
-  );
+  return <InputDateRange value={value} onChange={handleChange} />;
 }
 
 describe("<InputDateRange />", () => {

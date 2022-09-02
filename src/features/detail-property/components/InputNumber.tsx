@@ -5,7 +5,6 @@ import classes from "./input-group.module.scss";
 
 type Props = {
   className?: string;
-  name: string;
   value?: number;
   onChange: (newValue: number) => void;
   min?: number;
@@ -88,7 +87,6 @@ export default function InputNumber({
         type="text"
         min={min}
         max={max}
-        name={props.name}
         pattern="[0-9]*"
         className={classes.inputGroup__textInput}
         value={inputValue}

@@ -12,7 +12,6 @@ function Form() {
 
   return (
     <InputNumber
-      name="test-input"
       value={value}
       suffix={{ value: "day", pluralValue: "days" }}
       max={50}
