@@ -7,7 +7,7 @@ export type Property = {
   imageUrls: ImageUrl[];
   country: string;
   city: string;
-  price: string;
+  price: number;
   unit: string;
   isPopular: boolean;
   hasBackyard: boolean;
@@ -23,9 +23,9 @@ export type ImageUrl = {
   url: string;
 };
 
-type Feature = {
+export type Feature = {
   _id: string;
-  qty: string;
+  qty: number;
   name: string;
   imageUrl: string;
 };

@@ -5,6 +5,7 @@ import { Fade } from "react-awesome-reveal";
 import { useParams } from "react-router-dom";
 import property from "../assets/data/item-details.json";
 import Breadcrumbs, { type BreadcrumbsData } from "./Breadcrumbs";
+import Description from "./Description";
 import FeaturedImages from "./FeaturedImages";
 import PageTitle from "./PageTitle";
 
@@ -41,7 +42,17 @@ export default function DetailPropertyPage() {
             />
           </>
         </Fade>
+
         <FeaturedImages imageUrls={property.imageUrls} />
+
+        <div className="mt-50px grid grid-cols-12 gap-x-50px">
+          <Description
+            className="col-span-7"
+            description={property.description}
+            features={property.features}
+          />
+          <div className="col-span-5">Hello</div>
+        </div>
       </Main>
     </>
   );
