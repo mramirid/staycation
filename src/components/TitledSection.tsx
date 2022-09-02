@@ -1,9 +1,9 @@
-import { forwardRef, type ReactElement } from "react";
+import { forwardRef, type ReactNode } from "react";
 
 type Props = {
   sectionClass?: string;
   title: string;
-  children: ReactElement;
+  children: ReactNode;
 };
 
 const TitledSection = forwardRef<HTMLDivElement, Props>((props, ref) => (
