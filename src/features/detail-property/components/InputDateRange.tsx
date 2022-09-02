@@ -69,6 +69,7 @@ export default function InputDateRange(props: Props) {
         <input
           readOnly
           type="text"
+          placeholder="Pick a date range..."
           className={clx(classes.inputGroup__textInput, "cursor-pointer")}
           value={startDate + endDate}
         />

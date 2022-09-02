@@ -87,6 +87,7 @@ export default function InputNumber({
         type="text"
         min={min}
         max={max}
+        placeholder="Enter a number..."
         pattern="[0-9]*"
         className={classes.inputGroup__textInput}
         value={inputValue}
