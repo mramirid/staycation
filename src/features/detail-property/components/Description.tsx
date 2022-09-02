@@ -31,7 +31,7 @@ function Features(props: FeaturesProps) {
       className={clx("grid grid-cols-4 gap-x-50px gap-y-5", props.className)}
     >
       {props.features.map((feature) => (
-        <figure>
+        <figure key={feature._id}>
           <img
             src={feature.imageUrl}
             alt={feature.name}
