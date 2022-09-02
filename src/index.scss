@@ -19,6 +19,10 @@
     @apply font-light text-base-300;
   }
 
+  .text-semibold {
+    @apply font-medium text-secondary leading-7;
+  }
+
   // For element with selector: figure > img
   .img-wrapper {
     @apply h-full w-full;

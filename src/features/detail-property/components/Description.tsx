@@ -42,8 +42,8 @@ function Features(props: FeaturesProps) {
             width={38}
             height={38}
           />
-          <figcaption className="mt-3 text-secondary">
-            {feature.qty} <span className="text-light">{feature.name}</span>
+          <figcaption className="mt-3 text-light">
+            <b className="text-semibold">{feature.qty}</b> {feature.name}
           </figcaption>
         </figure>
       ))}
