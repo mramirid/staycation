@@ -71,7 +71,7 @@ function TestimonialPortrait({ imageUrl }: HeroBannerProps) {
         <div
           className={clx(
             "absolute bg-cover bg-no-repeat w-[23rem] h-[31.25rem] bottom-0",
-            "left-10 top-10 rounded-2xl rounded-br-[100px]"
+            "left-10 top-10 rounded-2xl rounded-br-[100px] bg-base-300"
           )}
           style={{ backgroundImage: `url(${imageUrl})` }}
         />

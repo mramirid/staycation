@@ -1,20 +1,20 @@
 import Tag from "@/components/Tag";
 import TitledSection from "@/components/TitledSection";
+import type { Category, CategoryItem as CategoryItemType } from "@/types";
 import { isEmpty } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
-import { categories } from "../assets/data/landing-page.json";
-import type { CategoryItem as CategoryItemType } from "../types";
 
-export default function Categories() {
+type Props = {
+  className: string;
+  categories: Category[];
+};
+
+export default function Categories(props: Props) {
   return (
-    <Fade direction="up" triggerOnce cascade>
-      {categories.map((category) => (
-        <TitledSection
-          title={category.name}
-          sectionClass="mt-70px"
-          key={category._id}
-        >
+    <Fade direction="up" triggerOnce cascade className={props.className}>
+      {props.categories.map((category) => (
+        <TitledSection title={category.name} key={category._id}>
           {isEmpty(category.items) ? (
             <CategoryEmpty />
           ) : (

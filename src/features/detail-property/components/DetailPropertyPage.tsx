@@ -1,5 +1,8 @@
+import Categories from "@/components/Categories";
+import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
+import Testimonial from "@/components/Testimonial";
 import { useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 import { useParams } from "react-router-dom";
@@ -46,15 +49,26 @@ export default function DetailPropertyPage() {
 
         <FeaturedImages imageUrls={property.imageUrls} />
 
-        <div className="mt-50px grid grid-cols-12 gap-x-50px">
-          <Description
-            className="col-span-7"
-            description={property.description}
-            features={property.features}
-          />
-          <BookingForm property={property} className="col-span-5" />
-        </div>
+        <Fade
+          className="mt-50px grid grid-cols-12 gap-x-50px"
+          direction="up"
+          triggerOnce
+        >
+          <>
+            <Description
+              className="col-span-7"
+              description={property.description}
+              features={property.features}
+            />
+            <BookingForm property={property} className="col-span-5" />
+          </>
+        </Fade>
+
+        <Categories className="mt-70px" categories={property.categories} />
+
+        <Testimonial className="my-100px" testimonial={property.testimonial} />
       </Main>
+      <Footer />
     </>
   );
 }

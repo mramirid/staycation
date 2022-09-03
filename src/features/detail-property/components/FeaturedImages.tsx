@@ -8,7 +8,7 @@ type Props = {
 
 export default function FeaturedImages({ imageUrls }: Props) {
   return (
-    <section className="h-[31.25rem] grid grid-rows-2 grid-cols-12 gap-[0.625rem]">
+    <section className="h-[31.25rem] grid grid-rows-2 grid-cols-12 gap-10px">
       {imageUrls.map((imageUrl, i) => {
         const isFirst = i === 0;
         return (

@@ -1,4 +1,4 @@
-import type { Category } from "../landing-page/types";
+import type { Category } from "@/types";
 
 export type Property = {
   _id: string;

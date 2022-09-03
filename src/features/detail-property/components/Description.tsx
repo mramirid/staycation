@@ -16,7 +16,7 @@ export default function Description(props: Props) {
       titleClass="mb-[0.625rem]"
     >
       <div
-        className="text-light leading-7"
+        className="text-light leading-7 flex flex-col space-y-10px"
         dangerouslySetInnerHTML={{ __html: props.description }}
       />
       <Features className="mt-30px" features={props.features} />
