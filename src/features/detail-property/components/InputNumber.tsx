@@ -11,34 +11,15 @@ type Props = {
 };
 
 export default function InputNumber({ min = 1, ...props }: Props) {
-  const buildSuffix = (currentValue: number) => {
-    const { suffix } = props;
-
-    if (isUndefined(suffix)) {
-      return "";
-    }
-
-    if (isString(suffix.pluralValue) && currentValue > 1) {
-      return suffix.pluralValue;
-    }
-    return suffix.value;
-  };
-
-  const inputValue = [props.value, buildSuffix(props.value)].join(" ");
-
-  const onChange = (newValue: string) => {
-    const currentSuffix = buildSuffix(props.value);
-    if (isString(currentSuffix)) {
-      newValue = newValue.replace(currentSuffix, "");
-    }
-
-    const patternNumeric = new RegExp("[0-9]*");
-    const isNumeric = patternNumeric.test(newValue);
-
-    if (isNumeric && +newValue >= min) {
-      props.onChange(+newValue);
-    }
-  };
+  let suffix: string;
+  if (isUndefined(props.suffix)) {
+    suffix = "";
+  } else if (isString(props.suffix.pluralValue) && props.value > 1) {
+    suffix = props.suffix.pluralValue;
+  } else {
+    suffix = props.suffix.value;
+  }
+  const inputValue = [props.value, suffix].join(" ");
 
   const hasReachedMin = props.value <= min;
 
@@ -66,12 +47,12 @@ export default function InputNumber({ min = 1, ...props }: Props) {
         -
       </button>
       <input
+        readOnly
         id={props.id}
         type="text"
         placeholder="Enter a number..."
         className={classes.inputGroup__textInput}
         value={inputValue}
-        onChange={(e) => onChange(e.target.value)}
       />
       <button
         className={clx(

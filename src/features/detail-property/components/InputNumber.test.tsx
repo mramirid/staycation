@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import UserEvent from "@testing-library/user-event";
 import { useState } from "react";
 import InputNumber from "./InputNumber";
@@ -27,24 +27,6 @@ describe("<InputNumber />", () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it("Should able to change value", () => {
-    render(<Form />);
-
-    const input = screen.getByRole("textbox") as HTMLInputElement;
-    fireEvent.change(input, { target: { value: 50 } });
-
-    expect(input.value).toBe("50 days");
-  });
-
-  it("Should not be able to change when it has reached the mininmum value", () => {
-    render(<Form />);
-
-    const input = screen.getByRole("textbox") as HTMLInputElement;
-    fireEvent.change(input, { target: { value: 0 } });
-
-    expect(input.value).toBe("2 days");
-  });
-
   it("Should increment when the plus button is pressed", async () => {
     render(<Form />);
 
@@ -58,8 +40,21 @@ describe("<InputNumber />", () => {
   it("Should decrement when the minus button is pressed", async () => {
     render(<Form />);
 
-    const plusButton = screen.getByTestId("btn-minus") as HTMLButtonElement;
-    await UserEvent.click(plusButton);
+    const minusButton = screen.getByTestId("btn-minus") as HTMLButtonElement;
+    await UserEvent.click(minusButton);
+
+    const input = screen.getByRole("textbox") as HTMLInputElement;
+    expect(input.value).toBe("1 day");
+  });
+
+  it("Should not be able to decrement when it has reached the mininmum value", async () => {
+    render(<Form />);
+
+    const minusButton = screen.getByTestId("btn-minus") as HTMLButtonElement;
+    await Promise.all([
+      UserEvent.click(minusButton),
+      UserEvent.click(minusButton),
+    ]);
 
     const input = screen.getByRole("textbox") as HTMLInputElement;
     expect(input.value).toBe("1 day");
