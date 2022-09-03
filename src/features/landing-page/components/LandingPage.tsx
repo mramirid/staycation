@@ -3,13 +3,17 @@ import Header from "@/components/Header";
 import Main from "@/components/Main";
 import Testimonial from "@/components/Testimonial";
 import { isNumber } from "lodash-es";
-import { createRef } from "react";
+import { createRef, useEffect } from "react";
 import { testimonial } from "../assets/data/landing-page.json";
 import Categories from "./Categories";
 import Hero from "./Hero";
 import MostPicked from "./MostPicked";
 
 export default function LandingPage() {
+  useEffect(() => {
+    document.title = "Home - Staycation";
+  }, []);
+
   const mostPickedRef = createRef<HTMLDivElement>();
 
   const scrollToMostPicked = () => {
