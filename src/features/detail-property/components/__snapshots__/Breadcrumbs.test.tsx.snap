@@ -2,7 +2,7 @@
 
 exports[`<Breadcrumbs /> > Should match with the snapshot 1`] = `
 <nav
-  class="breadcrumbs font-light text-lg"
+  class="breadcrumbs text-lg"
 >
   <ul>
     <li>
@@ -16,7 +16,7 @@ exports[`<Breadcrumbs /> > Should match with the snapshot 1`] = `
     </li>
     <li>
       <a
-        class="text-base-300"
+        class="text-light"
         href="/house/1"
       >
         House Details

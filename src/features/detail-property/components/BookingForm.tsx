@@ -40,10 +40,11 @@ export default function BookingForm(props: Props) {
 }
 
 function Form({ className, property }: Props) {
+  const today = new Date();
   const [nights, setNights] = useState<number>(1);
   const [dateRange, setDateRange] = useState<Range>({
-    startDate: new Date(),
-    endDate: addDays(new Date(), nights - 1),
+    startDate: today,
+    endDate: addDays(today, nights - 1),
     key: "selection",
   });
 
@@ -89,7 +90,7 @@ function Form({ className, property }: Props) {
       <InputDateRange
         id="date-range"
         value={dateRange}
-        minDate={new Date()}
+        minDate={today}
         onChange={updateDateRange}
       />
 

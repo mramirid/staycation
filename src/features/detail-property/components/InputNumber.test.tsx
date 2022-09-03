@@ -14,8 +14,8 @@ function Form() {
     <InputNumber
       id="test-input-number"
       value={value}
+      min={1}
       suffix={{ value: "day", pluralValue: "days" }}
-      max={50}
       onChange={handleChange}
     />
   );
@@ -36,11 +36,11 @@ describe("<InputNumber />", () => {
     expect(input.value).toBe("50 days");
   });
 
-  it("Should not be able to change when it has reached max value", () => {
+  it("Should not be able to change when it has reached the mininmum value", () => {
     render(<Form />);
 
     const input = screen.getByRole("textbox") as HTMLInputElement;
-    fireEvent.change(input, { target: { value: 51 } });
+    fireEvent.change(input, { target: { value: 0 } });
 
     expect(input.value).toBe("2 days");
   });

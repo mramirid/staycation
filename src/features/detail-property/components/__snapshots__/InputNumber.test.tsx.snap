@@ -2,26 +2,24 @@
 
 exports[`<InputNumber /> > Should match with the snapshot 1`] = `
 <div
-  class="custom-input-group"
+  class="_inputGroup_zgol5_1"
 >
   <button
-    class="side-icon btn btn-error !rounded-l"
+    class="_inputGroup__sideIcon_zgol5_4 btn btn-error !rounded-l"
     data-testid="btn-minus"
     type="button"
   >
     -
   </button>
   <input
-    class="text-input"
-    max="50"
-    min="1"
-    name="test-input"
-    pattern="[0-9]*"
+    class="_inputGroup__textInput_zgol5_9"
+    id="test-input-number"
+    placeholder="Enter a number..."
     type="text"
     value="2 days"
   />
   <button
-    class="side-icon btn btn-success !rounded-r"
+    class="_inputGroup__sideIcon_zgol5_4 btn btn-success !rounded-r"
     data-testid="btn-plus"
     type="button"
   >
