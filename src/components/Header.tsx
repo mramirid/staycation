@@ -3,21 +3,27 @@ import { clx } from "@/utils/styling";
 import { Fade } from "react-awesome-reveal";
 import { NavLink } from "react-router-dom";
 
-export default function Header() {
+type Props = {
+  logoOnly?: boolean;
+};
+
+export default function Header({ logoOnly = false }: Props) {
   return (
     <Fade triggerOnce>
       <header className="border-b border-base-200">
         <div className="app-container">
           <nav className="navbar h-20 p-0">
-            <div className="flex-1">
+            <div className={clx("flex-1", { "justify-center": logoOnly })}>
               <BrandText />
             </div>
-            <ul className="flex-none flex gap-x-7">
-              <NavItem to="/">Home</NavItem>
-              <NavItem to="/browse-by">Browse By</NavItem>
-              <NavItem to="/stories">Stories</NavItem>
-              <NavItem to="/agents">Agents</NavItem>
-            </ul>
+            {!logoOnly && (
+              <ul className="flex-none flex gap-x-7">
+                <NavItem to="/">Home</NavItem>
+                <NavItem to="/browse-by">Browse By</NavItem>
+                <NavItem to="/stories">Stories</NavItem>
+                <NavItem to="/agents">Agents</NavItem>
+              </ul>
+            )}
           </nav>
         </div>
       </header>
