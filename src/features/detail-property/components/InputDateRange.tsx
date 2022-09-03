@@ -1,5 +1,5 @@
 import { clx } from "@/utils/styling";
-import { isDate } from "lodash-es";
+import { isDate, isUndefined } from "lodash-es";
 import { useEffect, useRef, useState } from "react";
 import {
   DateRange,
@@ -13,18 +13,16 @@ import { ReactComponent as IconCalendar } from "../assets/icons/calendar.svg";
 import classes from "./input-group.module.scss";
 
 type Props = {
-  className?: string;
-  value?: Range;
+  id: string;
+  value: Range;
   minDate?: Date;
   onChange: (range: Range) => void;
 };
 
 export default function InputDateRange(props: Props) {
-  const value: Range = props.value ?? {
-    startDate: new Date(),
-    endDate: addDays(new Date(), 7), // until next week
-    key: "selection",
-  };
+  if (isUndefined(props.value)) {
+    throw new Error("Please provide the initial value");
+  }
 
   const [isShowed, setIsShowed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -42,9 +40,11 @@ export default function InputDateRange(props: Props) {
     };
   });
 
-  const startDate = isDate(value.startDate) ? formatDate(value.startDate) : "";
-  const endDate = isDate(value.endDate)
-    ? " - " + formatDate(value.endDate)
+  const startDate = isDate(props.value.startDate)
+    ? formatDate(props.value.startDate)
+    : "";
+  const endDate = isDate(props.value.endDate)
+    ? " - " + formatDate(props.value.endDate)
     : "";
 
   const datePickerChange = (rangesByKey: RangeKeyDict) => {
@@ -57,7 +57,7 @@ export default function InputDateRange(props: Props) {
 
   return (
     <div ref={containerRef}>
-      <div className={clx(classes.inputGroup, props.className)}>
+      <div className={classes.inputGroup}>
         <span
           className={clx(
             classes.inputGroup__sideIcon,
@@ -67,6 +67,7 @@ export default function InputDateRange(props: Props) {
           <IconCalendar className="h-[1.563rem] aspect-square" />
         </span>
         <input
+          id={props.id}
           readOnly
           type="text"
           placeholder="Pick a date range..."
@@ -78,7 +79,7 @@ export default function InputDateRange(props: Props) {
       {isShowed && (
         <DateRange
           className="p-1 bg-white drop-shadow-[0_0_20px_rgba(0,0,0,0.1)] rounded"
-          ranges={[value]}
+          ranges={[props.value]}
           minDate={props.minDate}
           onChange={datePickerChange}
           editableDateInputs
@@ -88,11 +89,6 @@ export default function InputDateRange(props: Props) {
       )}
     </div>
   );
-}
-
-export function addDays(date: Date, number: number) {
-  const newDate = new Date(date);
-  return new Date(newDate.setDate(newDate.getDate() + number));
 }
 
 /**

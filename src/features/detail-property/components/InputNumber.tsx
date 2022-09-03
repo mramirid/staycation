@@ -1,27 +1,16 @@
 import { clx } from "@/utils/styling";
-import { inRange, isString, isUndefined } from "lodash-es";
-import { useState } from "react";
+import { isString, isUndefined } from "lodash-es";
 import classes from "./input-group.module.scss";
 
 type Props = {
-  className?: string;
-  value?: number;
+  id: string;
+  value: number;
   onChange: (newValue: number) => void;
   min?: number;
-  max?: number;
   suffix?: { value: string; pluralValue?: string };
 };
 
-export default function InputNumber({
-  value = 1,
-  min = 1,
-  max = 1,
-  ...props
-}: Props) {
-  if (!inRange(value, min, max + 1)) {
-    throw new Error("The value is out of range. Check your min-max!");
-  }
-
+export default function InputNumber({ min = 1, ...props }: Props) {
   const buildSuffix = (currentValue: number) => {
     const { suffix } = props;
 
@@ -35,12 +24,10 @@ export default function InputNumber({
     return suffix.value;
   };
 
-  const [inputValue, setInputValue] = useState(
-    [value, buildSuffix(value)].join(" ")
-  );
+  const inputValue = [props.value, buildSuffix(props.value)].join(" ");
 
   const onChange = (newValue: string) => {
-    const currentSuffix = buildSuffix(value);
+    const currentSuffix = buildSuffix(props.value);
     if (isString(currentSuffix)) {
       newValue = newValue.replace(currentSuffix, "");
     }
@@ -48,29 +35,24 @@ export default function InputNumber({
     const patternNumeric = new RegExp("[0-9]*");
     const isNumeric = patternNumeric.test(newValue);
 
-    if (isNumeric && +newValue <= max && +newValue >= min) {
+    if (isNumeric && +newValue >= min) {
       props.onChange(+newValue);
-
-      const newSuffix = buildSuffix(+newValue);
-      setInputValue([newValue, newSuffix].join(" "));
     }
   };
 
-  const hasReachedMin = value === min;
-  const hasReachedMax = value === max;
+  const hasReachedMin = props.value <= min;
 
   const minus = () => {
     if (hasReachedMin) return;
-    onChange((value - 1).toString());
+    props.onChange(props.value - 1);
   };
 
   const plus = () => {
-    if (hasReachedMax) return;
-    onChange((value + 1).toString());
+    props.onChange(props.value + 1);
   };
 
   return (
-    <div className={clx(classes.inputGroup, props.className)}>
+    <div className={classes.inputGroup}>
       <button
         className={clx(
           classes.inputGroup__sideIcon,
@@ -84,11 +66,9 @@ export default function InputNumber({
         -
       </button>
       <input
+        id={props.id}
         type="text"
-        min={min}
-        max={max}
         placeholder="Enter a number..."
-        pattern="[0-9]*"
         className={classes.inputGroup__textInput}
         value={inputValue}
         onChange={(e) => onChange(e.target.value)}
@@ -99,7 +79,6 @@ export default function InputNumber({
           "btn btn-success !rounded-r"
         )}
         type="button"
-        disabled={hasReachedMax}
         onClick={plus}
         data-testid="btn-plus"
       >

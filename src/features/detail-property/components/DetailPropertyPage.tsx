@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 import { useParams } from "react-router-dom";
 import property from "../assets/data/item-details.json";
+import BookingForm from "./BookingForm";
 import Breadcrumbs, { type BreadcrumbsData } from "./Breadcrumbs";
 import Description from "./Description";
 import FeaturedImages from "./FeaturedImages";
@@ -51,7 +52,7 @@ export default function DetailPropertyPage() {
             description={property.description}
             features={property.features}
           />
-          <div className="col-span-5">Hello</div>
+          <BookingForm property={property} className="col-span-5" />
         </div>
       </Main>
     </>

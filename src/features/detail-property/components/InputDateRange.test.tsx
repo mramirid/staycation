@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import UserEvent from "@testing-library/user-event";
+import { addDays } from "date-fns";
 import { useState } from "react";
 import { type Range } from "react-date-range";
-import InputDateRange, { addDays } from "./InputDateRange";
+import InputDateRange from "./InputDateRange";
 
 const AUGUST_31_2022 = new Date(2022, 7, 31);
 
@@ -17,7 +18,13 @@ function Form() {
     setValue(newValue);
   };
 
-  return <InputDateRange value={value} onChange={handleChange} />;
+  return (
+    <InputDateRange
+      id="test-input-date"
+      value={value}
+      onChange={handleChange}
+    />
+  );
 }
 
 describe("<InputDateRange />", () => {
