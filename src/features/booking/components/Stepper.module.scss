@@ -1,0 +1,57 @@
+.Numberings {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  li {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @apply h-50px w-50px;
+    border-radius: 3.125rem;
+    color: white;
+
+    &:after {
+      position: absolute;
+      content: "";
+      z-index: 1;
+      @apply h-50px w-50px bg-success;
+      border-radius: 3.125rem;
+      background-image: url("../assets/icons/check-mark.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: scale(1);
+      transition: 0.35s transform ease-in-out;
+    }
+
+    &:not(:last-child) {
+      position: absolute;
+      content: "";
+      z-index: -2;
+      top: 50%;
+      left: 100%;
+      width: 3.75rem;
+      height: 1px;
+      @apply bg-base-200;
+    }
+
+    &.active {
+      @apply bg-base-200 text-base-300;
+
+      &:after {
+        z-index: -1;
+        background-color: white;
+        @apply border border-base-200;
+      }
+
+      & ~ li {
+        @apply text-base-300 bg-base-200;
+
+        &:after {
+          content: none;
+        }
+      }
+    }
+  }
+}
