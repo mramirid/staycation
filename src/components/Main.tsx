@@ -8,7 +8,7 @@ type Props = {
 
 export default function Main(props: Props) {
   return (
-    <main className={clx({ "app-container": props.withContainer })}>
+    <main className={clx({ "app-container": !!props.withContainer })}>
       {props.children}
     </main>
   );
