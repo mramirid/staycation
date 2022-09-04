@@ -1,4 +1,4 @@
-import type { Category } from "@/types";
+import type { Category, Testimonial } from "@/types";
 
 export type Property = {
   _id: string;
@@ -35,14 +35,4 @@ type Activity = {
   name: string;
   type: string;
   imageUrl: string;
-};
-
-type Testimonial = {
-  _id: string;
-  imageUrl: string;
-  name: string;
-  rate: number;
-  content: string;
-  familyName: string;
-  familyOccupation: string;
 };
