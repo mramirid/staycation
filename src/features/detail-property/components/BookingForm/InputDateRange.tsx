@@ -21,7 +21,7 @@ type Props = {
 
 export default function InputDateRange(props: Props) {
   if (isUndefined(props.value)) {
-    throw new Error("Please provide the initial value");
+    throw new TypeError("Please provide the initial value");
   }
 
   const [isShowed, setIsShowed] = useState(false);
@@ -99,7 +99,7 @@ export default function InputDateRange(props: Props) {
  */
 function assertIsNode(target: EventTarget | null): asserts target is Node {
   if (!target || !("nodeType" in target)) {
-    throw new Error("Node expected");
+    throw new TypeError("Node expected");
   }
 }
 

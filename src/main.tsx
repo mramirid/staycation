@@ -9,7 +9,7 @@ import { store } from "./store";
 
 const rootElement = document.getElementById("root");
 if (isNull(rootElement)) {
-  throw new Error("The root element is undefined");
+  throw new TypeError("The root element is undefined");
 }
 
 ReactDOM.createRoot(rootElement).render(
