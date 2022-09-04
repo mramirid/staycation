@@ -6,7 +6,6 @@ import { isDate } from "lodash-es";
 import { useState, type FormEvent } from "react";
 import { type Range } from "react-date-range";
 import type { Property } from "../types";
-import classes from "./BookingForm.module.scss";
 import InputDateRange from "./InputDateRange";
 import InputNumber from "./InputNumber";
 
@@ -73,7 +72,7 @@ function Form({ className, property }: Props) {
 
   return (
     <form className={className} onSubmit={startBooking}>
-      <label htmlFor="nights" className={classes.form__label}>
+      <label htmlFor="nights" className="block mb-2 leading-7 text-secondary">
         How long you will stay?
       </label>
       <InputNumber
@@ -84,7 +83,10 @@ function Form({ className, property }: Props) {
         onChange={updateNights}
       />
 
-      <label htmlFor="date-range" className={clx(classes.form__label, "mt-6")}>
+      <label
+        htmlFor="date-range"
+        className="block mb-2 leading-7 text-secondary mt-6"
+      >
         Pick a Date
       </label>
       <InputDateRange
