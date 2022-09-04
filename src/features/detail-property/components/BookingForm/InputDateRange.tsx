@@ -9,7 +9,7 @@ import {
 } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
-import { ReactComponent as IconCalendar } from "../assets/icons/calendar.svg";
+import { ReactComponent as IconCalendar } from "../../assets/icons/calendar.svg";
 import classes from "./input-group.module.scss";
 
 type Props = {

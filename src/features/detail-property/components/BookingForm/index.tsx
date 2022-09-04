@@ -5,7 +5,7 @@ import { addDays, differenceInDays } from "date-fns";
 import { isDate } from "lodash-es";
 import { useState, type FormEvent } from "react";
 import { type Range } from "react-date-range";
-import type { Property } from "../types";
+import type { Property } from "../../types";
 import InputDateRange from "./InputDateRange";
 import InputNumber from "./InputNumber";
 
