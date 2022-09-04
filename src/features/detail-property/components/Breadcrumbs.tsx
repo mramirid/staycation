@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-type Props = {
+type BreadcrumbsProps = {
   data: BreadcrumbsData;
 };
 
@@ -9,7 +9,7 @@ export type BreadcrumbsData = {
   to: string;
 }[];
 
-export default function Breadcrumbs(props: Props) {
+export default function Breadcrumbs(props: BreadcrumbsProps) {
   return (
     <nav className="breadcrumbs text-lg">
       <ul>

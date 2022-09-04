@@ -5,12 +5,12 @@ import { isEmpty } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
 
-type Props = {
+type CategoriesProps = {
   className: string;
   categories: Category[];
 };
 
-export default function Categories(props: Props) {
+export default function Categories(props: CategoriesProps) {
   return (
     <Fade direction="up" triggerOnce cascade className={props.className}>
       {props.categories.map((category) => (

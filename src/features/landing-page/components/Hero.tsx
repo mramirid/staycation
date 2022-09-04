@@ -9,11 +9,11 @@ import { ReactComponent as IconTraveler } from "../assets/icons/traveler.svg";
 import { ReactComponent as IconTreasure } from "../assets/icons/treasure.svg";
 import imageHero from "../assets/images/hero.jpg";
 
-type Props = {
+type HeroProps = {
   onShowMeClicked: () => void;
 };
 
-export default function Hero(props: Props) {
+export default function Hero(props: HeroProps) {
   return (
     <Fade direction="up" triggerOnce>
       <section className="mt-70px grid grid-cols-12">
@@ -24,7 +24,7 @@ export default function Hero(props: Props) {
   );
 }
 
-type HeroContentProps = Props & { className: string };
+type HeroContentProps = HeroProps & { className: string };
 
 function HeroContent(props: HeroContentProps) {
   return (

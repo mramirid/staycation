@@ -9,12 +9,12 @@ import type { Property } from "../../types";
 import InputDateRange from "./InputDateRange";
 import InputNumber from "./InputNumber";
 
-type Props = {
+type BookingFormProps = {
   className: string;
   property: Property;
 };
 
-export default function BookingForm(props: Props) {
+export default function BookingForm(props: BookingFormProps) {
   const formattedPrice = formatToUSD(props.property.price);
 
   return (
@@ -38,7 +38,7 @@ export default function BookingForm(props: Props) {
   );
 }
 
-function Form({ className, property }: Props) {
+function Form({ className, property }: BookingFormProps) {
   const today = new Date();
   const [nights, setNights] = useState<number>(1);
   const [dateRange, setDateRange] = useState<Range>({

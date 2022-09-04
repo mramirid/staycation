@@ -2,11 +2,11 @@ import { clx } from "@/utils/styling";
 import { Fade } from "react-awesome-reveal";
 import type { ImageUrl } from "../types";
 
-type Props = {
+type FeaturedImagesProps = {
   imageUrls: ImageUrl[];
 };
 
-export default function FeaturedImages({ imageUrls }: Props) {
+export default function FeaturedImages({ imageUrls }: FeaturedImagesProps) {
   return (
     <section className="h-[31.25rem] grid grid-rows-2 grid-cols-12 gap-10px">
       {imageUrls.map((imageUrl, i) => {

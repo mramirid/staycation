@@ -5,12 +5,12 @@ import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
 import StarRatings from "react-star-ratings";
 
-type Props = {
+type TestimonialProps = {
   className: string;
   testimonial: TestimonialType;
 };
 
-export default function Testimonial(props: Props) {
+export default function Testimonial(props: TestimonialProps) {
   return (
     <Fade direction="up" triggerOnce className={props.className}>
       <section className="flex">
@@ -21,7 +21,7 @@ export default function Testimonial(props: Props) {
   );
 }
 
-function TestimonialContent({ testimonial, className }: Props) {
+function TestimonialContent({ testimonial, className }: TestimonialProps) {
   const gotoTestimonialStory = () => {
     // TODO: I don't know
   };

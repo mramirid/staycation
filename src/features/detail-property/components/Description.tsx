@@ -2,13 +2,13 @@ import TitledSection from "@/components/TitledSection";
 import { clx } from "@/utils/styling";
 import type { Feature } from "../types";
 
-type Props = {
+type DescriptionProps = {
   description: string;
   features: Feature[];
   className: string;
 };
 
-export default function Description(props: Props) {
+export default function Description(props: DescriptionProps) {
   return (
     <TitledSection
       title="About the property"

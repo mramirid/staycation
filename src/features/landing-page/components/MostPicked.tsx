@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import { mostPicked as mostPickedList } from "../assets/data/landing-page.json";
 import classes from "./MostPicked.module.scss";
 
-type MostPicked = {
+type MostPickedType = {
   _id: string;
   name: string;
   type: string;
@@ -19,11 +19,11 @@ type MostPicked = {
   unit: string;
 };
 
-type Props = {
+type MostPickedProps = {
   className: string;
 };
 
-const MostPickedSection = forwardRef<HTMLDivElement, Props>((props, ref) => (
+const MostPicked = forwardRef<HTMLDivElement, MostPickedProps>((props, ref) => (
   <Fade direction="up" triggerOnce>
     <TitledSection title="Most Picked" sectionClass={props.className} ref={ref}>
       <div className="grid grid-rows-2 grid-cols-3 gap-30px h-[28.75rem]">
@@ -43,10 +43,10 @@ const MostPickedSection = forwardRef<HTMLDivElement, Props>((props, ref) => (
   </Fade>
 ));
 
-export default MostPickedSection;
+export default MostPicked;
 
 type MostPickedItemProps = {
-  mostPicked: MostPicked;
+  mostPicked: MostPickedType;
 };
 
 function MostPickedItem({ mostPicked }: MostPickedItemProps) {

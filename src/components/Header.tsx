@@ -3,11 +3,11 @@ import { clx } from "@/utils/styling";
 import { Fade } from "react-awesome-reveal";
 import { NavLink } from "react-router-dom";
 
-type Props = {
+type HeaderProps = {
   logoOnly?: boolean;
 };
 
-export default function Header({ logoOnly = false }: Props) {
+export default function Header({ logoOnly = false }: HeaderProps) {
   return (
     <Fade triggerOnce>
       <header className="border-b border-base-200">
