@@ -41,7 +41,7 @@ function HeroContent(props: HeroContentProps) {
       </p>
 
       <button
-        className="app-btn app-btn-primary mt-[1.875rem]"
+        className="app-btn app-btn-primary mt-30px"
         onClick={props.onShowMeClicked}
         type="button"
       >

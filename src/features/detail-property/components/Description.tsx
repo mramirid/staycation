@@ -13,7 +13,7 @@ export default function Description(props: DescriptionProps) {
     <TitledSection
       title="About the property"
       sectionClass={props.className}
-      titleClass="mb-[0.625rem]"
+      titleClass="mb-10px"
     >
       <div
         className="text-light leading-7 flex flex-col space-y-10px"
