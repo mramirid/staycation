@@ -24,26 +24,34 @@ type MostPickedProps = {
 };
 
 const MostPicked = forwardRef<HTMLDivElement, MostPickedProps>((props, ref) => (
-  <Fade direction="up" triggerOnce>
-    <TitledSection title="Most Picked" sectionClass={props.className} ref={ref}>
-      <div className="grid grid-rows-2 grid-cols-3 gap-30px h-[28.75rem]">
-        {mostPickedList.map((mostPicked, i) => (
-          <Fade
-            className={clx({ "row-span-2": i === 0 })}
-            direction="up"
-            triggerOnce
-            delay={500 * i}
-            key={mostPicked._id}
-          >
-            <MostPickedItem mostPicked={mostPicked} />
-          </Fade>
-        ))}
-      </div>
-    </TitledSection>
-  </Fade>
+  <div ref={ref} className={props.className}>
+    <Fade direction="up" triggerOnce>
+      <TitledSection title="Most Picked" ref={ref}>
+        <MostPickedList />
+      </TitledSection>
+    </Fade>
+  </div>
 ));
 
 export default MostPicked;
+
+function MostPickedList() {
+  return (
+    <div className="grid grid-rows-2 grid-cols-3 gap-30px h-[28.75rem]">
+      {mostPickedList.map((mostPicked, i) => (
+        <Fade
+          className={clx({ "row-span-2": i === 0 })}
+          direction="up"
+          triggerOnce
+          delay={500 * i}
+          key={mostPicked._id}
+        >
+          <MostPickedItem mostPicked={mostPicked} />
+        </Fade>
+      ))}
+    </div>
+  );
+}
 
 type MostPickedItemProps = {
   mostPicked: MostPickedType;

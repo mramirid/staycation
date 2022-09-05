@@ -50,6 +50,7 @@ export default function BookingPage() {
         </Stepper> */}
         <form onSubmit={handleSubmit(submit)} className="w-60">
           <InputText
+            id="name"
             {...register("name", { required: true })}
             errorMessage={formState.errors.name?.message}
           />
