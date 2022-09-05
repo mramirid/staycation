@@ -4,7 +4,6 @@ module.exports = {
   theme: {
     extend: {
       margin: {
-        "14px": "0.875rem",
         "50px": "3.125rem",
         "70px": "4.375rem",
         "100px": "6.25rem",
@@ -12,6 +11,7 @@ module.exports = {
       spacing: {
         "10px": "0.625rem",
         "30px": "1.875rem",
+        "45px": "2.813rem",
         "50px": "3.125rem",
       },
     },

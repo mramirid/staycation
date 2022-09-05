@@ -31,6 +31,7 @@
     }
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.9.7",
     "@reduxjs/toolkit": "^1.8.4",
     "classnames": "^2.3.1",
     "daisyui": "^2.24.0",
@@ -43,7 +44,8 @@
     "react-hook-form": "^7.34.2",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
-    "react-star-ratings": "^2.3.0"
+    "react-star-ratings": "^2.3.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
