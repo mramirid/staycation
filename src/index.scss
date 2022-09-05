@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -41,7 +41,7 @@
   .app-btn-primary {
     box-shadow: 0px 8px 15px rgba(50, 82, 223, 0.3);
     @apply btn-primary rounded font-medium leading-7
-    min-h-[3.125rem] min-w-[13rem] text-[1.125rem] px-7;
+    min-h-[3.125rem] min-w-[13rem] text-lg px-7;
   }
 
   .app-btn-link {
