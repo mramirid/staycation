@@ -1,8 +1,11 @@
 import Header from "@/components/Header";
 import Main from "@/components/Main";
+import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { isNull, isUndefined } from "lodash-es";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { object, string, type SchemaOf } from "yup";
+import { mixed, object, string } from "yup";
+import InputImage from "./InputImage";
 import InputText from "./InputText";
 
 // const steps: Steps = {
@@ -25,20 +28,53 @@ import InputText from "./InputText";
 
 type FieldValues = {
   name: string;
+  image: FileList;
 };
 
-const fieldSchema: SchemaOf<FieldValues> = object({
+const acceptTypes = ["image/png", "image/jpg", "image/jpeg"];
+
+const fieldSchema = object({
   name: string().trim().min(3).required(),
+  image: mixed<FileList>()
+    .test(
+      "Required",
+      "You need to provide a file",
+      (fileList) => fileList?.length === 1
+    )
+    .test("Image Size", "The file is too large", (value) => {
+      if (isUndefined(value)) {
+        return false;
+      }
+
+      const image = value.item(0);
+      if (isNull(image)) {
+        return false;
+      }
+
+      return image.size <= 2_000_000; // In bytes or 2 MB
+    })
+    .test("Image Type", "We only support PNG/JPG/JPEG", (value) => {
+      if (isUndefined(value)) {
+        return false;
+      }
+
+      const image = value.item(0);
+      if (isNull(image)) {
+        return false;
+      }
+
+      return acceptTypes.includes(image.type);
+    }),
 });
 
 export default function BookingPage() {
-  const { register, handleSubmit, formState } = useForm<FieldValues>({
+  const { register, handleSubmit, formState, control } = useForm<FieldValues>({
     resolver: yupResolver(fieldSchema),
     mode: "onChange",
   });
 
   const submit: SubmitHandler<FieldValues> = (data) => {
-    alert(JSON.stringify(data));
+    console.log("SUBMITTED:", data);
   };
 
   return (
@@ -48,14 +84,28 @@ export default function BookingPage() {
         {/* <Stepper steps={steps} initialStepName="bookingInformation">
           {() => <h1>Hello World</h1>}
         </Stepper> */}
-        <form onSubmit={handleSubmit(submit)} className="w-60">
+        <form className="w-60" onSubmit={handleSubmit(submit)}>
           <InputText
             id="name"
-            {...register("name", { required: true })}
+            {...register("name")}
             errorMessage={formState.errors.name?.message}
           />
+          <InputImage
+            containerClass="mt-1"
+            accept={acceptTypes}
+            id="payment-proof"
+            {...register("image")}
+            errorMessage={formState.errors.image?.message}
+          />
+          <button
+            className="app-btn app-btn-primary btn-block mt-10"
+            type="submit"
+          >
+            Continue to Book
+          </button>
         </form>
       </Main>
+      <DevTool control={control} />
     </>
   );
 }

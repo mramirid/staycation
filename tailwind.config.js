@@ -14,6 +14,9 @@ module.exports = {
         "45px": "2.813rem",
         "50px": "3.125rem",
       },
+      minHeight: {
+        "45px": "2.813rem",
+      },
     },
   },
   daisyui: {
