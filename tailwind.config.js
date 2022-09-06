@@ -9,6 +9,7 @@ module.exports = {
         "100px": "6.25rem",
       },
       spacing: {
+        "1px": "0.063rem",
         "10px": "0.625rem",
         "30px": "1.875rem",
         "45px": "2.813rem",

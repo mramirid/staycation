@@ -59,16 +59,17 @@ export default function Stepper(props: StepperProps) {
   return props.children(props.steps, currentStepName, toPrevStep, toNextStep);
 }
 
-type StepContent = {
+type StepContentProps = {
   steps: Steps;
   currentStepName: string;
+  className: string;
 };
 
-export function Numberings({ steps, currentStepName }: StepContent) {
-  const stepNames = Object.keys(steps);
+export function Numberings(props: StepContentProps) {
+  const stepNames = Object.keys(props.steps);
 
   return (
-    <Fade>
+    <Fade className={props.className}>
       <ol className={classes.Numberings}>
         {stepNames.map((stepName, i) => {
           const number = i + 1;
@@ -78,7 +79,7 @@ export function Numberings({ steps, currentStepName }: StepContent) {
           }
           return (
             <li
-              className={clx({ active: stepName === currentStepName })}
+              className={clx({ active: stepName === props.currentStepName })}
               key={i}
             >
               {number}
@@ -90,18 +91,20 @@ export function Numberings({ steps, currentStepName }: StepContent) {
   );
 }
 
-export function Meta({ steps, currentStepName }: StepContent) {
-  const currentStep = steps[currentStepName];
+export function Meta(props: StepContentProps) {
+  const currentStep = props.steps[props.currentStepName];
 
   return (
-    <Fade delay={300} className="text-center">
-      <h1 className="font-semibold text-4xl">{currentStep.title}</h1>
-      <p className="text-light text-lg mt-1">{currentStep.description}</p>
+    <Fade delay={300} className={clx("text-center", props.className)}>
+      <>
+        <h1 className="font-semibold text-4xl">{currentStep.title}</h1>
+        <p className="text-light text-lg mt-1">{currentStep.description}</p>
+      </>
     </Fade>
   );
 }
 
-export function Content({ steps, currentStepName }: StepContent) {
+export function Content({ steps, currentStepName }: StepContentProps) {
   return <Fade>{steps[currentStepName].content}</Fade>;
 }
 
