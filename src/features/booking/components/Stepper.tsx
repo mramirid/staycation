@@ -12,7 +12,7 @@ type StepperProps = {
     currentStepName: string,
     toPrevStep: () => void,
     toNextStep: () => void
-  ) => ReactNode;
+  ) => JSX.Element;
 };
 
 export type Steps = {
