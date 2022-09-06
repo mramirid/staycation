@@ -4,6 +4,7 @@ specifiers:
   '@hookform/devtools': ^4.2.2
   '@hookform/resolvers': ^2.9.7
   '@reduxjs/toolkit': ^1.8.4
+  '@tailwindcss/line-clamp': ^0.4.2
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.3.0
   '@testing-library/user-event': ^14.4.3
@@ -48,6 +49,7 @@ specifiers:
 dependencies:
   '@hookform/resolvers': 2.9.7_react-hook-form@7.34.2
   '@reduxjs/toolkit': 1.8.4_kkwg4cbsojnjnupd3btipussee
+  '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.1.8
   classnames: 2.3.1
   daisyui: 2.24.0_25hquoklqeoqwmt7fwvvcyxm5e
   date-fns: 2.29.2
@@ -1856,6 +1858,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.1.8:
+    resolution: {integrity: sha512-HFzAQuqYCjyy/SX9sLGB1lroPzmcnWv1FHkIpmypte10hptf4oPUfucryMKovZh2u0uiS9U5Ty3GghWfEJGwVw==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
+      tailwindcss: 3.1.8_postcss@8.4.16
+    dev: false
 
   /@testing-library/dom/8.17.1:
     resolution: {integrity: sha512-KnH2MnJUzmFNPW6RIKfd+zf2Wue8mEKX0M3cpX6aKl5ZXrJM1/c/Pc8c2xDNYQCnJO48Sm5ITbMXgqTr3h4jxQ==}

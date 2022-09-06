@@ -1,32 +1,27 @@
 import { clx } from "@/utils/styling";
-import { isString } from "lodash-es";
-import { forwardRef } from "react";
-import type { FieldValues, UseFormRegister } from "react-hook-form";
+import { isNull, isString } from "lodash-es";
+import { type ChangeEventHandler } from "react";
 
 type Props = {
   id: string;
+  name: string;
   accept: string[];
+  value?: string;
+  onChange: (image: File) => void;
   containerClass?: string;
   errorMessage?: string;
 };
 
-const InputImage = forwardRef<
-  HTMLInputElement,
-  Props & ReturnType<UseFormRegister<FieldValues>>
->((props, ref) => {
-  // const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-  //   const files = e.target.files;
-  //   if (isNull(files)) {
-  //     return;
-  //   }
+export default function InputImage(props: Props) {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const files = e.target.files;
+    if (isNull(files)) return;
 
-  //   const image = files.item(0);
-  //   if (isNull(image)) {
-  //     return;
-  //   }
+    const image = files.item(0);
+    if (isNull(image)) return;
 
-  //   props.onChange(image);
-  // };
+    props.onChange(image);
+  };
 
   return (
     <div className={props.containerClass}>
@@ -36,25 +31,25 @@ const InputImage = forwardRef<
           className="hidden"
           type="file"
           accept={props.accept.join()}
-          ref={ref}
           name={props.name}
-          onChange={props.onChange}
-          onBlur={props.onBlur}
+          onChange={handleChange}
         />
-        <span
+        <div
           className={clx(
             "input cursor-pointer bg-base-200 text-gray-400",
             "flex h-full w-full items-center min-h-45px"
           )}
         >
-          Choose a file...
-        </span>
+          {isString(props.value) ? (
+            <span className="line-clamp-1 text-secondary">{props.value}</span>
+          ) : (
+            <>Browse a file ...</>
+          )}
+        </div>
       </label>
       {isString(props.errorMessage) && (
         <div className="mt-1 text-error text-sm">{props.errorMessage}</div>
       )}
     </div>
   );
-});
-
-export default InputImage;
+}

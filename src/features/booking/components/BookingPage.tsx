@@ -2,8 +2,8 @@ import Header from "@/components/Header";
 import Main from "@/components/Main";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { isNull, isUndefined } from "lodash-es";
-import { useForm, type SubmitHandler } from "react-hook-form";
+import { isObject } from "lodash-es";
+import { Controller, useForm, type SubmitHandler } from "react-hook-form";
 import { mixed, object, string } from "yup";
 import InputImage from "./InputImage";
 import InputText from "./InputText";
@@ -28,43 +28,25 @@ import InputText from "./InputText";
 
 type FieldValues = {
   name: string;
-  image: FileList;
+  image: File;
 };
 
 const acceptTypes = ["image/png", "image/jpg", "image/jpeg"];
 
 const fieldSchema = object({
   name: string().trim().min(3).required(),
-  image: mixed<FileList>()
+  image: mixed<File>()
+    .test("Required", "You need to provide a file", (image) => isObject(image))
     .test(
-      "Required",
-      "You need to provide a file",
-      (fileList) => fileList?.length === 1
+      "Image Size",
+      "The file is too large",
+      (image) => isObject(image) && image.size <= 2000000 /* In bytes or 2 MB*/
     )
-    .test("Image Size", "The file is too large", (value) => {
-      if (isUndefined(value)) {
-        return false;
-      }
-
-      const image = value.item(0);
-      if (isNull(image)) {
-        return false;
-      }
-
-      return image.size <= 2_000_000; // In bytes or 2 MB
-    })
-    .test("Image Type", "We only support PNG/JPG/JPEG", (value) => {
-      if (isUndefined(value)) {
-        return false;
-      }
-
-      const image = value.item(0);
-      if (isNull(image)) {
-        return false;
-      }
-
-      return acceptTypes.includes(image.type);
-    }),
+    .test(
+      "Image Type",
+      "We only support PNG/JPG/JPEG",
+      (image) => isObject(image) && acceptTypes.includes(image.type)
+    ),
 });
 
 export default function BookingPage() {
@@ -90,12 +72,20 @@ export default function BookingPage() {
             {...register("name")}
             errorMessage={formState.errors.name?.message}
           />
-          <InputImage
-            containerClass="mt-1"
-            accept={acceptTypes}
-            id="payment-proof"
-            {...register("image")}
-            errorMessage={formState.errors.image?.message}
+          <Controller
+            control={control}
+            name="image"
+            render={({ field }) => (
+              <InputImage
+                containerClass="mt-1"
+                accept={acceptTypes}
+                id="payment-proof"
+                name={field.name}
+                onChange={field.onChange}
+                value={field.value?.name}
+                errorMessage={formState.errors.image?.message}
+              />
+            )}
           />
           <button
             className="app-btn app-btn-primary btn-block mt-10"
