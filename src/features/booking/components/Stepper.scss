@@ -1,0 +1,68 @@
+$sixtyPx: 3.75rem;
+
+.Numberings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  li {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $sixtyPx;
+    height: $sixtyPx;
+    border-radius: $sixtyPx;
+    @apply font-light text-2xl;
+
+    &:after {
+      position: absolute;
+      content: "";
+      z-index: 2;
+      width: $sixtyPx;
+      height: $sixtyPx;
+      border-radius: $sixtyPx;
+      background-image: url("../assets/icons/check-mark.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      @apply bg-success;
+      transform: scale(1);
+      transition: 0.35s transform ease-in-out;
+    }
+
+    &:not(:last-child) {
+      margin-right: $sixtyPx;
+
+      &:before {
+        content: "";
+        z-index: -2;
+        top: 50%;
+        left: 100%;
+        position: absolute;
+        width: $sixtyPx + 0.625rem;
+        height: 1px;
+        @apply bg-base-200;
+      }
+    }
+
+    &.active {
+      font-weight: 500;
+      @apply bg-base-200;
+
+      &:after {
+        z-index: -1;
+        background: transparent;
+        transform: scale(1.2);
+        @apply border border-base-200;
+      }
+
+      & ~ li {
+        color: gray;
+        @apply bg-base-200;
+        &:after {
+          content: none;
+        }
+      }
+    }
+  }
+}

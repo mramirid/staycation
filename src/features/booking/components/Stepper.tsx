@@ -2,7 +2,7 @@ import { clx } from "@/utils/styling";
 import { isEmpty, isString } from "lodash-es";
 import { useState, type ReactNode } from "react";
 import { Fade } from "react-awesome-reveal";
-import classes from "./Stepper.module.scss";
+import "./Stepper.scss";
 
 type StepperProps = {
   steps: Steps;
@@ -70,7 +70,7 @@ export function Numberings(props: StepContentProps) {
 
   return (
     <Fade className={props.className}>
-      <ol className={classes.Numberings}>
+      <ol className="Numberings">
         {stepNames.map((stepName, i) => {
           const number = i + 1;
 
