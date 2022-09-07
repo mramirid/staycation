@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import BookingInformation from "./BookingInformation";
+import Completed from "./Completed";
 import Payment from "./Payment";
 import Stepper, { Content, Meta, Numberings, type Steps } from "./Stepper";
 
@@ -18,7 +19,7 @@ const steps: Steps = {
   completed: {
     title: "Yay! Completed",
     description: "",
-    content: <></>,
+    content: <Completed />,
   },
 };
 
@@ -27,7 +28,7 @@ export default function BookingPage() {
     <>
       <Header logoOnly />
       <Main>
-        <Stepper steps={steps} initialStepName="payment">
+        <Stepper steps={steps} initialStepName="completed">
           {(steps, currentStepName) => (
             <>
               <Numberings
