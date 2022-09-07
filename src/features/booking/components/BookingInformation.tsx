@@ -9,8 +9,8 @@ import { object, string, type SchemaOf } from "yup";
 import "yup-phone";
 import InputText from "./InputText";
 
-const CHECKOUT = {
-  duration: 2,
+const bookingData = {
+  nights: 2,
 };
 
 type BookingInformationProps = {
@@ -35,7 +35,7 @@ export default function BookingInformation(props: BookingInformationProps) {
 }
 
 function PropertyDetails() {
-  const formattedNights = formatWithSuffix(CHECKOUT.duration, {
+  const formattedNights = formatWithSuffix(bookingData.nights, {
     singular: "night",
     plural: "nights",
   });
@@ -57,7 +57,7 @@ function PropertyDetails() {
           </div>
           <div className="leading-7">
             <b className="text-semibold">
-              ${CHECKOUT.duration * property.price} USD
+              ${bookingData.nights * property.price} USD
             </b>
             <span className="text-light"> per </span>
             <b className="text-semibold">{formattedNights}</b>
