@@ -1,4 +1,4 @@
-import PROPERTY from "@/features/detail-property/assets/property.data.json";
+import PROPERTY from "@/assets/data/property.data.json";
 import { formatWithSuffix } from "@/utils/format";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";

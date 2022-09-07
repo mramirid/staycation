@@ -1,3 +1,4 @@
+import PROPERTY from "@/assets/data/property.data.json";
 import Categories from "@/components/Categories";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
@@ -6,7 +7,6 @@ import Testimonial from "@/components/Testimonial";
 import { useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 import { useParams } from "react-router-dom";
-import PROPERTY from "../assets/property.data.json";
 import BookingForm from "./BookingForm";
 import Breadcrumbs, { type BreadcrumbsData } from "./Breadcrumbs";
 import Description from "./Description";
