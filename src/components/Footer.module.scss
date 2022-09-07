@@ -6,6 +6,6 @@
   @apply mt-2 flex flex-col gap-y-2;
 
   .menu__link {
-    @apply link link-hover text-light;
+    @apply link link-hover;
   }
 }

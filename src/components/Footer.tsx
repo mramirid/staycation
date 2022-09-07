@@ -82,18 +82,19 @@ type SitemapItemProps = { label: string } & (
 
 function LinkItem(props: SitemapItemProps) {
   let link: ReactElement;
+  const className = clx(classes.menu__link, "text-light");
 
   switch (props.type) {
     case "internal-link":
       link = (
-        <Link to={props.to} className={classes.menu__link}>
+        <Link to={props.to} className={className}>
           {props.label}
         </Link>
       );
       break;
     case "external-link":
       link = (
-        <ExternalLink href={props.href} className={classes.menu__link}>
+        <ExternalLink href={props.href} className={className}>
           {props.label}
         </ExternalLink>
       );
