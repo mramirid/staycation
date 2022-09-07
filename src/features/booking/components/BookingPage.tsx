@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Main from "@/components/Main";
+import { useEffect } from "react";
 import BookingInformation from "./BookingInformation";
 import Completed from "./Completed";
 import Payment from "./Payment";
@@ -24,6 +25,8 @@ const steps: Steps = {
 };
 
 export default function BookingPage() {
+  useEffect(() => window.scrollTo(0, 0), []);
+
   return (
     <>
       <Header logoOnly />

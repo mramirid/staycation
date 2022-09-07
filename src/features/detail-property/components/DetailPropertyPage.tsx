@@ -18,6 +18,7 @@ const DETAIL_PAGE_TITLE = "Detail Property";
 export default function DetailPropertyPage() {
   useEffect(() => {
     document.title = `${DETAIL_PAGE_TITLE} - Staycation`;
+    window.scrollTo(0, 0);
   }, []);
 
   const { id: propertyId } = useParams();
