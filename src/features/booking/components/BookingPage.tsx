@@ -28,31 +28,25 @@ export default function BookingPage() {
       <Header logoOnly />
       <Main>
         <Stepper steps={steps} initialStepName="payment">
-          {(steps, currentStepName) => {
-            // console.log("steps:", steps);
-            // console.log("currentStepName:", currentStepName);
-
-            return (
-              <>
-                <Numberings
-                  className="my-50px"
-                  steps={steps}
-                  currentStepName={currentStepName}
-                />
-                <Meta
-                  className="my-50px"
-                  steps={steps}
-                  currentStepName={currentStepName}
-                />
-
-                <Content
-                  className="my-50px"
-                  steps={steps}
-                  currentStepName={currentStepName}
-                />
-              </>
-            );
-          }}
+          {(steps, currentStepName) => (
+            <>
+              <Numberings
+                className="my-50px"
+                steps={steps}
+                currentStepName={currentStepName}
+              />
+              <Meta
+                className="my-50px"
+                steps={steps}
+                currentStepName={currentStepName}
+              />
+              <Content
+                className="my-50px"
+                steps={steps}
+                currentStepName={currentStepName}
+              />
+            </>
+          )}
         </Stepper>
       </Main>
     </>

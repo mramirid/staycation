@@ -6,7 +6,7 @@ import Testimonial from "@/components/Testimonial";
 import { useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 import { useParams } from "react-router-dom";
-import property from "../assets/data/item-details.json";
+import PROPERTY from "../assets/property.data.json";
 import BookingForm from "./BookingForm";
 import Breadcrumbs, { type BreadcrumbsData } from "./Breadcrumbs";
 import Description from "./Description";
@@ -39,15 +39,15 @@ export default function DetailPropertyPage() {
           <>
             <Breadcrumbs data={breadcrumbsData} />
             <PageTitle
-              title={property.name}
-              city={property.city}
-              country={property.country}
+              title={PROPERTY.name}
+              city={PROPERTY.city}
+              country={PROPERTY.country}
               className="col-span-2"
             />
           </>
         </Fade>
 
-        <FeaturedImages imageUrls={property.imageUrls} />
+        <FeaturedImages imageUrls={PROPERTY.imageUrls} />
 
         <Fade
           className="mt-50px grid grid-cols-12 gap-x-50px"
@@ -57,16 +57,16 @@ export default function DetailPropertyPage() {
           <>
             <Description
               className="col-span-7"
-              description={property.description}
-              features={property.features}
+              description={PROPERTY.description}
+              features={PROPERTY.features}
             />
-            <BookingForm property={property} className="col-span-5" />
+            <BookingForm property={PROPERTY} className="col-span-5" />
           </>
         </Fade>
 
-        <Categories className="mt-70px" categories={property.categories} />
+        <Categories className="mt-70px" categories={PROPERTY.categories} />
 
-        <Testimonial className="my-100px" testimonial={property.testimonial} />
+        <Testimonial className="my-100px" testimonial={PROPERTY.testimonial} />
       </Main>
       <Footer />
     </>

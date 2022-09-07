@@ -1,4 +1,4 @@
-import property from "@/features/detail-property/assets/data/item-details.json";
+import PROPERTY from "@/features/detail-property/assets/property.data.json";
 import { formatWithSuffix } from "@/utils/format";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -6,11 +6,8 @@ import { Fade } from "react-awesome-reveal";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { object, string, type SchemaOf } from "yup";
 import "yup-phone";
+import BOOKING_DATA from "../assets/booking.data.json";
 import InputText from "./InputText";
-
-const bookingData = {
-  nights: 2,
-};
 
 export default function BookingInformation() {
   return (
@@ -23,7 +20,7 @@ export default function BookingInformation() {
 }
 
 function PropertyDetails() {
-  const formattedNights = formatWithSuffix(bookingData.nights, {
+  const formattedNights = formatWithSuffix(BOOKING_DATA.nights, {
     singular: "night",
     plural: "nights",
   });
@@ -32,20 +29,20 @@ function PropertyDetails() {
     <Fade delay={300} className="py-9">
       <figure className="img-wrapper">
         <img
-          src={property.imageUrls[0].url}
-          alt={property.name}
+          src={PROPERTY.imageUrls[0].url}
+          alt={PROPERTY.name}
           style={{ height: "16.875rem" }}
         />
         <figcaption className="mt-4 flex justify-between items-center">
           <div>
-            <h5 className="text-xl text-secondary">{property.name}</h5>
+            <h5 className="text-xl text-secondary">{PROPERTY.name}</h5>
             <span className="text-light">
-              {property.city}, {property.country}
+              {PROPERTY.city}, {PROPERTY.country}
             </span>
           </div>
           <div className="leading-7">
             <b className="text-semibold">
-              ${bookingData.nights * property.price} USD
+              ${BOOKING_DATA.nights * PROPERTY.price} USD
             </b>
             <span className="text-light"> per </span>
             <b className="text-semibold">{formattedNights}</b>

@@ -5,7 +5,7 @@ import { clx } from "@/utils/styling";
 import { forwardRef } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
-import { mostPicked as mostPickedList } from "../assets/data/landing-page.json";
+import { mostPicked as MOST_PICKED_LIST } from "../assets/landing-page.data.json";
 import classes from "./MostPicked.module.scss";
 
 type MostPickedType = {
@@ -38,7 +38,7 @@ export default MostPicked;
 function MostPickedList() {
   return (
     <div className="grid grid-rows-2 grid-cols-3 gap-30px h-[28.75rem]">
-      {mostPickedList.map((mostPicked, i) => (
+      {MOST_PICKED_LIST.map((mostPicked, i) => (
         <Fade
           className={clx({ "row-span-2": i === 0 })}
           direction="up"

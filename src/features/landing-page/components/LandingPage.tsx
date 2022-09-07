@@ -5,7 +5,10 @@ import Main from "@/components/Main";
 import Testimonial from "@/components/Testimonial";
 import { isNumber } from "lodash-es";
 import { createRef, useEffect } from "react";
-import { categories, testimonial } from "../assets/data/landing-page.json";
+import {
+  categories as CATEGORIES,
+  testimonial as TESTIMONIAL,
+} from "../assets/landing-page.data.json";
 import Hero from "./Hero";
 import MostPicked from "./MostPicked";
 
@@ -29,8 +32,8 @@ export default function LandingPage() {
       <Main withContainer>
         <Hero onShowMeClicked={scrollToMostPicked} />
         <MostPicked className="mt-70px" ref={mostPickedRef} />
-        <Categories className="mt-70px" categories={categories} />
-        <Testimonial className="my-100px" testimonial={testimonial} />
+        <Categories className="mt-70px" categories={CATEGORIES} />
+        <Testimonial className="my-100px" testimonial={TESTIMONIAL} />
       </Main>
       <Footer />
     </>

@@ -3,11 +3,11 @@
 import { clx } from "@/utils/styling";
 import type { FunctionComponent, SVGProps } from "react";
 import { Fade } from "react-awesome-reveal";
-import { hero as heroStatistics } from "../assets/data/landing-page.json";
 import { ReactComponent as IconCities } from "../assets/icons/cities.svg";
 import { ReactComponent as IconTraveler } from "../assets/icons/traveler.svg";
 import { ReactComponent as IconTreasure } from "../assets/icons/treasure.svg";
 import imageHero from "../assets/images/hero.jpg";
+import { hero as HERO_STATISTICS } from "../assets/landing-page.data.json";
 
 type HeroProps = {
   onShowMeClicked: () => void;
@@ -51,17 +51,17 @@ function HeroContent(props: HeroContentProps) {
       <div className="mt-20 grid grid-cols-3 gap-x-12">
         <Statistic
           Icon={IconTraveler}
-          total={heroStatistics.travelers}
+          total={HERO_STATISTICS.travelers}
           unit="travelers"
         />
         <Statistic
           Icon={IconTreasure}
-          total={heroStatistics.treasures}
+          total={HERO_STATISTICS.treasures}
           unit="treasures"
         />
         <Statistic
           Icon={IconCities}
-          total={heroStatistics.cities}
+          total={HERO_STATISTICS.cities}
           unit="cities"
         />
       </div>
