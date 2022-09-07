@@ -4,7 +4,7 @@ import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Fade } from "react-awesome-reveal";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { object, string, type SchemaOf } from "yup";
+import { object, string, type InferType } from "yup";
 import "yup-phone";
 import BOOKING_DATA from "../assets/booking.data.json";
 import InputText from "./InputText";
@@ -53,7 +53,7 @@ function PropertyDetails() {
   );
 }
 
-const bookingFieldSchema: SchemaOf<BookingFieldValues> = object({
+const bookingInfoSchema = object({
   firstName: string().trim().required("First name is required"),
   lastName: string().trim().required("Last name is required"),
   email: string()
@@ -64,14 +64,16 @@ const bookingFieldSchema: SchemaOf<BookingFieldValues> = object({
     .required("Phone number is required"),
 });
 
+type BookingInfoValues = InferType<typeof bookingInfoSchema>;
+
 function Form() {
   const { register, handleSubmit, formState, control } =
-    useForm<BookingFieldValues>({
-      resolver: yupResolver(bookingFieldSchema),
+    useForm<BookingInfoValues>({
+      resolver: yupResolver(bookingInfoSchema),
       mode: "onChange",
     });
 
-  const submit: SubmitHandler<BookingFieldValues> = (data) => {
+  const submit: SubmitHandler<BookingInfoValues> = (data) => {
     console.log("SUBMITTED:", data);
   };
 
@@ -127,10 +129,3 @@ function Form() {
     </Fade>
   );
 }
-
-type BookingFieldValues = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  phone: string;
-};
