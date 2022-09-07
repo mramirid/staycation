@@ -104,8 +104,12 @@ export function Meta(props: StepContentProps) {
   );
 }
 
-export function Content({ steps, currentStepName }: StepContentProps) {
-  return <Fade>{steps[currentStepName].content}</Fade>;
+export function Content(props: StepContentProps) {
+  return (
+    <Fade className={props.className}>
+      {props.steps[props.currentStepName].content}
+    </Fade>
+  );
 }
 
 type ControllerProps = {

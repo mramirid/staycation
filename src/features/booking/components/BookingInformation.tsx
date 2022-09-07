@@ -1,6 +1,5 @@
 import property from "@/features/detail-property/assets/data/item-details.json";
 import { formatWithSuffix } from "@/utils/format";
-import { clx } from "@/utils/styling";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Fade } from "react-awesome-reveal";
@@ -13,24 +12,13 @@ const bookingData = {
   nights: 2,
 };
 
-type BookingInformationProps = {
-  className: string;
-};
-
-export default function BookingInformation(props: BookingInformationProps) {
+export default function BookingInformation() {
   return (
-    <Fade
-      className={clx(
-        "grid grid-cols-[26.25rem_min-content_26.25rem] gap-x-20 justify-center",
-        props.className
-      )}
-    >
-      <>
-        <PropertyDetails />
-        <div className="divider divider-horizontal w-fit before:w-1px after:w-1px m-0" />
-        <Form />
-      </>
-    </Fade>
+    <div className="grid grid-cols-[26.25rem_min-content_26.25rem] gap-x-20 justify-center">
+      <PropertyDetails />
+      <div className="divider divider-horizontal w-fit before:w-1px after:w-1px m-0" />
+      <Form />
+    </div>
   );
 }
 

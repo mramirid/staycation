@@ -1,18 +1,19 @@
 import Header from "@/components/Header";
 import Main from "@/components/Main";
 import BookingInformation from "./BookingInformation";
-import Stepper, { Meta, Numberings, type Steps } from "./Stepper";
+import Payment from "./Payment";
+import Stepper, { Content, Meta, Numberings, type Steps } from "./Stepper";
 
 const steps: Steps = {
   bookingInformation: {
     title: "Booking Information",
     description: "Please fill up the blank fields below",
-    content: <></>,
+    content: <BookingInformation />,
   },
   payment: {
     title: "Payment",
     description: "Kindly follow the instructions below",
-    content: <></>,
+    content: <Payment />,
   },
   completed: {
     title: "Yay! Completed",
@@ -26,7 +27,7 @@ export default function BookingPage() {
     <>
       <Header logoOnly />
       <Main>
-        <Stepper steps={steps} initialStepName="bookingInformation">
+        <Stepper steps={steps} initialStepName="payment">
           {(steps, currentStepName) => {
             // console.log("steps:", steps);
             // console.log("currentStepName:", currentStepName);
@@ -43,7 +44,12 @@ export default function BookingPage() {
                   steps={steps}
                   currentStepName={currentStepName}
                 />
-                <BookingInformation className="my-50px" />
+
+                <Content
+                  className="my-50px"
+                  steps={steps}
+                  currentStepName={currentStepName}
+                />
               </>
             );
           }}
