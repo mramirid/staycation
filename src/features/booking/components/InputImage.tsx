@@ -5,7 +5,6 @@ import { type ChangeEventHandler } from "react";
 type Props = {
   id: string;
   name: string;
-  accept: string[];
   value?: string;
   onChange: (image: File) => void;
   containerClass?: string;
@@ -30,7 +29,7 @@ export default function InputImage(props: Props) {
           id={props.id}
           className="hidden"
           type="file"
-          accept={props.accept.join()}
+          accept="image/*"
           name={props.name}
           onChange={handleChange}
         />
@@ -48,7 +47,7 @@ export default function InputImage(props: Props) {
         </div>
       </label>
       {isString(props.errorMessage) && (
-        <div className="mt-1 text-error text-sm">{props.errorMessage}</div>
+        <div className="mt-2 text-error text-sm">{props.errorMessage}</div>
       )}
     </div>
   );
