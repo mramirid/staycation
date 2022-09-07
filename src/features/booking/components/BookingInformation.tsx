@@ -27,13 +27,15 @@ function PropertyDetails() {
 
   return (
     <Fade delay={300} className="py-9">
-      <figure className="img-wrapper">
-        <img
-          src={PROPERTY.imageUrls[0].url}
-          alt={PROPERTY.name}
-          style={{ height: "16.875rem" }}
-        />
-        <figcaption className="mt-4 flex justify-between items-center">
+      <>
+        <figure>
+          <img
+            src={PROPERTY.imageUrls[0].url}
+            alt={PROPERTY.name}
+            style={{ height: "16.875rem", width: "100%" }}
+          />
+        </figure>
+        <div className="mt-4 flex justify-between items-center">
           <div>
             <h5 className="text-xl text-secondary">{PROPERTY.name}</h5>
             <span className="text-light">
@@ -47,8 +49,8 @@ function PropertyDetails() {
             <span className="text-light"> per </span>
             <b className="text-semibold">{formattedNights}</b>
           </div>
-        </figcaption>
-      </figure>
+        </div>
+      </>
     </Fade>
   );
 }
