@@ -78,7 +78,7 @@ function Form({ className, property }: BookingFormProps) {
       <InputNumber
         id="nights"
         value={nights}
-        suffix={{ value: "night", pluralValue: "nights" }}
+        suffix={{ singular: "night", plural: "nights" }}
         min={1}
         onChange={updateNights}
       />

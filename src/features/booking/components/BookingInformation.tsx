@@ -1,4 +1,5 @@
 import property from "@/features/detail-property/assets/data/item-details.json";
+import { formatWithSuffix } from "@/utils/format";
 import { clx } from "@/utils/styling";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -34,6 +35,11 @@ export default function BookingInformation(props: BookingInformationProps) {
 }
 
 function PropertyDetails() {
+  const formattedNights = formatWithSuffix(CHECKOUT.duration, {
+    singular: "night",
+    plural: "nights",
+  });
+
   return (
     <Fade delay={300} className="py-9">
       <figure className="img-wrapper">
@@ -54,10 +60,7 @@ function PropertyDetails() {
               ${CHECKOUT.duration * property.price} USD
             </b>
             <span className="text-light"> per </span>
-            <b className="text-semibold">
-              {CHECKOUT.duration} {property.unit}
-              {CHECKOUT.duration > 1 ? "s" : ""}
-            </b>
+            <b className="text-semibold">{formattedNights}</b>
           </div>
         </figcaption>
       </figure>

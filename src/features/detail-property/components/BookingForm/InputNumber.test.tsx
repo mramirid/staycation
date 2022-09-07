@@ -15,7 +15,7 @@ function Form() {
       id="test-input-number"
       value={value}
       min={1}
-      suffix={{ value: "day", pluralValue: "days" }}
+      suffix={{ singular: "day", plural: "days" }}
       onChange={handleChange}
     />
   );

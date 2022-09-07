@@ -1,5 +1,5 @@
+import { formatWithSuffix, type Suffix } from "@/utils/format";
 import { clx } from "@/utils/styling";
-import { isString, isUndefined } from "lodash-es";
 import classes from "./input-group.module.scss";
 
 type Props = {
@@ -7,19 +7,11 @@ type Props = {
   value: number;
   onChange: (newValue: number) => void;
   min?: number;
-  suffix?: { value: string; pluralValue?: string };
+  suffix?: Suffix;
 };
 
 export default function InputNumber({ min = 1, ...props }: Props) {
-  let suffix: string;
-  if (isUndefined(props.suffix)) {
-    suffix = "";
-  } else if (isString(props.suffix.pluralValue) && props.value > 1) {
-    suffix = props.suffix.pluralValue;
-  } else {
-    suffix = props.suffix.value;
-  }
-  const inputValue = [props.value, suffix].join(" ");
+  const inputValue = formatWithSuffix(props.value, props.suffix);
 
   const hasReachedMin = props.value <= min;
 
