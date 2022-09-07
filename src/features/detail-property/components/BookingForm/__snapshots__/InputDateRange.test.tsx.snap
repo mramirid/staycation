@@ -3,10 +3,10 @@
 exports[`<InputDateRange /> > Should match with the snapshot 1`] = `
 <div>
   <div
-    class="_inputGroup_zgol5_1"
+    class="_inputGroup_1jjec_1"
   >
     <span
-      class="_inputGroup__sideIcon_zgol5_4 !bg-secondary !rounded-l cursor-pointer"
+      class="_inputGroup__sideIcon_1jjec_4 !bg-secondary !rounded-l cursor-pointer"
     >
       <svg
         class="h-[1.563rem] aspect-square"
@@ -63,7 +63,7 @@ exports[`<InputDateRange /> > Should match with the snapshot 1`] = `
       </svg>
     </span>
     <input
-      class="_inputGroup__textInput_zgol5_9 cursor-pointer"
+      class="_inputGroup__textInput_1jjec_9 cursor-pointer"
       id="test-input-date"
       placeholder="Pick a date range..."
       readonly=""
