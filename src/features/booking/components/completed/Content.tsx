@@ -1,6 +1,6 @@
-import { ReactComponent as CompletedIlustration } from "../assets/images/completed.svg";
+import { ReactComponent as CompletedIlustration } from "../../assets/images/completed.svg";
 
-export default function Completed() {
+export function CompletedContent() {
   return (
     <div className="text-center">
       <CompletedIlustration className="inline-block w-[22.625rem] h-[20.625rem]" />

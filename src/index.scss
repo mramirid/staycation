@@ -44,6 +44,11 @@
     min-h-[3.125rem] min-w-[13rem] text-lg px-7;
   }
 
+  .app-btn-light {
+    @apply rounded leading-7 min-h-[3.125rem] min-w-[13rem] 
+    text-lg px-7 bg-base-200 border-none font-normal;
+  }
+
   .app-btn-link {
     @apply btn-link;
   }

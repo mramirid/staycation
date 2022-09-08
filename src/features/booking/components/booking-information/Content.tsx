@@ -1,15 +1,13 @@
 import PROPERTY from "@/assets/data/property.data.json";
 import { formatWithSuffix } from "@/utils/format";
-import { DevTool } from "@hookform/devtools";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { Fade } from "react-awesome-reveal";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { object, string, type InferType } from "yup";
+import { useFormContext } from "react-hook-form";
 import "yup-phone";
-import BOOKING_DATA from "../assets/booking.data.json";
-import InputText from "./InputText";
+import BOOKING_DATA from "../../assets/booking.data.json";
+import type { BookingForm } from "../../types/booking-form";
+import InputText from "../InputText";
 
-export default function BookingInformation() {
+export function BookingInformationContent() {
   return (
     <div className="grid grid-cols-[26.25rem_min-content_26.25rem] gap-x-20 justify-center">
       <PropertyDetails />
@@ -26,7 +24,7 @@ function PropertyDetails() {
   });
 
   return (
-    <Fade delay={300} className="py-9">
+    <Fade delay={300} className="py-9" triggerOnce>
       <>
         <figure>
           <img
@@ -55,41 +53,20 @@ function PropertyDetails() {
   );
 }
 
-const bookingInfoSchema = object({
-  firstName: string().trim().required("First name is required"),
-  lastName: string().trim().required("Last name is required"),
-  email: string()
-    .email("Enter a valid email address")
-    .required("Email is required"),
-  phone: string()
-    .phone("Enter a valid phone number")
-    .required("Phone number is required"),
-});
-
-type BookingInfoValues = InferType<typeof bookingInfoSchema>;
-
 function Form() {
-  const { register, handleSubmit, formState, control } =
-    useForm<BookingInfoValues>({
-      resolver: yupResolver(bookingInfoSchema),
-      mode: "onChange",
-    });
-
-  const submit: SubmitHandler<BookingInfoValues> = (data) => {
-    console.log("SUBMITTED:", data);
-  };
+  const form: BookingForm = useFormContext();
 
   return (
-    <Fade delay={600} className="py-9 max-w-xs">
-      <form className="flex flex-col gap-y-5" onSubmit={handleSubmit(submit)}>
+    <Fade className="py-9 max-w-xs" delay={600} triggerOnce>
+      <form className="flex flex-col gap-y-5">
         <div>
           <label htmlFor="first-name">First Name</label>
           <InputText
             id="first-name"
             type="text"
             containerClass="mt-2"
-            {...register("firstName")}
-            errorMessage={formState.errors.firstName?.message}
+            {...form.register("firstName")}
+            errorMessage={form.formState.errors.firstName?.message}
           />
         </div>
 
@@ -99,8 +76,8 @@ function Form() {
             id="last-name"
             type="text"
             containerClass="mt-2"
-            {...register("lastName")}
-            errorMessage={formState.errors.lastName?.message}
+            {...form.register("lastName")}
+            errorMessage={form.formState.errors.lastName?.message}
           />
         </div>
 
@@ -110,8 +87,8 @@ function Form() {
             id="email"
             type="email"
             containerClass="mt-2"
-            {...register("email")}
-            errorMessage={formState.errors.email?.message}
+            {...form.register("email")}
+            errorMessage={form.formState.errors.email?.message}
           />
         </div>
 
@@ -121,12 +98,10 @@ function Form() {
             id="phone"
             type="tel"
             containerClass="mt-2"
-            {...register("phone")}
-            errorMessage={formState.errors.phone?.message}
+            {...form.register("phone")}
+            errorMessage={form.formState.errors.phone?.message}
           />
         </div>
-
-        {import.meta.env.DEV && <DevTool control={control} />}
       </form>
     </Fade>
   );
