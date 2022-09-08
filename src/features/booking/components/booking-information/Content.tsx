@@ -1,5 +1,5 @@
 import PROPERTY from "@/assets/data/property.data.json";
-import { formatWithSuffix } from "@/utils/format";
+import { formatCountSuffix } from "@/utils/format";
 import { Fade } from "react-awesome-reveal";
 import { useFormContext } from "react-hook-form";
 import "yup-phone";
@@ -18,7 +18,7 @@ export function BookingInformationContent() {
 }
 
 function PropertyDetails() {
-  const formattedNights = formatWithSuffix(BOOKING_DATA.nights, {
+  const formattedNights = formatCountSuffix(BOOKING_DATA.nights, {
     singular: "night",
     plural: "nights",
   });

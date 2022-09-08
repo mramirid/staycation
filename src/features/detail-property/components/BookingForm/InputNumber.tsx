@@ -1,4 +1,4 @@
-import { formatWithSuffix, type Suffix } from "@/utils/format";
+import { formatCountSuffix, type Suffix } from "@/utils/format";
 import { clx } from "@/utils/styling";
 import classes from "./input-group.module.scss";
 
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function InputNumber({ min = 1, ...props }: Props) {
-  const inputValue = formatWithSuffix(props.value, props.suffix);
+  const inputValue = formatCountSuffix(props.value, props.suffix);
 
   const hasReachedMin = props.value <= min;
 
