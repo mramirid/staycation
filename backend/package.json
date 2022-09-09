@@ -3,7 +3,7 @@
   "author": "mramirid",
   "scripts": {
     "start": "ts-node index.ts",
-    "dev": "nodemon index.ts",
+    "dev": "nodemon -L index.ts",
     "prettier": "prettier --write \"**/*.{js,ts}\"",
     "lint": "eslint . --ext .js,.ts"
   },
