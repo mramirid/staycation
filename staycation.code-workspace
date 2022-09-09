@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "name": "root",
+      "path": "."
+    },
+    {
+      "path": "frontend"
+    },
+    {
+      "path": "backend"
+    }
+  ],
+  "settings": {
+    "eslint.workingDirectories": ["frontend", "backend", "mongodb", "docker"]
+  }
+}
