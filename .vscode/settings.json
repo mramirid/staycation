@@ -4,5 +4,8 @@
   "tailwindCSS.experimental.classRegex": [
     ["classNames|clx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
-  "conventionalCommits.scopes": ["client"]
+  "conventionalCommits.scopes": [
+    "frontend",
+    "backend"
+  ]
 }
