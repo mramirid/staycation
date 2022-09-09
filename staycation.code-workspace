@@ -12,6 +12,7 @@
     }
   ],
   "settings": {
-    "eslint.workingDirectories": ["frontend", "backend", "mongodb", "docker"]
+    "eslint.workingDirectories": ["frontend", "backend", "mongodb", "docker"],
+    "conventionalCommits.scopes": ["frontend", "backend"]
   }
 }

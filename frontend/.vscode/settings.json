@@ -3,9 +3,5 @@
   "scss.lint.unknownAtRules": "ignore",
   "tailwindCSS.experimental.classRegex": [
     ["classNames|clx\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
-  ],
-  "conventionalCommits.scopes": [
-    "frontend",
-    "backend"
   ]
 }
