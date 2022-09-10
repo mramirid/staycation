@@ -36,7 +36,7 @@ bookings {
   nights: number;
   member: members; // one-to-one referenced
   property: {
-    _id: ObjectId;
+    data: ObjectId;
     priceSnapshot: number;
   };
   banks: [banks];  // one-to-many referenced
