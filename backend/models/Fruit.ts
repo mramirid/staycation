@@ -7,8 +7,16 @@ interface IFruit {
 }
 
 const fruitSchema = new Schema<IFruit>({
-  name: String,
-  rating: Number,
+  name: {
+    type: String,
+    required: [true, "Please specify the fruit name"],
+  },
+  rating: {
+    type: Number,
+    required: true,
+    min: 0,
+    max: 5,
+  },
   review: String,
 });
 
