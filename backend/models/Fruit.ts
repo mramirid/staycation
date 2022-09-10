@@ -1,9 +1,9 @@
 import { model, Schema } from "mongoose";
 
-interface IFruit {
+export interface IFruit {
   name: string;
   rating: number;
-  review: string;
+  review?: string;
 }
 
 const fruitSchema = new Schema<IFruit>({
