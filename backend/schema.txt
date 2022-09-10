@@ -1,0 +1,59 @@
+categories {
+  name: string;
+}
+
+properties {
+  title: string;
+  price: number;
+  city: string;
+  country: string;
+  isPopular: boolean;
+  description: string;
+
+  // one-to-many & embedded
+  images: [{ imageUrl: string }];  
+
+  // many-to-many & embedded
+  features: [{
+    name: string;
+    quantity: number;
+    iconUrl: string;
+  }]; 
+
+
+  // one-to-many & embedded
+  activities: [{
+    name: string;
+    type: string;
+    imageUrl: string;
+    isPopular: boolean;
+  }];
+}
+
+bookings {
+  startDate: Date,
+  endDate: Date,
+  nights: number;
+  member: members; // one-to-one referenced
+  property: {
+    _id: ObjectId;
+    priceSnapshot: number;
+  };
+  banks: [banks];  // one-to-many referenced
+  paymentProofUrl: string;
+  originBankName: string;
+  accountHolderName: string;
+}
+
+members {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+}
+
+banks {
+  bankName: string;
+  accountNumber: string;
+  accountHolderName: string;
+}
