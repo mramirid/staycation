@@ -20,7 +20,6 @@ properties {
     iconUrl: string;
   }]; 
 
-
   // one-to-many & embedded
   activities: [{
     name: string;
