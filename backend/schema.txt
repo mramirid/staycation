@@ -42,6 +42,7 @@ bookings {
   paymentProofUrl: string;
   originBankName: string;
   accountHolderName: string;
+  status: "ACCEPTED" | "REJECTED" | "PENDING";
 }
 
 members {

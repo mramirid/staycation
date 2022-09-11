@@ -16,7 +16,7 @@ export interface IBooking {
   paymentProofUrl: string;
   originBankName: string;
   accountHolderName: string;
-  paymentStatus: "ACCEPTED" | "REJECTED" | "PENDING";
+  status: "ACCEPTED" | "REJECTED" | "PENDING";
 }
 
 const bookingSchema = new Schema<IBooking>({
@@ -68,7 +68,7 @@ const bookingSchema = new Schema<IBooking>({
     type: String,
     required: true,
   },
-  paymentStatus: {
+  status: {
     type: String,
     required: true,
     default: "PENDING",
