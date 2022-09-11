@@ -15,3 +15,7 @@ export const viewBank: RequestHandler = (_, res) => {
 export const viewProperty: RequestHandler = (_, res) => {
   res.render("admin/property");
 };
+
+export const viewBooking: RequestHandler = (_, res) => {
+  res.render("admin/booking");
+};
