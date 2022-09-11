@@ -3,8 +3,8 @@ import express, { ErrorRequestHandler } from "express";
 import createError from "http-errors";
 import logger from "morgan";
 import path from "path";
+import adminRouter from "./routes/admin";
 import indexRouter from "./routes/index";
-import usersRouter from "./routes/users";
 
 const app = express();
 
@@ -17,8 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-console.log(__dirname);
-
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   "/sb-admin-2",
@@ -26,7 +24,7 @@ app.use(
 );
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/admin", adminRouter);
 
 // catch 404 and forward to error handler
 app.use((_, __, next) => {
