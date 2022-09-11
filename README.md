@@ -17,7 +17,6 @@ Fullstack TypeScript MERN:
 - TypeScript
 - React.js
 - TailwindCSS
-- daisyUI
 - MongoDB
 - Node.js
 - Express.js
