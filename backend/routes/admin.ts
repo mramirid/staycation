@@ -4,9 +4,9 @@ import * as adminController from "../controllers/admin";
 const router = express.Router();
 
 router.get("/dashboard", adminController.viewDashboard);
-router.get("/category", adminController.viewCategory);
-router.get("/bank", adminController.viewBank);
-router.get("/property", adminController.viewProperty);
-router.get("/booking", adminController.viewBooking);
+router.get("/categories", adminController.viewCategories);
+router.get("/banks", adminController.viewBanks);
+router.get("/properties", adminController.viewProperties);
+router.get("/bookings", adminController.viewBookings);
 
 export default router;

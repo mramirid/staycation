@@ -4,18 +4,18 @@ export const viewDashboard: RequestHandler = (_, res) => {
   res.render("admin/dashboard");
 };
 
-export const viewCategory: RequestHandler = (_, res) => {
-  res.render("admin/category");
+export const viewCategories: RequestHandler = (_, res) => {
+  res.render("admin/categories");
 };
 
-export const viewBank: RequestHandler = (_, res) => {
-  res.render("admin/bank");
+export const viewBanks: RequestHandler = (_, res) => {
+  res.render("admin/banks");
 };
 
-export const viewProperty: RequestHandler = (_, res) => {
-  res.render("admin/property");
+export const viewProperties: RequestHandler = (_, res) => {
+  res.render("admin/properties");
 };
 
-export const viewBooking: RequestHandler = (_, res) => {
-  res.render("admin/booking");
+export const viewBookings: RequestHandler = (_, res) => {
+  res.render("admin/bookings");
 };
