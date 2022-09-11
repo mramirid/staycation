@@ -7,3 +7,7 @@ export const viewDashboard: RequestHandler = (_, res) => {
 export const viewCategory: RequestHandler = (_, res) => {
   res.render("admin/category");
 };
+
+export const viewBank: RequestHandler = (_, res) => {
+  res.render("admin/bank");
+};
