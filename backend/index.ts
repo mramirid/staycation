@@ -1,6 +1,8 @@
 import cookieParser from "cookie-parser";
 import express, { ErrorRequestHandler } from "express";
 import createError from "http-errors";
+import _ from "lodash";
+import mongoose from "mongoose";
 import logger from "morgan";
 import path from "path";
 import adminRouter from "./routes/admin";
@@ -45,31 +47,20 @@ app.use(errorHandler);
 
 export default app;
 
-// const mongoDbUsername = process.env.MONGO_INITDB_ROOT_USERNAME;
-// const mongoDbPassword = process.env.MONGO_INITDB_ROOT_PASSWORD;
+const mongoDbUsername = process.env.MONGO_INITDB_ROOT_USERNAME;
+const mongoDbPassword = process.env.MONGO_INITDB_ROOT_PASSWORD;
 
-// mongoose.connect(
-//   `mongodb://${mongoDbUsername}:${mongoDbPassword}@mongodb:27017/shop?authSource=admin`,
-//   async (error) => {
-//     if (_.isError(error)) {
-//       console.error("Failed to connect to MongoDB:", error);
-//       return;
-//     }
+mongoose.connect(
+  `mongodb://${mongoDbUsername}:${mongoDbPassword}@mongodb:27017/shop?authSource=admin`,
+  async (error) => {
+    if (_.isError(error)) {
+      console.error("Failed to connect to MongoDB:", error);
+      return;
+    }
 
-//     try {
-//       const createdFruit = await createFruit();
-//       const createdPerson = await createPerson(createdFruit);
-//       const personData = await getPerson(createdPerson._id);
-//       console.log("personData:", personData);
-//     } catch (error) {
-//       console.error("Failed to create dummy fruit:", error);
-//       mongoose.connection.close();
-//       return;
-//     }
-
-//     app.listen(3000, () => console.log("Listening at http://localhost:3000"));
-//   }
-// );
+    app.listen(3000, () => console.log("Listening at http://localhost:3000"));
+  }
+);
 
 // async function createFruit() {
 //   await Fruit.deleteMany();
