@@ -11,3 +11,7 @@ export const viewCategory: RequestHandler = (_, res) => {
 export const viewBank: RequestHandler = (_, res) => {
   res.render("admin/bank");
 };
+
+export const viewProperty: RequestHandler = (_, res) => {
+  res.render("admin/property");
+};
