@@ -20,7 +20,11 @@ export async function addCategory(
   req: Request<unknown, unknown, AddCategoryBody>,
   res: Response
 ) {
-  await Category.create({ name: req.body.name });
+  try {
+    await Category.create({ name: req.body.name });
+  } catch (_) {
+    // TODO: Display flash message
+  }
 
   res.redirect("/admin/categories");
 }
