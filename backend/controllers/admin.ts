@@ -5,16 +5,18 @@ export function viewDashboard(_: Request, res: Response) {
   res.render("admin/dashboard");
 }
 
-export function viewCategories(_: Request, res: Response) {
-  res.render("admin/categories");
+export async function viewCategories(_: Request, res: Response) {
+  const categories = await Category.find();
+
+  res.render("admin/categories", { categories });
 }
 
-type AddCategoryPayload = {
+type AddCategoryBody = {
   name: string;
 };
 
 export async function addCategory(
-  req: Request<unknown, unknown, AddCategoryPayload>,
+  req: Request<unknown, unknown, AddCategoryBody>,
   res: Response
 ) {
   await Category.create({ name: req.body });
