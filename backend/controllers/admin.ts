@@ -1,4 +1,6 @@
 import { Request, Response } from "express";
+import { StatusCodes } from "http-status-codes";
+import _ from "lodash";
 import Category from "../models/Category";
 
 export function viewDashboard(_: Request, res: Response) {
@@ -20,6 +22,29 @@ export async function addCategory(
   res: Response
 ) {
   await Category.create({ name: req.body });
+
+  res.redirect(StatusCodes.CREATED, "categories");
+}
+
+type EditCategoryBody = {
+  id: string;
+  name: string;
+};
+
+export async function editCategory(
+  req: Request<unknown, unknown, EditCategoryBody>,
+  res: Response
+) {
+  const { id, name } = req.body;
+
+  const category = await Category.findById(id);
+  if (_.isNull(category)) {
+    res.redirect("categories");
+    return;
+  }
+
+  category.name = name;
+  await category.save();
 
   res.redirect("categories");
 }

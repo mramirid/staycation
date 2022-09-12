@@ -1,14 +1,14 @@
 <!-- Modal -->
-<div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addModalLabel">Add Category</h5>
+        <h5 class="modal-title" id="editModalLabel">Edit Category</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="/admin/categories">
+      <form method="post" action="/admin/categories?_method=PATCH">
         <div class="modal-body">
           <div class="form-group">
             <label for="name">Name</label>
@@ -16,8 +16,9 @@
           </div>
         </div>
         <div class="modal-footer">
+          <input type="text" id="id" name="id" hidden>
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Add</button>
+          <button type="submit" class="btn btn-primary">Edit</button>
         </div>
       </form>
     </div>
