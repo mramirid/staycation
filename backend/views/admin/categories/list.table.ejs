@@ -26,9 +26,11 @@
                 data-id="<%= category._id %>" data-name="<%= category.name %>">
                 <i class="fas fa-edit"></i>
               </a>
-              <a href="javascript:void(0)" type="button" class="btn btn-danger btn-circle btn-sm">
-                <i class="fas fa-trash"></i>
-              </a>
+              <form method="post" action="/admin/categories/<%= category._id %>?_method=DELETE" class="d-inline">
+                <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
             </td>
           </tr>
           <% }) %>

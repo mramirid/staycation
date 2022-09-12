@@ -8,6 +8,7 @@ router.get("/dashboard", adminController.viewDashboard);
 router.get("/categories", adminController.viewCategories);
 router.post("/categories", adminController.addCategory);
 router.patch("/categories", adminController.editCategory);
+router.delete("/categories/:id", adminController.deleteCategory);
 
 router.get("/banks", adminController.viewBanks);
 

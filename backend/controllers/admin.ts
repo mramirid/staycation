@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 import Category from "../models/Category";
 
@@ -21,9 +20,9 @@ export async function addCategory(
   req: Request<unknown, unknown, AddCategoryBody>,
   res: Response
 ) {
-  await Category.create({ name: req.body });
+  await Category.create({ name: req.body.name });
 
-  res.redirect(StatusCodes.CREATED, "categories");
+  res.redirect("categories");
 }
 
 type EditCategoryBody = {
@@ -47,6 +46,19 @@ export async function editCategory(
   await category.save();
 
   res.redirect("categories");
+}
+
+type DeleteCategoryParams = {
+  id: string;
+};
+
+export async function deleteCategory(
+  req: Request<DeleteCategoryParams>,
+  res: Response
+) {
+  await Category.findByIdAndDelete(req.params.id);
+
+  res.redirect("/admin/categories");
 }
 
 export function viewBanks(_: Request, res: Response) {
