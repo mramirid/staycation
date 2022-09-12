@@ -1,13 +1,13 @@
-import { Request, RequestHandler, Response } from "express";
+import { Request, Response } from "express";
 import Category from "../models/Category";
 
-export const viewDashboard: RequestHandler = (_, res) => {
+export function viewDashboard(_: Request, res: Response) {
   res.render("admin/dashboard");
-};
+}
 
-export const viewCategories: RequestHandler = (_, res) => {
+export function viewCategories(_: Request, res: Response) {
   res.render("admin/categories");
-};
+}
 
 type AddCategoryPayload = {
   name: string;
@@ -22,14 +22,14 @@ export async function addCategory(
   res.redirect("categories");
 }
 
-export const viewBanks: RequestHandler = (_, res) => {
+export function viewBanks(_: Request, res: Response) {
   res.render("admin/banks");
-};
+}
 
-export const viewProperties: RequestHandler = (_, res) => {
+export function viewProperties(_: Request, res: Response) {
   res.render("admin/properties");
-};
+}
 
-export const viewBookings: RequestHandler = (_, res) => {
+export function viewBookings(_: Request, res: Response) {
   res.render("admin/bookings");
-};
+}
