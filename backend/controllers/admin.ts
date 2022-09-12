@@ -22,7 +22,7 @@ export async function addCategory(
 ) {
   await Category.create({ name: req.body.name });
 
-  res.redirect("categories");
+  res.redirect("/admin/categories");
 }
 
 type EditCategoryBody = {
@@ -38,14 +38,14 @@ export async function editCategory(
 
   const category = await Category.findById(id);
   if (_.isNull(category)) {
-    res.redirect("categories");
+    res.redirect("/admin/categories");
     return;
   }
 
   category.name = name;
   await category.save();
 
-  res.redirect("categories");
+  res.redirect("/admin/categories");
 }
 
 type DeleteCategoryParams = {
