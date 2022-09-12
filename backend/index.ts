@@ -51,7 +51,7 @@ const mongoDbUsername = process.env.MONGO_INITDB_ROOT_USERNAME;
 const mongoDbPassword = process.env.MONGO_INITDB_ROOT_PASSWORD;
 
 mongoose.connect(
-  `mongodb://${mongoDbUsername}:${mongoDbPassword}@mongodb:27017/shop?authSource=admin`,
+  `mongodb://${mongoDbUsername}:${mongoDbPassword}@mongodb:27017/staycation?authSource=admin`,
   async (error) => {
     if (_.isError(error)) {
       console.error("Failed to connect to MongoDB:", error);
