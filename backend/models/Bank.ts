@@ -1,13 +1,18 @@
 import { model, Schema } from "mongoose";
 
 export interface IBank {
-  bankName: string;
+  name: string;
+  logoUrl: string;
   accountNumber: string;
   accountHolderName: string;
 }
 
 const bankSchema = new Schema<IBank>({
-  bankName: {
+  name: {
+    type: String,
+    required: true,
+  },
+  logoUrl: {
     type: String,
     required: true,
   },

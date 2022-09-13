@@ -13,6 +13,7 @@ services:
     volumes:
       - ./backend:/app:ro
       - /app/node_modules
+      - images:/app/public/images
     env_file:
       - ./backend/.env
     ports:
@@ -33,3 +34,4 @@ services:
 
 volumes:
   db:
+  images:

@@ -1,5 +1,6 @@
 import express from "express";
 import * as adminController from "../controllers/admin";
+import { handleUploadImage } from "../middlewares/images.multer";
 
 const router = express.Router();
 
@@ -11,6 +12,7 @@ router.patch("/categories", adminController.editCategory);
 router.delete("/categories/:id", adminController.deleteCategory);
 
 router.get("/banks", adminController.viewBanks);
+router.post("/banks", handleUploadImage("bankLogo"), adminController.addBank);
 
 router.get("/properties", adminController.viewProperties);
 

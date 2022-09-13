@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import _ from "lodash";
+import Bank from "../models/Bank";
 import Category from "../models/Category";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError } from "../utils/error";
@@ -12,18 +13,18 @@ export async function viewCategories(req: Request, res: Response) {
   const categories = await Category.find();
 
   res.render("admin/categories", {
-    categories,
-    alert: getAlert(req),
     pageTitle: "Categories - Staycation",
+    alert: getAlert(req),
+    categories,
   });
 }
 
-type AddCategoryBody = {
+type AddCategoryReqBody = {
   name: string;
 };
 
 export async function addCategory(
-  req: Request<unknown, unknown, AddCategoryBody>,
+  req: Request<unknown, unknown, AddCategoryReqBody>,
   res: Response
 ) {
   try {
@@ -38,13 +39,13 @@ export async function addCategory(
   res.redirect("/admin/categories");
 }
 
-type EditCategoryBody = {
+type EditCategoryReqBody = {
   id: string;
   name: string;
 };
 
 export async function editCategory(
-  req: Request<unknown, unknown, EditCategoryBody>,
+  req: Request<unknown, unknown, EditCategoryReqBody>,
   res: Response
 ) {
   const { id, name } = req.body;
@@ -93,8 +94,41 @@ export async function deleteCategory(
   res.redirect("/admin/categories");
 }
 
-export function viewBanks(_: Request, res: Response) {
-  res.render("admin/banks", { pageTitle: "Banks - Staycation" });
+export async function viewBanks(req: Request, res: Response) {
+  const banks = await Bank.find();
+
+  res.render("admin/banks", {
+    pageTitle: "Banks - Staycation",
+    alert: getAlert(req),
+    banks,
+  });
+}
+
+type AddBankReqBody = {
+  bankName: string;
+  accountNumber: string;
+  accountHolderName: string;
+};
+
+export async function addBank(
+  req: Request<unknown, unknown, AddBankReqBody>,
+  res: Response
+) {
+  try {
+    await Bank.create({
+      name: req.body.bankName,
+      logoUrl: `images/${req.file?.filename}`,
+      accountNumber: req.body.accountNumber,
+      accountHolderName: req.body.accountHolderName,
+    });
+
+    setAlert(req, { message: "Bank added", status: AlertStatuses.Success });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect("/admin/banks");
 }
 
 export function viewProperties(_: Request, res: Response) {

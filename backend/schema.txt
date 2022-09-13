@@ -53,7 +53,8 @@ members {
 }
 
 banks {
-  bankName: string;
+  name: string;
+  logoUrl: string;
   accountNumber: string;
   accountHolderName: string;
 }
