@@ -17,6 +17,16 @@
           </tr>
         </thead>
         <tbody>
+          <% banks.forEach((bank, i) => { %>
+          <tr>
+            <td><%= i + 1 %></td>
+            <td><%= bank.name %></td>
+            <td><img src="/<%= bank.logoUrl %>" alt="<%= bank.name %>" width="70" class="img-thumbnail"></td>
+            <td><%= bank.accountNumber %></td>
+            <td><%= bank.accountHolderName %></td>
+            <td></td>
+          </tr>
+          <% }) %>
         </tbody>
       </table>
     </div>
