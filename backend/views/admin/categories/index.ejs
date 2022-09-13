@@ -37,20 +37,5 @@
 </div>
 <!-- End of Page Wrapper -->
 
-<%- include("./add.modal.ejs") %>
-<%- include("./edit.modal.ejs") %>
-
 <%- include("../../partials/utilities.ejs") %>
 <%- include("../../partials/scripts.ejs") %>
-
-<script>
-  // For displaying Edit Modal
-  $('#dataTable').on("click", "#button-edit", function () {
-    const id = $(this).data("id");
-    const name = $(this).data("name");
-
-    $("#editModal").modal("show");
-    $("#editModal #id").val(id);
-    $("#editModal #name").val(name);
-  });
-</script>

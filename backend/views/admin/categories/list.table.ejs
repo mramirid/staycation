@@ -1,10 +1,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
   <div class="card-header py-3">
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">
-      <i class="fas fa-plus"></i>
-    </button>
+    <%- include("./add.modal-button.ejs") %>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -22,10 +19,7 @@
             <td><%= i + 1 %></td>
             <td><%= category.name %></td>
             <td>
-              <a href="javascript:void(0)" type="button" class="btn btn-warning btn-circle btn-sm" id="button-edit"
-                data-id="<%= category._id %>" data-name="<%= category.name %>">
-                <i class="fas fa-edit"></i>
-              </a>
+              <%- include("./edit.modal-button.ejs", {category}) %>
               <form method="post" action="/admin/categories/<%= category._id %>?_method=DELETE" class="d-inline">
                 <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
