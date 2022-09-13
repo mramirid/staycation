@@ -82,7 +82,10 @@ export async function deleteCategory(
   res: Response
 ) {
   try {
-    await Category.findByIdAndDelete(req.params.id);
+    const category = await Category.findByIdAndDelete(req.params.id);
+    if (_.isNull(category)) {
+      throw new Error("Category not found");
+    }
 
     setAlert(req, {
       message: "Category deleted",
