@@ -166,6 +166,34 @@ export async function editBank(
   res.redirect("/admin/banks");
 }
 
+type DeleteBankParams = {
+  id: string;
+};
+
+export async function deleteBank(
+  req: Request<DeleteBankParams>,
+  res: Response
+) {
+  try {
+    const bank = await Bank.findByIdAndDelete(req.params.id);
+    if (_.isNull(bank)) {
+      throw new Error("Bank not found");
+    }
+
+    await fs.unlink(path.join("public", bank.logoUrl));
+
+    setAlert(req, {
+      message: "Bank deleted",
+      status: AlertStatuses.Success,
+    });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect("/admin/banks");
+}
+
 export function viewProperties(_: Request, res: Response) {
   res.render("admin/properties", { pageTitle: "Properties - Staycation" });
 }
