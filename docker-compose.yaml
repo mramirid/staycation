@@ -5,8 +5,6 @@ services:
       - db:/data/db
     env_file:
       - ./backend/.env
-    environment:
-      - MONGO_HOSTNAME=mongodb
     ports:
       - "27017:27017"
 
@@ -18,6 +16,8 @@ services:
       - images:/app/public/images
     env_file:
       - ./backend/.env
+    environment:
+      - MONGO_HOSTNAME=mongodb
     ports:
       - "3000:3000"
     depends_on:
