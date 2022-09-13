@@ -24,7 +24,14 @@
             <td><img src="/<%= bank.logoUrl %>" alt="<%= bank.name %>" width="70" class="img-thumbnail"></td>
             <td><%= bank.accountNumber %></td>
             <td><%= bank.accountHolderName %></td>
-            <td></td>
+            <td>
+              <%- include("./edit.modal-button.ejs", {bank}) %>
+              <form method="post" action="/admin/banks/<%= bank._id %>?_method=DELETE" class="d-inline">
+                <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </form>
+            </td>
           </tr>
           <% }) %>
         </tbody>

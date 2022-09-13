@@ -12,6 +12,7 @@ import adminRouter from "./routes/admin";
 import indexRouter from "./routes/index";
 
 const env = cleanEnv(process.env, {
+  MONGO_HOSTNAME: str(),
   MONGO_INITDB_ROOT_USERNAME: str(),
   MONGO_INITDB_ROOT_PASSWORD: str(),
   SESSION_SECRET: str(),
@@ -64,10 +65,8 @@ const errorHandler: ErrorRequestHandler = (err, req, res) => {
 };
 app.use(errorHandler);
 
-export default app;
-
 mongoose.connect(
-  `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/staycation?authSource=admin`,
+  `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`,
   async (error) => {
     if (_.isError(error)) {
       console.error("Failed to connect to MongoDB:", error);

@@ -13,6 +13,7 @@ router.delete("/categories/:id", adminController.deleteCategory);
 
 router.get("/banks", adminController.viewBanks);
 router.post("/banks", handleUploadImage("bankLogo"), adminController.addBank);
+router.patch("/banks", handleUploadImage("bankLogo"), adminController.editBank);
 
 router.get("/properties", adminController.viewProperties);
 

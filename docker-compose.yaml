@@ -5,6 +5,8 @@ services:
       - db:/data/db
     env_file:
       - ./backend/.env
+    environment:
+      - MONGO_HOSTNAME=mongodb
     ports:
       - "27017:27017"
 
