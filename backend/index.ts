@@ -1,5 +1,7 @@
-import cookieParser from "cookie-parser";
+import flash from "connect-flash";
+import { cleanEnv, str } from "envalid";
 import express, { ErrorRequestHandler } from "express";
+import session from "express-session";
 import createError from "http-errors";
 import _ from "lodash";
 import methodOverride from "method-override";
@@ -9,23 +11,38 @@ import path from "path";
 import adminRouter from "./routes/admin";
 import indexRouter from "./routes/index";
 
+const env = cleanEnv(process.env, {
+  MONGO_INITDB_ROOT_USERNAME: str(),
+  MONGO_INITDB_ROOT_PASSWORD: str(),
+  SESSION_SECRET: str(),
+});
+
 const app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-app.use(logger("dev"));
-app.use(methodOverride("_method"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   "/sb-admin-2",
   express.static(path.join(__dirname, "node_modules/startbootstrap-sb-admin-2"))
 );
+
+app.use(logger("dev"));
+app.use(methodOverride("_method"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+app.use(
+  session({
+    secret: env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { maxAge: 60_000 },
+  })
+);
+app.use(flash());
 
 app.use("/", indexRouter);
 app.use("/admin", adminRouter);
@@ -49,11 +66,8 @@ app.use(errorHandler);
 
 export default app;
 
-const mongoDbUsername = process.env.MONGO_INITDB_ROOT_USERNAME;
-const mongoDbPassword = process.env.MONGO_INITDB_ROOT_PASSWORD;
-
 mongoose.connect(
-  `mongodb://${mongoDbUsername}:${mongoDbPassword}@mongodb:27017/staycation?authSource=admin`,
+  `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@mongodb:27017/staycation?authSource=admin`,
   async (error) => {
     if (_.isError(error)) {
       console.error("Failed to connect to MongoDB:", error);
