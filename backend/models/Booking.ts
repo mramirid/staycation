@@ -70,7 +70,6 @@ const bookingSchema = new Schema<IBooking>({
   },
   status: {
     type: String,
-    required: true,
     default: "PENDING",
   },
 });
