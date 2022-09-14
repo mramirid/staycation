@@ -1,4 +1,5 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Types } from "mongoose";
+import Category from "./Category";
 
 interface IProperty {
   title: string;
@@ -7,6 +8,7 @@ interface IProperty {
   country: string;
   isPopular: boolean;
   description: string;
+  category: Types.ObjectId;
   images: { imageUrl: string }[];
   features: {
     name: string;
@@ -45,6 +47,11 @@ const propertySchema = new Schema<IProperty>({
   },
   description: {
     type: String,
+    required: true,
+  },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: Category,
     required: true,
   },
   images: [

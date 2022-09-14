@@ -9,6 +9,7 @@ properties {
   country: string;
   isPopular: boolean;
   description: string;
+  category: categories;
 
   // one-to-many & embedded
   images: [{ imageUrl: string }];  
@@ -27,6 +28,7 @@ properties {
     imageUrl: string;
     isPopular: boolean;
   }];
+
 }
 
 bookings {
