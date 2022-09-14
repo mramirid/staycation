@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import fs from "fs/promises";
 import _ from "lodash";
+import { Types } from "mongoose";
 import path from "path";
 import Bank from "../models/Bank";
-import Category from "../models/Category";
+import Category, { ICategory } from "../models/Category";
+import Property from "../models/Property";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError } from "../utils/error";
 
@@ -21,16 +23,12 @@ export async function viewCategories(req: Request, res: Response) {
   });
 }
 
-type AddCategoryReqBody = {
-  name: string;
-};
-
 export async function addCategory(
-  req: Request<unknown, unknown, AddCategoryReqBody>,
+  req: Request<unknown, unknown, ICategory>,
   res: Response
 ) {
   try {
-    await Category.create({ name: req.body.name });
+    await Category.create(req.body);
 
     setAlert(req, { message: "Category added", status: AlertStatuses.Success });
   } catch (maybeError) {
@@ -73,12 +71,8 @@ export async function editCategory(
   res.redirect("/admin/categories");
 }
 
-type DeleteCategoryParams = {
-  id: string;
-};
-
 export async function deleteCategory(
-  req: Request<DeleteCategoryParams>,
+  req: Request<{ id: string }>,
   res: Response
 ) {
   try {
@@ -169,14 +163,7 @@ export async function editBank(
   res.redirect("/admin/banks");
 }
 
-type DeleteBankParams = {
-  id: string;
-};
-
-export async function deleteBank(
-  req: Request<DeleteBankParams>,
-  res: Response
-) {
+export async function deleteBank(req: Request<{ id: string }>, res: Response) {
   try {
     const bank = await Bank.findByIdAndDelete(req.params.id);
     if (_.isNull(bank)) {
@@ -197,8 +184,59 @@ export async function deleteBank(
   res.redirect("/admin/banks");
 }
 
-export function viewProperties(_: Request, res: Response) {
-  res.render("admin/properties", { pageTitle: "Properties - Staycation" });
+export async function viewProperties(req: Request, res: Response) {
+  const [properties, categories] = await Promise.all([
+    Property.find(),
+    Category.find(),
+  ]);
+
+  res.render("admin/properties", {
+    pageTitle: "Properties - Staycation",
+    alert: getAlert(req),
+    properties,
+    categories,
+  });
+}
+
+type AddPropertyReqBody = {
+  title: string;
+  price: number;
+  city: string;
+  country: string;
+  categoryId: string;
+  description: string;
+};
+
+export async function addProperty(
+  req: Request<unknown, unknown, AddPropertyReqBody>,
+  res: Response
+) {
+  try {
+    if (
+      _.isUndefined(req.files) ||
+      !_.isArray(req.files) ||
+      req.files.length < 3
+    ) {
+      throw new Error("Please provide at least 3 images");
+    }
+
+    await Property.create({
+      title: req.body.title,
+      price: req.body.price,
+      city: req.body.city,
+      country: req.body.country,
+      description: req.body.description,
+      category: new Types.ObjectId(req.body.categoryId),
+      imageUrls: req.files.map((image) => `images/${image.filename}`),
+    });
+
+    setAlert(req, { message: "Property added", status: AlertStatuses.Success });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect("/admin/properties");
 }
 
 export function viewBookings(_: Request, res: Response) {

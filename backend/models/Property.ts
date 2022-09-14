@@ -7,9 +7,9 @@ interface IProperty {
   city: string;
   country: string;
   isPopular: boolean;
-  description: string;
   category: Types.ObjectId;
-  images: { imageUrl: string }[];
+  description: string;
+  imageUrls: string[];
   features: {
     name: string;
     quantity: number;
@@ -43,62 +43,64 @@ const propertySchema = new Schema<IProperty>({
   },
   isPopular: {
     type: Boolean,
-    required: true,
-  },
-  description: {
-    type: String,
-    required: true,
+    default: false,
   },
   category: {
     type: Schema.Types.ObjectId,
     ref: Category,
     required: true,
   },
-  images: [
-    {
-      imageUrl: {
-        type: String,
-        required: true,
+  description: {
+    type: String,
+    required: true,
+  },
+  imageUrls: {
+    type: [String],
+    required: true,
+  },
+  features: {
+    type: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+          min: 0,
+        },
+        iconUrl: {
+          type: String,
+          required: true,
+        },
       },
-    },
-  ],
-  features: [
-    {
-      name: {
-        type: String,
-        required: true,
+    ],
+    default: [],
+  },
+  activities: {
+    type: [
+      {
+        name: {
+          type: String,
+          required: true,
+        },
+        type: {
+          type: String,
+          required: true,
+        },
+        imageUrl: {
+          type: String,
+          required: true,
+        },
+        isPopular: {
+          type: Boolean,
+          required: true,
+        },
       },
-      quantity: {
-        type: Number,
-        required: true,
-        min: 0,
-      },
-      iconUrl: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  activities: [
-    {
-      name: {
-        type: String,
-        required: true,
-      },
-      type: {
-        type: String,
-        required: true,
-      },
-      imageUrl: {
-        type: String,
-        required: true,
-      },
-      isPopular: {
-        type: Boolean,
-        required: true,
-      },
-    },
-  ],
+    ],
+    default: [],
+  },
 });
 
 const Property = model("Property", propertySchema);

@@ -10,9 +10,7 @@ properties {
   isPopular: boolean;
   description: string;
   category: categories;
-
-  // one-to-many & embedded
-  images: [{ imageUrl: string }];  
+  imageUrls: [string];  
 
   // many-to-many & embedded
   features: [{

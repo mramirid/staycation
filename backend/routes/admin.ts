@@ -1,6 +1,9 @@
 import express from "express";
 import * as adminController from "../controllers/admin";
-import { handleUploadImage } from "../middlewares/images.multer";
+import {
+  handleUploadImage,
+  handleUploadImages,
+} from "../middlewares/images.multer";
 
 const router = express.Router();
 
@@ -17,6 +20,11 @@ router.patch("/banks", handleUploadImage("bankLogo"), adminController.editBank);
 router.delete("/banks/:id", adminController.deleteBank);
 
 router.get("/properties", adminController.viewProperties);
+router.post(
+  "/properties",
+  handleUploadImages("images", 3),
+  adminController.addProperty
+);
 
 router.get("/bookings", adminController.viewBookings);
 
