@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import _ from "lodash";
 import { Types } from "mongoose";
 import path from "path";
-import Bank from "../models/Bank";
+import Bank, { IBank } from "../models/Bank";
 import Category, { ICategory } from "../models/Category";
 import Property, { IProperty } from "../models/Property";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
@@ -15,7 +15,14 @@ export function viewDashboard(_: Request, res: Response) {
 }
 
 export async function viewCategories(req: Request, res: Response) {
-  const categories = await Category.find();
+  let categories: ICategory[] = [];
+
+  try {
+    categories = await Category.find();
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
 
   res.render("admin/categories", {
     pageTitle: "Categories - Staycation",
@@ -103,7 +110,14 @@ export async function deleteCategory(
 }
 
 export async function viewBanks(req: Request, res: Response) {
-  const banks = await Bank.find();
+  let banks: IBank[] = [];
+
+  try {
+    banks = await Bank.find();
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
 
   res.render("admin/banks", {
     pageTitle: "Banks - Staycation",
@@ -198,10 +212,18 @@ export async function deleteBank(req: Request<{ id: string }>, res: Response) {
 }
 
 export async function viewProperties(req: Request, res: Response) {
-  const [properties, categories] = await Promise.all([
-    Property.find(),
-    Category.find(),
-  ]);
+  let properties: IProperty[] = [];
+  let categories: ICategory[] = [];
+
+  try {
+    [properties, categories] = await Promise.all([
+      Property.find(),
+      Category.find(),
+    ]);
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
 
   res.render("admin/properties", {
     pageTitle: "Properties - Staycation",
