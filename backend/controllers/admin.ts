@@ -269,13 +269,14 @@ export async function addProperty(
   req: Request<unknown, unknown, AddPropertyReqBody>,
   res: Response
 ) {
+  let images = req.files;
+
   try {
-    if (
-      _.isUndefined(req.files) ||
-      !_.isArray(req.files) ||
-      req.files.length < 3
-    ) {
+    if (_.isUndefined(images) || images.length < 3) {
       throw new Error("Please provide at least 3 images");
+    }
+    if (!_.isArray(images)) {
+      images = Object.values(images).flat();
     }
 
     await Property.create({
@@ -285,7 +286,7 @@ export async function addProperty(
       country: req.body.country,
       description: req.body.description,
       category: req.body.categoryId,
-      imageUrls: req.files.map((image) => `/images/${image.filename}`),
+      imageUrls: images.map((image) => `/images/${image.filename}`),
     });
 
     setAlert(req, { message: "Property added", status: AlertStatuses.Success });
