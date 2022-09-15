@@ -8,6 +8,8 @@ import Category, { ICategory } from "../models/Category";
 import Property from "../models/Property";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError, checkValidationResult } from "../utils/error";
+import { formatToUSD } from "../utils/format";
+
 export function viewDashboard(_: Request, res: Response) {
   res.render("admin/dashboard", { pageTitle: "Dashboard - Staycation" });
 }
@@ -206,6 +208,7 @@ export async function viewProperties(req: Request, res: Response) {
     alert: getAlert(req),
     properties,
     categories,
+    formatToUSD,
   });
 }
 

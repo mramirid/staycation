@@ -17,7 +17,7 @@
           <tr>
             <td><%= i + 1 %></td>
             <td><%= property.title %></td>
-            <td><%= property.price %></td>
+            <td><%= formatToUSD(property.price) %></td>
             <td><%= property.city %>, <%= property.country %></td>
             <td>
               <a href="#" class="btn btn-info btn-circle btn-sm"><i class="fas fa-image"></i></a>
