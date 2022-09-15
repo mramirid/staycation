@@ -65,7 +65,7 @@ export const addPropertyValidator: ValidationChain[] = [
   body("description", "Invalid description").isString().trim().notEmpty(),
 ];
 
-export const viewPropertyValidator: ValidationChain = param(
+export const viewPropertyImagesValidator: ValidationChain = param(
   "id",
   "Invalid id"
 ).isMongoId();

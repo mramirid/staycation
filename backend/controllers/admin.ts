@@ -5,7 +5,7 @@ import { Types } from "mongoose";
 import path from "path";
 import Bank from "../models/Bank";
 import Category, { ICategory } from "../models/Category";
-import Property from "../models/Property";
+import Property, { IProperty } from "../models/Property";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError, checkValidationResult } from "../utils/error";
 import { formatToUSD } from "../utils/format";
@@ -127,7 +127,7 @@ export async function addBank(
 
     await Bank.create({
       name: req.body.bankName,
-      logoUrl: `images/${req.file?.filename}`,
+      logoUrl: `/images/${req.file?.filename}`,
       accountNumber: req.body.accountNumber,
       accountHolderName: req.body.accountHolderName,
     });
@@ -159,7 +159,7 @@ export async function editBank(
     bank.accountHolderName = req.body.accountHolderName;
     if (_.isObject(req.file)) {
       await fs.unlink(path.join("public", bank.logoUrl));
-      bank.logoUrl = `images/${req.file.filename}`;
+      bank.logoUrl = `/images/${req.file.filename}`;
     }
     await bank.save();
 
@@ -212,6 +212,28 @@ export async function viewProperties(req: Request, res: Response) {
   });
 }
 
+export async function viewPropertyImages(
+  req: Request<{ id: string }>,
+  res: Response
+) {
+  let property: IProperty | undefined;
+
+  try {
+    property = await Property.findById(req.params.id).orFail(
+      new Error("Property not found")
+    );
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.render("admin/properties/property/images", {
+    pageTitle: "Property Images - Staycation",
+    alert: getAlert(req),
+    property,
+  });
+}
+
 type AddPropertyReqBody = {
   title: string;
   price: number;
@@ -241,7 +263,7 @@ export async function addProperty(
       country: req.body.country,
       description: req.body.description,
       category: req.body.categoryId,
-      imageUrls: req.files.map((image) => `images/${image.filename}`),
+      imageUrls: req.files.map((image) => `/images/${image.filename}`),
     });
 
     setAlert(req, { message: "Property added", status: AlertStatuses.Success });
