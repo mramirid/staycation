@@ -58,10 +58,9 @@ export async function editCategory(
   try {
     checkValidationResult(req);
 
-    const category = await Category.findById(id);
-    if (_.isNull(category)) {
-      throw new Error("Category not found");
-    }
+    const category = await Category.findById(id).orFail(
+      new Error("Category not found")
+    );
 
     category.name = name;
     await category.save();
@@ -85,10 +84,9 @@ export async function deleteCategory(
   try {
     checkValidationResult(req);
 
-    const category = await Category.findByIdAndDelete(req.params.id);
-    if (_.isNull(category)) {
-      throw new Error("Category not found");
-    }
+    await Category.findByIdAndDelete(req.params.id).orFail(
+      new Error("Category not found")
+    );
 
     setAlert(req, {
       message: "Category deleted",
@@ -150,10 +148,9 @@ export async function editBank(
   try {
     checkValidationResult(req);
 
-    const bank = await Bank.findById(req.body.id);
-    if (_.isNull(bank)) {
-      throw new Error("Bank not found");
-    }
+    const bank = await Bank.findById(req.body.id).orFail(
+      new Error("Bank not found")
+    );
 
     bank.name = req.body.bankName;
     bank.accountNumber = req.body.accountNumber;
@@ -180,10 +177,9 @@ export async function deleteBank(req: Request<{ id: string }>, res: Response) {
   try {
     checkValidationResult(req);
 
-    const bank = await Bank.findByIdAndDelete(req.params.id);
-    if (_.isNull(bank)) {
-      throw new Error("Bank not found");
-    }
+    const bank = await Bank.findByIdAndDelete(req.params.id).orFail(
+      new Error("Bank not found")
+    );
 
     await fs.unlink(path.join("public", bank.logoUrl));
 
