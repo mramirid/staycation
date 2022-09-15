@@ -7,8 +7,7 @@ import Bank from "../models/Bank";
 import Category, { ICategory } from "../models/Category";
 import Property from "../models/Property";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
-import { catchError } from "../utils/error";
-
+import { catchError, checkValidationResult } from "../utils/error";
 export function viewDashboard(_: Request, res: Response) {
   res.render("admin/dashboard", { pageTitle: "Dashboard - Staycation" });
 }
@@ -24,10 +23,12 @@ export async function viewCategories(req: Request, res: Response) {
 }
 
 export async function addCategory(
-  req: Request<unknown, unknown, ICategory>,
+  req: Request<Record<string, never>, Record<string, never>, ICategory>,
   res: Response
 ) {
   try {
+    checkValidationResult(req);
+
     await Category.create(req.body);
 
     setAlert(req, { message: "Category added", status: AlertStatuses.Success });
@@ -40,17 +41,23 @@ export async function addCategory(
 }
 
 type EditCategoryReqBody = {
-  id: string;
+  id: Types.ObjectId;
   name: string;
 };
 
 export async function editCategory(
-  req: Request<unknown, unknown, EditCategoryReqBody>,
+  req: Request<
+    Record<string, never>,
+    Record<string, never>,
+    EditCategoryReqBody
+  >,
   res: Response
 ) {
   const { id, name } = req.body;
 
   try {
+    checkValidationResult(req);
+
     const category = await Category.findById(id);
     if (_.isNull(category)) {
       throw new Error("Category not found");
@@ -76,6 +83,8 @@ export async function deleteCategory(
   res: Response
 ) {
   try {
+    checkValidationResult(req);
+
     const category = await Category.findByIdAndDelete(req.params.id);
     if (_.isNull(category)) {
       throw new Error("Category not found");
@@ -110,10 +119,12 @@ type AddBankReqBody = {
 };
 
 export async function addBank(
-  req: Request<unknown, unknown, AddBankReqBody>,
+  req: Request<Record<string, never>, Record<string, never>, AddBankReqBody>,
   res: Response
 ) {
   try {
+    checkValidationResult(req);
+
     await Bank.create({
       name: req.body.bankName,
       logoUrl: `images/${req.file?.filename}`,
@@ -130,13 +141,15 @@ export async function addBank(
   res.redirect("/admin/banks");
 }
 
-type EditBankReqBody = { id: string } & AddBankReqBody;
+type EditBankReqBody = { id: Types.ObjectId } & AddBankReqBody;
 
 export async function editBank(
-  req: Request<unknown, unknown, EditBankReqBody>,
+  req: Request<Record<string, never>, Record<string, never>, EditBankReqBody>,
   res: Response
 ) {
   try {
+    checkValidationResult(req);
+
     const bank = await Bank.findById(req.body.id);
     if (_.isNull(bank)) {
       throw new Error("Bank not found");
@@ -165,6 +178,8 @@ export async function editBank(
 
 export async function deleteBank(req: Request<{ id: string }>, res: Response) {
   try {
+    checkValidationResult(req);
+
     const bank = await Bank.findByIdAndDelete(req.params.id);
     if (_.isNull(bank)) {
       throw new Error("Bank not found");
@@ -203,7 +218,7 @@ type AddPropertyReqBody = {
   price: number;
   city: string;
   country: string;
-  categoryId: string;
+  categoryId: Types.ObjectId;
   description: string;
 };
 
@@ -226,7 +241,7 @@ export async function addProperty(
       city: req.body.city,
       country: req.body.country,
       description: req.body.description,
-      category: new Types.ObjectId(req.body.categoryId),
+      category: req.body.categoryId,
       imageUrls: req.files.map((image) => `images/${image.filename}`),
     });
 

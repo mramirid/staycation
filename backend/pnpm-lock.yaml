@@ -19,6 +19,7 @@ specifiers:
   eslint-plugin-node: ^11.1.0
   express: ^4.18.1
   express-session: ^1.17.3
+  express-validator: ^6.14.2
   http-errors: ^2.0.0
   http-status-codes: ^2.2.0
   lodash: ^4.17.21
@@ -38,6 +39,7 @@ dependencies:
   envalid: 7.3.1
   express: 4.18.1
   express-session: 1.17.3
+  express-validator: 6.14.2
   http-errors: 2.0.0
   http-status-codes: 2.2.0
   lodash: 4.17.21
@@ -1161,6 +1163,14 @@ packages:
       uid-safe: 2.1.5
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /express-validator/6.14.2:
+    resolution: {integrity: sha512-8XfAUrQ6Y7dIIuy9KcUPCfG/uCbvREctrxf5EeeME+ulanJ4iiW71lWmm9r4YcKKYOCBMan0WpVg7FtHu4Z4Wg==}
+    engines: {node: '>= 8.0.0'}
+    dependencies:
+      lodash: 4.17.21
+      validator: 13.7.0
     dev: false
 
   /express/4.18.1:
@@ -2587,6 +2597,11 @@ packages:
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
+
+  /validator/13.7.0:
+    resolution: {integrity: sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==}
+    engines: {node: '>= 0.10'}
+    dev: false
 
   /vary/1.1.2:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
