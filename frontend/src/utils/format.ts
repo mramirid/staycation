@@ -7,7 +7,6 @@ export function formatToUSD(amount: number) {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   });
-
   return formattedAmount;
 }
 

@@ -46,6 +46,11 @@ router.post(
   adminValidators.addPropertyValidator,
   adminController.addProperty
 );
+router.get(
+  "/properties/:id",
+  adminValidators.viewPropertyValidator,
+  adminController.viewProperty
+);
 
 router.get("/bookings", adminController.viewBookings);
 
