@@ -4,7 +4,7 @@ categories {
 
 properties {
   title: string;
-  price: number;
+  price: Decimal128;
   city: string;
   country: string;
   isPopular: boolean;

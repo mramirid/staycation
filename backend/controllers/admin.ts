@@ -236,7 +236,7 @@ export async function addProperty(
 
     await Property.create({
       title: req.body.title,
-      price: req.body.price,
+      price: new Types.Decimal128(req.body.price.toString()),
       city: req.body.city,
       country: req.body.country,
       description: req.body.description,

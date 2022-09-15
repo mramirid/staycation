@@ -64,3 +64,8 @@ export const addPropertyValidator: ValidationChain[] = [
     .customSanitizer(toObjectId),
   body("description", "Invalid description").isString().trim().notEmpty(),
 ];
+
+export const viewPropertyValidator: ValidationChain = param(
+  "id",
+  "Invalid id"
+).isMongoId();

@@ -1,9 +1,9 @@
 import { model, Schema, Types } from "mongoose";
 import Category from "./Category";
 
-interface IProperty {
+export interface IProperty {
   title: string;
-  price: number;
+  price: Types.Decimal128;
   city: string;
   country: string;
   isPopular: boolean;
@@ -29,7 +29,7 @@ const propertySchema = new Schema<IProperty>({
     required: true,
   },
   price: {
-    type: Number,
+    type: Schema.Types.Decimal128,
     required: true,
     min: 0,
   },
