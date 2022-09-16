@@ -82,6 +82,11 @@ export async function deleteCategory(
   try {
     checkValidationResult(req);
 
+    const property = await Property.findOne({ category: req.params.id });
+    if (_.isObject(property)) {
+      throw new Error("The category is being used by some properties");
+    }
+
     await Category.findByIdAndDelete(req.params.id).orFail(
       new Error("Category not found")
     );
