@@ -234,6 +234,8 @@ export async function viewPropertyImages(
   let property: IProperty | undefined;
 
   try {
+    checkValidationResult(req);
+
     property = await Property.findById(req.params.id).orFail(propertyNotFound);
   } catch (maybeError) {
     const error = catchError(maybeError);
@@ -261,10 +263,16 @@ const lackOfPropertyImages = new Error(
 );
 
 export async function addProperty(
-  req: Request<unknown, unknown, AddPropertyReqBody>,
+  req: Request<
+    Record<string, never>,
+    Record<string, never>,
+    AddPropertyReqBody
+  >,
   res: Response
 ) {
   try {
+    checkValidationResult(req);
+
     const images = req.files as Express.Multer.File[];
     if (images.length < MAX_PROPERTY_IMAGES) {
       throw lackOfPropertyImages;
@@ -297,6 +305,8 @@ export async function viewEditProperty(
   let categories: ICategory[] = [];
 
   try {
+    checkValidationResult(req);
+
     [property, categories] = await Promise.all([
       Property.findById(req.params.id).orFail(propertyNotFound),
       Category.find(),
