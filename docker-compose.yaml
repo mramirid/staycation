@@ -22,17 +22,17 @@ services:
       - "3000:3000"
     depends_on:
       - mongodb
-  #
-  # frontend:
-  #   build: ./frontend
-  #   volumes:
-  #     - ./frontend/src:/app/src:ro
-  #   ports:
-  #     - "5173:5173"
-  #   stdin_open: true
-  #   tty: true
-  #   depends_on:
-  #     - backend
+
+  frontend:
+    build: ./frontend
+    volumes:
+      - ./frontend/src:/app/src:ro
+    ports:
+      - "5173:5173"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - backend
 
 volumes:
   db:
