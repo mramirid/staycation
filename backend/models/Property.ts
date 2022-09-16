@@ -50,6 +50,7 @@ const propertySchema = new Schema<IProperty>({
     type: Schema.Types.ObjectId,
     ref: Category,
     required: true,
+    index: true,
   },
   description: {
     type: String,

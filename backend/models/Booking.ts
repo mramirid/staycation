@@ -36,6 +36,7 @@ const bookingSchema = new Schema<IBooking>({
     type: Schema.Types.ObjectId,
     ref: Member,
     required: true,
+    index: true,
   },
   property: {
     data: {
