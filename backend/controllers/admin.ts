@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import _ from "lodash";
 import { Types } from "mongoose";
 import path from "path";
+import { MAX_PROPERTY_IMAGES } from "../lib/constants";
 import Bank, { IBank } from "../models/Bank";
 import Category, { ICategory } from "../models/Category";
 import Property, { IProperty } from "../models/Property";
@@ -61,16 +62,14 @@ export async function editCategory(
   >,
   res: Response
 ) {
-  const { id, name } = req.body;
-
   try {
     checkValidationResult(req);
 
-    const category = await Category.findById(id).orFail(
+    const category = await Category.findById(req.body.id).orFail(
       new Error("Category not found")
     );
 
-    category.name = name;
+    category.name = req.body.name;
     await category.save();
 
     setAlert(req, {
@@ -232,6 +231,8 @@ export async function viewProperties(req: Request, res: Response) {
   });
 }
 
+const propertyNotFound = new Error("Property not found");
+
 export async function viewPropertyImages(
   req: Request<{ id: string }>,
   res: Response
@@ -239,9 +240,7 @@ export async function viewPropertyImages(
   let property: IProperty | undefined;
 
   try {
-    property = await Property.findById(req.params.id).orFail(
-      new Error("Property not found")
-    );
+    property = await Property.findById(req.params.id).orFail(propertyNotFound);
   } catch (maybeError) {
     const error = catchError(maybeError);
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
@@ -256,30 +255,30 @@ export async function viewPropertyImages(
 
 type AddPropertyReqBody = {
   title: string;
-  price: number;
+  price: Types.Decimal128;
   city: string;
   country: string;
   categoryId: Types.ObjectId;
   description: string;
 };
 
+const lackOfPropertyImages = new Error(
+  `Please provide at least ${MAX_PROPERTY_IMAGES} images`
+);
+
 export async function addProperty(
   req: Request<unknown, unknown, AddPropertyReqBody>,
   res: Response
 ) {
-  let images = req.files;
-
   try {
-    if (_.isUndefined(images) || images.length < 3) {
-      throw new Error("Please provide at least 3 images");
-    }
-    if (!_.isArray(images)) {
-      images = Object.values(images).flat();
+    const images = req.files as Express.Multer.File[];
+    if (images.length < MAX_PROPERTY_IMAGES) {
+      throw lackOfPropertyImages;
     }
 
     await Property.create({
       title: req.body.title,
-      price: new Types.Decimal128(req.body.price.toString()),
+      price: req.body.price,
       city: req.body.city,
       country: req.body.country,
       description: req.body.description,
@@ -305,7 +304,7 @@ export async function viewEditProperty(
 
   try {
     [property, categories] = await Promise.all([
-      Property.findById(req.params.id).orFail(new Error("Property not found")),
+      Property.findById(req.params.id).orFail(propertyNotFound),
       Category.find(),
     ]);
   } catch (maybeError) {
@@ -321,7 +320,45 @@ export async function viewEditProperty(
   });
 }
 
-// type EditPropertyReqBody = { id: Types.ObjectId } & AddPropertyReqBody;
+export async function editProperty(
+  req: Request<{ id: string }, Record<string, never>, AddPropertyReqBody>,
+  res: Response
+) {
+  try {
+    checkValidationResult(req);
+
+    const property = await Property.findById(req.params.id).orFail(
+      propertyNotFound
+    );
+
+    property.title = req.body.title;
+    property.price = req.body.price;
+    property.city = req.body.city;
+    property.country = req.body.country;
+    property.category = req.body.categoryId;
+    property.description = req.body.description;
+
+    const images = req.files as Express.Multer.File[];
+    if (!_.isEmpty(images)) {
+      if (images.length < MAX_PROPERTY_IMAGES) {
+        throw lackOfPropertyImages;
+      }
+      property.imageUrls = images.map((image) => `/images/${image.filename}`);
+    }
+
+    await property.save();
+
+    setAlert(req, {
+      message: "Property edited",
+      status: AlertStatuses.Success,
+    });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect("/admin/properties");
+}
 
 export function viewBookings(_: Request, res: Response) {
   res.render("admin/bookings", { pageTitle: "Bookings - Staycation" });

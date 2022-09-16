@@ -1,5 +1,4 @@
 import flash from "connect-flash";
-import { cleanEnv, str } from "envalid";
 import express, { ErrorRequestHandler } from "express";
 import session from "express-session";
 import createError from "http-errors";
@@ -8,16 +7,10 @@ import methodOverride from "method-override";
 import mongoose from "mongoose";
 import logger from "morgan";
 import path from "path";
+import { env } from "./lib/constants";
 import adminRouter from "./routes/admin";
 import indexRouter from "./routes/index";
 import * as format from "./utils/format";
-
-const env = cleanEnv(process.env, {
-  MONGO_HOSTNAME: str(),
-  MONGO_INITDB_ROOT_USERNAME: str(),
-  MONGO_INITDB_ROOT_PASSWORD: str(),
-  SESSION_SECRET: str(),
-});
 
 const app = express();
 

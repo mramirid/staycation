@@ -1,4 +1,5 @@
 import { model, Schema, Types } from "mongoose";
+import { MAX_PROPERTY_IMAGES } from "../lib/constants";
 import Category from "./Category";
 
 export interface IProperty {
@@ -56,6 +57,7 @@ const propertySchema = new Schema<IProperty>({
   },
   imageUrls: {
     type: [String],
+    maxlength: MAX_PROPERTY_IMAGES,
     required: true,
   },
   features: {

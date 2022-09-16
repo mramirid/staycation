@@ -1,5 +1,6 @@
 import express from "express";
 import * as adminController from "../controllers/admin";
+import { MAX_PROPERTY_IMAGES } from "../lib/constants";
 import * as imagesMulter from "../middlewares/images.multer";
 import * as adminValidators from "../middlewares/validators/admin";
 
@@ -23,7 +24,7 @@ router.patch(
 );
 router.delete(
   "/categories/:id",
-  adminValidators.deleteCategoryValidator,
+  adminValidators.deleteValidator,
   adminController.deleteCategory
 );
 
@@ -43,7 +44,11 @@ router.patch(
   adminValidators.editBankValidator,
   adminController.editBank
 );
-router.delete("/banks/:id", adminController.deleteBank);
+router.delete(
+  "/banks/:id",
+  adminValidators.deleteValidator,
+  adminController.deleteBank
+);
 
 //
 // Properties
@@ -56,11 +61,17 @@ router.get(
 );
 router.post(
   "/properties",
-  imagesMulter.handleUploadImages("images", 3),
+  imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
   adminValidators.addPropertyValidator,
   adminController.addProperty
 );
 router.get("/properties/:id/edit", adminController.viewEditProperty);
+router.patch(
+  "/properties/:id",
+  imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
+  adminValidators.editPropertyValidator,
+  adminController.editProperty
+);
 
 //
 // Bookings
