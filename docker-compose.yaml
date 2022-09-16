@@ -6,7 +6,7 @@ services:
     env_file:
       - ./backend/.env
     ports:
-      - "27017:27017"
+      - "27017:27017" # TODO: Should be removed in production
 
   backend:
     build: ./backend
