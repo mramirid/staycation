@@ -1,7 +1,10 @@
 import crypto from "crypto";
+import { RequestHandler } from "express";
 import fs from "fs";
+import _ from "lodash";
 import multer from "multer";
 import path from "path";
+import { AlertStatuses, setAlert } from "../utils/alert";
 
 // Storage engine for single image upload
 const uploadStorage = multer.diskStorage({
@@ -11,12 +14,24 @@ const uploadStorage = multer.diskStorage({
   },
 });
 
-export function handleUploadImage(fieldName: string) {
-  return multer({
+export function handleUploadImage(fieldName: string): RequestHandler {
+  const upload = multer({
     storage: uploadStorage,
     limits: { fileSize: 1_000_000 },
     fileFilter: (_, file, cb) => checkFileType(file, cb),
   }).single(fieldName);
+
+  return (req, res, next) => {
+    upload(req, res, (maybeError: unknown) => {
+      if (_.isError(maybeError)) {
+        setAlert(req, {
+          message: maybeError.message,
+          status: AlertStatuses.Error,
+        });
+      }
+      next();
+    });
+  };
 }
 
 const multipleUploadStorage = multer.diskStorage({
@@ -32,12 +47,27 @@ const multipleUploadStorage = multer.diskStorage({
   },
 });
 
-export function handleUploadImages(fieldName: string, maxFiles = 12) {
-  return multer({
+export function handleUploadImages(
+  fieldName: string,
+  maxFiles = 12
+): RequestHandler {
+  const uploadMultiple = multer({
     storage: multipleUploadStorage,
     limits: { fileSize: 1_000_000 },
     fileFilter: (_, file, cb) => checkFileType(file, cb),
   }).array(fieldName, maxFiles);
+
+  return (req, res, next) => {
+    uploadMultiple(req, res, (maybeError: unknown) => {
+      if (_.isError(maybeError)) {
+        setAlert(req, {
+          message: maybeError.message,
+          status: AlertStatuses.Error,
+        });
+      }
+      next();
+    });
+  };
 }
 
 function checkFileType(
@@ -57,5 +87,5 @@ function checkFileType(
     cb(null, true);
     return;
   }
-  cb(new TypeError("Images Only: jpeg, jpg, png, or gif."));
+  cb(new TypeError("Images Only: jpeg, jpg, png, or gif"));
 }
