@@ -7,6 +7,9 @@ const router = express.Router();
 
 router.get("/dashboard", adminController.viewDashboard);
 
+//
+// Categories
+//
 router.get("/categories", adminController.viewCategories);
 router.post(
   "/categories",
@@ -24,6 +27,9 @@ router.delete(
   adminController.deleteCategory
 );
 
+//
+// Banks
+//
 router.get("/banks", adminController.viewBanks);
 router.post(
   "/banks",
@@ -39,19 +45,26 @@ router.patch(
 );
 router.delete("/banks/:id", adminController.deleteBank);
 
+//
+// Properties
+//
 router.get("/properties", adminController.viewProperties);
+router.get(
+  "/properties/:id/images",
+  adminValidators.viewPropertyImagesValidator,
+  adminController.viewPropertyImages
+);
 router.post(
   "/properties",
   imagesMulter.handleUploadImages("images", 3),
   adminValidators.addPropertyValidator,
   adminController.addProperty
 );
-router.get(
-  "/properties/:id/images",
-  adminValidators.viewPropertyImagesValidator,
-  adminController.viewPropertyImages
-);
+router.get("/properties/:id/edit", adminController.viewEditProperty);
 
+//
+// Bookings
+//
 router.get("/bookings", adminController.viewBookings);
 
 export default router;

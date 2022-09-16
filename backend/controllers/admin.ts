@@ -296,6 +296,33 @@ export async function addProperty(
   res.redirect("/admin/properties");
 }
 
+export async function viewEditProperty(
+  req: Request<{ id: string }>,
+  res: Response
+) {
+  let property: IProperty | undefined;
+  let categories: ICategory[] = [];
+
+  try {
+    [property, categories] = await Promise.all([
+      Property.findById(req.params.id).orFail(new Error("Property not found")),
+      Category.find(),
+    ]);
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.render("admin/properties/property/edit", {
+    pageTitle: "Edit Property - Staycation",
+    alert: getAlert(req),
+    property,
+    categories,
+  });
+}
+
+// type EditPropertyReqBody = { id: Types.ObjectId } & AddPropertyReqBody;
+
 export function viewBookings(_: Request, res: Response) {
   res.render("admin/bookings", { pageTitle: "Bookings - Staycation" });
 }
