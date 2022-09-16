@@ -7,10 +7,9 @@ export const addCategoryValidator = body("name", "Invalid name")
   .escape()
   .notEmpty();
 
-export const editCategoryValidator = [
-  body("id", "Invalid id").isMongoId().customSanitizer(toObjectId),
-  addCategoryValidator,
-];
+export const paramIdValidator = param("id", "Invalid id").isMongoId();
+
+export const editCategoryValidator = [paramIdValidator, addCategoryValidator];
 
 export const addBankValidator = [
   body("bankName", "Invalid bank name").isString().trim().notEmpty().escape(),
@@ -22,10 +21,7 @@ export const addBankValidator = [
     .notEmpty(),
 ];
 
-export const editBankValidator = [
-  body("id", "Invalid id").isMongoId().customSanitizer(toObjectId),
-  ...addBankValidator,
-];
+export const editBankValidator = [paramIdValidator, ...addBankValidator];
 
 export const addPropertyValidator = [
   body("title", "Invalid title").isString().trim().escape().notEmpty(),
@@ -38,14 +34,7 @@ export const addPropertyValidator = [
   body("description", "Invalid description").isString().trim().notEmpty(),
 ];
 
-export const viewPropertyImagesValidator = param(
-  "id",
-  "Invalid id"
-).isMongoId();
-
 export const editPropertyValidator = [
-  param("id", "Invalid id").isMongoId(),
+  paramIdValidator,
   ...addPropertyValidator,
 ];
-
-export const deleteValidator = param("id", "Invalid id").isMongoId();

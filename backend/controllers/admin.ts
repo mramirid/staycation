@@ -49,23 +49,14 @@ export async function addCategory(
   res.redirect("/admin/categories");
 }
 
-type EditCategoryReqBody = {
-  id: Types.ObjectId;
-  name: string;
-};
-
 export async function editCategory(
-  req: Request<
-    Record<string, never>,
-    Record<string, never>,
-    EditCategoryReqBody
-  >,
+  req: Request<{ id: string }, Record<string, never>, { name: string }>,
   res: Response
 ) {
   try {
     checkValidationResult(req);
 
-    const category = await Category.findById(req.body.id).orFail(
+    const category = await Category.findById(req.params.id).orFail(
       new Error("Category not found")
     );
 
@@ -153,16 +144,14 @@ export async function addBank(
   res.redirect("/admin/banks");
 }
 
-type EditBankReqBody = { id: Types.ObjectId } & AddBankReqBody;
-
 export async function editBank(
-  req: Request<Record<string, never>, Record<string, never>, EditBankReqBody>,
+  req: Request<{ id: string }, Record<string, never>, AddBankReqBody>,
   res: Response
 ) {
   try {
     checkValidationResult(req);
 
-    const bank = await Bank.findById(req.body.id).orFail(
+    const bank = await Bank.findById(req.params.id).orFail(
       new Error("Bank not found")
     );
 

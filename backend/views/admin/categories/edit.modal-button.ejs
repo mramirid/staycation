@@ -15,7 +15,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="/admin/categories?_method=PATCH">
+      <form method="post" action="/admin/categories/<%= category._id %>?_method=PATCH">
         <div class="modal-body">
           <div class="form-group">
             <label for="name">Name</label>
@@ -24,7 +24,6 @@
           </div>
         </div>
         <div class="modal-footer">
-          <input type="text" id="id" name="id" hidden value="<%= category._id %>">
           <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Edit</button>
         </div>

@@ -15,7 +15,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="/admin/banks?_method=PATCH" enctype="multipart/form-data">
+      <form method="post" action="/admin/banks/<%= bank._id %>?_method=PATCH" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <label for="bank-name">Bank Name</label>
@@ -38,7 +38,6 @@
           </div>
         </div>
         <div class="modal-footer">
-          <input type="text" id="id" name="id" hidden value="<%= bank._id %>">
           <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Edit</button>
         </div>

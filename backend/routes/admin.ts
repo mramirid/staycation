@@ -18,13 +18,13 @@ router.post(
   adminController.addCategory
 );
 router.patch(
-  "/categories",
+  "/categories/:id",
   adminValidators.editCategoryValidator,
   adminController.editCategory
 );
 router.delete(
   "/categories/:id",
-  adminValidators.deleteValidator,
+  adminValidators.paramIdValidator,
   adminController.deleteCategory
 );
 
@@ -39,14 +39,14 @@ router.post(
   adminController.addBank
 );
 router.patch(
-  "/banks",
+  "/banks/:id",
   imagesMulter.handleUploadImage("bankLogo"),
   adminValidators.editBankValidator,
   adminController.editBank
 );
 router.delete(
   "/banks/:id",
-  adminValidators.deleteValidator,
+  adminValidators.paramIdValidator,
   adminController.deleteBank
 );
 
@@ -56,7 +56,7 @@ router.delete(
 router.get("/properties", adminController.viewProperties);
 router.get(
   "/properties/:id/images",
-  adminValidators.viewPropertyImagesValidator,
+  adminValidators.paramIdValidator,
   adminController.viewPropertyImages
 );
 router.post(
