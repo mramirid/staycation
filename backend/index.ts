@@ -10,6 +10,7 @@ import logger from "morgan";
 import path from "path";
 import adminRouter from "./routes/admin";
 import indexRouter from "./routes/index";
+import * as format from "./utils/format";
 
 const env = cleanEnv(process.env, {
   MONGO_HOSTNAME: str(),
@@ -64,6 +65,9 @@ const errorHandler: ErrorRequestHandler = (err, req, res) => {
   res.render("error");
 };
 app.use(errorHandler);
+
+app.locals._ = _;
+app.locals.format = format;
 
 mongoose.connect(
   `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`,
