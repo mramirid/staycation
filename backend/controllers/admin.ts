@@ -349,6 +349,35 @@ export async function editProperty(
   res.redirect("/admin/properties");
 }
 
+export async function deleteProperty(
+  req: Request<{ id: string }>,
+  res: Response
+) {
+  try {
+    checkValidationResult(req);
+
+    const property = await Property.findByIdAndDelete(req.params.id).orFail(
+      new Error("Property not found")
+    );
+
+    await Promise.all(
+      property.imageUrls.map((imageUrl) =>
+        fs.unlink(path.join("public", imageUrl))
+      )
+    );
+
+    setAlert(req, {
+      message: "Property deleted",
+      status: AlertStatuses.Success,
+    });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect("/admin/properties");
+}
+
 export function viewBookings(_: Request, res: Response) {
   res.render("admin/bookings", { pageTitle: "Bookings - Staycation" });
 }

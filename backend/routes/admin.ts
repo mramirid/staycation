@@ -54,16 +54,16 @@ router.delete(
 // Properties
 //
 router.get("/properties", adminController.viewProperties);
-router.get(
-  "/properties/:id/images",
-  adminValidators.paramIdValidator,
-  adminController.viewPropertyImages
-);
 router.post(
   "/properties",
   imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
   adminValidators.addPropertyValidator,
   adminController.addProperty
+);
+router.get(
+  "/properties/:id/images",
+  adminValidators.paramIdValidator,
+  adminController.viewPropertyImages
 );
 router.get("/properties/:id/edit", adminController.viewEditProperty);
 router.patch(
@@ -71,6 +71,11 @@ router.patch(
   imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
   adminValidators.editPropertyValidator,
   adminController.editProperty
+);
+router.delete(
+  "/properties/:id",
+  adminValidators.paramIdValidator,
+  adminController.deleteProperty
 );
 
 //
