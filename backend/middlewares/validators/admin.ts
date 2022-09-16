@@ -13,7 +13,10 @@ export const editCategoryValidator = [paramIdValidator, addCategoryValidator];
 
 export const addBankValidator = [
   body("bankName", "Invalid bank name").isString().trim().notEmpty().escape(),
-  body("accountNumber", "Invalid account number").isNumeric(),
+  body("accountNumber", "Invalid account number").isInt({
+    allow_leading_zeroes: true,
+    min: 0,
+  }),
   body("accountHolderName", "Invalid holder name")
     .isString()
     .trim()
@@ -25,7 +28,7 @@ export const editBankValidator = [paramIdValidator, ...addBankValidator];
 
 export const addPropertyValidator = [
   body("title", "Invalid title").isString().trim().escape().notEmpty(),
-  body("price", "Invalid price").isNumeric().customSanitizer(toDecimal128),
+  body("price", "Invalid price").isDecimal().customSanitizer(toDecimal128),
   body("city", "Invalid city").isString().trim().escape().notEmpty(),
   body("country", "Invalid country").isString().trim().escape().notEmpty(),
   body("categoryId", "Invalid categoryId")
