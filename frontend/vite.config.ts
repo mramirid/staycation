@@ -10,7 +10,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react(), svgr()],
   resolve: {
     alias: {
@@ -22,4 +22,7 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/setup-tests.ts",
   },
-});
+  css: {
+    modules: mode !== "test" ? {} : { generateScopedName: (name) => name },
+  },
+}));

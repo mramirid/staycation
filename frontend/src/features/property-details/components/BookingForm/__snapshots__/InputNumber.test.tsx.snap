@@ -2,17 +2,17 @@
 
 exports[`<InputNumber /> > Should match with the snapshot 1`] = `
 <div
-  class="_inputGroup_1jjec_1"
+  class="inputGroup"
 >
   <button
-    class="_inputGroup__sideIcon_1jjec_4 btn btn-error !rounded-l"
+    class="inputGroup__sideIcon btn btn-error !rounded-l"
     data-testid="btn-minus"
     type="button"
   >
     -
   </button>
   <input
-    class="_inputGroup__textInput_1jjec_9"
+    class="inputGroup__textInput"
     id="test-input-number"
     placeholder="Enter a number..."
     readonly=""
@@ -20,7 +20,7 @@ exports[`<InputNumber /> > Should match with the snapshot 1`] = `
     value="2 days"
   />
   <button
-    class="_inputGroup__sideIcon_1jjec_4 btn btn-success !rounded-r"
+    class="inputGroup__sideIcon btn btn-success !rounded-r"
     data-testid="btn-plus"
     type="button"
   >
