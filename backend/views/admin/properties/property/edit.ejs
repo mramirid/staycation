@@ -58,7 +58,7 @@
                 <label for="categoryId">Category</label>
                 <select class="custom-select" name="categoryId" required>
                   <% categories.forEach(category => { %>
-                  <option value="<%= category._id %>" <%= property.category.equals(category._id) ? "selected" : '' %>>
+                  <option value="<%= category.id %>" <%= property.category.equals(category.id) ? "selected" : '' %>>
                     <%= category.name %>
                   </option>
                   <% }) %>

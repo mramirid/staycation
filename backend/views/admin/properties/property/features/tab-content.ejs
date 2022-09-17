@@ -1,7 +1,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4 mt-2">
   <div class="card-body row">
-    <form class="col-md-5" method="post" action="/admin/properties/<%= property._id %>/features"
+    <form class="col-md-5" method="post" action="/admin/properties/<%= property.id %>/features"
       enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">Name</label>
@@ -38,7 +38,7 @@
             <td><img src="<%= feature.iconUrl %>" alt="<%= feature.name %>" width="38" class="img-thumbnail"></td>
             <td>
               <%- include("./edit.modal-button.ejs", {feature}) %>
-              <form method="post" action="/admin/properties/<%= property._id %>/features?_method=DELETE"
+              <form method="post" action="/admin/properties/<%= property.id %>/features?_method=DELETE"
                 class="d-inline">
                 <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>

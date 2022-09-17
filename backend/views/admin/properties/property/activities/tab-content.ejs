@@ -35,18 +35,18 @@
             <td><%= activity.type %></td>
             <td><%= activity.imageUrl %></td>
             <td>
-              <a href="/admin/properties/<%= property._id %>/images" class="btn btn-info btn-circle btn-sm">
+              <a href="/admin/properties/<%= property.id %>/images" class="btn btn-info btn-circle btn-sm">
                 <i class="fas fa-image"></i>
               </a>
-              <a href="/admin/properties/<%= property._id %>/edit" class="btn btn-warning btn-circle btn-sm">
+              <a href="/admin/properties/<%= property.id %>/edit" class="btn btn-warning btn-circle btn-sm">
                 <i class="fas fa-edit"></i>
               </a>
-              <form method="post" action="/admin/properties/<%= property._id %>?_method=DELETE" class="d-inline">
+              <form method="post" action="/admin/properties/<%= property.id %>?_method=DELETE" class="d-inline">
                 <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
                 </button>
               </form>
-              <a href="/admin/properties/<%= property._id %>" class="btn btn-success btn-circle btn-sm">
+              <a href="/admin/properties/<%= property.id %>" class="btn btn-success btn-circle btn-sm">
                 <i class="fas fa-plus"></i>
               </a>
             </td>

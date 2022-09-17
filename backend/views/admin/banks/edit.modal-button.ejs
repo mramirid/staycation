@@ -1,21 +1,21 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-warning btn-circle btn-sm" data-toggle="modal"
-  data-target="#editModal<%= bank._id %>">
+  data-target="#editModal<%= bank.id %>">
   <i class="fas fa-edit"></i>
 </button>
 
 <!-- Modal -->
-<div class="modal fade" id="editModal<%= bank._id %>" data-backdrop="static" data-keyboard="false" tabindex="-1"
-  aria-labelledby="editModalLabel<%= bank._id %>" aria-hidden="true">
+<div class="modal fade" id="editModal<%= bank.id %>" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="editModalLabel<%= bank.id %>" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editModalLabel<%= bank._id %>">Edit Bank</h5>
+        <h5 class="modal-title" id="editModalLabel<%= bank.id %>">Edit Bank</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="/admin/banks/<%= bank._id %>?_method=PATCH" enctype="multipart/form-data">
+      <form method="post" action="/admin/banks/<%= bank.id %>?_method=PATCH" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <label for="bank-name">Bank Name</label>
