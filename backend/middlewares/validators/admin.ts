@@ -16,10 +16,9 @@ export const editCategoryValidator = [paramIdValidator, addCategoryValidator];
 
 const commonBankValidator = [
   body("bankName", "Invalid bank name").isString().trim().notEmpty().escape(),
-  body("accountNumber", "Invalid account number").isInt({
-    allow_leading_zeroes: true,
-    min: 0,
-  }),
+  body("accountNumber", "Invalid account number")
+    .isInt({ allow_leading_zeroes: true, min: 0 })
+    .withMessage("Account number cannot be negative"),
   body("accountHolderName", "Invalid holder name")
     .isString()
     .trim()
@@ -73,6 +72,20 @@ export const editPropertyValidator = [
     const images: Express.Multer.File[] = meta.req.files;
     if (!_.isEmpty(images) && images.length < MAX_PROPERTY_IMAGES) {
       throw lackOfPropertyImages;
+    }
+
+    return true;
+  }),
+];
+
+export const addFeatureValidator = [
+  body("name", "Invalid name").isString().trim().escape().notEmpty(),
+  body("quantity", "Invalid quantity")
+    .isInt({ min: 0 })
+    .withMessage("Quantity cannot be negative"),
+  body("icon").custom((__, meta) => {
+    if (_.isUndefined((meta.req as Request).file)) {
+      throw new Error("Please provide an icon for the feature");
     }
 
     return true;

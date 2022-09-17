@@ -11,17 +11,17 @@ export interface IProperty {
   category: Types.ObjectId;
   description: string;
   imageUrls: string[];
-  features: {
+  features: Types.DocumentArray<{
     name: string;
     quantity: number;
     iconUrl: string;
-  }[];
-  activities: {
+  }>;
+  activities: Types.DocumentArray<{
     name: string;
     type: string;
     imageUrl: string;
     isPopular: boolean;
-  }[];
+  }>;
 }
 
 const propertySchema = new Schema<IProperty>({
@@ -61,49 +61,43 @@ const propertySchema = new Schema<IProperty>({
     maxlength: MAX_PROPERTY_IMAGES,
     required: true,
   },
-  features: {
-    type: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          required: true,
-          min: 0,
-        },
-        iconUrl: {
-          type: String,
-          required: true,
-        },
+  features: [
+    {
+      name: {
+        type: String,
+        required: true,
       },
-    ],
-    default: [],
-  },
-  activities: {
-    type: [
-      {
-        name: {
-          type: String,
-          required: true,
-        },
-        type: {
-          type: String,
-          required: true,
-        },
-        imageUrl: {
-          type: String,
-          required: true,
-        },
-        isPopular: {
-          type: Boolean,
-          required: true,
-        },
+      quantity: {
+        type: Number,
+        required: true,
+        min: 0,
       },
-    ],
-    default: [],
-  },
+      iconUrl: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  activities: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      type: {
+        type: String,
+        required: true,
+      },
+      imageUrl: {
+        type: String,
+        required: true,
+      },
+      isPopular: {
+        type: Boolean,
+        required: true,
+      },
+    },
+  ],
 });
 
 const Property = model("Property", propertySchema);

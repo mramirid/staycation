@@ -382,6 +382,64 @@ export async function deleteProperty(
   res.redirect("/admin/properties");
 }
 
+export async function viewProperty(
+  req: Request<{ id: string }>,
+  res: Response
+) {
+  let property: IProperty | undefined;
+
+  try {
+    checkValidationResult(req);
+
+    property = await Property.findById(req.params.id).orFail(propertyNotFound);
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.render("admin/properties/property", {
+    pageTitle: "Detail Property - Staycation",
+    alert: getAlert(req),
+    property,
+  });
+}
+
+type AddFeatureReqBody = {
+  name: string;
+  quantity: number;
+};
+
+export async function addFeature(
+  req: Request<{ id: string }, Record<string, never>, AddFeatureReqBody>,
+  res: Response
+) {
+  const propertyId = req.params.id;
+
+  try {
+    checkValidationResult(req);
+
+    const property = await Property.findById(propertyId).orFail(
+      propertyNotFound
+    );
+
+    const icon = req.file as Express.Multer.File;
+    property.features.push({
+      name: req.body.name,
+      quantity: req.body.quantity,
+      iconUrl: `/images/${icon.filename}`,
+    });
+
+    await property.save();
+
+    setAlert(req, { message: "Feature added", status: AlertStatuses.Success });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect(`/admin/properties/${propertyId}`);
+}
+
 export function viewBookings(_: Request, res: Response) {
   res.render("admin/bookings", { pageTitle: "Bookings - Staycation" });
 }
