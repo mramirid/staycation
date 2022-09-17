@@ -15,26 +15,22 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="/admin/properties/<%= feature.id %>?_method=PATCH" enctype="multipart/form-data">
+      <form method="post" action="/admin/properties/<%= property.id %>/features/<%= feature.id %>?_method=PATCH"
+        enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
-            <label for="bank-name">Bank Name</label>
-            <input type="text" class="form-control" id="bank-name" name="bankName" placeholder="Enter bank name"
-              required value="<%= feature.name %>">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required
+              value="<%= feature.name %>">
           </div>
           <div class="form-group">
-            <label for="bank-logo">Bank Logo</label>
-            <input type="file" class="form-control-file" id="bank-logo" name="bankLogo">
+            <label for="quantity">Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter quantity"
+              required min="0" value="<%= feature.quantity %>">
           </div>
           <div class="form-group">
-            <label for="account-number">Account Number</label>
-            <input type="text" class="form-control" id="account-number" name="accountNumber"
-              placeholder="Enter account number" required value="<%= feature.accountNumber %>">
-          </div>
-          <div class="form-group">
-            <label for="account-holder-name">Account Holder Name</label>
-            <input type="text" class="form-control" id="account-holder-name" name="accountHolderName"
-              placeholder="Enter holder name" required value="<%= feature.accountHolderName %>">
+            <label for="icon">Icon</label>
+            <input type="file" class="form-control-file" id="icon" name="icon">
           </div>
         </div>
         <div class="modal-footer">

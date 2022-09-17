@@ -440,6 +440,48 @@ export async function addFeature(
   res.redirect(`/admin/properties/${propertyId}`);
 }
 
+type EditFeatureParams = {
+  propertyId: string;
+  featureId: string;
+};
+
+export async function editFeature(
+  req: Request<EditFeatureParams, Record<string, never>, AddFeatureReqBody>,
+  res: Response
+) {
+  try {
+    checkValidationResult(req);
+
+    const property = await Property.findById(req.params.propertyId).orFail(
+      propertyNotFound
+    );
+
+    const feature = property.features.id(req.params.featureId);
+    if (_.isNull(feature)) {
+      throw new Error("Feature not found");
+    }
+
+    feature.name = req.body.name;
+    feature.quantity = req.body.quantity;
+    if (_.isObject(req.file)) {
+      await fs.unlink(path.join("public", feature.iconUrl));
+      feature.iconUrl = `/images/${req.file.filename}`;
+    }
+
+    await property.save();
+
+    setAlert(req, {
+      message: "Feature edited",
+      status: AlertStatuses.Success,
+    });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect(`/admin/properties/${req.params.propertyId}`);
+}
+
 export function viewBookings(_: Request, res: Response) {
   res.render("admin/bookings", { pageTitle: "Bookings - Staycation" });
 }

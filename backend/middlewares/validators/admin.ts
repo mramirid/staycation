@@ -78,11 +78,15 @@ export const editPropertyValidator = [
   }),
 ];
 
-export const addFeatureValidator = [
+const commonFeatureValidator = [
   body("name", "Invalid name").isString().trim().escape().notEmpty(),
   body("quantity", "Invalid quantity")
     .isInt({ min: 0 })
     .withMessage("Quantity cannot be negative"),
+];
+
+export const addFeatureValidator = [
+  ...commonFeatureValidator,
   body("icon").custom((__, meta) => {
     if (_.isUndefined((meta.req as Request).file)) {
       throw new Error("Please provide an icon for the feature");
@@ -90,4 +94,10 @@ export const addFeatureValidator = [
 
     return true;
   }),
+];
+
+export const editFeatureValidator = [
+  param("propertyId", "Invalid property id").isMongoId(),
+  param("featureId", "Invalid feature id").isMongoId(),
+  ...commonFeatureValidator,
 ];

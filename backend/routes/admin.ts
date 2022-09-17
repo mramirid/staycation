@@ -88,6 +88,12 @@ router.post(
   validators.addFeatureValidator,
   controllers.addFeature
 );
+router.patch(
+  "/properties/:propertyId/features/:featureId",
+  imagesMulter.handleUploadImage("icon"),
+  validators.editFeatureValidator,
+  controllers.editFeature
+);
 
 //
 // Bookings
