@@ -105,6 +105,12 @@ router.post(
   validators.addActivityValidator,
   controllers.addActivity
 );
+router.patch(
+  "/properties/:propertyId/activities/:activityId",
+  imagesMulter.handleUploadImage("image"),
+  validators.editActivityValidator,
+  controllers.editActivity
+);
 
 //
 // Bookings

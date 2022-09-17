@@ -130,3 +130,14 @@ export const addActivityValidator = [
     return true;
   }),
 ];
+
+const paramActivityIdValidator = param(
+  "activityId",
+  "Invalid activity id"
+).isMongoId();
+
+export const editActivityValidator = [
+  paramPropertyIdValidator,
+  paramActivityIdValidator,
+  ...commonActivityValidator,
+];

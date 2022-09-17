@@ -36,7 +36,7 @@
             <td><%= activity.type %></td>
             <td><img src="<%= activity.imageUrl %>" alt="<%= activity.name %>" width="100" class="img-thumbnail"></td>
             <td>
-              <!-- TODO: Add edit.modal-button -->
+              <%- include("./edit.modal-button.ejs", {activity}) %>
               <form method="post"
                 action="/admin/properties/<%= property.id %>/activities/<%= activity.id %>?_method=DELETE"
                 class="d-inline">
