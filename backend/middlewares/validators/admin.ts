@@ -141,3 +141,8 @@ export const editActivityValidator = [
   paramActivityIdValidator,
   ...commonActivityValidator,
 ];
+
+export const deleteActivityValidator = [
+  paramPropertyIdValidator,
+  paramActivityIdValidator,
+];

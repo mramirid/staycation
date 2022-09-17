@@ -111,6 +111,11 @@ router.patch(
   validators.editActivityValidator,
   controllers.editActivity
 );
+router.delete(
+  "/properties/:propertyId/activities/:activityId",
+  validators.deleteActivityValidator,
+  controllers.deleteActivity,
+);
 
 //
 // Bookings

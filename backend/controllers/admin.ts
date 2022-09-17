@@ -607,6 +607,40 @@ export async function editActivity(
   res.redirect(`/admin/properties/${req.params.propertyId}`);
 }
 
+export async function deleteActivity(
+  req: Request<EditActivityParams>,
+  res: Response
+) {
+  try {
+    checkValidationResult(req);
+
+    const property = await Property.findById(req.params.propertyId).orFail(
+      propertyNotFound
+    );
+
+    const activity = property.activities.id(req.params.activityId);
+    if (_.isNull(activity)) {
+      throw activityNotFound;
+    }
+
+    property.activities.pull(activity);
+    await Promise.all([
+      fs.unlink(path.join("public", activity.imageUrl)),
+      property.save(),
+    ]);
+
+    setAlert(req, {
+      message: "Activity deleted",
+      status: AlertStatuses.Success,
+    });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect(`/admin/properties/${req.params.propertyId}`);
+}
+
 export function viewBookings(_: Request, res: Response) {
   res.render("admin/bookings", { pageTitle: "Bookings - Staycation" });
 }
