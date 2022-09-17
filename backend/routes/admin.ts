@@ -61,8 +61,8 @@ router.post(
   controllers.addProperty
 );
 router.get(
-  "/properties/:id/images",
-  validators.paramIdValidator,
+  "/properties/:propertyId/images",
+  validators.paramPropertyIdValidator,
   controllers.viewPropertyImages
 );
 router.get("/properties/:id/edit", controllers.viewEditProperty);
@@ -83,7 +83,7 @@ router.get(
   controllers.viewProperty
 );
 router.post(
-  "/properties/:id/features",
+  "/properties/:propertyId/features",
   imagesMulter.handleUploadImage("icon"),
   validators.addFeatureValidator,
   controllers.addFeature

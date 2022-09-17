@@ -60,7 +60,6 @@ export const addPropertyValidator = [
     if (images.length < MAX_PROPERTY_IMAGES) {
       throw lackOfPropertyImages;
     }
-
     return true;
   }),
 ];
@@ -73,10 +72,14 @@ export const editPropertyValidator = [
     if (!_.isEmpty(images) && images.length < MAX_PROPERTY_IMAGES) {
       throw lackOfPropertyImages;
     }
-
     return true;
   }),
 ];
+
+export const paramPropertyIdValidator = param(
+  "propertyId",
+  "Invalid property id"
+).isMongoId();
 
 const commonFeatureValidator = [
   body("name", "Invalid name").isString().trim().escape().notEmpty(),
@@ -86,18 +89,19 @@ const commonFeatureValidator = [
 ];
 
 export const addFeatureValidator = [
+  paramPropertyIdValidator,
   ...commonFeatureValidator,
   body("icon").custom((__, meta) => {
     if (_.isUndefined((meta.req as Request).file)) {
       throw new Error("Please provide an icon for the feature");
     }
-
     return true;
   }),
 ];
 
 export const editFeatureValidator = [
-  param("propertyId", "Invalid property id").isMongoId(),
+  paramPropertyIdValidator,
+  paramPropertyIdValidator,
   param("featureId", "Invalid feature id").isMongoId(),
   ...commonFeatureValidator,
 ];

@@ -228,7 +228,7 @@ export async function viewProperties(req: Request, res: Response) {
 const propertyNotFound = new Error("Property not found");
 
 export async function viewPropertyImages(
-  req: Request<{ id: string }>,
+  req: Request<{ propertyId: string }>,
   res: Response
 ) {
   let property: IProperty | undefined;
@@ -236,7 +236,9 @@ export async function viewPropertyImages(
   try {
     checkValidationResult(req);
 
-    property = await Property.findById(req.params.id).orFail(propertyNotFound);
+    property = await Property.findById(req.params.propertyId).orFail(
+      propertyNotFound
+    );
   } catch (maybeError) {
     const error = catchError(maybeError);
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
@@ -410,15 +412,17 @@ type AddFeatureReqBody = {
 };
 
 export async function addFeature(
-  req: Request<{ id: string }, Record<string, never>, AddFeatureReqBody>,
+  req: Request<
+    { propertyId: string },
+    Record<string, never>,
+    AddFeatureReqBody
+  >,
   res: Response
 ) {
-  const propertyId = req.params.id;
-
   try {
     checkValidationResult(req);
 
-    const property = await Property.findById(propertyId).orFail(
+    const property = await Property.findById(req.params.propertyId).orFail(
       propertyNotFound
     );
 
@@ -437,7 +441,7 @@ export async function addFeature(
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
   }
 
-  res.redirect(`/admin/properties/${propertyId}`);
+  res.redirect(`/admin/properties/${req.params.propertyId}`);
 }
 
 type EditFeatureParams = {
