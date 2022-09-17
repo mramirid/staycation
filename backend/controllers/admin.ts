@@ -525,6 +525,44 @@ export async function deleteFeature(
   res.redirect(`/admin/properties/${req.params.propertyId}`);
 }
 
+type AddActivityReqBody = {
+  name: string;
+  type: string;
+};
+
+export async function addActivity(
+  req: Request<
+    { propertyId: string },
+    Record<string, never>,
+    AddActivityReqBody
+  >,
+  res: Response
+) {
+  try {
+    checkValidationResult(req);
+
+    const property = await Property.findById(req.params.propertyId).orFail(
+      propertyNotFound
+    );
+
+    const image = req.file as Express.Multer.File;
+    property.activities.push({
+      name: req.body.name,
+      type: req.body.type,
+      imageUrl: `/images/${image.filename}`,
+    });
+
+    await property.save();
+
+    setAlert(req, { message: "Activity added", status: AlertStatuses.Success });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect(`/admin/properties/${req.params.propertyId}`);
+}
+
 export function viewBookings(_: Request, res: Response) {
   res.render("admin/bookings", { pageTitle: "Bookings - Staycation" });
 }

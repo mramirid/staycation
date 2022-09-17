@@ -99,6 +99,12 @@ router.delete(
   validators.deleteFeatureValidator,
   controllers.deleteFeature
 );
+router.post(
+  "/properties/:propertyId/activities",
+  imagesMulter.handleUploadImage("image"),
+  validators.addActivityValidator,
+  controllers.addActivity
+);
 
 //
 // Bookings

@@ -94,7 +94,7 @@ const propertySchema = new Schema<IProperty>({
       },
       isPopular: {
         type: Boolean,
-        required: true,
+        default: false,
       },
     },
   ],

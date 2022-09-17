@@ -114,3 +114,19 @@ export const deleteFeatureValidator = [
   paramPropertyIdValidator,
   paramFeatureIdValidator,
 ];
+
+const commonActivityValidator = [
+  body("name", "Invalid name").isString().trim().escape().notEmpty(),
+  body("type", "Invalid type").isString().trim().escape().notEmpty(),
+];
+
+export const addActivityValidator = [
+  paramPropertyIdValidator,
+  ...commonActivityValidator,
+  body("image").custom((__, meta) => {
+    if (_.isUndefined((meta.req as Request).file)) {
+      throw new Error("Please provide an image for the activity");
+    }
+    return true;
+  }),
+];

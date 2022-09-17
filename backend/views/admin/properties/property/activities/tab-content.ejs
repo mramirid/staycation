@@ -1,7 +1,8 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4 mt-2">
   <div class="card-body row">
-    <form class="col-md-5" method="post" action="/admin/banks" enctype="multipart/form-data">
+    <form class="col-md-5" method="post" action="/admin/properties/<%= property.id %>/activities"
+      enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" required>
@@ -28,27 +29,21 @@
           </tr>
         </thead>
         <tbody>
-          <% [].forEach((activity, i) => { %>
+          <% property.activities.forEach((activity, i) => { %>
           <tr>
             <td><%= i + 1 %></td>
             <td><%= activity.name %></td>
             <td><%= activity.type %></td>
-            <td><%= activity.imageUrl %></td>
+            <td><img src="<%= activity.imageUrl %>" alt="<%= activity.name %>" width="100" class="img-thumbnail"></td>
             <td>
-              <a href="/admin/properties/<%= property.id %>/images" class="btn btn-info btn-circle btn-sm">
-                <i class="fas fa-image"></i>
-              </a>
-              <a href="/admin/properties/<%= property.id %>/edit" class="btn btn-warning btn-circle btn-sm">
-                <i class="fas fa-edit"></i>
-              </a>
-              <form method="post" action="/admin/properties/<%= property.id %>?_method=DELETE" class="d-inline">
+              <!-- TODO: Add edit.modal-button -->
+              <form method="post"
+                action="/admin/properties/<%= property.id %>/activities/<%= activity.id %>?_method=DELETE"
+                class="d-inline">
                 <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
                 </button>
               </form>
-              <a href="/admin/properties/<%= property.id %>" class="btn btn-success btn-circle btn-sm">
-                <i class="fas fa-plus"></i>
-              </a>
             </td>
           </tr>
           <% }) %>
