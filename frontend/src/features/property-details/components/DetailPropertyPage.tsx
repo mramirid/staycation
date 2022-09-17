@@ -13,11 +13,11 @@ import Description from "./Description";
 import FeaturedImages from "./FeaturedImages";
 import PageTitle from "./PageTitle";
 
-const DETAIL_PAGE_TITLE = "Detail Property";
+const PAGE_DETAILS_TITLE = "Detail Property";
 
-export default function DetailPropertyPage() {
+export default function PropertyDetailsPage() {
   useEffect(() => {
-    document.title = `${DETAIL_PAGE_TITLE} - Staycation`;
+    document.title = `${PAGE_DETAILS_TITLE} - Staycation`;
     window.scrollTo(0, 0);
   }, []);
 
@@ -25,7 +25,7 @@ export default function DetailPropertyPage() {
 
   const breadcrumbsData: BreadcrumbsData = [
     { label: "Home", to: "/" },
-    { label: DETAIL_PAGE_TITLE, to: `/properties/${propertyId}` },
+    { label: PAGE_DETAILS_TITLE, to: `/properties/${propertyId}` },
   ];
 
   return (

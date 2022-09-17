@@ -5,15 +5,15 @@
   "imageUrls": [
     {
       "_id": "67226305-083b-4e3c-aefc-b15e0d9a4b81",
-      "url": "/src/features/detail-property/assets/images/featured-1.jpg"
+      "url": "/src/features/property-details/assets/images/featured-1.jpg"
     },
     {
       "_id": "b1d42fb4-0767-477b-9310-aafbe35477cb",
-      "url": "/src/features/detail-property/assets/images/featured-2.jpg"
+      "url": "/src/features/property-details/assets/images/featured-2.jpg"
     },
     {
       "_id": "fc11bf85-58be-4239-9f55-9bacb148f945",
-      "url": "/src/features/detail-property/assets/images/featured-3.jpg"
+      "url": "/src/features/property-details/assets/images/featured-3.jpg"
     }
   ],
   "country": "Indonesia",
@@ -28,49 +28,49 @@
       "_id": "6e39c158-e32a-49a6-913a-2ff1eaafb59a",
       "qty": 3,
       "name": "bedroom",
-      "imageUrl": "/src/features/detail-property/assets/icons/bedroom.svg"
+      "imageUrl": "/src/features/property-details/assets/icons/bedroom.svg"
     },
     {
       "_id": "981e42c5-398c-4a2d-863a-7e9a19bf4ed9",
       "qty": 1,
       "name": "living room",
-      "imageUrl": "/src/features/detail-property/assets/icons/living-room.svg"
+      "imageUrl": "/src/features/property-details/assets/icons/living-room.svg"
     },
     {
       "_id": "7aa387a2-7616-4e36-bdba-c48046646638",
       "qty": 2,
       "name": "bath room",
-      "imageUrl": "/src/features/detail-property/assets/icons/bathroom.svg"
+      "imageUrl": "/src/features/property-details/assets/icons/bathroom.svg"
     },
     {
       "_id": "0625eb0f-81fc-405e-8f36-70756710751a",
       "qty": 1,
       "name": "dining room",
-      "imageUrl": "/src/features/detail-property/assets/icons/dining-room.svg"
+      "imageUrl": "/src/features/property-details/assets/icons/dining-room.svg"
     },
     {
       "_id": "bd15814d-ca39-490b-9fb2-9d233ea08151",
       "qty": 10,
       "name": "mbps",
-      "imageUrl": "/src/features/detail-property/assets/icons/wifi.svg"
+      "imageUrl": "/src/features/property-details/assets/icons/wifi.svg"
     },
     {
       "_id": "081c4537-378c-4823-99d5-c6c5435d3676",
       "qty": 2,
       "name": "units ready",
-      "imageUrl": "/src/features/detail-property/assets/icons/air-conditioner.svg"
+      "imageUrl": "/src/features/property-details/assets/icons/air-conditioner.svg"
     },
     {
       "_id": "9c77c41c-7a87-4cec-9ee1-60f8feb42d82",
       "qty": 2,
       "name": "refrigerator",
-      "imageUrl": "/src/features/detail-property/assets/icons/refrigerator.svg"
+      "imageUrl": "/src/features/property-details/assets/icons/refrigerator.svg"
     },
     {
       "_id": "bf6541f6-78b6-4f69-a2a5-85836ca24e54",
       "qty": 1,
       "name": "television",
-      "imageUrl": "/src/features/detail-property/assets/icons/tv.svg"
+      "imageUrl": "/src/features/property-details/assets/icons/tv.svg"
     }
   ],
   "activities": [
@@ -107,7 +107,7 @@
         {
           "_id": "bdfdffef-77ce-46f8-b1e2-5d3d021b36e1",
           "name": "PSW Antasari",
-          "imageUrl": "/src/features/detail-property/assets/images/treasure-1.jpg",
+          "imageUrl": "/src/features/property-details/assets/images/treasure-1.jpg",
           "country": "South Korea",
           "city": "Seoul Flore",
           "isPopular": false
@@ -115,7 +115,7 @@
         {
           "_id": "fa50f7d0-0b8c-4462-93f9-406b41a340ea",
           "name": "Kuretakeso",
-          "imageUrl": "/src/features/detail-property/assets/images/treasure-2.jpg",
+          "imageUrl": "/src/features/property-details/assets/images/treasure-2.jpg",
           "country": "South Korea",
           "city": "Seoul Flore",
           "isPopular": false
@@ -123,7 +123,7 @@
         {
           "_id": "39a3c484-31c5-4006-9e7f-c5bfc0d4ca4e",
           "name": "Arya Duta",
-          "imageUrl": "/src/features/detail-property/assets/images/treasure-3.jpg",
+          "imageUrl": "/src/features/property-details/assets/images/treasure-3.jpg",
           "country": "South Korea",
           "city": "Seoul Flore",
           "isPopular": true
@@ -131,7 +131,7 @@
         {
           "_id": "a213e332-b918-487f-a37d-66e5b7cac419",
           "name": "Grand Dhika",
-          "imageUrl": "/src/features/detail-property/assets/images/treasure-4.jpg",
+          "imageUrl": "/src/features/property-details/assets/images/treasure-4.jpg",
           "country": "South Korea",
           "city": "Seoul Flore",
           "isPopular": false
@@ -141,7 +141,7 @@
   ],
   "testimonial": {
     "_id": "291850b1-e2a2-4675-ab27-a990f7e82173",
-    "imageUrl": "/src/features/detail-property/assets/images/testimonial.jpg",
+    "imageUrl": "/src/features/property-details/assets/images/testimonial.jpg",
     "name": "Happy Family",
     "rate": 3.75,
     "content": "What a great trip with my family and I should try again and again next time soon...",
