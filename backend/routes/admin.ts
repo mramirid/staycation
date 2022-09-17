@@ -94,6 +94,11 @@ router.patch(
   validators.editFeatureValidator,
   controllers.editFeature
 );
+router.delete(
+  "/properties/:propertyId/features/:featureId",
+  validators.deleteFeatureValidator,
+  controllers.deleteFeature
+);
 
 //
 // Bookings

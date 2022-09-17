@@ -99,9 +99,18 @@ export const addFeatureValidator = [
   }),
 ];
 
+const paramFeatureIdValidator = param(
+  "featureId",
+  "Invalid feature id"
+).isMongoId();
+
 export const editFeatureValidator = [
   paramPropertyIdValidator,
-  paramPropertyIdValidator,
-  param("featureId", "Invalid feature id").isMongoId(),
+  paramFeatureIdValidator,
   ...commonFeatureValidator,
+];
+
+export const deleteFeatureValidator = [
+  paramPropertyIdValidator,
+  paramFeatureIdValidator,
 ];

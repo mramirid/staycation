@@ -366,11 +366,14 @@ export async function deleteProperty(
       new Error("Property not found")
     );
 
-    await Promise.all(
-      property.imageUrls.map((imageUrl) =>
-        fs.unlink(path.join("public", imageUrl))
-      )
-    );
+    await Promise.allSettled([
+      ...property.imageUrls.map((imageUrl) => {
+        return fs.unlink(path.join("public", imageUrl));
+      }),
+      ...property.features.map((feature) => {
+        return fs.unlink(path.join("public", feature.iconUrl));
+      }),
+    ]);
 
     setAlert(req, {
       message: "Property deleted",
@@ -400,7 +403,7 @@ export async function viewProperty(
   }
 
   res.render("admin/properties/property", {
-    pageTitle: "Detail Property - Staycation",
+    pageTitle: "Property Addons - Staycation",
     alert: getAlert(req),
     property,
   });
@@ -449,6 +452,8 @@ type EditFeatureParams = {
   featureId: string;
 };
 
+const featureNotFound = new Error("Feature not found");
+
 export async function editFeature(
   req: Request<EditFeatureParams, Record<string, never>, AddFeatureReqBody>,
   res: Response
@@ -462,7 +467,7 @@ export async function editFeature(
 
     const feature = property.features.id(req.params.featureId);
     if (_.isNull(feature)) {
-      throw new Error("Feature not found");
+      throw featureNotFound;
     }
 
     feature.name = req.body.name;
@@ -476,6 +481,40 @@ export async function editFeature(
 
     setAlert(req, {
       message: "Feature edited",
+      status: AlertStatuses.Success,
+    });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect(`/admin/properties/${req.params.propertyId}`);
+}
+
+export async function deleteFeature(
+  req: Request<EditFeatureParams>,
+  res: Response
+) {
+  try {
+    checkValidationResult(req);
+
+    const property = await Property.findById(req.params.propertyId).orFail(
+      propertyNotFound
+    );
+
+    const feature = property.features.id(req.params.featureId);
+    if (_.isNull(feature)) {
+      throw featureNotFound;
+    }
+
+    property.features.pull(feature);
+    await Promise.all([
+      fs.unlink(path.join("public", feature.iconUrl)),
+      property.save(),
+    ]);
+
+    setAlert(req, {
+      message: "Feature deleted",
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {

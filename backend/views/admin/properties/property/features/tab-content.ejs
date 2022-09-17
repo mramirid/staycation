@@ -38,7 +38,8 @@
             <td><img src="<%= feature.iconUrl %>" alt="<%= feature.name %>" width="38" class="img-thumbnail"></td>
             <td>
               <%- include("./edit.modal-button.ejs", {feature}) %>
-              <form method="post" action="/admin/properties/<%= property.id %>/features?_method=DELETE"
+              <form method="post"
+                action="/admin/properties/<%= property.id %>/features/<%= feature.id %>?_method=DELETE"
                 class="d-inline">
                 <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
