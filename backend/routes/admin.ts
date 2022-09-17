@@ -1,97 +1,97 @@
 import express from "express";
-import * as adminControllers from "../controllers/admin";
+import * as controllers from "../controllers/admin";
 import { MAX_PROPERTY_IMAGES } from "../lib/constants";
 import * as imagesMulter from "../middlewares/images.multer";
-import * as adminValidators from "../middlewares/validators/admin";
+import * as validators from "../middlewares/validators/admin";
 
 const router = express.Router();
 
-router.get("/dashboard", adminControllers.viewDashboard);
+router.get("/dashboard", controllers.viewDashboard);
 
 //
 // Categories
 //
-router.get("/categories", adminControllers.viewCategories);
+router.get("/categories", controllers.viewCategories);
 router.post(
   "/categories",
-  adminValidators.addCategoryValidator,
-  adminControllers.addCategory
+  validators.addCategoryValidator,
+  controllers.addCategory
 );
 router.patch(
   "/categories/:id",
-  adminValidators.editCategoryValidator,
-  adminControllers.editCategory
+  validators.editCategoryValidator,
+  controllers.editCategory
 );
 router.delete(
   "/categories/:id",
-  adminValidators.paramIdValidator,
-  adminControllers.deleteCategory
+  validators.paramIdValidator,
+  controllers.deleteCategory
 );
 
 //
 // Banks
 //
-router.get("/banks", adminControllers.viewBanks);
+router.get("/banks", controllers.viewBanks);
 router.post(
   "/banks",
   imagesMulter.handleUploadImage("bankLogo"),
-  adminValidators.addBankValidator,
-  adminControllers.addBank
+  validators.addBankValidator,
+  controllers.addBank
 );
 router.patch(
   "/banks/:id",
   imagesMulter.handleUploadImage("bankLogo"),
-  adminValidators.editBankValidator,
-  adminControllers.editBank
+  validators.editBankValidator,
+  controllers.editBank
 );
 router.delete(
   "/banks/:id",
-  adminValidators.paramIdValidator,
-  adminControllers.deleteBank
+  validators.paramIdValidator,
+  controllers.deleteBank
 );
 
 //
 // Properties
 //
-router.get("/properties", adminControllers.viewProperties);
+router.get("/properties", controllers.viewProperties);
 router.post(
   "/properties",
   imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
-  adminValidators.addPropertyValidator,
-  adminControllers.addProperty
+  validators.addPropertyValidator,
+  controllers.addProperty
 );
 router.get(
   "/properties/:id/images",
-  adminValidators.paramIdValidator,
-  adminControllers.viewPropertyImages
+  validators.paramIdValidator,
+  controllers.viewPropertyImages
 );
-router.get("/properties/:id/edit", adminControllers.viewEditProperty);
+router.get("/properties/:id/edit", controllers.viewEditProperty);
 router.patch(
   "/properties/:id",
   imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
-  adminValidators.editPropertyValidator,
-  adminControllers.editProperty
+  validators.editPropertyValidator,
+  controllers.editProperty
 );
 router.delete(
   "/properties/:id",
-  adminValidators.paramIdValidator,
-  adminControllers.deleteProperty
+  validators.paramIdValidator,
+  controllers.deleteProperty
 );
 router.get(
   "/properties/:id",
-  adminValidators.paramIdValidator,
-  adminControllers.viewProperty
+  validators.paramIdValidator,
+  controllers.viewProperty
 );
 router.post(
   "/properties/:id/features",
   imagesMulter.handleUploadImage("icon"),
-  adminValidators.addFeatureValidator,
-  adminControllers.addFeature
+  validators.addFeatureValidator,
+  controllers.addFeature
 );
 
 //
 // Bookings
 //
-router.get("/bookings", adminControllers.viewBookings);
+router.get("/bookings", controllers.viewBookings);
 
 export default router;
