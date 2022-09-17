@@ -3,7 +3,6 @@ import fs from "fs/promises";
 import _ from "lodash";
 import { Types } from "mongoose";
 import path from "path";
-import { MAX_PROPERTY_IMAGES } from "../lib/constants";
 import Bank, { IBank } from "../models/Bank";
 import Category, { ICategory } from "../models/Category";
 import Property, { IProperty } from "../models/Property";
@@ -133,9 +132,10 @@ export async function addBank(
   try {
     checkValidationResult(req);
 
+    const bankLogo = req.file as Express.Multer.File;
     await Bank.create({
       name: req.body.bankName,
-      logoUrl: `/images/${req.file?.filename}`,
+      logoUrl: `/images/${bankLogo.filename}`,
       accountNumber: req.body.accountNumber,
       accountHolderName: req.body.accountHolderName,
     });
@@ -258,10 +258,6 @@ type AddPropertyReqBody = {
   description: string;
 };
 
-const lackOfPropertyImages = new Error(
-  `Please provide at least ${MAX_PROPERTY_IMAGES} images`
-);
-
 export async function addProperty(
   req: Request<
     Record<string, never>,
@@ -274,10 +270,6 @@ export async function addProperty(
     checkValidationResult(req);
 
     const images = req.files as Express.Multer.File[];
-    if (images.length < MAX_PROPERTY_IMAGES) {
-      throw lackOfPropertyImages;
-    }
-
     await Property.create({
       title: req.body.title,
       price: req.body.price,
@@ -344,9 +336,6 @@ export async function editProperty(
 
     const images = req.files as Express.Multer.File[];
     if (!_.isEmpty(images)) {
-      if (images.length < MAX_PROPERTY_IMAGES) {
-        throw lackOfPropertyImages;
-      }
       property.imageUrls = images.map((image) => `/images/${image.filename}`);
     }
 
