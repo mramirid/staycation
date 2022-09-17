@@ -78,9 +78,9 @@ router.delete(
   controllers.deleteProperty
 );
 router.get(
-  "/properties/:id",
+  "/properties/:id/addons",
   validators.paramIdValidator,
-  controllers.viewProperty
+  controllers.viewPropertyAddons
 );
 router.post(
   "/properties/:propertyId/features",
@@ -114,7 +114,7 @@ router.patch(
 router.delete(
   "/properties/:propertyId/activities/:activityId",
   validators.deleteActivityValidator,
-  controllers.deleteActivity,
+  controllers.deleteActivity
 );
 
 //

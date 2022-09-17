@@ -387,7 +387,7 @@ export async function deleteProperty(
   res.redirect("/admin/properties");
 }
 
-export async function viewProperty(
+export async function viewPropertyAddons(
   req: Request<{ id: string }>,
   res: Response
 ) {
