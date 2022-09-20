@@ -373,6 +373,9 @@ export async function deleteProperty(
       ...property.features.map((feature) => {
         return fs.unlink(path.join("public", feature.iconUrl));
       }),
+      ...property.activities.map((activity) => {
+        return fs.unlink(path.join("public", activity.imageUrl));
+      }),
     ]);
 
     setAlert(req, {
