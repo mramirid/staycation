@@ -64,7 +64,7 @@ app.locals.format = format;
 
 mongoose.connect(
   `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`,
-  async (error) => {
+  (error) => {
     if (_.isError(error)) {
       console.error("Failed to connect to MongoDB:", error);
       return;
