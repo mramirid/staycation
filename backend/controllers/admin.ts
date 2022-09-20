@@ -444,7 +444,7 @@ export async function addFeature(
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
   }
 
-  res.redirect(`/admin/properties/${req.params.propertyId}`);
+  res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
 }
 
 type EditFeatureParams = {
@@ -488,7 +488,7 @@ export async function editFeature(
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
   }
 
-  res.redirect(`/admin/properties/${req.params.propertyId}`);
+  res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
 }
 
 export async function deleteFeature(
@@ -522,7 +522,7 @@ export async function deleteFeature(
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
   }
 
-  res.redirect(`/admin/properties/${req.params.propertyId}`);
+  res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
 }
 
 type AddActivityReqBody = {
@@ -560,7 +560,7 @@ export async function addActivity(
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
   }
 
-  res.redirect(`/admin/properties/${req.params.propertyId}`);
+  res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
 }
 
 type EditActivityParams = {
@@ -604,7 +604,7 @@ export async function editActivity(
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
   }
 
-  res.redirect(`/admin/properties/${req.params.propertyId}`);
+  res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
 }
 
 export async function deleteActivity(
@@ -638,7 +638,7 @@ export async function deleteActivity(
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
   }
 
-  res.redirect(`/admin/properties/${req.params.propertyId}`);
+  res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
 }
 
 export function viewBookings(_: Request, res: Response) {
