@@ -1,4 +1,4 @@
-import { model, Schema, Types } from "mongoose";
+import { HydratedDocument, Model, model, Schema, Types } from "mongoose";
 import Bank from "./Bank";
 import Member from "./Member";
 import Property from "./Property";
@@ -9,17 +9,26 @@ export interface IBooking {
   nights: number;
   member: Types.ObjectId; // one-to-one referenced
   property: {
-    data: Types.ObjectId;
-    priceSnapshot: number;
+    current: Types.ObjectId;
+    price: number;
   };
   banks: Types.ObjectId[]; // one-to-many referenced
-  paymentProofUrl: string;
-  originBankName: string;
-  accountHolderName: string;
-  status: "ACCEPTED" | "REJECTED" | "PENDING";
+  payment: {
+    imageProofUrl: string;
+    originBankName: string;
+    accountHolderName: string;
+    status: "ACCEPTED" | "REJECTED" | "PENDING";
+  };
 }
 
-const bookingSchema = new Schema<IBooking>({
+interface IBookingMethods {
+  getInvoiceId(): string;
+  getTotalPrice(): number;
+}
+
+type BookingModel = Model<IBooking, unknown, IBookingMethods>;
+
+const bookingSchema = new Schema<IBooking, BookingModel, IBookingMethods>({
   startDate: {
     type: Date,
     required: true,
@@ -39,12 +48,12 @@ const bookingSchema = new Schema<IBooking>({
     index: true,
   },
   property: {
-    data: {
+    current: {
       type: Schema.Types.ObjectId,
       ref: Property,
       required: true,
     },
-    priceSnapshot: {
+    price: {
       type: Number,
       required: true,
       min: 0,
@@ -57,23 +66,37 @@ const bookingSchema = new Schema<IBooking>({
       required: true,
     },
   ],
-  paymentProofUrl: {
-    type: String,
-    required: true,
-  },
-  originBankName: {
-    type: String,
-    required: true,
-  },
-  accountHolderName: {
-    type: String,
-    required: true,
-  },
-  status: {
-    type: String,
-    default: "PENDING",
+  payment: {
+    imageProofUrl: {
+      type: String,
+      required: true,
+    },
+    originBankName: {
+      type: String,
+      required: true,
+    },
+    accountHolderName: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: String,
+      default: "PENDING",
+    },
   },
 });
 
-const Booking = model("Booking", bookingSchema);
+bookingSchema.methods.getInvoiceId = function (
+  this: HydratedDocument<IBooking>
+) {
+  return this.id;
+};
+
+bookingSchema.methods.getTotalPrice = function (
+  this: HydratedDocument<IBooking>
+) {
+  return this.nights * this.property.price;
+};
+
+const Booking = model<IBooking, BookingModel>("Booking", bookingSchema);
 export default Booking;
