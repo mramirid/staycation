@@ -3,7 +3,7 @@ import Bank from "./Bank";
 import Member from "./Member";
 import Property from "./Property";
 
-export interface IBooking {
+interface IBooking {
   startDate: Date;
   endDate: Date;
   nights: number;
