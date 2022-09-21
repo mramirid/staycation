@@ -1,5 +1,5 @@
 import { model, Schema, Types } from "mongoose";
-import { MAX_PROPERTY_IMAGES } from "../lib/constants";
+import { category404, MAX_PROPERTY_IMAGES } from "../lib/constants";
 import Category from "./Category";
 
 export interface IProperty {
@@ -98,6 +98,10 @@ const propertySchema = new Schema<IProperty>({
       },
     },
   ],
+});
+
+propertySchema.path("category").validate((categoryId: Types.ObjectId) => {
+  return Category.findById(categoryId).orFail(category404);
 });
 
 const Property = model("Property", propertySchema);

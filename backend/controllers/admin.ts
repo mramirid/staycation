@@ -3,6 +3,7 @@ import fs from "fs/promises";
 import _ from "lodash";
 import { Types } from "mongoose";
 import path from "path";
+import { category404 } from "../lib/constants";
 import Bank, { IBank } from "../models/Bank";
 import Category, { ICategory } from "../models/Category";
 import Property, { IProperty } from "../models/Property";
@@ -55,9 +56,7 @@ export async function editCategory(
   try {
     checkValidationResult(req);
 
-    const category = await Category.findById(req.params.id).orFail(
-      new Error("Category not found")
-    );
+    const category = await Category.findById(req.params.id).orFail(category404);
 
     category.name = req.body.name;
     await category.save();
@@ -81,14 +80,7 @@ export async function deleteCategory(
   try {
     checkValidationResult(req);
 
-    const property = await Property.findOne({ category: req.params.id });
-    if (_.isObject(property)) {
-      throw new Error("The category is being used by some properties");
-    }
-
-    await Category.findByIdAndDelete(req.params.id).orFail(
-      new Error("Category not found")
-    );
+    await Category.findByIdAndDelete(req.params.id).orFail(category404);
 
     setAlert(req, {
       message: "Category deleted",

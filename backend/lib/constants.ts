@@ -8,3 +8,5 @@ export const env = cleanEnv(process.env, {
 });
 
 export const MAX_PROPERTY_IMAGES = 3;
+
+export const category404 = new Error("The Category does not exist");

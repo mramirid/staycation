@@ -98,5 +98,5 @@ bookingSchema.methods.getTotalPrice = function (
   return this.nights * this.property.price;
 };
 
-const Booking = model<IBooking, BookingModel>("Booking", bookingSchema);
+const Booking = model("Booking", bookingSchema);
 export default Booking;
