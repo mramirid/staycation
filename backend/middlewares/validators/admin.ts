@@ -7,7 +7,6 @@ import { toDecimal128, toObjectId } from "../../utils/format";
 export const addCategoryValidator = body("name", "Invalid name")
   .isString()
   .trim()
-  .escape()
   .notEmpty();
 
 export const paramIdValidator = param("id", "Invalid id").isMongoId();
@@ -15,15 +14,11 @@ export const paramIdValidator = param("id", "Invalid id").isMongoId();
 export const editCategoryValidator = [paramIdValidator, addCategoryValidator];
 
 const commonBankValidator = [
-  body("bankName", "Invalid bank name").isString().trim().notEmpty().escape(),
+  body("bankName", "Invalid bank name").isString().trim().notEmpty(),
   body("accountNumber", "Invalid account number")
     .isInt({ allow_leading_zeroes: true, min: 0 })
     .withMessage("Account number cannot be negative"),
-  body("accountHolderName", "Invalid holder name")
-    .isString()
-    .trim()
-    .escape()
-    .notEmpty(),
+  body("accountHolderName", "Invalid holder name").isString().trim().notEmpty(),
 ];
 
 export const addBankValidator = [
@@ -39,10 +34,10 @@ export const addBankValidator = [
 export const editBankValidator = [paramIdValidator, ...commonBankValidator];
 
 const commonPropertyValidator = [
-  body("title", "Invalid title").isString().trim().escape().notEmpty(),
+  body("title", "Invalid title").isString().trim().notEmpty(),
   body("price", "Invalid price").isDecimal().customSanitizer(toDecimal128),
-  body("city", "Invalid city").isString().trim().escape().notEmpty(),
-  body("country", "Invalid country").isString().trim().escape().notEmpty(),
+  body("city", "Invalid city").isString().trim().notEmpty(),
+  body("country", "Invalid country").isString().trim().notEmpty(),
   body("categoryId", "Invalid categoryId")
     .isMongoId()
     .customSanitizer(toObjectId),
@@ -82,7 +77,7 @@ export const paramPropertyIdValidator = param(
 ).isMongoId();
 
 const commonFeatureValidator = [
-  body("name", "Invalid name").isString().trim().escape().notEmpty(),
+  body("name", "Invalid name").isString().trim().notEmpty(),
   body("quantity", "Invalid quantity")
     .isInt({ min: 0 })
     .withMessage("Quantity cannot be negative"),
@@ -116,8 +111,8 @@ export const deleteFeatureValidator = [
 ];
 
 const commonActivityValidator = [
-  body("name", "Invalid name").isString().trim().escape().notEmpty(),
-  body("type", "Invalid type").isString().trim().escape().notEmpty(),
+  body("name", "Invalid name").isString().trim().notEmpty(),
+  body("type", "Invalid type").isString().trim().notEmpty(),
 ];
 
 export const addActivityValidator = [
