@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import fs from "fs/promises";
-import _ from "lodash";
+import _, { isObjectLike } from "lodash";
 import { Types } from "mongoose";
 import path from "path";
 import { category404 } from "../lib/constants";
@@ -42,14 +42,29 @@ export async function login(
       id: user.id,
       username: user.username,
     };
+    res.locals.user = req.session.user;
 
-    setAlert(req, { message: "Login success", status: AlertStatuses.Success });
     res.redirect("/admin/dashboard");
   } catch (maybeError) {
     const error = catchError(maybeError);
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
     res.redirect("/admin/login");
   }
+}
+
+export function logout(req: Request, res: Response) {
+  req.session.destroy((maybeError) => {
+    if (isObjectLike(maybeError)) {
+      // const error = catchError(maybeError);
+      // setAlert(req, { message: error.message, status: AlertStatuses.Error });
+      res.redirect("/admin/dashboard");
+      return;
+    }
+
+    delete res.locals.user;
+
+    res.redirect("/admin/login");
+  });
 }
 
 export function viewDashboard(req: Request, res: Response) {

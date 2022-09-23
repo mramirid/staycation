@@ -1,9 +1,9 @@
 import express from "express";
 import * as controllers from "../controllers/admin";
 import { MAX_PROPERTY_IMAGES } from "../lib/constants";
-import * as imagesMulter from "../middlewares/images.multer";
-import * as validators from "../middlewares/admin/validators";
 import * as authorizations from "../middlewares/admin/authorizations";
+import * as validators from "../middlewares/admin/validators";
+import * as imagesMulter from "../middlewares/images.multer";
 
 const router = express.Router();
 
@@ -18,14 +18,10 @@ router.post(
   controllers.login
 );
 
-//
-// Authorization
-//
 router.use(authorizations.isAuthenticated);
 
-//
-// Dashboard
-//
+router.post("/logout", controllers.logout);
+
 router.get("/dashboard", controllers.viewDashboard);
 
 //

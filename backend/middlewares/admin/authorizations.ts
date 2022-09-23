@@ -13,7 +13,7 @@ export function isAuthenticated(
   }
 
   setAlert(req, {
-    message: "Your session has expired. Please login again to continue.",
+    message: "You are not authenticated. Please login again to continue.",
     status: AlertStatuses.Error,
   });
   res.redirect("/admin/login");
