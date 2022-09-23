@@ -9,6 +9,12 @@ const router = express.Router();
 router.get("/dashboard", controllers.viewDashboard);
 
 //
+// Auth
+//
+router.get("/login", controllers.viewLogin);
+router.post("/login", validators.loginValidator, controllers.login);
+
+//
 // Categories
 //
 router.get("/categories", controllers.viewCategories);

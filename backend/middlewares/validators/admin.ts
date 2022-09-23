@@ -4,6 +4,11 @@ import _ from "lodash";
 import { MAX_PROPERTY_IMAGES } from "../../lib/constants";
 import { toDecimal128, toObjectId } from "../../utils/format";
 
+export const loginValidator = [
+  body("username", "Invalid username").isString().trim().notEmpty(),
+  body("password", "Invalid password").isString().trim().notEmpty(),
+];
+
 export const addCategoryValidator = body("name", "Invalid name")
   .isString()
   .trim()

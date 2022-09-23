@@ -7,8 +7,45 @@ import { category404 } from "../lib/constants";
 import Bank, { IBank } from "../models/Bank";
 import Category, { ICategory } from "../models/Category";
 import Property, { IProperty } from "../models/Property";
+import User, { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError, checkValidationResult } from "../utils/error";
+import bcrypt from "bcryptjs";
+
+export function viewLogin(req: Request, res: Response) {
+  res.render("admin/login", {
+    pageTitle: "Login Admin",
+    alert: getAlert(req),
+  });
+}
+
+export async function login(
+  req: Request<Record<string, never>, Record<string, never>, IUser>,
+  res: Response
+) {
+  try {
+    checkValidationResult(req);
+
+    const user = await User.findOne({ username: req.body.username }).orFail(
+      new Error("Username not found!")
+    );
+
+    const doesPasswordMatch = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (!doesPasswordMatch) {
+      throw new Error("Password does not match!");
+    }
+
+    setAlert(req, { message: "Login success", status: AlertStatuses.Success });
+    res.redirect("/admin/dashboard");
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    res.redirect("/admin/login");
+  }
+}
 
 export function viewDashboard(_: Request, res: Response) {
   res.render("admin/dashboard", { pageTitle: "Dashboard" });

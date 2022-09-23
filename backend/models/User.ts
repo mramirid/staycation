@@ -1,7 +1,7 @@
 import bcrypt from "bcryptjs";
 import { model, Schema } from "mongoose";
 
-interface IUser {
+export interface IUser {
   username: string;
   password: string;
 }
@@ -10,6 +10,8 @@ const userSchema = new Schema<IUser>({
   username: {
     type: String,
     required: true,
+    index: true,
+    unique: true,
   },
   password: {
     type: String,
