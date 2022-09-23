@@ -6,8 +6,17 @@ A web app to find providers of hotels, houses, and apartments that are closest t
 
 ## How to Run
 
+### Initial Run with Seeding
+
+Fill the staycation database with initial data and spin up the server. Warning, this also resets the database!
+
 ```bash
 docker-compose up -d
+```
+### Run Without Seeding
+
+```bash
+docker-compose up -d --scale seeding=0
 ```
 
 ## Techstack
