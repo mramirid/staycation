@@ -11,7 +11,7 @@ import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError, checkValidationResult } from "../utils/error";
 
 export function viewDashboard(_: Request, res: Response) {
-  res.render("admin/dashboard", { pageTitle: "Dashboard - Staycation" });
+  res.render("admin/dashboard", { pageTitle: "Dashboard" });
 }
 
 export async function viewCategories(req: Request, res: Response) {
@@ -25,7 +25,7 @@ export async function viewCategories(req: Request, res: Response) {
   }
 
   res.render("admin/categories", {
-    pageTitle: "Categories - Staycation",
+    pageTitle: "Categories",
     alert: getAlert(req),
     categories,
   });
@@ -105,7 +105,7 @@ export async function viewBanks(req: Request, res: Response) {
   }
 
   res.render("admin/banks", {
-    pageTitle: "Banks - Staycation",
+    pageTitle: "Banks",
     alert: getAlert(req),
     banks,
   });
@@ -210,7 +210,7 @@ export async function viewProperties(req: Request, res: Response) {
   }
 
   res.render("admin/properties", {
-    pageTitle: "Properties - Staycation",
+    pageTitle: "Properties",
     alert: getAlert(req),
     properties,
     categories,
@@ -237,7 +237,7 @@ export async function viewPropertyImages(
   }
 
   res.render("admin/properties/property/images", {
-    pageTitle: "Property Images - Staycation",
+    pageTitle: "Property Images",
     alert: getAlert(req),
     property,
   });
@@ -303,7 +303,7 @@ export async function viewEditProperty(
   }
 
   res.render("admin/properties/property/edit", {
-    pageTitle: "Edit Property - Staycation",
+    pageTitle: "Edit Property",
     alert: getAlert(req),
     property,
     categories,
@@ -398,7 +398,7 @@ export async function viewPropertyAddons(
   }
 
   res.render("admin/properties/property", {
-    pageTitle: "Property Addons - Staycation",
+    pageTitle: "Property Addons",
     alert: getAlert(req),
     property,
   });
@@ -637,5 +637,5 @@ export async function deleteActivity(
 }
 
 export function viewBookings(_: Request, res: Response) {
-  res.render("admin/bookings", { pageTitle: "Bookings - Staycation" });
+  res.render("admin/bookings", { pageTitle: "Bookings" });
 }

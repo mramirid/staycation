@@ -20,7 +20,7 @@
           <%- include('../../../partials/alert.ejs') %>
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Property Addons - <%= property?.title %></h1>
+          <h1 class="h3 mb-4 text-gray-800"><%= `${pageTitle} - ${property?.title}` %></h1>
 
           <% if (_.isObject(property)) { %>
           <ul class="nav nav-tabs" id="myTab" role="tablist">
