@@ -42,7 +42,6 @@ export async function login(
       id: user.id,
       username: user.username,
     };
-    res.locals.user = req.session.user;
 
     res.redirect("/admin/dashboard");
   } catch (maybeError) {

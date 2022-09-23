@@ -8,6 +8,7 @@ export function isAuthenticated(
   next: NextFunction
 ) {
   if (isObject(req.session.user)) {
+    res.locals.user = req.session.user;
     next();
     return;
   }
