@@ -1,4 +1,4 @@
-# Git Configs
+# Git Config
 .gitignore
 
 # NPM Depedencies
@@ -11,3 +11,4 @@ public/images
 
 # Docker Configs
 Dockerfile
+.dockerignore

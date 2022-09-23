@@ -1,8 +1,13 @@
+# Git Config
 .gitignore
 
+# NPM Depedencies
 node_modules
 pnpm-lock.yaml
 
+# Docker Configs
 Dockerfile
+.dockerignore
 
+# Vite Distributable
 dist
