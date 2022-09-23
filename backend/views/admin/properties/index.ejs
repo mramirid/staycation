@@ -1,62 +1,64 @@
 <%- include('../../partials/header.ejs') %>
 
-<!-- Page Wrapper -->
-<div id="wrapper">
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-  <%- include("../../partials/sidebar.ejs") %>
+    <%- include("../../partials/sidebar.ejs") %>
 
-  <!-- Content Wrapper -->
-  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-    <!-- Main Content -->
-    <div id="content">
+      <!-- Main Content -->
+      <div id="content">
 
-      <%- include("../../partials/navbar.ejs") %>
+        <%- include("../../partials/navbar.ejs") %>
 
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
 
-        <%- include('../../partials/alert.ejs') %>
+          <%- include('../../partials/alert.ejs') %>
 
-        <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Properties</h1>
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">Properties</h1>
 
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list"
-              aria-selected="true">
-              List
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="add-property-tab" data-toggle="tab" href="#add-property" role="tab"
-              aria-controls="add-property" aria-selected="false">
-              Add Property
-            </a>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
-            <%- include("./list.table.ejs") %>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="list-tab" data-toggle="tab" href="#list" role="tab" aria-controls="list"
+                aria-selected="true">
+                List
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="add-property-tab" data-toggle="tab" href="#add-property" role="tab"
+                aria-controls="add-property" aria-selected="false">
+                Add Property
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="list" role="tabpanel" aria-labelledby="list-tab">
+              <%- include("./list.table.ejs") %>
+            </div>
+            <div class="tab-pane fade" id="add-property" role="tabpanel" aria-labelledby="add-property-tab">
+              <%- include("./add.form.ejs") %>
+            </div>
           </div>
-          <div class="tab-pane fade" id="add-property" role="tabpanel" aria-labelledby="add-property-tab">
-            <%- include("./add.form.ejs") %>
-          </div>
+
         </div>
+        <!-- /.container-fluid -->
 
       </div>
-      <!-- /.container-fluid -->
+      <!-- End of Main Content -->
+
+      <%- include('../../partials/footer.ejs') %>
 
     </div>
-    <!-- End of Main Content -->
-
-    <%- include('../../partials/footer.ejs') %>
+    <!-- End of Content Wrapper -->
 
   </div>
-  <!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
+  <!-- End of Page Wrapper -->
+</body>
 
 <%- include("../../partials/utilities.ejs") %>
 <%- include("../../partials/scripts/common.ejs") %>

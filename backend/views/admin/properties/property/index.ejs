@@ -1,63 +1,65 @@
 <%- include('../../../partials/header.ejs') %>
 
-<!-- Page Wrapper -->
-<div id="wrapper">
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-  <%- include("../../../partials/sidebar.ejs") %>
+    <%- include("../../../partials/sidebar.ejs") %>
 
-  <!-- Content Wrapper -->
-  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
 
-    <!-- Main Content -->
-    <div id="content">
+      <!-- Main Content -->
+      <div id="content">
 
-      <%- include("../../../partials/navbar.ejs") %>
+        <%- include("../../../partials/navbar.ejs") %>
 
-      <!-- Begin Page Content -->
-      <div class="container-fluid">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
 
-        <%- include('../../../partials/alert.ejs') %>
+          <%- include('../../../partials/alert.ejs') %>
 
-        <!-- Page Heading -->
-        <h1 class="h3 mb-4 text-gray-800">Property Addons - <%= property?.title %></h1>
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">Property Addons - <%= property?.title %></h1>
 
-        <% if (_.isObject(property)) { %>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="features-tab" data-toggle="tab" href="#features" role="tab"
-              aria-controls="features" aria-selected="true">
-              Features
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="activities-tab" data-toggle="tab" href="#activities" role="tab"
-              aria-controls="activities" aria-selected="false">
-              Activities
-            </a>
-          </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="features" role="tabpanel" aria-labelledby="features-tab">
-            <%- include('./features/tab-content.ejs', { tableId: "featureDataTable" }) %>
+          <% if (_.isObject(property)) { %>
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="features-tab" data-toggle="tab" href="#features" role="tab"
+                aria-controls="features" aria-selected="true">
+                Features
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="activities-tab" data-toggle="tab" href="#activities" role="tab"
+                aria-controls="activities" aria-selected="false">
+                Activities
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="features" role="tabpanel" aria-labelledby="features-tab">
+              <%- include('./features/tab-content.ejs', { tableId: "featureDataTable" }) %>
+            </div>
+            <div class="tab-pane fade" id="activities" role="tabpanel" aria-labelledby="activities-tab">
+              <%- include('./activities/tab-content.ejs', { tableId: "activityDataTable" }) %>
+            </div>
           </div>
-          <div class="tab-pane fade" id="activities" role="tabpanel" aria-labelledby="activities-tab">
-            <%- include('./activities/tab-content.ejs', { tableId: "activityDataTable" }) %>
-          </div>
+          <% } %>
         </div>
-        <% } %>
+        <!-- /.container-fluid -->
+
       </div>
-      <!-- /.container-fluid -->
+      <!-- End of Main Content -->
+
+      <%- include('../../../partials/footer.ejs') %>
 
     </div>
-    <!-- End of Main Content -->
-
-    <%- include('../../../partials/footer.ejs') %>
+    <!-- End of Content Wrapper -->
 
   </div>
-  <!-- End of Content Wrapper -->
-
-</div>
-<!-- End of Page Wrapper -->
+  <!-- End of Page Wrapper -->
+</body>
 
 <%- include("../../../partials/utilities.ejs") %>
 <%- include("../../../partials/scripts/common.ejs") %>
