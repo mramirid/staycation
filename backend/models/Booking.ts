@@ -1,3 +1,4 @@
+import _ from "lodash";
 import { HydratedDocument, Model, model, Schema, Types } from "mongoose";
 import Bank from "./Bank";
 import Member from "./Member";
@@ -10,9 +11,9 @@ interface IBooking {
   member: Types.ObjectId; // one-to-one referenced
   property: {
     current: Types.ObjectId;
-    price: number;
+    price: Types.Decimal128;
   };
-  banks: Types.ObjectId[]; // one-to-many referenced
+  bank: Types.ObjectId; // one-to-one referenced
   payment: {
     imageProofUrl: string;
     originBankName: string;
@@ -54,18 +55,16 @@ const bookingSchema = new Schema<IBooking, BookingModel, IBookingMethods>({
       required: true,
     },
     price: {
-      type: Number,
+      type: Schema.Types.Decimal128,
       required: true,
       min: 0,
     },
   },
-  banks: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: Bank,
-      required: true,
-    },
-  ],
+  bank: {
+    type: Schema.Types.ObjectId,
+    ref: Bank,
+    required: true,
+  },
   payment: {
     imageProofUrl: {
       type: String,
@@ -95,7 +94,7 @@ bookingSchema.methods.getInvoiceId = function (
 bookingSchema.methods.getTotalPrice = function (
   this: HydratedDocument<IBooking>
 ) {
-  return this.nights * this.property.price;
+  return this.nights * _.toNumber(this.property.price);
 };
 
 const Booking = model("Booking", bookingSchema);

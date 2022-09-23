@@ -9,17 +9,26 @@ services:
       - "27017:27017" # TODO: Should be removed in production
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.development
     volumes:
       - ./backend:/app:ro
       - /app/node_modules
       - images:/app/public/images
     env_file:
       - ./backend/.env
-    environment:
-      - MONGO_HOSTNAME=mongodb
     ports:
       - "3000:3000"
+    depends_on:
+      - mongodb
+
+  seeding:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.seeding
+    env_file:
+      - ./backend/.env
     depends_on:
       - mongodb
 
