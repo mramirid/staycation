@@ -1,5 +1,5 @@
 import flash from "connect-flash";
-import express, { ErrorRequestHandler } from "express";
+import express, { ErrorRequestHandler, Response } from "express";
 import session from "express-session";
 import createError from "http-errors";
 import _ from "lodash";
@@ -8,7 +8,7 @@ import mongoose from "mongoose";
 import logger from "morgan";
 import path from "path";
 import { env } from "./lib/constants";
-import { IUser } from "./models/User";
+import { AppLocals, UserSession } from "./lib/types";
 import adminRouter from "./routes/admin";
 import indexRouter from "./routes/index";
 import * as format from "./utils/format";
@@ -41,11 +41,19 @@ app.use(
 );
 declare module "express-session" {
   interface SessionData {
-    user: { id: string; username: string };
+    user: UserSession;
   }
 }
 
 app.use(flash());
+
+// app locals.
+app.use((__, res: Response<unknown, AppLocals>, next) => {
+  res.locals._ = _;
+  res.locals.format = format;
+
+  next();
+});
 
 app.use("/", indexRouter);
 app.use("/admin", adminRouter);
@@ -66,9 +74,6 @@ const errorHandler: ErrorRequestHandler = (err, req, res) => {
   res.render("error");
 };
 app.use(errorHandler);
-
-app.locals._ = _;
-app.locals.format = format;
 
 mongoose.connect(
   `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`,

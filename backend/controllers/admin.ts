@@ -2,10 +2,12 @@ import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import fs from "fs/promises";
 import _, { isObjectLike } from "lodash";
-import { Types } from "mongoose";
+import { HydratedDocument, Types } from "mongoose";
 import path from "path";
 import { category404 } from "../lib/constants";
+import { AppLocals } from "../lib/types";
 import Bank, { IBank } from "../models/Bank";
+import Booking, { IBooking } from "../models/Booking";
 import Category, { ICategory } from "../models/Category";
 import Property, { IProperty } from "../models/Property";
 import User, { IUser } from "../models/User";
@@ -51,7 +53,7 @@ export async function login(
   }
 }
 
-export function logout(req: Request, res: Response) {
+export function logout(req: Request, res: Response<unknown, AppLocals>) {
   req.session.destroy((maybeError) => {
     if (isObjectLike(maybeError)) {
       // const error = catchError(maybeError);
