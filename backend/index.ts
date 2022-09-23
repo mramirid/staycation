@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 import logger from "morgan";
 import path from "path";
 import { env } from "./lib/constants";
+import { IUser } from "./models/User";
 import adminRouter from "./routes/admin";
 import indexRouter from "./routes/index";
 import * as format from "./utils/format";
@@ -29,6 +30,7 @@ app.use(methodOverride("_method"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// express session setup
 app.use(
   session({
     secret: env.SESSION_SECRET,
@@ -37,6 +39,12 @@ app.use(
     cookie: { maxAge: 60_000 },
   })
 );
+declare module "express-session" {
+  interface SessionData {
+    user: { id: string; username: string };
+  }
+}
+
 app.use(flash());
 
 app.use("/", indexRouter);

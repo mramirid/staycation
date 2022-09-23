@@ -1,3 +1,4 @@
+import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import fs from "fs/promises";
 import _ from "lodash";
@@ -10,7 +11,6 @@ import Property, { IProperty } from "../models/Property";
 import User, { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError, checkValidationResult } from "../utils/error";
-import bcrypt from "bcryptjs";
 
 export function viewLogin(req: Request, res: Response) {
   res.render("admin/login", {
@@ -38,6 +38,11 @@ export async function login(
       throw new Error("Password does not match!");
     }
 
+    req.session.user = {
+      id: user.id,
+      username: user.username,
+    };
+
     setAlert(req, { message: "Login success", status: AlertStatuses.Success });
     res.redirect("/admin/dashboard");
   } catch (maybeError) {
@@ -47,8 +52,11 @@ export async function login(
   }
 }
 
-export function viewDashboard(_: Request, res: Response) {
-  res.render("admin/dashboard", { pageTitle: "Dashboard" });
+export function viewDashboard(req: Request, res: Response) {
+  res.render("admin/dashboard", {
+    pageTitle: "Dashboard",
+    alert: getAlert(req),
+  });
 }
 
 export async function viewCategories(req: Request, res: Response) {

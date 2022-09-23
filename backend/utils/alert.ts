@@ -1,7 +1,7 @@
 import { Request } from "express";
 import _ from "lodash";
 
-export const enum AlertTypes {
+const enum AlertTypes {
   Message = "FLASH_MESSAGE",
   Status = "FLASH_STATUS",
 }

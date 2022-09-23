@@ -2,17 +2,31 @@ import express from "express";
 import * as controllers from "../controllers/admin";
 import { MAX_PROPERTY_IMAGES } from "../lib/constants";
 import * as imagesMulter from "../middlewares/images.multer";
-import * as validators from "../middlewares/validators/admin";
+import * as validators from "../middlewares/admin/validators";
+import * as authorizations from "../middlewares/admin/authorizations";
 
 const router = express.Router();
 
-router.get("/dashboard", controllers.viewDashboard);
+//
+// Authentication
+//
+router.get("/login", authorizations.isNotAuthenticated, controllers.viewLogin);
+router.post(
+  "/login",
+  authorizations.isNotAuthenticated,
+  validators.loginValidator,
+  controllers.login
+);
 
 //
-// Auth
+// Authorization
 //
-router.get("/login", controllers.viewLogin);
-router.post("/login", validators.loginValidator, controllers.login);
+router.use(authorizations.isAuthenticated);
+
+//
+// Dashboard
+//
+router.get("/dashboard", controllers.viewDashboard);
 
 //
 // Categories
