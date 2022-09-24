@@ -55,6 +55,7 @@ export function viewDashboard(req: Request, res: Response) {
   res.render("admin/dashboard", {
     pageTitle: "Dashboard",
     alert: getAlert(req),
+    user: req.user,
   });
 }
 
@@ -71,6 +72,7 @@ export async function viewCategories(req: Request, res: Response) {
   res.render("admin/categories", {
     pageTitle: "Categories",
     alert: getAlert(req),
+    user: req.user,
     categories,
   });
 }
@@ -151,6 +153,7 @@ export async function viewBanks(req: Request, res: Response) {
   res.render("admin/banks", {
     pageTitle: "Banks",
     alert: getAlert(req),
+    user: req.user,
     banks,
   });
 }
@@ -256,6 +259,7 @@ export async function viewProperties(req: Request, res: Response) {
   res.render("admin/properties", {
     pageTitle: "Properties",
     alert: getAlert(req),
+    user: req.user,
     properties,
     categories,
   });
@@ -283,6 +287,7 @@ export async function viewPropertyImages(
   res.render("admin/properties/property/images", {
     pageTitle: "Property Images",
     alert: getAlert(req),
+    user: req.user,
     property,
   });
 }
@@ -349,6 +354,7 @@ export async function viewEditProperty(
   res.render("admin/properties/property/edit", {
     pageTitle: "Edit Property",
     alert: getAlert(req),
+    user: req.user,
     property,
     categories,
   });
@@ -444,6 +450,7 @@ export async function viewPropertyAddons(
   res.render("admin/properties/property", {
     pageTitle: "Property Addons",
     alert: getAlert(req),
+    user: req.user,
     property,
   });
 }
@@ -680,6 +687,9 @@ export async function deleteActivity(
   res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
 }
 
-export function viewBookings(_: Request, res: Response) {
-  res.render("admin/bookings", { pageTitle: "Bookings" });
+export function viewBookings(req: Request, res: Response) {
+  res.render("admin/bookings", {
+    pageTitle: "Bookings",
+    user: req.user,
+  });
 }

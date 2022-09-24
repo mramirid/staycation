@@ -68,7 +68,6 @@ export function isAuthenticated(
   next: NextFunction
 ) {
   if (isObject(req.user)) {
-    res.locals.user = req.user;
     next();
     return;
   }
