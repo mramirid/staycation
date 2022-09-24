@@ -6,25 +6,32 @@ const enum AlertTypes {
   Status = "FLASH_STATUS",
 }
 
-export const enum AlertStatuses {
+export enum AlertStatuses {
   Success = "success",
   Error = "danger",
   Info = "info",
 }
 
-type Alert = {
+export type Alert = {
   message: string;
   status: AlertStatuses;
 };
 
-export function getAlert(req: Request): Alert | undefined {
-  const message = req.flash(AlertTypes.Message).at(0);
-  const status = req.flash(AlertTypes.Status).at(0);
+export function getAlert(
+  req: Request,
+  custom?: { messageType: string; status: AlertStatuses }
+) {
+  const message = req.flash(custom?.messageType ?? AlertTypes.Message).at(0);
+  const status = req.flash(AlertTypes.Status).at(0) ?? custom?.status;
 
   if (_.isUndefined(message) || _.isUndefined(status)) {
     return undefined;
   }
-  return { message, status: status as AlertStatuses };
+
+  return Object.freeze<Alert>({
+    message,
+    status: status as AlertStatuses,
+  });
 }
 
 export function setAlert(req: Request<unknown>, alert: Alert) {

@@ -1,23 +1,23 @@
-import bcrypt from "bcryptjs";
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import fs from "fs/promises";
-import _, { isObjectLike } from "lodash";
-import { HydratedDocument, Types } from "mongoose";
+import _ from "lodash";
+import { Types } from "mongoose";
 import path from "path";
 import { category404 } from "../lib/constants";
-import { AppLocals } from "../lib/types";
+import * as auth from "../middlewares/admin/auth";
 import Bank, { IBank } from "../models/Bank";
-import Booking, { IBooking } from "../models/Booking";
 import Category, { ICategory } from "../models/Category";
 import Property, { IProperty } from "../models/Property";
-import User, { IUser } from "../models/User";
+import { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError, checkValidationResult } from "../utils/error";
 
 export function viewLogin(req: Request, res: Response) {
   res.render("admin/login", {
     pageTitle: "Login Admin",
-    alert: getAlert(req),
+    alert:
+      getAlert(req) ??
+      getAlert(req, { messageType: "error", status: AlertStatuses.Error }),
   });
 }
 
@@ -28,24 +28,11 @@ export async function login(
   try {
     checkValidationResult(req);
 
-    const user = await User.findOne({ username: req.body.username }).orFail(
-      new Error("Username not found!")
-    );
-
-    const doesPasswordMatch = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-    if (!doesPasswordMatch) {
-      throw new Error("Password does not match!");
-    }
-
-    req.session.user = {
-      id: user.id,
-      username: user.username,
-    };
-
-    res.redirect("/admin/dashboard");
+    auth.passport.authenticate("local", {
+      successRedirect: "/admin/dashboard",
+      failureRedirect: "/admin/login",
+      failureFlash: true,
+    })(req, res);
   } catch (maybeError) {
     const error = catchError(maybeError);
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
@@ -53,16 +40,12 @@ export async function login(
   }
 }
 
-export function logout(req: Request, res: Response<unknown, AppLocals>) {
-  req.session.destroy((maybeError) => {
-    if (isObjectLike(maybeError)) {
-      // const error = catchError(maybeError);
-      // setAlert(req, { message: error.message, status: AlertStatuses.Error });
-      res.redirect("/admin/dashboard");
+export function logout(req: Request, res: Response, next: NextFunction) {
+  req.logout((error) => {
+    if (error) {
+      next(error);
       return;
     }
-
-    delete res.locals.user;
 
     res.redirect("/admin/login");
   });

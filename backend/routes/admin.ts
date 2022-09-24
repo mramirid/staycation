@@ -1,7 +1,7 @@
 import express from "express";
 import * as controllers from "../controllers/admin";
 import { MAX_PROPERTY_IMAGES } from "../lib/constants";
-import * as authorizations from "../middlewares/admin/authorizations";
+import * as auth from "../middlewares/admin/auth";
 import * as validators from "../middlewares/admin/validators";
 import * as imagesMulter from "../middlewares/images.multer";
 
@@ -10,15 +10,15 @@ const router = express.Router();
 //
 // Authentication
 //
-router.get("/login", authorizations.isNotAuthenticated, controllers.viewLogin);
+router.get("/login", auth.isNotAuthenticated, controllers.viewLogin);
 router.post(
   "/login",
-  authorizations.isNotAuthenticated,
+  auth.isNotAuthenticated,
   validators.loginValidator,
   controllers.login
 );
 
-router.use(authorizations.isAuthenticated);
+router.use(auth.isAuthenticated);
 
 router.post("/logout", controllers.logout);
 

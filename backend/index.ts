@@ -1,21 +1,21 @@
 import flash from "connect-flash";
-import express, { ErrorRequestHandler, Response } from "express";
+import connectMongoDBSession from "connect-mongodb-session";
+import express, { ErrorRequestHandler, Request, Response } from "express";
 import session from "express-session";
 import createError from "http-errors";
 import _ from "lodash";
 import methodOverride from "method-override";
 import mongoose from "mongoose";
 import logger from "morgan";
+import passport from "passport";
 import path from "path";
 import { env } from "./lib/constants";
-import { AppLocals, UserSession } from "./lib/types";
 import adminRouter from "./routes/admin";
 import indexRouter from "./routes/index";
 import * as format from "./utils/format";
 
 const app = express();
 
-// view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
@@ -26,29 +26,33 @@ app.use(
 );
 
 app.use(logger("dev"));
+
 app.use(methodOverride("_method"));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// express session setup
+const mongoUri = `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`;
+
+const MongoDBStore = connectMongoDBSession(session);
+const mongoDBStore = new MongoDBStore({
+  uri: mongoUri,
+  collection: "sessions",
+});
 app.use(
   session({
     secret: env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60_000 },
+    saveUninitialized: false,
+    store: mongoDBStore,
   })
 );
-declare module "express-session" {
-  interface SessionData {
-    user: UserSession;
-  }
-}
+
+app.use(passport.authenticate("session"));
 
 app.use(flash());
 
-// app locals.
-app.use((__, res: Response<unknown, AppLocals>, next) => {
+app.use((__: Request, res: Response, next) => {
   res.locals._ = _;
   res.locals.format = format;
 
@@ -75,17 +79,14 @@ const errorHandler: ErrorRequestHandler = (err, req, res) => {
 };
 app.use(errorHandler);
 
-mongoose.connect(
-  `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`,
-  (error) => {
-    if (_.isError(error)) {
-      console.error("Failed to connect to MongoDB:", error);
-      return;
-    }
-
-    app.listen(3000, () => console.log("Listening at http://localhost:3000"));
+mongoose.connect(mongoUri, (error) => {
+  if (_.isError(error)) {
+    console.error("Failed to connect to MongoDB:", error);
+    return;
   }
-);
+
+  app.listen(3000, () => console.log("Listening at http://localhost:3000"));
+});
 
 // async function createFruit() {
 //   await Fruit.deleteMany();
