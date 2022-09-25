@@ -137,5 +137,10 @@ router.delete(
 // Bookings
 //
 router.get("/bookings", controllers.viewBookings);
+router.get(
+  "/bookings/:id",
+  validators.paramIdValidator,
+  controllers.viewBooking
+);
 
 export default router;

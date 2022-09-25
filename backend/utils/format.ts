@@ -23,7 +23,7 @@ export const toDecimal128: CustomSanitizer = (value: number, meta) => {
   }
 };
 
-export function formatToUSD(amount: number | Types.Decimal128) {
+export function toUSD(amount: number | Types.Decimal128) {
   const formattedAmount = _.toNumber(amount).toLocaleString("en-US", {
     style: "currency",
     currency: "USD",

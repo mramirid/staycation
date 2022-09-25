@@ -234,7 +234,7 @@ async function seed() {
     },
     bank: bsi._id,
     payment: {
-      imageProofUrl: "images/payment-proof.seed.jpeg",
+      imageProofUrl: "/images/payment-proof.seed.jpeg",
       originBankName: "BNI Syariah",
       accountHolderName: "Ismail Ahmad Kanabawi",
     },

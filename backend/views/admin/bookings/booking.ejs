@@ -1,0 +1,91 @@
+<%- include('../../partials/header.ejs') %>
+
+<body id="page-top">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <%- include("../../partials/sidebar.ejs") %>
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <%- include("../../partials/navbar.ejs") %>
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800"><%= pageTitle %></h1>
+
+          <!-- DataTales Example -->
+          <div class="card shadow mb-4 mt-2">
+            <div class="card-header py-3">
+              <a href="/admin/bookings" class="btn btn-light">
+                <i class="fas fa-arrow-left"></i> <span class="ml-1">Back</span>
+              </a>
+            </div>
+            <div class="card-body row">
+              <div class="col-md-4">
+                <img src="<%= booking.payment.imageProofUrl %>" alt="Payment Proof" class="img-fluid img-thumbnail" />
+                <div class="mt-3 row">
+                  <form class="col-md-6" method="post" action="/admin/bookings/<%= booking.id %>/payment/reject">
+                    <button type="submit" class="btn btn-danger btn-block">
+                      <i class="fas fa-times"></i> <span class="ml-1">Reject</span>
+                    </button>
+                  </form>
+                  <form class="col-md-6" method="post" action="/admin/bookings/<%= booking.id %>/payment/confirm">
+                    <button type="submit" class="btn btn-success btn-block">
+                      <i class="fas fa-check"></i> <span class="ml-1">Confirm</span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+              <div class="col-md-8 table-responsive">
+                <table class="table table-bordered" width="100%" cellspacing="0">
+                  <tbody>
+                    <tr>
+                      <th>Member</th>
+                      <td><%= booking.member.fullName %></td>
+                    </tr>
+                    <tr>
+                      <th>Total Price</th>
+                      <td><%= format.toUSD(booking.totalPrice) %></td>
+                    </tr>
+                    <tr>
+                      <th>Property Title</th>
+                      <td><%= booking.property.current.title %></td>
+                    </tr>
+                    <tr>
+                      <th>Origin Bank</th>
+                      <td><%= booking.payment.originBankName %></td>
+                    </tr>
+                    <tr>
+                      <th>Account Holder</th>
+                      <td><%= booking.payment.accountHolderName %></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <%- include('../../partials/footer.ejs') %>
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+</body>
+
+<%- include("../../partials/utilities.ejs") %>
+<%- include("../../partials/scripts/common.ejs") %>

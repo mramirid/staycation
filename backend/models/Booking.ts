@@ -119,7 +119,7 @@ bookingSchema
   });
 
 bookingSchema
-  .virtual("getTotalPrice")
+  .virtual("totalPrice")
   .get(function (this: HydratedDocument<IBooking>) {
     return this.nights * _.toNumber(this.property.price);
   });

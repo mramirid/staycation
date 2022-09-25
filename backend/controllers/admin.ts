@@ -679,20 +679,19 @@ export async function deleteActivity(
   res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
 }
 
-type PopulatedBooking = MergeType<
-  BookingDoc,
-  {
-    member: MemberDoc;
-    property: MergeType<BookingDoc["property"], { current: PropertyDoc }>;
-    bank: BankDoc;
-  }
->;
+type BookingPopulationPaths = {
+  member: MemberDoc;
+  property: MergeType<BookingDoc["property"], { current: PropertyDoc }>;
+  bank: BankDoc;
+};
+
+type PopulatedBookingDoc = MergeType<BookingDoc, BookingPopulationPaths>;
 
 export async function viewBookings(req: Request, res: Response) {
-  let bookings: PopulatedBooking[] = [];
+  let bookings: PopulatedBookingDoc[] = [];
 
   try {
-    bookings = await Booking.find().populate([
+    bookings = await Booking.find().populate<BookingPopulationPaths>([
       "member",
       "property.current",
       "bank",
@@ -707,5 +706,27 @@ export async function viewBookings(req: Request, res: Response) {
     alert: getAlert(req),
     user: req.user,
     bookings,
+  });
+}
+
+export async function viewBooking(req: Request<{ id: string }>, res: Response) {
+  let booking: PopulatedBookingDoc | undefined;
+
+  try {
+    checkValidationResult(req);
+
+    booking = await Booking.findById(req.params.id)
+      .populate<BookingPopulationPaths>(["member", "property.current", "bank"])
+      .orFail(new Error("Booking not found"));
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.render("admin/bookings/booking", {
+    pageTitle: "Booking Details",
+    alert: getAlert(req),
+    user: req.user,
+    booking,
   });
 }
