@@ -77,8 +77,8 @@ router.post(
   controllers.addProperty
 );
 router.get(
-  "/properties/:propertyId/images",
-  validators.paramPropertyIdValidator,
+  "/properties/:id/images",
+  validators.paramIdValidator,
   controllers.viewPropertyImages
 );
 router.get("/properties/:id/edit", controllers.viewEditProperty);
@@ -99,7 +99,7 @@ router.get(
   controllers.viewPropertyAddons
 );
 router.post(
-  "/properties/:propertyId/features",
+  "/properties/:id/features",
   imagesMulter.handleUploadImage("icon"),
   validators.addFeatureValidator,
   controllers.addFeature
@@ -116,7 +116,7 @@ router.delete(
   controllers.deleteFeature
 );
 router.post(
-  "/properties/:propertyId/activities",
+  "/properties/:id/activities",
   imagesMulter.handleUploadImage("image"),
   validators.addActivityValidator,
   controllers.addActivity

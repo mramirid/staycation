@@ -270,7 +270,7 @@ export async function viewProperties(req: Request, res: Response) {
 const propertyNotFound = new Error("Property not found");
 
 export async function viewPropertyImages(
-  req: Request<{ propertyId: string }>,
+  req: Request<{ id: string }>,
   res: Response
 ) {
   let property: PropertyDoc | undefined;
@@ -278,9 +278,7 @@ export async function viewPropertyImages(
   try {
     checkValidationResult(req);
 
-    property = await Property.findById(req.params.propertyId).orFail(
-      propertyNotFound
-    );
+    property = await Property.findById(req.params.id).orFail(propertyNotFound);
   } catch (maybeError) {
     const error = catchError(maybeError);
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
@@ -463,17 +461,13 @@ type AddFeatureReqBody = {
 };
 
 export async function addFeature(
-  req: Request<
-    { propertyId: string },
-    Record<string, never>,
-    AddFeatureReqBody
-  >,
+  req: Request<{ id: string }, Record<string, never>, AddFeatureReqBody>,
   res: Response
 ) {
   try {
     checkValidationResult(req);
 
-    const property = await Property.findById(req.params.propertyId).orFail(
+    const property = await Property.findById(req.params.id).orFail(
       propertyNotFound
     );
 
@@ -492,7 +486,7 @@ export async function addFeature(
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
   }
 
-  res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
+  res.redirect(`/admin/properties/${req.params.id}/addons`);
 }
 
 type EditFeatureParams = {
@@ -579,17 +573,13 @@ type AddActivityReqBody = {
 };
 
 export async function addActivity(
-  req: Request<
-    { propertyId: string },
-    Record<string, never>,
-    AddActivityReqBody
-  >,
+  req: Request<{ id: string }, Record<string, never>, AddActivityReqBody>,
   res: Response
 ) {
   try {
     checkValidationResult(req);
 
-    const property = await Property.findById(req.params.propertyId).orFail(
+    const property = await Property.findById(req.params.id).orFail(
       propertyNotFound
     );
 
@@ -608,7 +598,7 @@ export async function addActivity(
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
   }
 
-  res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
+  res.redirect(`/admin/properties/${req.params.id}/addons`);
 }
 
 type EditActivityParams = {

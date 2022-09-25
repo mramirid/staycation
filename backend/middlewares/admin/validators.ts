@@ -76,7 +76,7 @@ export const editPropertyValidator = [
   }),
 ];
 
-export const paramPropertyIdValidator = param(
+const paramPropertyIdValidator = param(
   "propertyId",
   "Invalid property id"
 ).isMongoId();
@@ -89,7 +89,7 @@ const commonFeatureValidator = [
 ];
 
 export const addFeatureValidator = [
-  paramPropertyIdValidator,
+  paramIdValidator,
   ...commonFeatureValidator,
   body("icon").custom((__, meta) => {
     if (_.isUndefined((meta.req as Request).file)) {
@@ -121,7 +121,7 @@ const commonActivityValidator = [
 ];
 
 export const addActivityValidator = [
-  paramPropertyIdValidator,
+  paramIdValidator,
   ...commonActivityValidator,
   body("image").custom((__, meta) => {
     if (_.isUndefined((meta.req as Request).file)) {
