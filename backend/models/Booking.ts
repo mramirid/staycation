@@ -4,7 +4,7 @@ import Bank from "./Bank";
 import Member from "./Member";
 import Property from "./Property";
 
-export interface IBooking {
+interface IBooking {
   startDate: Date;
   endDate: Date;
   nights: number;
@@ -27,6 +27,12 @@ interface IBookingVirtuals {
   dateRange: string;
   totalPrice: string;
 }
+
+export type BookingDoc = HydratedDocument<
+  IBooking,
+  Record<string, never>,
+  IBookingVirtuals
+>;
 
 type BookingModel = Model<
   IBooking,

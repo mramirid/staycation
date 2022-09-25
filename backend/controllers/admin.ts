@@ -6,10 +6,10 @@ import path from "path";
 import { category404 } from "../lib/constants";
 import * as auth from "../middlewares/admin/auth";
 import Bank, { BankDoc } from "../models/Bank";
-import Booking, { IBooking } from "../models/Booking";
-import Category, { ICategory } from "../models/Category";
+import Booking, { BookingDoc } from "../models/Booking";
+import Category, { CategoryDoc, ICategory } from "../models/Category";
 import { MemberDoc } from "../models/Member";
-import Property, { IProperty, PropertyDoc } from "../models/Property";
+import Property, { PropertyDoc } from "../models/Property";
 import { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError, checkValidationResult } from "../utils/error";
@@ -62,7 +62,7 @@ export function viewDashboard(req: Request, res: Response) {
 }
 
 export async function viewCategories(req: Request, res: Response) {
-  let categories: ICategory[] = [];
+  let categories: CategoryDoc[] = [];
 
   try {
     categories = await Category.find();
@@ -245,8 +245,8 @@ export async function deleteBank(req: Request<{ id: string }>, res: Response) {
 }
 
 export async function viewProperties(req: Request, res: Response) {
-  let properties: IProperty[] = [];
-  let categories: ICategory[] = [];
+  let properties: PropertyDoc[] = [];
+  let categories: CategoryDoc[] = [];
 
   try {
     [properties, categories] = await Promise.all([
@@ -273,7 +273,7 @@ export async function viewPropertyImages(
   req: Request<{ propertyId: string }>,
   res: Response
 ) {
-  let property: IProperty | undefined;
+  let property: PropertyDoc | undefined;
 
   try {
     checkValidationResult(req);
@@ -338,8 +338,8 @@ export async function viewEditProperty(
   req: Request<{ id: string }>,
   res: Response
 ) {
-  let property: IProperty | undefined;
-  let categories: ICategory[] = [];
+  let property: PropertyDoc | undefined;
+  let categories: CategoryDoc[] = [];
 
   try {
     checkValidationResult(req);
@@ -438,7 +438,7 @@ export async function viewPropertyAddons(
   req: Request<{ id: string }>,
   res: Response
 ) {
-  let property: IProperty | undefined;
+  let property: PropertyDoc | undefined;
 
   try {
     checkValidationResult(req);
@@ -690,10 +690,10 @@ export async function deleteActivity(
 }
 
 type PopulatedBooking = MergeType<
-  IBooking,
+  BookingDoc,
   {
     member: MemberDoc;
-    property: MergeType<IBooking["property"], { current: PropertyDoc }>;
+    property: MergeType<BookingDoc["property"], { current: PropertyDoc }>;
     bank: BankDoc;
   }
 >;

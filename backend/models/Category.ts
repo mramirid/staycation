@@ -1,10 +1,12 @@
 import _ from "lodash";
-import mongoose, { model, Query, Schema } from "mongoose";
+import { HydratedDocument, model, Query, Schema } from "mongoose";
 import { IProperty } from "./Property";
 
 export interface ICategory {
   name: string;
 }
+
+export type CategoryDoc = HydratedDocument<ICategory>;
 
 const categorySchema = new Schema<ICategory>({
   name: {
@@ -19,9 +21,9 @@ categorySchema.pre(
   async function (this: Query<unknown, unknown>) {
     const { _id } = this.getQuery();
 
-    const property = await mongoose
-      .model<IProperty>("Property")
-      .findOne({ category: _id });
+    const property = await model<IProperty>("Property").findOne({
+      category: _id,
+    });
 
     if (_.isObject(property)) {
       throw new Error("The category is being used by some properties");
