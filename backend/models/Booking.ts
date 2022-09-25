@@ -4,7 +4,7 @@ import Bank from "./Bank";
 import Member from "./Member";
 import Property from "./Property";
 
-interface IBooking {
+export interface IBooking {
   startDate: Date;
   endDate: Date;
   nights: number;
@@ -22,14 +22,26 @@ interface IBooking {
   };
 }
 
-interface IBookingMethods {
-  getInvoiceId(): string;
-  getTotalPrice(): number;
+interface IBookingVirtuals {
+  invoiceId: string;
+  dateRange: string;
+  totalPrice: string;
 }
 
-type BookingModel = Model<IBooking, unknown, IBookingMethods>;
+type BookingModel = Model<
+  IBooking,
+  Record<string, never>,
+  Record<string, never>,
+  IBookingVirtuals
+>;
 
-const bookingSchema = new Schema<IBooking, BookingModel, IBookingMethods>({
+const bookingSchema = new Schema<
+  IBooking,
+  BookingModel,
+  Record<string, never>,
+  Record<string, never>,
+  IBookingVirtuals
+>({
   startDate: {
     type: Date,
     required: true,
@@ -85,17 +97,26 @@ const bookingSchema = new Schema<IBooking, BookingModel, IBookingMethods>({
   },
 });
 
-bookingSchema.methods.getInvoiceId = function (
-  this: HydratedDocument<IBooking>
-) {
-  return this.id;
-};
+bookingSchema
+  .virtual("invoiceId")
+  .get(function (this: HydratedDocument<IBooking>) {
+    return this.id;
+  });
 
-bookingSchema.methods.getTotalPrice = function (
-  this: HydratedDocument<IBooking>
-) {
-  return this.nights * _.toNumber(this.property.price);
-};
+bookingSchema
+  .virtual("dateRange")
+  .get(function (this: HydratedDocument<IBooking>) {
+    return new Intl.DateTimeFormat("en-US").formatRange(
+      this.startDate,
+      this.endDate
+    );
+  });
+
+bookingSchema
+  .virtual("getTotalPrice")
+  .get(function (this: HydratedDocument<IBooking>) {
+    return this.nights * _.toNumber(this.property.price);
+  });
 
 const Booking = model("Booking", bookingSchema);
 export default Booking;

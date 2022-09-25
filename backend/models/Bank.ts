@@ -1,11 +1,13 @@
-import { model, Schema } from "mongoose";
+import { HydratedDocument, model, Schema } from "mongoose";
 
-export interface IBank {
+interface IBank {
   name: string;
   logoUrl: string;
   accountNumber: string;
   accountHolderName: string;
 }
+
+export type BankDoc = HydratedDocument<IBank>;
 
 const bankSchema = new Schema<IBank>({
   name: {

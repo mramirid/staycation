@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { HydratedDocument, Model, model, Schema } from "mongoose";
 
 interface IMember {
   firstName: string;
@@ -7,7 +7,30 @@ interface IMember {
   phone: string;
 }
 
-const memberSchema = new Schema<IMember>({
+interface IMemberVirtuals {
+  fullName: string;
+}
+
+export type MemberDoc = HydratedDocument<
+  IMember,
+  Record<string, never>,
+  IMemberVirtuals
+>;
+
+type MemberModel = Model<
+  IMember,
+  Record<string, never>,
+  Record<string, never>,
+  IMemberVirtuals
+>;
+
+const memberSchema = new Schema<
+  IMember,
+  MemberModel,
+  Record<string, never>,
+  Record<string, never>,
+  IMemberVirtuals
+>({
   firstName: {
     type: String,
     required: true,
@@ -25,6 +48,12 @@ const memberSchema = new Schema<IMember>({
     required: true,
   },
 });
+
+memberSchema
+  .virtual("fullName")
+  .get(function (this: HydratedDocument<IMember>) {
+    return `${this.firstName} ${this.lastName}`;
+  });
 
 const Member = model("Member", memberSchema);
 export default Member;

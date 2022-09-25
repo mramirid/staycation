@@ -1,13 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import fs from "fs/promises";
 import _ from "lodash";
-import { Types } from "mongoose";
+import { MergeType, Types } from "mongoose";
 import path from "path";
 import { category404 } from "../lib/constants";
 import * as auth from "../middlewares/admin/auth";
-import Bank, { IBank } from "../models/Bank";
+import Bank, { BankDoc } from "../models/Bank";
+import Booking, { IBooking } from "../models/Booking";
 import Category, { ICategory } from "../models/Category";
-import Property, { IProperty } from "../models/Property";
+import { MemberDoc } from "../models/Member";
+import Property, { IProperty, PropertyDoc } from "../models/Property";
 import { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { catchError, checkValidationResult } from "../utils/error";
@@ -141,7 +143,7 @@ export async function deleteCategory(
 }
 
 export async function viewBanks(req: Request, res: Response) {
-  let banks: IBank[] = [];
+  let banks: BankDoc[] = [];
 
   try {
     banks = await Bank.find();
@@ -687,9 +689,33 @@ export async function deleteActivity(
   res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
 }
 
-export function viewBookings(req: Request, res: Response) {
+type PopulatedBooking = MergeType<
+  IBooking,
+  {
+    member: MemberDoc;
+    property: MergeType<IBooking["property"], { current: PropertyDoc }>;
+    bank: BankDoc;
+  }
+>;
+
+export async function viewBookings(req: Request, res: Response) {
+  let bookings: PopulatedBooking[] = [];
+
+  try {
+    bookings = await Booking.find().populate([
+      "member",
+      "property.current",
+      "bank",
+    ]);
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
   res.render("admin/bookings", {
     pageTitle: "Bookings",
+    alert: getAlert(req),
     user: req.user,
+    bookings,
   });
 }

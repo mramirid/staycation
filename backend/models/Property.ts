@@ -1,4 +1,4 @@
-import { model, Schema, Types } from "mongoose";
+import { HydratedDocument, model, Schema, Types } from "mongoose";
 import { category404, MAX_PROPERTY_IMAGES } from "../lib/constants";
 import Category from "./Category";
 
@@ -23,6 +23,8 @@ export interface IProperty {
     isPopular: boolean;
   }>;
 }
+
+export type PropertyDoc = HydratedDocument<IProperty>;
 
 const propertySchema = new Schema<IProperty>({
   title: {
