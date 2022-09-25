@@ -142,5 +142,15 @@ router.get(
   validators.paramIdValidator,
   controllers.viewBooking
 );
+router.patch(
+  "/bookings/:id/payment/accept",
+  validators.paramIdValidator,
+  controllers.acceptPayment
+);
+router.patch(
+  "/bookings/:id/payment/reject",
+  validators.paramIdValidator,
+  controllers.rejectPayment
+);
 
 export default router;

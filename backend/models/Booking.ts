@@ -18,7 +18,7 @@ interface IBooking {
     imageProofUrl: string;
     originBankName: string;
     accountHolderName: string;
-    status: "ACCEPTED" | "REJECTED" | "PENDING";
+    status: "Accepted" | "Rejected" | "Pending";
   };
 }
 
@@ -98,7 +98,7 @@ const bookingSchema = new Schema<
     },
     status: {
       type: String,
-      default: "PENDING",
+      default: "Pending",
     },
   },
 });

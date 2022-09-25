@@ -17,6 +17,8 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
+          <%- include('../../partials/alert.ejs') %>
+
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800"><%= pageTitle %></h1>
 
@@ -31,14 +33,18 @@
               <div class="col-md-4">
                 <img src="<%= booking.payment.imageProofUrl %>" alt="Payment Proof" class="img-fluid img-thumbnail" />
                 <div class="mt-3 row">
-                  <form class="col-md-6" method="post" action="/admin/bookings/<%= booking.id %>/payment/reject">
-                    <button type="submit" class="btn btn-danger btn-block">
+                  <form class="col-md-6" method="post"
+                    action="/admin/bookings/<%= booking.id %>/payment/reject?_method=PATCH">
+                    <button type="submit" class="btn btn-danger btn-block"
+                      <%= booking.payment.status === "Rejected" ? "disabled" : "" %>>
                       <i class="fas fa-times"></i> <span class="ml-1">Reject</span>
                     </button>
                   </form>
-                  <form class="col-md-6" method="post" action="/admin/bookings/<%= booking.id %>/payment/confirm">
-                    <button type="submit" class="btn btn-success btn-block">
-                      <i class="fas fa-check"></i> <span class="ml-1">Confirm</span>
+                  <form class="col-md-6" method="post"
+                    action="/admin/bookings/<%= booking.id %>/payment/accept?_method=PATCH">
+                    <button type="submit" class="btn btn-success btn-block"
+                      <%= booking.payment.status === "Accepted" ? "disabled" : "" %>>
+                      <i class="fas fa-check"></i> <span class="ml-1">Accept</span>
                     </button>
                   </form>
                 </div>
@@ -65,6 +71,10 @@
                     <tr>
                       <th>Account Holder</th>
                       <td><%= booking.payment.accountHolderName %></td>
+                    </tr>
+                    <tr>
+                      <th>Payment Status</th>
+                      <td><%= booking.payment.status %></td>
                     </tr>
                   </tbody>
                 </table>

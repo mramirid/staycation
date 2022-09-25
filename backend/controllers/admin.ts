@@ -190,6 +190,8 @@ export async function addBank(
   res.redirect("/admin/banks");
 }
 
+const bank404 = new Error("Bank not found");
+
 export async function editBank(
   req: Request<{ id: string }, Record<string, never>, AddBankReqBody>,
   res: Response
@@ -197,9 +199,7 @@ export async function editBank(
   try {
     checkValidationResult(req);
 
-    const bank = await Bank.findById(req.params.id).orFail(
-      new Error("Bank not found")
-    );
+    const bank = await Bank.findById(req.params.id).orFail(bank404);
 
     bank.name = req.body.bankName;
     bank.accountNumber = req.body.accountNumber;
@@ -226,9 +226,7 @@ export async function deleteBank(req: Request<{ id: string }>, res: Response) {
   try {
     checkValidationResult(req);
 
-    const bank = await Bank.findByIdAndDelete(req.params.id).orFail(
-      new Error("Bank not found")
-    );
+    const bank = await Bank.findByIdAndDelete(req.params.id).orFail(bank404);
 
     await fs.unlink(path.join("public", bank.logoUrl));
 
@@ -267,7 +265,7 @@ export async function viewProperties(req: Request, res: Response) {
   });
 }
 
-const propertyNotFound = new Error("Property not found");
+const property404 = new Error("Property not found");
 
 export async function viewPropertyImages(
   req: Request<{ id: string }>,
@@ -278,7 +276,7 @@ export async function viewPropertyImages(
   try {
     checkValidationResult(req);
 
-    property = await Property.findById(req.params.id).orFail(propertyNotFound);
+    property = await Property.findById(req.params.id).orFail(property404);
   } catch (maybeError) {
     const error = catchError(maybeError);
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
@@ -343,7 +341,7 @@ export async function viewEditProperty(
     checkValidationResult(req);
 
     [property, categories] = await Promise.all([
-      Property.findById(req.params.id).orFail(propertyNotFound),
+      Property.findById(req.params.id).orFail(property404),
       Category.find(),
     ]);
   } catch (maybeError) {
@@ -367,9 +365,7 @@ export async function editProperty(
   try {
     checkValidationResult(req);
 
-    const property = await Property.findById(req.params.id).orFail(
-      propertyNotFound
-    );
+    const property = await Property.findById(req.params.id).orFail(property404);
 
     property.title = req.body.title;
     property.price = req.body.price;
@@ -405,7 +401,7 @@ export async function deleteProperty(
     checkValidationResult(req);
 
     const property = await Property.findByIdAndDelete(req.params.id).orFail(
-      new Error("Property not found")
+      property404
     );
 
     await Promise.allSettled([
@@ -441,7 +437,7 @@ export async function viewPropertyAddons(
   try {
     checkValidationResult(req);
 
-    property = await Property.findById(req.params.id).orFail(propertyNotFound);
+    property = await Property.findById(req.params.id).orFail(property404);
   } catch (maybeError) {
     const error = catchError(maybeError);
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
@@ -467,9 +463,7 @@ export async function addFeature(
   try {
     checkValidationResult(req);
 
-    const property = await Property.findById(req.params.id).orFail(
-      propertyNotFound
-    );
+    const property = await Property.findById(req.params.id).orFail(property404);
 
     const icon = req.file as Express.Multer.File;
     property.features.push({
@@ -494,7 +488,7 @@ type EditFeatureParams = {
   featureId: string;
 };
 
-const featureNotFound = new Error("Feature not found");
+const feature404 = new Error("Feature not found");
 
 export async function editFeature(
   req: Request<EditFeatureParams, Record<string, never>, AddFeatureReqBody>,
@@ -504,12 +498,12 @@ export async function editFeature(
     checkValidationResult(req);
 
     const property = await Property.findById(req.params.propertyId).orFail(
-      propertyNotFound
+      property404
     );
 
     const feature = property.features.id(req.params.featureId);
     if (_.isNull(feature)) {
-      throw featureNotFound;
+      throw feature404;
     }
 
     feature.name = req.body.name;
@@ -541,12 +535,12 @@ export async function deleteFeature(
     checkValidationResult(req);
 
     const property = await Property.findById(req.params.propertyId).orFail(
-      propertyNotFound
+      property404
     );
 
     const feature = property.features.id(req.params.featureId);
     if (_.isNull(feature)) {
-      throw featureNotFound;
+      throw feature404;
     }
 
     property.features.pull(feature);
@@ -579,9 +573,7 @@ export async function addActivity(
   try {
     checkValidationResult(req);
 
-    const property = await Property.findById(req.params.id).orFail(
-      propertyNotFound
-    );
+    const property = await Property.findById(req.params.id).orFail(property404);
 
     const image = req.file as Express.Multer.File;
     property.activities.push({
@@ -606,7 +598,7 @@ type EditActivityParams = {
   activityId: string;
 };
 
-const activityNotFound = new Error("Activity not found");
+const activity404 = new Error("Activity not found");
 
 export async function editActivity(
   req: Request<EditActivityParams, Record<string, never>, AddActivityReqBody>,
@@ -616,12 +608,12 @@ export async function editActivity(
     checkValidationResult(req);
 
     const property = await Property.findById(req.params.propertyId).orFail(
-      propertyNotFound
+      property404
     );
 
     const activity = property.activities.id(req.params.activityId);
     if (_.isNull(activity)) {
-      throw activityNotFound;
+      throw activity404;
     }
 
     activity.name = req.body.name;
@@ -653,12 +645,12 @@ export async function deleteActivity(
     checkValidationResult(req);
 
     const property = await Property.findById(req.params.propertyId).orFail(
-      propertyNotFound
+      property404
     );
 
     const activity = property.activities.id(req.params.activityId);
     if (_.isNull(activity)) {
-      throw activityNotFound;
+      throw activity404;
     }
 
     property.activities.pull(activity);
@@ -709,6 +701,8 @@ export async function viewBookings(req: Request, res: Response) {
   });
 }
 
+const booking404 = new Error("Booking not found");
+
 export async function viewBooking(req: Request<{ id: string }>, res: Response) {
   let booking: PopulatedBookingDoc | undefined;
 
@@ -717,7 +711,7 @@ export async function viewBooking(req: Request<{ id: string }>, res: Response) {
 
     booking = await Booking.findById(req.params.id)
       .populate<BookingPopulationPaths>(["member", "property.current", "bank"])
-      .orFail(new Error("Booking not found"));
+      .orFail(booking404);
   } catch (maybeError) {
     const error = catchError(maybeError);
     setAlert(req, { message: error.message, status: AlertStatuses.Error });
@@ -729,4 +723,50 @@ export async function viewBooking(req: Request<{ id: string }>, res: Response) {
     user: req.user,
     booking,
   });
+}
+
+export async function acceptPayment(
+  req: Request<{ id: string }>,
+  res: Response
+) {
+  try {
+    checkValidationResult(req);
+
+    const booking = await Booking.findById(req.params.id).orFail(booking404);
+    booking.payment.status = "Accepted";
+    await booking.save();
+
+    setAlert(req, {
+      message: "Payment accepted",
+      status: AlertStatuses.Success,
+    });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect(`/admin/bookings/${req.params.id}`);
+}
+
+export async function rejectPayment(
+  req: Request<{ id: string }>,
+  res: Response
+) {
+  try {
+    checkValidationResult(req);
+
+    const booking = await Booking.findById(req.params.id).orFail(booking404);
+    booking.payment.status = "Rejected";
+    await booking.save();
+
+    setAlert(req, {
+      message: "Payment rejected",
+      status: AlertStatuses.Success,
+    });
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
+  res.redirect(`/admin/bookings/${req.params.id}`);
 }
