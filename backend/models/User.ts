@@ -1,10 +1,12 @@
 import bcrypt from "bcryptjs";
-import { model, Schema } from "mongoose";
+import { HydratedDocument, model, Schema } from "mongoose";
 
 export interface IUser {
   username: string;
   password: string;
 }
+
+export type UserDoc = HydratedDocument<IUser>;
 
 const userSchema = new Schema<IUser>({
   username: {

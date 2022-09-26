@@ -1,15 +1,14 @@
 import bcrypt from "bcryptjs";
 import { NextFunction, Request, Response } from "express";
 import _, { isObject, isUndefined } from "lodash";
-import { HydratedDocument } from "mongoose";
 import passport from "passport";
 import { Strategy } from "passport-local";
-import User, { IUser } from "../../models/User";
+import User, { UserDoc } from "../../models/User";
 import { AlertStatuses, setAlert } from "../../utils/alert";
 import { catchError } from "../../utils/error";
 
 const localStrategy = new Strategy(async (username, password, done) => {
-  let user: HydratedDocument<IUser> | null;
+  let user: UserDoc | null;
 
   try {
     user = await User.findOne({ username });
@@ -37,11 +36,11 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Express {
     // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface User extends HydratedDocument<IUser> {}
+    interface User extends UserDoc {}
   }
 }
 
-passport.serializeUser<string>((user: HydratedDocument<IUser>, done) => {
+passport.serializeUser<string>((user: UserDoc, done) => {
   process.nextTick(() => {
     done(undefined, user.id);
   });
