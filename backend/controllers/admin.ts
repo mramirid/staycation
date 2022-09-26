@@ -8,7 +8,6 @@ import * as auth from "../middlewares/admin/auth";
 import Bank, { BankDoc } from "../models/Bank";
 import Booking, { BookingDoc } from "../models/Booking";
 import Category, { CategoryDoc, ICategory } from "../models/Category";
-import { MemberDoc } from "../models/Member";
 import Property, { PropertyDoc } from "../models/Property";
 import { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
@@ -672,7 +671,6 @@ export async function deleteActivity(
 }
 
 type BookingPopulationPaths = {
-  member: MemberDoc;
   property: MergeType<BookingDoc["property"], { current: PropertyDoc }>;
   bank: BankDoc;
 };
@@ -684,7 +682,6 @@ export async function viewBookings(req: Request, res: Response) {
 
   try {
     bookings = await Booking.find().populate<BookingPopulationPaths>([
-      "member",
       "property.current",
       "bank",
     ]);
@@ -710,7 +707,7 @@ export async function viewBooking(req: Request<{ id: string }>, res: Response) {
     checkValidationResult(req);
 
     booking = await Booking.findById(req.params.id)
-      .populate<BookingPopulationPaths>(["member", "property.current", "bank"])
+      .populate<BookingPopulationPaths>(["property.current", "bank"])
       .orFail(booking404);
   } catch (maybeError) {
     const error = catchError(maybeError);

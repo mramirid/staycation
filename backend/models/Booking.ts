@@ -1,14 +1,18 @@
 import _ from "lodash";
 import { HydratedDocument, Model, model, Schema, Types } from "mongoose";
 import Bank from "./Bank";
-import Member from "./Member";
 import Property from "./Property";
 
 interface IBooking {
   startDate: Date;
   endDate: Date;
   nights: number;
-  member: Types.ObjectId; // one-to-one referenced
+  member: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+  };
   property: {
     current: Types.ObjectId;
     price: Types.Decimal128;
@@ -26,6 +30,7 @@ interface IBookingVirtuals {
   invoiceId: string;
   dateRange: string;
   totalPrice: string;
+  memberFullName: string;
 }
 
 export type BookingDoc = HydratedDocument<
@@ -61,10 +66,22 @@ const bookingSchema = new Schema<
     required: true,
   },
   member: {
-    type: Schema.Types.ObjectId,
-    ref: Member,
-    required: true,
-    index: true,
+    firstName: {
+      type: String,
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+    },
   },
   property: {
     current: {
@@ -103,26 +120,24 @@ const bookingSchema = new Schema<
   },
 });
 
-bookingSchema
-  .virtual("invoiceId")
-  .get(function (this: HydratedDocument<IBooking>) {
-    return this.id;
-  });
+bookingSchema.virtual("invoiceId").get(function (this: BookingDoc) {
+  return this.id;
+});
 
-bookingSchema
-  .virtual("dateRange")
-  .get(function (this: HydratedDocument<IBooking>) {
-    return new Intl.DateTimeFormat("en-US").formatRange(
-      this.startDate,
-      this.endDate
-    );
-  });
+bookingSchema.virtual("dateRange").get(function (this: BookingDoc) {
+  return new Intl.DateTimeFormat("en-US").formatRange(
+    this.startDate,
+    this.endDate
+  );
+});
 
-bookingSchema
-  .virtual("totalPrice")
-  .get(function (this: HydratedDocument<IBooking>) {
-    return this.nights * _.toNumber(this.property.price);
-  });
+bookingSchema.virtual("totalPrice").get(function (this: BookingDoc) {
+  return this.nights * _.toNumber(this.property.price);
+});
+
+bookingSchema.virtual("memberFullName").get(function (this: BookingDoc) {
+  return `${this.member.firstName} ${this.member.lastName}`;
+});
 
 const Booking = model("Booking", bookingSchema);
 export default Booking;

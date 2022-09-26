@@ -1,13 +1,12 @@
 import _ from "lodash";
 import mongoose from "mongoose";
-import Bank from "../models/Bank";
-import Booking from "../models/Booking";
-import Category from "../models/Category";
-import Member from "../models/Member";
-import Property from "../models/Property";
-import User from "../models/User";
-import { catchError } from "../utils/error";
-import { env } from "./constants";
+import { env } from "./lib/constants";
+import Bank from "./models/Bank";
+import Booking from "./models/Booking";
+import Category from "./models/Category";
+import Property from "./models/Property";
+import User from "./models/User";
+import { catchError } from "./utils/error";
 
 mongoose.connect(
   `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`,
@@ -28,7 +27,7 @@ mongoose.connect(
 );
 
 async function seed() {
-  const [bsi] = await Bank.insertMany([
+  const [bsi, bsm] = await Bank.insertMany([
     {
       name: "Bank Syariah Indonesia",
       logoUrl: "/images/bsi-logo.seed.png",
@@ -49,7 +48,7 @@ async function seed() {
     { name: "Apartment with kitchen" },
   ]);
 
-  const [tabbyTown] = await Property.insertMany([
+  const [tabbyTown, seattleRain] = await Property.insertMany([
     {
       title: "Tabby Town",
       price: new mongoose.Types.Decimal128("12"),
@@ -208,37 +207,50 @@ async function seed() {
     },
   ]);
 
-  const [elfin] = await Member.insertMany([
+  await Booking.insertMany([
     {
-      firstName: "Elfin",
-      lastName: "Sanjaya",
-      email: "elfinsanjaya12@gmail.com",
-      phone: "082377954008",
+      startDate: new Date(2022, 0, 20),
+      endDate: new Date(2022, 0, 22),
+      nights: 3,
+      member: {
+        firstName: "Elfin",
+        lastName: "Sanjaya",
+        email: "elfinsanjaya12@gmail.com",
+        phone: "082377954008",
+      },
+      property: {
+        current: tabbyTown._id,
+        price: tabbyTown.price,
+      },
+      bank: bsi._id,
+      payment: {
+        imageProofUrl: "/images/payment-proof-1.seed.jpeg",
+        originBankName: "BTPN Syariah",
+        accountHolderName: "Ismail Ahmad Kanabawi",
+      },
     },
     {
-      firstName: "Yein",
-      lastName: "Narayana",
-      email: "elfinsanjaya1207@gmail.com",
-      phone: "082377954008",
+      startDate: new Date(2022, 4, 15),
+      endDate: new Date(2022, 5, 10),
+      nights: 27,
+      member: {
+        firstName: "Yein",
+        lastName: "Narayana",
+        email: "elfinsanjaya1207@gmail.com",
+        phone: "082377954008",
+      },
+      property: {
+        current: seattleRain._id,
+        price: seattleRain.price,
+      },
+      bank: bsm._id,
+      payment: {
+        imageProofUrl: "/images/payment-proof-2.seed.jpeg",
+        originBankName: "Bank Syariah Indonesia",
+        accountHolderName: "Khalid Kashmiri",
+      },
     },
   ]);
-
-  await Booking.create({
-    startDate: new Date(2022, 0, 20),
-    endDate: new Date(2022, 0, 22),
-    nights: 2,
-    member: elfin._id,
-    property: {
-      current: tabbyTown._id,
-      price: tabbyTown.price,
-    },
-    bank: bsi._id,
-    payment: {
-      imageProofUrl: "/images/payment-proof.seed.jpeg",
-      originBankName: "BNI Syariah",
-      accountHolderName: "Ismail Ahmad Kanabawi",
-    },
-  });
 
   await User.create({
     username: "mramirid",
