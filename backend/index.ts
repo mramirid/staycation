@@ -1,7 +1,9 @@
+import compression from "compression";
 import flash from "connect-flash";
 import connectMongoDBSession from "connect-mongodb-session";
 import express, { ErrorRequestHandler, Request, Response } from "express";
 import session from "express-session";
+import helmet from "helmet";
 import createError from "http-errors";
 import _ from "lodash";
 import methodOverride from "method-override";
@@ -26,6 +28,10 @@ app.use(
 );
 
 app.use(logger("dev"));
+
+app.use(helmet());
+
+app.use(compression());
 
 app.use(methodOverride("_method"));
 
