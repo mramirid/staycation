@@ -15,7 +15,8 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="/admin/properties/<%= property.id %>/features/<%= feature.id %>?_method=PATCH"
+      <form method="post"
+        action="/admin/properties/<%= property.id %>/features/<%= feature.id %>?_method=PATCH&_csrf=<%= csrfToken %>"
         enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">

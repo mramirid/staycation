@@ -1,7 +1,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4 mt-2">
   <div class="card-body row">
-    <form class="col-md-5" method="post" action="/admin/properties/<%= property.id %>/features"
+    <form class="col-md-5" method="post" action="/admin/properties/<%= property.id %>/features?_csrf=<%= csrfToken %>"
       enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">Name</label>
@@ -41,6 +41,7 @@
               <form method="post"
                 action="/admin/properties/<%= property.id %>/features/<%= feature.id %>?_method=DELETE"
                 class="d-inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
                 </button>

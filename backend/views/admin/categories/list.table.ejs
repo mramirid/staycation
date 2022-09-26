@@ -21,6 +21,7 @@
             <td>
               <%- include("./edit.modal-button.ejs", {category}) %>
               <form method="post" action="/admin/categories/<%= category.id %>?_method=DELETE" class="d-inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
                 </button>

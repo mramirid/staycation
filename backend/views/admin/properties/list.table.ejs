@@ -27,6 +27,7 @@
                 <i class="fas fa-edit"></i>
               </a>
               <form method="post" action="/admin/properties/<%= property.id %>?_method=DELETE" class="d-inline">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                 <button type="submit" type="button" class="btn btn-danger btn-circle btn-sm">
                   <i class="fas fa-trash"></i>
                 </button>

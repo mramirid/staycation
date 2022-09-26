@@ -33,7 +33,7 @@
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active py-2" id="images" role="tabpanel" aria-labelledby="images-tab">
               <% if (_.isObject(property)) { %>
-              <form method="post" action="/admin/properties/<%= property.id %>?_method=PATCH"
+              <form method="post" action="/admin/properties/<%= property.id %>?_method=PATCH&_csrf=<%= csrfToken %>"
                 enctype="multipart/form-data">
                 <div class="form-group">
                   <label for="title">Title</label>

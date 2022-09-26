@@ -22,6 +22,7 @@
             <input type="text" class="form-control" id="name" name="name" placeholder="Enter category name" required
               value="<%= category.name %>">
           </div>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

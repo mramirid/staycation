@@ -1,4 +1,4 @@
-<form method="post" action="/admin/properties" enctype="multipart/form-data" class="py-2">
+<form method="post" action="/admin/properties?_csrf=<%= csrfToken %>" enctype="multipart/form-data" class="py-2">
   <div class="form-group">
     <label for="title">Title</label>
     <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>

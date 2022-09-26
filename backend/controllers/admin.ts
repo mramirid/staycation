@@ -16,6 +16,7 @@ import { catchError, checkValidationResult } from "../utils/error";
 export function viewLogin(req: Request, res: Response) {
   res.render("admin/login", {
     pageTitle: "Login Admin",
+    csrfToken: req.csrfToken(),
     alert:
       getAlert(req) ??
       getAlert(req, { messageType: "error", status: AlertStatuses.Error }),
@@ -71,6 +72,7 @@ export async function viewDashboard(req: Request, res: Response) {
   res.render("admin/dashboard", {
     pageTitle: "Dashboard",
     alert: getAlert(req),
+    csrfToken: req.csrfToken(),
     user: req.user,
     numMembers,
     numBookings,
@@ -91,6 +93,7 @@ export async function viewCategories(req: Request, res: Response) {
   res.render("admin/categories", {
     pageTitle: "Categories",
     alert: getAlert(req),
+    csrfToken: req.csrfToken(),
     user: req.user,
     categories,
   });
@@ -172,6 +175,7 @@ export async function viewBanks(req: Request, res: Response) {
   res.render("admin/banks", {
     pageTitle: "Banks",
     alert: getAlert(req),
+    csrfToken: req.csrfToken(),
     user: req.user,
     banks,
   });
@@ -276,6 +280,7 @@ export async function viewProperties(req: Request, res: Response) {
   res.render("admin/properties", {
     pageTitle: "Properties",
     alert: getAlert(req),
+    csrfToken: req.csrfToken(),
     user: req.user,
     properties,
     categories,
@@ -302,6 +307,7 @@ export async function viewPropertyImages(
   res.render("admin/properties/property/images", {
     pageTitle: "Property Images",
     alert: getAlert(req),
+    csrfToken: req.csrfToken(),
     user: req.user,
     property,
   });
@@ -369,6 +375,7 @@ export async function viewEditProperty(
   res.render("admin/properties/property/edit", {
     pageTitle: "Edit Property",
     alert: getAlert(req),
+    csrfToken: req.csrfToken(),
     user: req.user,
     property,
     categories,
@@ -463,6 +470,7 @@ export async function viewPropertyAddons(
   res.render("admin/properties/property", {
     pageTitle: "Property Addons",
     alert: getAlert(req),
+    csrfToken: req.csrfToken(),
     user: req.user,
     property,
   });
@@ -711,6 +719,7 @@ export async function viewBookings(req: Request, res: Response) {
   res.render("admin/bookings", {
     pageTitle: "Bookings",
     alert: getAlert(req),
+    csrfToken: req.csrfToken(),
     user: req.user,
     bookings,
   });
@@ -735,6 +744,7 @@ export async function viewBooking(req: Request<{ id: string }>, res: Response) {
   res.render("admin/bookings/booking", {
     pageTitle: "Booking Details",
     alert: getAlert(req),
+    csrfToken: req.csrfToken(),
     user: req.user,
     booking,
   });

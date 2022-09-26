@@ -1,3 +1,4 @@
+import csrf from "csurf";
 import express from "express";
 import * as controllers from "../controllers/admin";
 import { MAX_PROPERTY_IMAGES } from "../lib/constants";
@@ -6,6 +7,8 @@ import * as validators from "../middlewares/admin/validators";
 import * as imagesMulter from "../middlewares/images.multer";
 
 const adminRouter = express.Router();
+
+adminRouter.use(csrf());
 
 //
 // Authentication

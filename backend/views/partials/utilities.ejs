@@ -16,6 +16,7 @@
       </div>
       <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
       <form class="modal-footer" action="/admin/logout" method="POST">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
         <button type="submit" class="btn btn-primary">
           Logout

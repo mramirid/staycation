@@ -15,7 +15,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form method="post" action="/admin/banks/<%= bank.id %>?_method=PATCH" enctype="multipart/form-data">
+      <form method="post" action="/admin/banks/<%= bank.id %>?_method=PATCH&_csrf=<%= csrfToken %>" enctype="multipart/form-data">
         <div class="modal-body">
           <div class="form-group">
             <label for="bank-name">Bank Name</label>
