@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { HydratedDocument, model, Query, Schema } from "mongoose";
 import { IProperty } from "./Property";
 
