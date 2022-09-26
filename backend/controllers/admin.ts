@@ -52,11 +52,29 @@ export function logout(req: Request, res: Response, next: NextFunction) {
   });
 }
 
-export function viewDashboard(req: Request, res: Response) {
+export async function viewDashboard(req: Request, res: Response) {
+  let numMembers = 0;
+  let numBookings = 0;
+  let numProperties = 0;
+
+  try {
+    [numMembers, numBookings, numProperties] = await Promise.all([
+      Booking.find().distinct<string>("member.email").countDocuments(),
+      Booking.find().countDocuments(),
+      Property.find().countDocuments(),
+    ]);
+  } catch (maybeError) {
+    const error = catchError(maybeError);
+    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+  }
+
   res.render("admin/dashboard", {
     pageTitle: "Dashboard",
     alert: getAlert(req),
     user: req.user,
+    numMembers,
+    numBookings,
+    numProperties,
   });
 }
 

@@ -236,7 +236,7 @@ async function seed() {
       member: {
         firstName: "Yein",
         lastName: "Narayana",
-        email: "elfinsanjaya1207@gmail.com",
+        email: "yein.narayana@gmail.com",
         phone: "082377954008",
       },
       property: {
