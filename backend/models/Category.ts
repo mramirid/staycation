@@ -21,11 +21,11 @@ categorySchema.pre(
   async function (this: Query<unknown, unknown>) {
     const { _id } = this.getQuery();
 
-    const property = await model<IProperty>("Property").findOne({
+    const numProperties = await model<IProperty>("Property").countDocuments({
       category: _id,
     });
 
-    if (_.isObject(property)) {
+    if (numProperties > 0) {
       throw new Error("The category is being used by some properties");
     }
   }
