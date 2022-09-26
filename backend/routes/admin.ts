@@ -5,40 +5,40 @@ import * as auth from "../middlewares/admin/auth";
 import * as validators from "../middlewares/admin/validators";
 import * as imagesMulter from "../middlewares/images.multer";
 
-const router = express.Router();
+const adminRouter = express.Router();
 
 //
 // Authentication
 //
-router.get("/login", auth.isNotAuthenticated, controllers.viewLogin);
-router.post(
+adminRouter.get("/login", auth.isNotAuthenticated, controllers.viewLogin);
+adminRouter.post(
   "/login",
   auth.isNotAuthenticated,
   validators.loginValidator,
   controllers.login
 );
 
-router.use(auth.isAuthenticated);
+adminRouter.use(auth.isAuthenticated);
 
-router.post("/logout", controllers.logout);
+adminRouter.post("/logout", controllers.logout);
 
-router.get("/dashboard", controllers.viewDashboard);
+adminRouter.get("/dashboard", controllers.viewDashboard);
 
 //
 // Categories
 //
-router.get("/categories", controllers.viewCategories);
-router.post(
+adminRouter.get("/categories", controllers.viewCategories);
+adminRouter.post(
   "/categories",
   validators.addCategoryValidator,
   controllers.addCategory
 );
-router.patch(
+adminRouter.patch(
   "/categories/:id",
   validators.editCategoryValidator,
   controllers.editCategory
 );
-router.delete(
+adminRouter.delete(
   "/categories/:id",
   validators.paramIdValidator,
   controllers.deleteCategory
@@ -47,20 +47,20 @@ router.delete(
 //
 // Banks
 //
-router.get("/banks", controllers.viewBanks);
-router.post(
+adminRouter.get("/banks", controllers.viewBanks);
+adminRouter.post(
   "/banks",
   imagesMulter.handleUploadImage("bankLogo"),
   validators.addBankValidator,
   controllers.addBank
 );
-router.patch(
+adminRouter.patch(
   "/banks/:id",
   imagesMulter.handleUploadImage("bankLogo"),
   validators.editBankValidator,
   controllers.editBank
 );
-router.delete(
+adminRouter.delete(
   "/banks/:id",
   validators.paramIdValidator,
   controllers.deleteBank
@@ -69,65 +69,65 @@ router.delete(
 //
 // Properties
 //
-router.get("/properties", controllers.viewProperties);
-router.post(
+adminRouter.get("/properties", controllers.viewProperties);
+adminRouter.post(
   "/properties",
   imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
   validators.addPropertyValidator,
   controllers.addProperty
 );
-router.get(
+adminRouter.get(
   "/properties/:id/images",
   validators.paramIdValidator,
   controllers.viewPropertyImages
 );
-router.get("/properties/:id/edit", controllers.viewEditProperty);
-router.patch(
+adminRouter.get("/properties/:id/edit", controllers.viewEditProperty);
+adminRouter.patch(
   "/properties/:id",
   imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
   validators.editPropertyValidator,
   controllers.editProperty
 );
-router.delete(
+adminRouter.delete(
   "/properties/:id",
   validators.paramIdValidator,
   controllers.deleteProperty
 );
-router.get(
+adminRouter.get(
   "/properties/:id/addons",
   validators.paramIdValidator,
   controllers.viewPropertyAddons
 );
-router.post(
+adminRouter.post(
   "/properties/:id/features",
   imagesMulter.handleUploadImage("icon"),
   validators.addFeatureValidator,
   controllers.addFeature
 );
-router.patch(
+adminRouter.patch(
   "/properties/:propertyId/features/:featureId",
   imagesMulter.handleUploadImage("icon"),
   validators.editFeatureValidator,
   controllers.editFeature
 );
-router.delete(
+adminRouter.delete(
   "/properties/:propertyId/features/:featureId",
   validators.deleteFeatureValidator,
   controllers.deleteFeature
 );
-router.post(
+adminRouter.post(
   "/properties/:id/activities",
   imagesMulter.handleUploadImage("image"),
   validators.addActivityValidator,
   controllers.addActivity
 );
-router.patch(
+adminRouter.patch(
   "/properties/:propertyId/activities/:activityId",
   imagesMulter.handleUploadImage("image"),
   validators.editActivityValidator,
   controllers.editActivity
 );
-router.delete(
+adminRouter.delete(
   "/properties/:propertyId/activities/:activityId",
   validators.deleteActivityValidator,
   controllers.deleteActivity
@@ -136,21 +136,21 @@ router.delete(
 //
 // Bookings
 //
-router.get("/bookings", controllers.viewBookings);
-router.get(
+adminRouter.get("/bookings", controllers.viewBookings);
+adminRouter.get(
   "/bookings/:id",
   validators.paramIdValidator,
   controllers.viewBooking
 );
-router.patch(
+adminRouter.patch(
   "/bookings/:id/payment/accept",
   validators.paramIdValidator,
   controllers.acceptPayment
 );
-router.patch(
+adminRouter.patch(
   "/bookings/:id/payment/reject",
   validators.paramIdValidator,
   controllers.rejectPayment
 );
 
-export default router;
+export default adminRouter;

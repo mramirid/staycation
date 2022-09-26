@@ -1,10 +1,10 @@
 import express from "express";
 
-const router = express.Router();
+const indexRouter = express.Router();
 
 /* GET home page. */
-router.get("/", function (_, res) {
+indexRouter.get("/", function (_, res) {
   res.redirect("/admin/login");
 });
 
-export default router;
+export default indexRouter;
