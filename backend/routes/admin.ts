@@ -3,7 +3,6 @@ import express from "express";
 import * as controllers from "../controllers/admin";
 import { MAX_PROPERTY_IMAGES } from "../lib/constants";
 import * as auth from "../middlewares/admin/auth";
-import * as validators from "../middlewares/admin/validators";
 import * as imagesMulter from "../middlewares/images.multer";
 
 const adminRouter = express.Router();
@@ -14,12 +13,7 @@ adminRouter.use(csrf());
 // Authentication
 //
 adminRouter.get("/login", auth.isNotAuthenticated, controllers.viewLogin);
-adminRouter.post(
-  "/login",
-  auth.isNotAuthenticated,
-  validators.loginValidator,
-  controllers.login
-);
+adminRouter.post("/login", auth.isNotAuthenticated, controllers.login);
 
 adminRouter.use(auth.isAuthenticated);
 
@@ -31,21 +25,9 @@ adminRouter.get("/dashboard", controllers.viewDashboard);
 // Categories
 //
 adminRouter.get("/categories", controllers.viewCategories);
-adminRouter.post(
-  "/categories",
-  validators.addCategoryValidator,
-  controllers.addCategory
-);
-adminRouter.patch(
-  "/categories/:id",
-  validators.editCategoryValidator,
-  controllers.editCategory
-);
-adminRouter.delete(
-  "/categories/:id",
-  validators.paramIdValidator,
-  controllers.deleteCategory
-);
+adminRouter.post("/categories", controllers.addCategory);
+adminRouter.patch("/categories/:id", controllers.editCategory);
+adminRouter.delete("/categories/:id", controllers.deleteCategory);
 
 //
 // Banks
@@ -53,21 +35,15 @@ adminRouter.delete(
 adminRouter.get("/banks", controllers.viewBanks);
 adminRouter.post(
   "/banks",
-  imagesMulter.handleUploadImage("bankLogo"),
-  validators.addBankValidator,
+  imagesMulter.handleUpload("bankLogo"),
   controllers.addBank
 );
 adminRouter.patch(
   "/banks/:id",
-  imagesMulter.handleUploadImage("bankLogo"),
-  validators.editBankValidator,
+  imagesMulter.handleUpload("bankLogo"),
   controllers.editBank
 );
-adminRouter.delete(
-  "/banks/:id",
-  validators.paramIdValidator,
-  controllers.deleteBank
-);
+adminRouter.delete("/banks/:id", controllers.deleteBank);
 
 //
 // Properties
@@ -75,64 +51,44 @@ adminRouter.delete(
 adminRouter.get("/properties", controllers.viewProperties);
 adminRouter.post(
   "/properties",
-  imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
-  validators.addPropertyValidator,
+  imagesMulter.handleUploadArray("images", MAX_PROPERTY_IMAGES),
   controllers.addProperty
 );
-adminRouter.get(
-  "/properties/:id/images",
-  validators.paramIdValidator,
-  controllers.viewPropertyImages
-);
+adminRouter.get("/properties/:id/images", controllers.viewPropertyImages);
 adminRouter.get("/properties/:id/edit", controllers.viewEditProperty);
 adminRouter.patch(
   "/properties/:id",
-  imagesMulter.handleUploadImages("images", MAX_PROPERTY_IMAGES),
-  validators.editPropertyValidator,
+  imagesMulter.handleUploadArray("images", MAX_PROPERTY_IMAGES),
   controllers.editProperty
 );
-adminRouter.delete(
-  "/properties/:id",
-  validators.paramIdValidator,
-  controllers.deleteProperty
-);
-adminRouter.get(
-  "/properties/:id/addons",
-  validators.paramIdValidator,
-  controllers.viewPropertyAddons
-);
+adminRouter.delete("/properties/:id", controllers.deleteProperty);
+adminRouter.get("/properties/:id/addons", controllers.viewPropertyAddons);
 adminRouter.post(
   "/properties/:id/features",
-  imagesMulter.handleUploadImage("icon"),
-  validators.addFeatureValidator,
+  imagesMulter.handleUpload("icon"),
   controllers.addFeature
 );
 adminRouter.patch(
   "/properties/:propertyId/features/:featureId",
-  imagesMulter.handleUploadImage("icon"),
-  validators.editFeatureValidator,
+  imagesMulter.handleUpload("icon"),
   controllers.editFeature
 );
 adminRouter.delete(
   "/properties/:propertyId/features/:featureId",
-  validators.deleteFeatureValidator,
   controllers.deleteFeature
 );
 adminRouter.post(
   "/properties/:id/activities",
-  imagesMulter.handleUploadImage("image"),
-  validators.addActivityValidator,
+  imagesMulter.handleUpload("image"),
   controllers.addActivity
 );
 adminRouter.patch(
   "/properties/:propertyId/activities/:activityId",
-  imagesMulter.handleUploadImage("image"),
-  validators.editActivityValidator,
+  imagesMulter.handleUpload("image"),
   controllers.editActivity
 );
 adminRouter.delete(
   "/properties/:propertyId/activities/:activityId",
-  validators.deleteActivityValidator,
   controllers.deleteActivity
 );
 
@@ -140,20 +96,8 @@ adminRouter.delete(
 // Bookings
 //
 adminRouter.get("/bookings", controllers.viewBookings);
-adminRouter.get(
-  "/bookings/:id",
-  validators.paramIdValidator,
-  controllers.viewBooking
-);
-adminRouter.patch(
-  "/bookings/:id/payment/accept",
-  validators.paramIdValidator,
-  controllers.acceptPayment
-);
-adminRouter.patch(
-  "/bookings/:id/payment/reject",
-  validators.paramIdValidator,
-  controllers.rejectPayment
-);
+adminRouter.get("/bookings/:id", controllers.viewBooking);
+adminRouter.patch("/bookings/:id/payment/accept", controllers.acceptPayment);
+adminRouter.patch("/bookings/:id/payment/reject", controllers.rejectPayment);
 
 export default adminRouter;

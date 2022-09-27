@@ -116,6 +116,7 @@ const bookingSchema = new Schema<
     status: {
       type: String,
       default: "Pending",
+      enum: ["Accepted", "Rejected", "Pending"],
     },
   },
 });

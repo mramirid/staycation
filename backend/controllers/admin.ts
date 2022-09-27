@@ -11,7 +11,7 @@ import Category, { CategoryDoc, ICategory } from "../models/Category";
 import Property, { PropertyDoc } from "../models/Property";
 import { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
-import { catchError, checkValidationResult } from "../utils/error";
+import { catchError } from "../utils/error";
 
 export function viewLogin(req: Request, res: Response) {
   res.render("admin/login", {
@@ -28,8 +28,6 @@ export async function login(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     auth.passport.authenticate("local", {
       successRedirect: "/admin/dashboard",
       failureRedirect: "/admin/login",
@@ -104,8 +102,6 @@ export async function addCategory(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     await Category.create(req.body);
 
     setAlert(req, { message: "Category added", status: AlertStatuses.Success });
@@ -122,8 +118,6 @@ export async function editCategory(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const category = await Category.findById(req.params.id).orFail(category404);
 
     category.name = req.body.name;
@@ -146,8 +140,6 @@ export async function deleteCategory(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     await Category.findByIdAndDelete(req.params.id).orFail(category404);
 
     setAlert(req, {
@@ -183,7 +175,7 @@ export async function viewBanks(req: Request, res: Response) {
 
 type AddBankReqBody = {
   bankName: string;
-  accountNumber: string;
+  accountNumbers: string;
   accountHolderName: string;
 };
 
@@ -192,13 +184,14 @@ export async function addBank(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
+    if (_.isUndefined(req.file)) {
+      throw new Error("Please provide a logo for the bank");
+    }
 
-    const bankLogo = req.file as Express.Multer.File;
     await Bank.create({
       name: req.body.bankName,
-      logoUrl: `/images/${bankLogo.filename}`,
-      accountNumber: req.body.accountNumber,
+      logoUrl: `/images/${req.file.filename}`,
+      accountNumbers: req.body.accountNumbers,
       accountHolderName: req.body.accountHolderName,
     });
 
@@ -218,12 +211,10 @@ export async function editBank(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const bank = await Bank.findById(req.params.id).orFail(bank404);
 
     bank.name = req.body.bankName;
-    bank.accountNumber = req.body.accountNumber;
+    bank.accountNumbers = req.body.accountNumbers;
     bank.accountHolderName = req.body.accountHolderName;
     if (_.isObject(req.file)) {
       await fs.unlink(path.join("public", bank.logoUrl));
@@ -245,8 +236,6 @@ export async function editBank(
 
 export async function deleteBank(req: Request<{ id: string }>, res: Response) {
   try {
-    checkValidationResult(req);
-
     const bank = await Bank.findByIdAndDelete(req.params.id).orFail(bank404);
 
     await fs.unlink(path.join("public", bank.logoUrl));
@@ -296,8 +285,6 @@ export async function viewPropertyImages(
   let property: PropertyDoc | undefined;
 
   try {
-    checkValidationResult(req);
-
     property = await Property.findById(req.params.id).orFail(property404);
   } catch (maybeError) {
     const error = catchError(maybeError);
@@ -331,9 +318,8 @@ export async function addProperty(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const images = req.files as Express.Multer.File[];
+
     await Property.create({
       title: req.body.title,
       price: req.body.price,
@@ -361,8 +347,6 @@ export async function viewEditProperty(
   let categories: CategoryDoc[] = [];
 
   try {
-    checkValidationResult(req);
-
     [property, categories] = await Promise.all([
       Property.findById(req.params.id).orFail(property404),
       Category.find(),
@@ -387,8 +371,6 @@ export async function editProperty(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const property = await Property.findById(req.params.id).orFail(property404);
 
     property.title = req.body.title;
@@ -397,12 +379,10 @@ export async function editProperty(
     property.country = req.body.country;
     property.category = req.body.categoryId;
     property.description = req.body.description;
-
     const images = req.files as Express.Multer.File[];
     if (!_.isEmpty(images)) {
       property.imageUrls = images.map((image) => `/images/${image.filename}`);
     }
-
     await property.save();
 
     setAlert(req, {
@@ -422,8 +402,6 @@ export async function deleteProperty(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const property = await Property.findByIdAndDelete(req.params.id).orFail(
       property404
     );
@@ -459,8 +437,6 @@ export async function viewPropertyAddons(
   let property: PropertyDoc | undefined;
 
   try {
-    checkValidationResult(req);
-
     property = await Property.findById(req.params.id).orFail(property404);
   } catch (maybeError) {
     const error = catchError(maybeError);
@@ -486,17 +462,15 @@ export async function addFeature(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const property = await Property.findById(req.params.id).orFail(property404);
 
-    const icon = req.file as Express.Multer.File;
     property.features.push({
       name: req.body.name,
       quantity: req.body.quantity,
-      iconUrl: `/images/${icon.filename}`,
+      iconUrl: _.isObject(req.file)
+        ? `/images/${req.file.filename}`
+        : undefined,
     });
-
     await property.save();
 
     setAlert(req, { message: "Feature added", status: AlertStatuses.Success });
@@ -520,8 +494,6 @@ export async function editFeature(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const property = await Property.findById(req.params.propertyId).orFail(
       property404
     );
@@ -537,7 +509,6 @@ export async function editFeature(
       await fs.unlink(path.join("public", feature.iconUrl));
       feature.iconUrl = `/images/${req.file.filename}`;
     }
-
     await property.save();
 
     setAlert(req, {
@@ -557,8 +528,6 @@ export async function deleteFeature(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const property = await Property.findById(req.params.propertyId).orFail(
       property404
     );
@@ -596,17 +565,15 @@ export async function addActivity(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const property = await Property.findById(req.params.id).orFail(property404);
 
-    const image = req.file as Express.Multer.File;
     property.activities.push({
       name: req.body.name,
       type: req.body.type,
-      imageUrl: `/images/${image.filename}`,
+      imageUrl: _.isObject(req.file)
+        ? `/images/${req.file.filename}`
+        : undefined,
     });
-
     await property.save();
 
     setAlert(req, { message: "Activity added", status: AlertStatuses.Success });
@@ -630,8 +597,6 @@ export async function editActivity(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const property = await Property.findById(req.params.propertyId).orFail(
       property404
     );
@@ -667,8 +632,6 @@ export async function deleteActivity(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const property = await Property.findById(req.params.propertyId).orFail(
       property404
     );
@@ -731,8 +694,6 @@ export async function viewBooking(req: Request<{ id: string }>, res: Response) {
   let booking: PopulatedBookingDoc | undefined;
 
   try {
-    checkValidationResult(req);
-
     booking = await Booking.findById(req.params.id)
       .populate<BookingPopulationPaths>(["property.current", "bank"])
       .orFail(booking404);
@@ -755,8 +716,6 @@ export async function acceptPayment(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const booking = await Booking.findById(req.params.id).orFail(booking404);
     booking.payment.status = "Accepted";
     await booking.save();
@@ -778,8 +737,6 @@ export async function rejectPayment(
   res: Response
 ) {
   try {
-    checkValidationResult(req);
-
     const booking = await Booking.findById(req.params.id).orFail(booking404);
     booking.payment.status = "Rejected";
     await booking.save();

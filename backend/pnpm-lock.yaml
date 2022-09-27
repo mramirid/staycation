@@ -15,6 +15,7 @@ specifiers:
   '@types/multer': ^1.4.7
   '@types/passport': ^1.0.11
   '@types/passport-local': ^1.0.34
+  '@types/validator': ^13.7.7
   '@typescript-eslint/eslint-plugin': ^5.29.0
   '@typescript-eslint/parser': ^5.29.0
   bcryptjs: ^2.4.3
@@ -29,7 +30,6 @@ specifiers:
   eslint-plugin-node: ^11.1.0
   express: ^4.18.1
   express-session: ^1.17.3
-  express-validator: ^6.14.2
   helmet: ^6.0.0
   http-errors: ^2.0.0
   http-status-codes: ^2.2.0
@@ -46,6 +46,7 @@ specifiers:
   startbootstrap-sb-admin-2: ^4.1.4
   ts-node: ^10.8.1
   typescript: ^4.7.4
+  validator: ^13.7.0
 
 dependencies:
   bcryptjs: 2.4.3
@@ -57,7 +58,6 @@ dependencies:
   envalid: 7.3.1
   express: 4.18.1
   express-session: 1.17.3
-  express-validator: 6.14.2
   helmet: 6.0.0
   http-errors: 2.0.0
   http-status-codes: 2.2.0
@@ -70,6 +70,7 @@ dependencies:
   passport-local: 1.0.0
   startbootstrap-sb-admin-2: 4.1.4_popper.js@1.16.1
   ts-node: 10.8.1_ssqzpbjs2sdybfr3fpuddh5sdi
+  validator: 13.7.0
 
 devDependencies:
   '@types/bcryptjs': 2.4.2
@@ -86,6 +87,7 @@ devDependencies:
   '@types/multer': 1.4.7
   '@types/passport': 1.0.11
   '@types/passport-local': 1.0.34
+  '@types/validator': 13.7.7
   '@typescript-eslint/eslint-plugin': 5.29.0_qqmbkyiaixvppdwswpytuf2hgm
   '@typescript-eslint/parser': 5.29.0_b5e7v2qnwxfo6hmiq56u52mz3e
   eslint: 8.18.0
@@ -356,6 +358,10 @@ packages:
     dependencies:
       '@types/mime': 3.0.1
       '@types/node': 18.7.16
+    dev: true
+
+  /@types/validator/13.7.7:
+    resolution: {integrity: sha512-jiEw2kTUJ8Jsh4A1K4b5Pkjj9Xz6FktLLOQ36ZVLRkmxFbpTvAV2VRoKMojz8UlZxNg/2dZqzpigH4JYn1bkQg==}
     dev: true
 
   /@types/webidl-conversions/7.0.0:
@@ -1331,14 +1337,6 @@ packages:
       uid-safe: 2.1.5
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /express-validator/6.14.2:
-    resolution: {integrity: sha512-8XfAUrQ6Y7dIIuy9KcUPCfG/uCbvREctrxf5EeeME+ulanJ4iiW71lWmm9r4YcKKYOCBMan0WpVg7FtHu4Z4Wg==}
-    engines: {node: '>= 8.0.0'}
-    dependencies:
-      lodash: 4.17.21
-      validator: 13.7.0
     dev: false
 
   /express/4.18.1:

@@ -11,13 +11,14 @@ export type UserDoc = HydratedDocument<IUser>;
 const userSchema = new Schema<IUser>({
   username: {
     type: String,
-    required: true,
-    index: true,
     unique: true,
+    required: true,
+    trim: true,
   },
   password: {
     type: String,
     required: true,
+    trim: true,
   },
 });
 

@@ -16,8 +16,13 @@ mongoose.connect(
     }
 
     try {
+      console.log("Dropping the database...");
       await mongoose.connection.dropDatabase();
+      console.log("The database has been dropped");
+
+      console.log("Seeding...");
       await seed();
+      console.log("Done");
     } catch (maybeError) {
       throw new Error("Seeding failed", { cause: catchError(maybeError) });
     } finally {
@@ -31,13 +36,13 @@ async function seed() {
     {
       name: "Bank Syariah Indonesia",
       logoUrl: "/images/bsi-logo.seed.png",
-      accountNumber: "22081544",
+      accountNumbers: "22081544",
       accountHolderName: "Amir Muhammad Hakim",
     },
     {
       name: "Bank Syariah Mandiri",
       logoUrl: "/images/mandiri-syariah-logo.seed.png",
-      accountNumber: "77542493",
+      accountNumbers: "77542493",
       accountHolderName: "Muhammad Avdol",
     },
   ]);

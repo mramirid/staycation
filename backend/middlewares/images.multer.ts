@@ -14,7 +14,7 @@ const uploadStorage = multer.diskStorage({
   },
 });
 
-export function handleUploadImage(fieldName: string): RequestHandler {
+export function handleUpload(fieldName: string): RequestHandler {
   const upload = multer({
     storage: uploadStorage,
     limits: { fileSize: 1_000_000 },
@@ -47,7 +47,7 @@ const multipleUploadStorage = multer.diskStorage({
   },
 });
 
-export function handleUploadImages(
+export function handleUploadArray(
   fieldName: string,
   maxFiles = 12
 ): RequestHandler {
