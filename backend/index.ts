@@ -13,8 +13,8 @@ import passport from "passport";
 import path from "path";
 import { env } from "./lib/constants";
 import adminRouter from "./routes/admin";
-import apiRouter from "./routes/api";
 import indexRouter from "./routes/index";
+import memberRouter from "./routes/member";
 import * as format from "./utils/format";
 
 const app = express();
@@ -68,7 +68,7 @@ app.use((__: Request, res: Response, next) => {
 
 app.use("/", indexRouter);
 app.use("/admin", adminRouter);
-app.use("/api/v1/member", apiRouter);
+app.use("/api/v1/member", memberRouter);
 
 // catch 404 and forward to error handler
 app.use((_, __, next) => {

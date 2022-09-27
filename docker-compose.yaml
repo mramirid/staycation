@@ -8,6 +8,15 @@ services:
     ports:
       - "27017:27017" # TODO: Should be removed in production
 
+  seeding:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.seeding
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - mongodb
+
   backend:
     build:
       context: ./backend
@@ -21,16 +30,7 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - mongodb
-
-  seeding:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.seeding
-    env_file:
-      - ./backend/.env
-    depends_on:
-      - mongodb
+      - seeding
 
   frontend:
     build: ./frontend

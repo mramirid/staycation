@@ -12,6 +12,7 @@ import Category from "./Category";
 export interface IProperty {
   title: string;
   price: Types.Decimal128;
+  unit: string;
   city: string;
   country: string;
   isPopular: boolean;
@@ -47,6 +48,11 @@ const propertySchema = new Schema<IProperty>({
         validator.isFloat(v.toString(), { min: 0 }),
       message: "The price must be a positive float",
     },
+  },
+  unit: {
+    type: String,
+    trim: true,
+    default: "night",
   },
   city: {
     type: String,
