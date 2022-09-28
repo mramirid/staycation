@@ -1,11 +1,11 @@
 import _ from "lodash";
 import mongoose from "mongoose";
-import { env } from "./lib/constants";
 import Bank from "./models/Bank";
 import Booking from "./models/Booking";
 import Category from "./models/Category";
 import Property from "./models/Property";
 import User from "./models/User";
+import { env } from "./utils/constant";
 
 mongoose.connect(
   `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`,

@@ -11,10 +11,10 @@ import mongoose from "mongoose";
 import logger from "morgan";
 import passport from "passport";
 import path from "path";
-import { env } from "./lib/constants";
 import adminRouter from "./routes/admin";
 import indexRouter from "./routes/index";
 import memberRouter from "./routes/member";
+import { env } from "./utils/constant";
 import * as format from "./utils/format";
 
 const app = express();

@@ -3,10 +3,10 @@ import {
   isValidObjectId,
   model,
   Schema,
-  Types,
+  Types
 } from "mongoose";
 import validator from "validator";
-import { category404, MAX_PROPERTY_IMAGES } from "../lib/constants";
+import { category404, MAX_PROPERTY_IMAGES } from "../utils/constant";
 import Category from "./Category";
 
 export interface IProperty {

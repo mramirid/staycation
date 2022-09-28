@@ -1,9 +1,9 @@
 import csrf from "csurf";
 import express from "express";
 import * as controllers from "../controllers/admin";
-import { MAX_PROPERTY_IMAGES } from "../lib/constants";
 import * as auth from "../middlewares/admin/auth";
 import * as imagesMulter from "../middlewares/images.multer";
+import { MAX_PROPERTY_IMAGES } from "../utils/constant";
 
 const adminRouter = express.Router();
 

@@ -3,7 +3,6 @@ import fs from "fs/promises";
 import _ from "lodash";
 import { MergeType, Types } from "mongoose";
 import path from "path";
-import { category404 } from "../lib/constants";
 import * as auth from "../middlewares/admin/auth";
 import Bank, { BankDoc } from "../models/Bank";
 import Booking, { BookingDoc } from "../models/Booking";
@@ -11,6 +10,7 @@ import Category, { CategoryDoc, ICategory } from "../models/Category";
 import Property, { PropertyDoc } from "../models/Property";
 import { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
+import { category404 } from "../utils/constant";
 import { catchError } from "../utils/error";
 
 export function viewLogin(req: Request, res: Response) {
