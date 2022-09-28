@@ -5,7 +5,7 @@ import passport from "passport";
 import { Strategy } from "passport-local";
 import User, { UserDoc } from "../../models/User";
 import { AlertStatuses, setAlert } from "../../utils/alert";
-import { catchError } from "../../utils/error";
+import { toError } from "../../utils/error";
 
 const localStrategy = new Strategy(async (username, password, done) => {
   let user: UserDoc | null;
@@ -13,7 +13,7 @@ const localStrategy = new Strategy(async (username, password, done) => {
   try {
     user = await User.findOne({ username });
   } catch (maybeError) {
-    done(catchError(maybeError));
+    done(toError(maybeError));
     return;
   }
 
@@ -54,7 +54,7 @@ passport.deserializeUser((userId: string, done) => {
       );
       done(undefined, user);
     } catch (maybeError) {
-      done(catchError(maybeError));
+      done(toError(maybeError));
     }
   });
 });
