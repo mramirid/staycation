@@ -6,7 +6,6 @@ import Booking from "./models/Booking";
 import Category from "./models/Category";
 import Property from "./models/Property";
 import User from "./models/User";
-import { catchError } from "./utils/error";
 
 mongoose.connect(
   `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`,
@@ -24,7 +23,7 @@ mongoose.connect(
       await seed();
       console.log("Done");
     } catch (maybeError) {
-      throw new Error("Seeding failed", { cause: catchError(maybeError) });
+      throw new Error("Seeding failed", { cause: maybeError });
     } finally {
       await mongoose.connection.close();
     }
