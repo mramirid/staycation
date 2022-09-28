@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import fs from "fs/promises";
 import _ from "lodash";
-import { MergeType, Types } from "mongoose";
+import mongoose, { MergeType, Types } from "mongoose";
 import path from "path";
 import * as auth from "../middlewares/admin/auth";
 import Bank, { BankDoc } from "../models/Bank";
@@ -10,8 +10,8 @@ import Category, { CategoryDoc, ICategory } from "../models/Category";
 import Property, { PropertyDoc } from "../models/Property";
 import { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
-import { category404 } from "../utils/constant";
-import { catchError } from "../utils/error";
+import { category404Error } from "../utils/constant";
+import { getErrorMessage } from "../utils/error";
 
 export function viewLogin(req: Request, res: Response) {
   res.render("admin/login", {
@@ -34,8 +34,10 @@ export async function login(
       failureFlash: true,
     })(req, res);
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
     res.redirect("/admin/login");
   }
 }
@@ -63,8 +65,10 @@ export async function viewDashboard(req: Request, res: Response) {
       Property.find().countDocuments(),
     ]);
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.render("admin/dashboard", {
@@ -84,8 +88,10 @@ export async function viewCategories(req: Request, res: Response) {
   try {
     categories = await Category.find();
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.render("admin/categories", {
@@ -106,8 +112,11 @@ export async function addCategory(
 
     setAlert(req, { message: "Category added", status: AlertStatuses.Success });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect("/admin/categories");
@@ -118,7 +127,9 @@ export async function editCategory(
   res: Response
 ) {
   try {
-    const category = await Category.findById(req.params.id).orFail(category404);
+    const category = await Category.findById(req.params.id).orFail(
+      category404Error
+    );
 
     category.name = req.body.name;
     await category.save();
@@ -128,8 +139,11 @@ export async function editCategory(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect("/admin/categories");
@@ -140,15 +154,17 @@ export async function deleteCategory(
   res: Response
 ) {
   try {
-    await Category.findByIdAndDelete(req.params.id).orFail(category404);
+    await Category.findByIdAndDelete(req.params.id).orFail(category404Error);
 
     setAlert(req, {
       message: "Category deleted",
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.redirect("/admin/categories");
@@ -160,8 +176,10 @@ export async function viewBanks(req: Request, res: Response) {
   try {
     banks = await Bank.find();
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.render("admin/banks", {
@@ -184,34 +202,35 @@ export async function addBank(
   res: Response
 ) {
   try {
-    if (_.isUndefined(req.file)) {
-      throw new Error("Please provide a logo for the bank");
-    }
-
     await Bank.create({
       name: req.body.bankName,
-      logoUrl: `/images/${req.file.filename}`,
+      logoUrl: _.isObject(req.file)
+        ? `/images/${req.file.filename}`
+        : undefined,
       accountNumbers: req.body.accountNumbers,
       accountHolderName: req.body.accountHolderName,
     });
 
     setAlert(req, { message: "Bank added", status: AlertStatuses.Success });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect("/admin/banks");
 }
 
-const bank404 = new Error("Bank not found");
+const bank404Error = new Error("Bank not found");
 
 export async function editBank(
   req: Request<{ id: string }, Record<string, never>, AddBankReqBody>,
   res: Response
 ) {
   try {
-    const bank = await Bank.findById(req.params.id).orFail(bank404);
+    const bank = await Bank.findById(req.params.id).orFail(bank404Error);
 
     bank.name = req.body.bankName;
     bank.accountNumbers = req.body.accountNumbers;
@@ -227,8 +246,11 @@ export async function editBank(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect("/admin/banks");
@@ -236,7 +258,9 @@ export async function editBank(
 
 export async function deleteBank(req: Request<{ id: string }>, res: Response) {
   try {
-    const bank = await Bank.findByIdAndDelete(req.params.id).orFail(bank404);
+    const bank = await Bank.findByIdAndDelete(req.params.id).orFail(
+      bank404Error
+    );
 
     await fs.unlink(path.join("public", bank.logoUrl));
 
@@ -245,8 +269,10 @@ export async function deleteBank(req: Request<{ id: string }>, res: Response) {
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.redirect("/admin/banks");
@@ -262,8 +288,10 @@ export async function viewProperties(req: Request, res: Response) {
       Category.find(),
     ]);
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.render("admin/properties", {
@@ -276,7 +304,7 @@ export async function viewProperties(req: Request, res: Response) {
   });
 }
 
-const property404 = new Error("Property not found");
+const property404Error = new Error("Property not found");
 
 export async function viewPropertyImages(
   req: Request<{ id: string }>,
@@ -285,10 +313,12 @@ export async function viewPropertyImages(
   let property: PropertyDoc | undefined;
 
   try {
-    property = await Property.findById(req.params.id).orFail(property404);
+    property = await Property.findById(req.params.id).orFail(property404Error);
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.render("admin/properties/property/images", {
@@ -332,8 +362,11 @@ export async function addProperty(
 
     setAlert(req, { message: "Property added", status: AlertStatuses.Success });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect("/admin/properties");
@@ -348,12 +381,14 @@ export async function viewEditProperty(
 
   try {
     [property, categories] = await Promise.all([
-      Property.findById(req.params.id).orFail(property404),
+      Property.findById(req.params.id).orFail(property404Error),
       Category.find(),
     ]);
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.render("admin/properties/property/edit", {
@@ -371,7 +406,9 @@ export async function editProperty(
   res: Response
 ) {
   try {
-    const property = await Property.findById(req.params.id).orFail(property404);
+    const property = await Property.findById(req.params.id).orFail(
+      property404Error
+    );
 
     property.title = req.body.title;
     property.price = req.body.price;
@@ -390,8 +427,11 @@ export async function editProperty(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect("/admin/properties");
@@ -403,7 +443,7 @@ export async function deleteProperty(
 ) {
   try {
     const property = await Property.findByIdAndDelete(req.params.id).orFail(
-      property404
+      property404Error
     );
 
     await Promise.allSettled([
@@ -423,8 +463,10 @@ export async function deleteProperty(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.redirect("/admin/properties");
@@ -437,10 +479,12 @@ export async function viewPropertyAddons(
   let property: PropertyDoc | undefined;
 
   try {
-    property = await Property.findById(req.params.id).orFail(property404);
+    property = await Property.findById(req.params.id).orFail(property404Error);
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.render("admin/properties/property", {
@@ -462,7 +506,9 @@ export async function addFeature(
   res: Response
 ) {
   try {
-    const property = await Property.findById(req.params.id).orFail(property404);
+    const property = await Property.findById(req.params.id).orFail(
+      property404Error
+    );
 
     property.features.push({
       name: req.body.name,
@@ -475,8 +521,11 @@ export async function addFeature(
 
     setAlert(req, { message: "Feature added", status: AlertStatuses.Success });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect(`/admin/properties/${req.params.id}/addons`);
@@ -487,7 +536,7 @@ type EditFeatureParams = {
   featureId: string;
 };
 
-const feature404 = new Error("Feature not found");
+const feature404Error = new Error("Feature not found");
 
 export async function editFeature(
   req: Request<EditFeatureParams, Record<string, never>, AddFeatureReqBody>,
@@ -495,12 +544,12 @@ export async function editFeature(
 ) {
   try {
     const property = await Property.findById(req.params.propertyId).orFail(
-      property404
+      property404Error
     );
 
     const feature = property.features.id(req.params.featureId);
     if (_.isNull(feature)) {
-      throw feature404;
+      throw feature404Error;
     }
 
     feature.name = req.body.name;
@@ -516,8 +565,11 @@ export async function editFeature(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
@@ -529,12 +581,12 @@ export async function deleteFeature(
 ) {
   try {
     const property = await Property.findById(req.params.propertyId).orFail(
-      property404
+      property404Error
     );
 
     const feature = property.features.id(req.params.featureId);
     if (_.isNull(feature)) {
-      throw feature404;
+      throw feature404Error;
     }
 
     property.features.pull(feature);
@@ -548,8 +600,10 @@ export async function deleteFeature(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
@@ -565,7 +619,9 @@ export async function addActivity(
   res: Response
 ) {
   try {
-    const property = await Property.findById(req.params.id).orFail(property404);
+    const property = await Property.findById(req.params.id).orFail(
+      property404Error
+    );
 
     property.activities.push({
       name: req.body.name,
@@ -578,8 +634,11 @@ export async function addActivity(
 
     setAlert(req, { message: "Activity added", status: AlertStatuses.Success });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect(`/admin/properties/${req.params.id}/addons`);
@@ -590,7 +649,7 @@ type EditActivityParams = {
   activityId: string;
 };
 
-const activity404 = new Error("Activity not found");
+const activity404Error = new Error("Activity not found");
 
 export async function editActivity(
   req: Request<EditActivityParams, Record<string, never>, AddActivityReqBody>,
@@ -598,12 +657,12 @@ export async function editActivity(
 ) {
   try {
     const property = await Property.findById(req.params.propertyId).orFail(
-      property404
+      property404Error
     );
 
     const activity = property.activities.id(req.params.activityId);
     if (_.isNull(activity)) {
-      throw activity404;
+      throw activity404Error;
     }
 
     activity.name = req.body.name;
@@ -620,11 +679,26 @@ export async function editActivity(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    let errorMessage = getErrorMessage(maybeError);
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      errorMessage = getValidationErrorMessage(maybeError);
+    }
+    setAlert(req, { message: errorMessage, status: AlertStatuses.Error });
   }
 
   res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
+}
+
+function getValidationErrorMessage(error: mongoose.Error.ValidationError) {
+  const errors = Object.values(error.errors);
+  const messages = errors.map(getErrorMessage);
+
+  const formatter = new Intl.ListFormat("en-US", {
+    style: "long",
+    type: "conjunction",
+  });
+
+  return formatter.format(messages);
 }
 
 export async function deleteActivity(
@@ -633,12 +707,12 @@ export async function deleteActivity(
 ) {
   try {
     const property = await Property.findById(req.params.propertyId).orFail(
-      property404
+      property404Error
     );
 
     const activity = property.activities.id(req.params.activityId);
     if (_.isNull(activity)) {
-      throw activity404;
+      throw activity404Error;
     }
 
     property.activities.pull(activity);
@@ -652,8 +726,10 @@ export async function deleteActivity(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.redirect(`/admin/properties/${req.params.propertyId}/addons`);
@@ -675,8 +751,10 @@ export async function viewBookings(req: Request, res: Response) {
       "bank",
     ]);
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.render("admin/bookings", {
@@ -688,7 +766,7 @@ export async function viewBookings(req: Request, res: Response) {
   });
 }
 
-const booking404 = new Error("Booking not found");
+const booking404Error = new Error("Booking not found");
 
 export async function viewBooking(req: Request<{ id: string }>, res: Response) {
   let booking: PopulatedBookingDoc | undefined;
@@ -696,10 +774,12 @@ export async function viewBooking(req: Request<{ id: string }>, res: Response) {
   try {
     booking = await Booking.findById(req.params.id)
       .populate<BookingPopulationPaths>(["property.current", "bank"])
-      .orFail(booking404);
+      .orFail(booking404Error);
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.render("admin/bookings/booking", {
@@ -716,7 +796,9 @@ export async function acceptPayment(
   res: Response
 ) {
   try {
-    const booking = await Booking.findById(req.params.id).orFail(booking404);
+    const booking = await Booking.findById(req.params.id).orFail(
+      booking404Error
+    );
     booking.payment.status = "Accepted";
     await booking.save();
 
@@ -725,8 +807,10 @@ export async function acceptPayment(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.redirect(`/admin/bookings/${req.params.id}`);
@@ -737,7 +821,9 @@ export async function rejectPayment(
   res: Response
 ) {
   try {
-    const booking = await Booking.findById(req.params.id).orFail(booking404);
+    const booking = await Booking.findById(req.params.id).orFail(
+      booking404Error
+    );
     booking.payment.status = "Rejected";
     await booking.save();
 
@@ -746,8 +832,10 @@ export async function rejectPayment(
       status: AlertStatuses.Success,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
-    setAlert(req, { message: error.message, status: AlertStatuses.Error });
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
   }
 
   res.redirect(`/admin/bookings/${req.params.id}`);

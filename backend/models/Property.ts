@@ -3,10 +3,10 @@ import {
   isValidObjectId,
   model,
   Schema,
-  Types
+  Types,
 } from "mongoose";
 import validator from "validator";
-import { category404, MAX_PROPERTY_IMAGES } from "../utils/constant";
+import { category404Error, MAX_PROPERTY_IMAGES } from "../utils/constant";
 import Category from "./Category";
 
 export interface IProperty {
@@ -80,7 +80,7 @@ const propertySchema = new Schema<IProperty>({
       },
       {
         validator: (v: Types.ObjectId) =>
-          Category.findById(v).orFail(category404),
+          Category.findById(v).orFail(category404Error),
       },
     ],
   },

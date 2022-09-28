@@ -1,21 +1,13 @@
 import _ from "lodash";
-import mongoose from "mongoose";
 
-export function catchError(maybeError: unknown): Error {
-  if (maybeError instanceof mongoose.Error.ValidationError) {
-    const [firstError] = Object.values(maybeError.errors);
-    return firstError;
-  }
-
-  if (_.isError(maybeError)) {
-    return maybeError;
-  }
-
-  return new Error("Something went wrong!");
+export function getErrorMessage(maybeError: unknown) {
+  return toError(maybeError).message;
 }
 
 export function toError(maybeError: unknown): Error {
-  if (_.isError(maybeError)) return maybeError;
+  if (_.isError(maybeError)) {
+    return maybeError;
+  }
 
   try {
     return new Error(JSON.stringify(maybeError));
