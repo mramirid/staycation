@@ -25,7 +25,7 @@ export function viewLogin(req: Request, res: Response) {
 }
 
 export async function login(
-  req: Request<Record<string, never>, Record<string, never>, IUser>,
+  req: Request<unknown, unknown, IUser>,
   res: Response
 ) {
   try {
@@ -105,7 +105,7 @@ export async function viewCategories(req: Request, res: Response) {
 }
 
 export async function addCategory(
-  req: Request<Record<string, never>, Record<string, never>, ICategory>,
+  req: Request<unknown, unknown, ICategory>,
   res: Response
 ) {
   try {
@@ -124,7 +124,7 @@ export async function addCategory(
 }
 
 export async function editCategory(
-  req: Request<{ id: string }, Record<string, never>, { name: string }>,
+  req: Request<{ id: string }, unknown, { name: string }>,
   res: Response
 ) {
   try {
@@ -199,7 +199,7 @@ type AddBankReqBody = {
 };
 
 export async function addBank(
-  req: Request<Record<string, never>, Record<string, never>, AddBankReqBody>,
+  req: Request<unknown, unknown, AddBankReqBody>,
   res: Response
 ) {
   try {
@@ -227,7 +227,7 @@ export async function addBank(
 const bank404Error = new createHttpError.NotFound("Bank not found");
 
 export async function editBank(
-  req: Request<{ id: string }, Record<string, never>, AddBankReqBody>,
+  req: Request<{ id: string }, unknown, AddBankReqBody>,
   res: Response
 ) {
   try {
@@ -339,11 +339,7 @@ type AddPropertyReqBody = {
 };
 
 export async function addProperty(
-  req: Request<
-    Record<string, never>,
-    Record<string, never>,
-    AddPropertyReqBody
-  >,
+  req: Request<unknown, unknown, AddPropertyReqBody>,
   res: Response
 ) {
   try {
@@ -401,7 +397,7 @@ export async function viewEditProperty(
 }
 
 export async function editProperty(
-  req: Request<{ id: string }, Record<string, never>, AddPropertyReqBody>,
+  req: Request<{ id: string }, unknown, AddPropertyReqBody>,
   res: Response
 ) {
   try {
@@ -501,7 +497,7 @@ type AddFeatureReqBody = {
 };
 
 export async function addFeature(
-  req: Request<{ id: string }, Record<string, never>, AddFeatureReqBody>,
+  req: Request<{ id: string }, unknown, AddFeatureReqBody>,
   res: Response
 ) {
   try {
@@ -538,7 +534,7 @@ type EditFeatureParams = {
 const feature404Error = new createHttpError.NotFound("Feature not found");
 
 export async function editFeature(
-  req: Request<EditFeatureParams, Record<string, never>, AddFeatureReqBody>,
+  req: Request<EditFeatureParams, unknown, AddFeatureReqBody>,
   res: Response
 ) {
   try {
@@ -614,7 +610,7 @@ type AddActivityReqBody = {
 };
 
 export async function addActivity(
-  req: Request<{ id: string }, Record<string, never>, AddActivityReqBody>,
+  req: Request<{ id: string }, unknown, AddActivityReqBody>,
   res: Response
 ) {
   try {
@@ -651,7 +647,7 @@ type EditActivityParams = {
 const activity404Error = new createHttpError.NotFound("Activity not found");
 
 export async function editActivity(
-  req: Request<EditActivityParams, Record<string, never>, AddActivityReqBody>,
+  req: Request<EditActivityParams, unknown, AddActivityReqBody>,
   res: Response
 ) {
   try {
