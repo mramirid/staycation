@@ -20,9 +20,9 @@ export function PaymentContent() {
 }
 
 function PaymentDetails() {
-  const TAX_RATE = 0.1; // 10%
   const subTotal = PROPERTY.price * BOOKING_DATA.nights;
-  const grandTotal = (subTotal * TAX_RATE) / 100 + subTotal;
+  const TAX_RATE = 10 / 100;
+  const grandTotal = subTotal * TAX_RATE + subTotal;
 
   return (
     <Fade className="py-9 leading-7" delay={300} triggerOnce>

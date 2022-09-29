@@ -9,6 +9,7 @@ import {
 } from "mongoose";
 import { property404Error } from "../utils/constant";
 import Property from "./Property";
+
 interface IBooking {
   startDate: Date;
   endDate: Date;
@@ -143,7 +144,10 @@ bookingSchema.virtual("dateRange").get(function (this: BookingDoc) {
 });
 
 bookingSchema.virtual("totalPrice").get(function (this: BookingDoc) {
-  return this.nights * _.toNumber(this.property.price);
+  const subTotal = _.toNumber(this.property.price) * this.nights;
+  const TAX_RATE = 10 / 100;
+  const totalPrice = subTotal * TAX_RATE + subTotal;
+  return totalPrice;
 });
 
 bookingSchema.virtual("memberFullName").get(function (this: BookingDoc) {
