@@ -145,9 +145,7 @@ export async function getProperty(req: Request<{ id: string }>, res: Response) {
       .json({ ...property.toJSON(), testimonial: TESTIMONIAL });
   } catch (maybeError) {
     if (createHttpError.isHttpError(maybeError)) {
-      res
-        .status(maybeError.statusCode)
-        .json({ error: { message: maybeError.message } });
+      res.status(maybeError.statusCode).json({ error: maybeError });
       return;
     }
 
@@ -155,10 +153,6 @@ export async function getProperty(req: Request<{ id: string }>, res: Response) {
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ error: { message: getErrorMessage(maybeError) } });
   }
-}
-
-export async function getTest(__: Request, res: Response) {
-  res.status(StatusCodes.OK).json({});
 }
 
 type AddBookingReqBody = {
@@ -214,4 +208,9 @@ export async function addBooking(
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
       .json({ error: { message: getErrorMessage(maybeError) } });
   }
+}
+
+export async function getTest(__: Request, res: Response) {
+  const response = new createHttpError.ImATeapot();
+  res.status(response.statusCode).json(response);
 }
