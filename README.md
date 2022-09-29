@@ -28,6 +28,20 @@ docker-compose up -d --build
 docker-compose up -d --scale seeding=0
 ```
 
+## The Frontend Service
+
+Screenshots...
+
+## The Backend Service
+
+### Admin Dashboard
+
+The admin functionality is in the form of a dashboard that is rendered by the server using EJS Templating Engine.
+
+### API Documentations
+
+See [Member API Documentation](https://documenter.getpostman.com/view/9718150/2s83meoPYL)
+
 ## Techstack
 
 Fullstack TypeScript MERN:
