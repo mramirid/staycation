@@ -31,21 +31,6 @@ mongoose.connect(
 );
 
 async function seed() {
-  const [bsi, bsm] = await Bank.insertMany([
-    {
-      name: "Bank Syariah Indonesia",
-      logoUrl: "/images/bsi-logo.seed.png",
-      accountNumbers: "22081544",
-      accountHolderName: "Amir Muhammad Hakim",
-    },
-    {
-      name: "Bank Syariah Mandiri",
-      logoUrl: "/images/mandiri-syariah-logo.seed.png",
-      accountNumbers: "77542493",
-      accountHolderName: "Muhammad Avdol",
-    },
-  ]);
-
   const [houses] = await Category.insertMany([
     { name: "Houses with beauty backyard" },
     { name: "Hotels with large living room" },
@@ -212,7 +197,22 @@ async function seed() {
     },
   ]);
 
-  await Booking.insertMany([
+  const insertBanksPromise = Bank.insertMany([
+    {
+      name: "Bank Syariah Indonesia",
+      logoUrl: "/images/bsi-logo.seed.png",
+      accountNumbers: "22081544",
+      accountHolderName: "Amir Muhammad Hakim",
+    },
+    {
+      name: "Bank Syariah Mandiri",
+      logoUrl: "/images/mandiri-syariah-logo.seed.png",
+      accountNumbers: "77542493",
+      accountHolderName: "Muhammad Avdol",
+    },
+  ]);
+
+  const insertBookingsPromise = Booking.insertMany([
     {
       startDate: new Date(2022, 0, 20),
       endDate: new Date(2022, 0, 22),
@@ -227,7 +227,6 @@ async function seed() {
         current: tabbyTown._id,
         price: tabbyTown.price,
       },
-      bank: bsi._id,
       payment: {
         imageProofUrl: "/images/payment-proof-1.seed.jpeg",
         originBankName: "BTPN Syariah",
@@ -248,7 +247,6 @@ async function seed() {
         current: seattleRain._id,
         price: seattleRain.price,
       },
-      bank: bsm._id,
       payment: {
         imageProofUrl: "/images/payment-proof-2.seed.jpeg",
         originBankName: "Bank Syariah Indonesia",
@@ -257,8 +255,14 @@ async function seed() {
     },
   ]);
 
-  await User.create({
+  const createUserPromise = User.create({
     username: "mramirid",
     password: "jajaja",
   });
+
+  await Promise.all([
+    insertBanksPromise,
+    insertBookingsPromise,
+    createUserPromise,
+  ]);
 }

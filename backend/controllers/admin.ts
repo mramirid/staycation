@@ -732,7 +732,6 @@ export async function deleteActivity(
 
 type BookingPopulationPaths = {
   property: MergeType<BookingDoc["property"], { current: PropertyDoc }>;
-  bank: BankDoc;
 };
 
 type PopulatedBookingDoc = MergeType<BookingDoc, BookingPopulationPaths>;
@@ -743,7 +742,6 @@ export async function viewBookings(req: Request, res: Response) {
   try {
     bookings = await Booking.find().populate<BookingPopulationPaths>([
       "property.current",
-      "bank",
     ]);
   } catch (maybeError) {
     setAlert(req, {
@@ -768,7 +766,7 @@ export async function viewBooking(req: Request<{ id: string }>, res: Response) {
 
   try {
     booking = await Booking.findById(req.params.id)
-      .populate<BookingPopulationPaths>(["property.current", "bank"])
+      .populate<BookingPopulationPaths>(["property.current"])
       .orFail(booking404Error);
   } catch (maybeError) {
     setAlert(req, {

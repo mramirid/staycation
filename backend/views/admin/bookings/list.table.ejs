@@ -9,7 +9,7 @@
             <th>Date</th>
             <th>Property Title</th>
             <th>Member Name</th>
-            <th>Bank Name</th>
+            <th>Origin Bank</th>
             <th>Status</th>
             <th>Action</th>
           </tr>
@@ -21,7 +21,7 @@
             <td><%= booking.dateRange %></td>
             <td><%= booking.property.current.title %></td>
             <td><%= booking.memberFullName %></td>
-            <td><%= booking.bank.name %></td>
+            <td><%= booking.payment.originBankName %></td>
             <td><%= booking.payment.status %></td>
             <td>
               <a href="/admin/bookings/<%= booking.id %>" class="btn btn-info btn-circle btn-sm">

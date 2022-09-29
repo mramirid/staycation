@@ -1,8 +1,14 @@
 import _ from "lodash";
-import { HydratedDocument, Model, model, Schema, Types } from "mongoose";
-import Bank from "./Bank";
+import {
+  HydratedDocument,
+  isValidObjectId,
+  Model,
+  model,
+  Schema,
+  Types,
+} from "mongoose";
+import { property404Error } from "../utils/constant";
 import Property from "./Property";
-
 interface IBooking {
   startDate: Date;
   endDate: Date;
@@ -17,7 +23,6 @@ interface IBooking {
     current: Types.ObjectId;
     price: Types.Decimal128;
   };
-  bank: Types.ObjectId; // one-to-one referenced
   payment: {
     imageProofUrl: string;
     originBankName: string;
@@ -88,17 +93,22 @@ const bookingSchema = new Schema<
       type: Schema.Types.ObjectId,
       ref: Property,
       required: true,
+      validate: [
+        {
+          validator: (v: Types.ObjectId) => isValidObjectId(v),
+          message: "Invalid category id",
+        },
+        {
+          validator: (v: Types.ObjectId) =>
+            Property.findById(v).orFail(property404Error),
+        },
+      ],
     },
     price: {
       type: Schema.Types.Decimal128,
       required: true,
       min: 0,
     },
-  },
-  bank: {
-    type: Schema.Types.ObjectId,
-    ref: Bank,
-    required: true,
   },
   payment: {
     imageProofUrl: {
