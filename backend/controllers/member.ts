@@ -2,6 +2,8 @@ import crypto from "crypto";
 import { Request, Response } from "express";
 import createHttpError from "http-errors";
 import { StatusCodes } from "http-status-codes";
+import _ from "lodash";
+import mongoose from "mongoose";
 import Booking from "../models/Booking";
 import Property from "../models/Property";
 import { property404Error } from "../utils/constant";
@@ -143,16 +145,73 @@ export async function getProperty(req: Request<{ id: string }>, res: Response) {
       .json({ ...property.toJSON(), testimonial: TESTIMONIAL });
   } catch (maybeError) {
     if (createHttpError.isHttpError(maybeError)) {
-      res.status(maybeError.statusCode).json({ message: maybeError.message });
+      res
+        .status(maybeError.statusCode)
+        .json({ error: { message: maybeError.message } });
       return;
     }
 
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: getErrorMessage(maybeError) });
+      .json({ error: { message: getErrorMessage(maybeError) } });
   }
 }
 
 export async function getTest(__: Request, res: Response) {
   res.status(StatusCodes.OK).json({});
+}
+
+type AddBookingReqBody = {
+  startDate: string;
+  endDate: string;
+  nights: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  propertyId: string;
+  price: number;
+  originBankName: string;
+  accountHolderName: string;
+};
+
+export async function addBooking(
+  req: Request<{ id: string }, unknown, AddBookingReqBody>,
+  res: Response
+) {
+  try {
+    await Booking.create({
+      startDate: req.body.startDate,
+      endDate: req.body.endDate,
+      nights: req.body.nights,
+      member: {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        phone: req.body.phone,
+      },
+      property: {
+        current: req.body.propertyId,
+        price: req.body.price,
+      },
+      payment: {
+        imageProofUrl: _.isObject(req.file)
+          ? `/images/${req.file.filename}`
+          : undefined,
+        originBankName: req.body.originBankName,
+        accountHolderName: req.body.accountHolderName,
+      },
+    });
+
+    res.status(StatusCodes.CREATED).json({ message: "Property booked" });
+  } catch (maybeError) {
+    if (maybeError instanceof mongoose.Error.ValidationError) {
+      res.status(StatusCodes.BAD_REQUEST).json({ errors: maybeError.errors });
+      return;
+    }
+
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ error: { message: getErrorMessage(maybeError) } });
+  }
 }

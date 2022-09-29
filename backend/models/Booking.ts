@@ -5,7 +5,7 @@ import {
   Model,
   model,
   Schema,
-  Types,
+  Types
 } from "mongoose";
 import { property404Error } from "../utils/constant";
 import Property from "./Property";
@@ -133,7 +133,7 @@ const bookingSchema = new Schema<
 });
 
 bookingSchema.virtual("invoiceId").get(function (this: BookingDoc) {
-  return this.id;
+  return this.id.toUpperCase();
 });
 
 bookingSchema.virtual("dateRange").get(function (this: BookingDoc) {

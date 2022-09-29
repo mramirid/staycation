@@ -4,7 +4,7 @@ import {
   isValidObjectId,
   model,
   Schema,
-  Types
+  Types,
 } from "mongoose";
 import validator from "validator";
 import { category404Error, MAX_PROPERTY_IMAGES } from "../utils/constant";
