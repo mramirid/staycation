@@ -1,15 +1,13 @@
 import crypto from "crypto";
 import { Request, Response } from "express";
+import createHttpError from "http-errors";
 import { StatusCodes } from "http-status-codes";
 import Booking from "../models/Booking";
 import Property from "../models/Property";
-import { catchError } from "../utils/error";
+import { property404Error } from "../utils/constant";
+import { getErrorMessage } from "../utils/error";
 
-export async function getTest(__: Request, res: Response) {
-  res.status(StatusCodes.OK).json({});
-}
-
-export async function getLandingPage(__: Request, res: Response) {
+export async function getLanding(__: Request, res: Response) {
   const travelersPromise = Booking.find({
     "payment.status": "Accepted",
   })
@@ -117,9 +115,44 @@ export async function getLandingPage(__: Request, res: Response) {
       testimonial: TESTIMONIAL,
     });
   } catch (maybeError) {
-    const error = catchError(maybeError);
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: error.message });
+      .json({ message: getErrorMessage(maybeError) });
   }
+}
+
+export async function getProperty(req: Request<{ id: string }>, res: Response) {
+  try {
+    const property = await Property.findById(req.params.id).orFail(
+      property404Error
+    );
+
+    const TESTIMONIAL = Object.freeze({
+      _id: "291850b1-e2a2-4675-ab27-a990f7e82173",
+      imageUrl: "/images/testimonial-property-details.seed.jpg",
+      name: "Happy Family",
+      rate: 4,
+      content:
+        "What a great trip with my family and I should try again and again next time soon...",
+      familyName: "Angga",
+      familyOccupation: "UI Designer",
+    });
+
+    res
+      .status(StatusCodes.OK)
+      .json({ ...property.toJSON(), testimonial: TESTIMONIAL });
+  } catch (maybeError) {
+    if (createHttpError.isHttpError(maybeError)) {
+      res.status(maybeError.statusCode).json({ message: maybeError.message });
+      return;
+    }
+
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: getErrorMessage(maybeError) });
+  }
+}
+
+export async function getTest(__: Request, res: Response) {
+  res.status(StatusCodes.OK).json({});
 }

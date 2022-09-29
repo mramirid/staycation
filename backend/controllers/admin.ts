@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import fs from "fs/promises";
+import createHttpError from "http-errors";
 import _ from "lodash";
 import mongoose, { MergeType, Types } from "mongoose";
 import path from "path";
@@ -10,7 +11,7 @@ import Category, { CategoryDoc, ICategory } from "../models/Category";
 import Property, { PropertyDoc } from "../models/Property";
 import { IUser } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
-import { category404Error } from "../utils/constant";
+import { category404Error, property404Error } from "../utils/constant";
 import { getErrorMessage } from "../utils/error";
 
 export function viewLogin(req: Request, res: Response) {
@@ -223,7 +224,7 @@ export async function addBank(
   res.redirect("/admin/banks");
 }
 
-const bank404Error = new Error("Bank not found");
+const bank404Error = new createHttpError.NotFound("Bank not found");
 
 export async function editBank(
   req: Request<{ id: string }, Record<string, never>, AddBankReqBody>,
@@ -303,8 +304,6 @@ export async function viewProperties(req: Request, res: Response) {
     categories,
   });
 }
-
-const property404Error = new Error("Property not found");
 
 export async function viewPropertyImages(
   req: Request<{ id: string }>,
@@ -536,7 +535,7 @@ type EditFeatureParams = {
   featureId: string;
 };
 
-const feature404Error = new Error("Feature not found");
+const feature404Error = new createHttpError.NotFound("Feature not found");
 
 export async function editFeature(
   req: Request<EditFeatureParams, Record<string, never>, AddFeatureReqBody>,
@@ -649,7 +648,7 @@ type EditActivityParams = {
   activityId: string;
 };
 
-const activity404Error = new Error("Activity not found");
+const activity404Error = new createHttpError.NotFound("Activity not found");
 
 export async function editActivity(
   req: Request<EditActivityParams, Record<string, never>, AddActivityReqBody>,
@@ -766,7 +765,7 @@ export async function viewBookings(req: Request, res: Response) {
   });
 }
 
-const booking404Error = new Error("Booking not found");
+const booking404Error = new createHttpError.NotFound("Booking not found");
 
 export async function viewBooking(req: Request<{ id: string }>, res: Response) {
   let booking: PopulatedBookingDoc | undefined;

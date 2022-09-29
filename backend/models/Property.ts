@@ -1,9 +1,10 @@
+import _ from "lodash";
 import {
   HydratedDocument,
   isValidObjectId,
   model,
   Schema,
-  Types,
+  Types
 } from "mongoose";
 import validator from "validator";
 import { category404Error, MAX_PROPERTY_IMAGES } from "../utils/constant";
@@ -48,6 +49,7 @@ const propertySchema = new Schema<IProperty>({
         validator.isFloat(v.toString(), { min: 0 }),
       message: "The price must be a positive float",
     },
+    transform: (v: Types.Decimal128) => _.toNumber(v),
   },
   unit: {
     type: String,

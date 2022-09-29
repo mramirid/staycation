@@ -1,4 +1,5 @@
 import { cleanEnv, str } from "envalid";
+import createHttpError from "http-errors";
 
 export const env = cleanEnv(process.env, {
   MONGO_HOSTNAME: str({ default: "localhost" }),
@@ -9,4 +10,9 @@ export const env = cleanEnv(process.env, {
 
 export const MAX_PROPERTY_IMAGES = 3;
 
-export const category404Error = new Error("The Category does not exist");
+export const category404Error = new createHttpError.NotFound(
+  "Category not found"
+);
+export const property404Error = new createHttpError.NotFound(
+  "Property not found"
+);
