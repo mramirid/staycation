@@ -1,34 +1,31 @@
 import _ from "lodash";
 import mongoose from "mongoose";
-import Bank from "./models/Bank";
-import Booking from "./models/Booking";
-import Category from "./models/Category";
-import Property from "./models/Property";
-import User from "./models/User";
-import { env } from "./utils/constant";
+import Bank from "../models/Bank";
+import Booking from "../models/Booking";
+import Category from "../models/Category";
+import Property from "../models/Property";
+import User from "../models/User";
+import { mongoUri } from "../utils/constant";
 
-mongoose.connect(
-  `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`,
-  async (error) => {
-    if (_.isError(error)) {
-      throw new Error("Failed to connect to MongoDB", { cause: error });
-    }
-
-    try {
-      console.log("Dropping the database...");
-      await mongoose.connection.dropDatabase();
-      console.log("The database has been dropped");
-
-      console.log("Seeding...");
-      await seed();
-      console.log("Done");
-    } catch (maybeError) {
-      throw new Error("Seeding failed", { cause: maybeError });
-    } finally {
-      await mongoose.connection.close();
-    }
+mongoose.connect(mongoUri, async (error) => {
+  if (_.isError(error)) {
+    throw new Error("Failed to connect to MongoDB", { cause: error });
   }
-);
+
+  try {
+    console.log("Dropping the database...");
+    await mongoose.connection.dropDatabase();
+    console.log("The database has been dropped");
+
+    console.log("Seeding...");
+    await seed();
+    console.log("Done");
+  } catch (maybeError) {
+    throw new Error("Seeding failed", { cause: maybeError });
+  } finally {
+    await mongoose.connection.close();
+  }
+});
 
 async function seed() {
   const [houses] = await Category.insertMany([

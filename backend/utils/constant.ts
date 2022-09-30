@@ -8,6 +8,8 @@ export const env = cleanEnv(process.env, {
   SESSION_SECRET: str(),
 });
 
+export const mongoUri = `mongodb://${env.MONGO_INITDB_ROOT_USERNAME}:${env.MONGO_INITDB_ROOT_PASSWORD}@${env.MONGO_HOSTNAME}:27017/staycation?authSource=admin`;
+
 export const MAX_PROPERTY_IMAGES = 3;
 
 export const category404Error = new createHttpError.NotFound(

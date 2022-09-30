@@ -3,7 +3,7 @@
   "author": "mramirid",
   "version": "1.0.0",
   "scripts": {
-    "seed": "ts-node ./seed.ts",
+    "seed": "ts-node ./bin/seed.ts",
     "start": "ts-node --transpile-only ./index.ts",
     "dev": "nodemon -L ./index.ts",
     "prettier": "prettier --write \"**/*.{js,ts}\"",
