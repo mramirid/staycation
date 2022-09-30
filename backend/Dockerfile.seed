@@ -1,6 +1,13 @@
 FROM node:16-alpine
+
 WORKDIR /app
+
 COPY package.json .
 RUN npm i
-COPY . .
+
+COPY ./models .
+COPY ./utils .
+COPY ./seed.ts .
+COPY ./tsconfig.json .
+
 CMD [ "npm", "run", "seed" ]
