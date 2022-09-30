@@ -11,7 +11,7 @@ services:
   seeding:
     build:
       context: ./backend
-      dockerfile: Dockerfile.seeding
+      dockerfile: Dockerfile.seed
     env_file:
       - ./backend/.env
     depends_on:
@@ -20,7 +20,7 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile.development
+      dockerfile: Dockerfile.dev
     volumes:
       - ./backend:/app:ro
       - /app/node_modules
@@ -33,7 +33,9 @@ services:
       - seeding
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
     volumes:
       - ./frontend/src:/app/src:ro
     ports:
