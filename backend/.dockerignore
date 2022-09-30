@@ -12,3 +12,7 @@ public/images
 # Docker Configs
 Dockerfile
 .dockerignore
+
+# Env variables
+.env
+.env.example
