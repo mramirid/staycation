@@ -13,19 +13,19 @@ Fill the database with initial documents and spin up the server. Warning, the da
 1. Shut down running services and remove existing volumes.
 
 ```bash
-docker-compose down -v
+docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml down -v
 ```
 
 2. Run all services.
 
 ```bash
-docker-compose up -d --build
+docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml up -d --build
 ```
 
 ### Run Without Seeding
 
 ```bash
-docker-compose up -d --scale seeding=0
+docker-compose up -d
 ```
 
 ## The Frontend Service

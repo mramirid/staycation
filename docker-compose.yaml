@@ -8,29 +8,21 @@ services:
     ports:
       - "27017:27017" # TODO: Should be removed in production
 
-  seeding:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.seed
-    env_file:
-      - ./backend/.env
-    depends_on:
-      - mongodb
-
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
     volumes:
       - ./backend:/app:ro
+      - /app/data/seeds
       - /app/node_modules
-      - images:/app/public/images
+      - public_images:/app/public/images
     env_file:
       - ./backend/.env
     ports:
       - "3000:3000"
     depends_on:
-      - seeding
+      - mongodb
 
   frontend:
     build:
@@ -47,4 +39,4 @@ services:
 
 volumes:
   db:
-  images:
+  public_images:

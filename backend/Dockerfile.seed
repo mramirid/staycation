@@ -5,9 +5,10 @@ WORKDIR /app
 COPY package.json .
 RUN npm i
 
-COPY ./models .
-COPY ./utils .
-COPY ./seed.ts .
-COPY ./tsconfig.json .
+COPY bin/seed.ts bin/
+COPY data/seeds/images public/images/
+COPY models models/
+COPY utils utils/
+COPY tsconfig.json .
 
 CMD [ "npm", "run", "seed" ]
