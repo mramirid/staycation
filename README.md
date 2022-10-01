@@ -10,13 +10,13 @@ A web app to find providers of hotels, houses, and apartments that are closest t
 
 Fill the database with initial documents and spin up the server. Warning, the database and the uploaded images will be dropped.
 
-#### 1. Shut down running services and remove existing volumes.
+1. Shut down running services and remove existing volumes.
 
 ```bash
 docker-compose down -v
 ```
 
-#### 2. Run all services.
+2. Run all services.
 
 ```bash
 docker-compose up -d --build
