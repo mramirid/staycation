@@ -16,9 +16,9 @@ export async function getLanding(__: Request, res: Response) {
     .distinct("member.email")
     .countDocuments();
 
-  const treasuresPromise = Property.aggregate()
+  const treasuresPromise = Property.aggregate<{ count: number }>()
     .unwind("$activities")
-    .count("value");
+    .count("count");
 
   const citiesPromise = Property.find().distinct("city").countDocuments();
 
@@ -101,7 +101,7 @@ export async function getLanding(__: Request, res: Response) {
   });
 
   try {
-    const [travelers, [treasures], cities, mostPicked, categories] =
+    const [travelerCount, treasureResult, cityCount, mostPicked, categories] =
       await Promise.all([
         travelersPromise,
         treasuresPromise,
@@ -110,8 +110,14 @@ export async function getLanding(__: Request, res: Response) {
         categoriesPromise,
       ]);
 
+    const treasures = treasureResult.at(0) ?? { count: 0 };
+
     res.status(StatusCodes.OK).json({
-      hero: { travelers, treasures: treasures.value, cities },
+      hero: {
+        travelerCount,
+        treasureCount: treasures.count,
+        cityCount,
+      },
       mostPicked,
       categories,
       testimonial: TESTIMONIAL,
