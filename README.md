@@ -36,9 +36,9 @@ Screenshots...
 
 ### Admin Dashboard
 
-The admin functionality is in the form of a dashboard that is rendered by the server using EJS Templating Engine.
+The admin functionality is supported by a dashboard, rendered by the server using EJS templating engine.
 
-### API Documentations
+### RESTful API Documentations
 
 See [Member API Documentation](https://documenter.getpostman.com/view/9718150/2s83meoPYL)
 
@@ -46,13 +46,13 @@ See [Member API Documentation](https://documenter.getpostman.com/view/9718150/2s
 
 Fullstack TypeScript MERN:
 
-- TypeScript
-- React.js
-- TailwindCSS
-- daisyUI
-- MongoDB
-- Node.js
-- Express.js
-- EJS
-- SB Admin 2
-- Docker
+- [TypeScript](https://www.typescriptlang.org/) - a strongly typed programming language that builds on JavaScript.
+- [React.js](https://reactjs.org/) - a JavaScript library for building user interfaces.
+- [TailwindCSS](https://tailwindcss.com/) - a utility-first CSS framework packed with classes like `flex`, `pt-4`, `text-center`, etc., that can be composed to build any design, directly in the markup.
+- [daisyUI](https://daisyui.com/) - the most popular, free and open-source Tailwind CSS component library.
+- [MongoDB](https://www.mongodb.com/docs/) - a NoSQL database management application.
+- [Node.js](https://nodejs.org/) - a JavaScript runtime built on Chrome's V8 JavaScript engine.
+- [Express.js](https://expressjs.com/) - a fast, unopinionated, and minimalist web framework for Node.js.
+- [EJS](https://ejs.co/) - a simple templating language for generating HTML markup with plain JavaScript.
+- [SB Admin 2](https://github.com/startbootstrap/startbootstrap-sb-admin-2) - a free Bootstrap 4 admin dashboard theme built with HTML/CSS.
+- [Docker](https://www.docker.com/) - an open platform for developing, shipping, and running applications.
