@@ -3,19 +3,22 @@
   "author": "mramirid",
   "version": "1.0.0",
   "scripts": {
-    "seed": "ts-node ./bin/seed.ts",
     "start": "ts-node --transpile-only ./bin/www.ts",
     "dev": "nodemon ./bin/www.ts",
     "dev:legacy": "nodemon -L ./bin/www.ts",
+    "test": "mocha --require ts-node/register tests/**/*.ts",
+    "test:watch": "mocha --require ts-node/register --watch-extensions ts --watch --watch-files tests 'tests/**/**.ts'",
     "prettier": "prettier --write \"**/*.{js,ts}\"",
     "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext .js,.ts"
+    "lint": "eslint . --ext .js,.ts",
+    "seed": "ts-node ./bin/seed.ts"
   },
   "engines": {
     "node": ">=16"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "chai-http": "^4.3.0",
     "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^3.1.1",
@@ -41,6 +44,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
+    "@types/chai": "^4.3.3",
     "@types/compression": "^1.7.2",
     "@types/connect-flash": "^0.0.37",
     "@types/connect-mongodb-session": "^2.4.4",
@@ -51,6 +55,7 @@
     "@types/http-errors": "^1.8.2",
     "@types/lodash": "^4.14.184",
     "@types/method-override": "^0.0.32",
+    "@types/mocha": "^10.0.0",
     "@types/morgan": "^1.9.3",
     "@types/multer": "^1.4.7",
     "@types/passport": "^1.0.11",
@@ -58,9 +63,11 @@
     "@types/validator": "^13.7.7",
     "@typescript-eslint/eslint-plugin": "^5.29.0",
     "@typescript-eslint/parser": "^5.29.0",
+    "chai": "^4.3.6",
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-node": "^11.1.0",
+    "mocha": "^10.0.0",
     "mongoose-seed": "^0.6.0",
     "nodemon": "^2.0.18",
     "prettier": "^2.7.1",
@@ -90,6 +97,14 @@
         {
           "ignores": [
             "modules"
+          ]
+        }
+      ],
+      "node/no-unpublished-import": [
+        "error",
+        {
+          "allowModules": [
+            "chai"
           ]
         }
       ]
