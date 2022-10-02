@@ -5,7 +5,7 @@ import {
   Model,
   model,
   Schema,
-  Types
+  Types,
 } from "mongoose";
 import { property404Error } from "../utils/constant";
 import Property from "./Property";
@@ -35,7 +35,7 @@ interface IBooking {
 interface IBookingVirtuals {
   invoiceId: string;
   dateRange: string;
-  totalPrice: string;
+  totalPrice: number;
   memberFullName: string;
 }
 
@@ -58,101 +58,111 @@ const bookingSchema = new Schema<
   Record<string, never>,
   Record<string, never>,
   IBookingVirtuals
->({
-  startDate: {
-    type: Date,
-    required: true,
-  },
-  endDate: {
-    type: Date,
-    required: true,
-  },
-  nights: {
-    type: Number,
-    required: true,
-  },
-  member: {
-    firstName: {
-      type: String,
+>(
+  {
+    startDate: {
+      type: Date,
       required: true,
     },
-    lastName: {
-      type: String,
+    endDate: {
+      type: Date,
       required: true,
     },
-    email: {
-      type: String,
+    nights: {
+      type: Number,
       required: true,
     },
-    phone: {
-      type: String,
-      required: true,
+    member: {
+      firstName: {
+        type: String,
+        required: true,
+      },
+      lastName: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      phone: {
+        type: String,
+        required: true,
+      },
+    },
+    property: {
+      current: {
+        type: Schema.Types.ObjectId,
+        ref: Property,
+        required: true,
+        validate: [
+          {
+            validator: (v: Types.ObjectId) => isValidObjectId(v),
+            message: "Invalid category id",
+          },
+          {
+            validator: (v: Types.ObjectId) =>
+              Property.findById(v).orFail(property404Error),
+          },
+        ],
+      },
+      price: {
+        type: Schema.Types.Decimal128,
+        required: true,
+        min: 0,
+      },
+    },
+    payment: {
+      imageProofUrl: {
+        type: String,
+        required: true,
+      },
+      originBankName: {
+        type: String,
+        required: true,
+      },
+      accountHolderName: {
+        type: String,
+        required: true,
+      },
+      status: {
+        type: String,
+        default: "Pending",
+        enum: ["Accepted", "Rejected", "Pending"],
+      },
     },
   },
-  property: {
-    current: {
-      type: Schema.Types.ObjectId,
-      ref: Property,
-      required: true,
-      validate: [
-        {
-          validator: (v: Types.ObjectId) => isValidObjectId(v),
-          message: "Invalid category id",
+  {
+    virtuals: {
+      invoiceId: {
+        get() {
+          return this.id.toUpperCase();
         },
-        {
-          validator: (v: Types.ObjectId) =>
-            Property.findById(v).orFail(property404Error),
+      },
+      dateRange: {
+        get() {
+          return new Intl.DateTimeFormat("en-US").formatRange(
+            this.startDate,
+            this.endDate
+          );
         },
-      ],
+      },
+      totalPrice: {
+        get() {
+          const subTotal = _.toNumber(this.property.price) * this.nights;
+          const TAX_RATE = 10 / 100;
+          const totalPrice = subTotal * TAX_RATE + subTotal;
+          return totalPrice;
+        },
+      },
+      memberFullName: {
+        get() {
+          return `${this.member.firstName} ${this.member.lastName}`;
+        },
+      },
     },
-    price: {
-      type: Schema.Types.Decimal128,
-      required: true,
-      min: 0,
-    },
-  },
-  payment: {
-    imageProofUrl: {
-      type: String,
-      required: true,
-    },
-    originBankName: {
-      type: String,
-      required: true,
-    },
-    accountHolderName: {
-      type: String,
-      required: true,
-    },
-    status: {
-      type: String,
-      default: "Pending",
-      enum: ["Accepted", "Rejected", "Pending"],
-    },
-  },
-});
-
-bookingSchema.virtual("invoiceId").get(function (this: BookingDoc) {
-  return this.id.toUpperCase();
-});
-
-bookingSchema.virtual("dateRange").get(function (this: BookingDoc) {
-  return new Intl.DateTimeFormat("en-US").formatRange(
-    this.startDate,
-    this.endDate
-  );
-});
-
-bookingSchema.virtual("totalPrice").get(function (this: BookingDoc) {
-  const subTotal = _.toNumber(this.property.price) * this.nights;
-  const TAX_RATE = 10 / 100;
-  const totalPrice = subTotal * TAX_RATE + subTotal;
-  return totalPrice;
-});
-
-bookingSchema.virtual("memberFullName").get(function (this: BookingDoc) {
-  return `${this.member.firstName} ${this.member.lastName}`;
-});
+  }
+);
 
 const Booking = model("Booking", bookingSchema);
 export default Booking;
