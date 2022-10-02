@@ -6,7 +6,7 @@ A web app to find providers of hotels, houses, and apartments that are closest t
 
 ## How to Run
 
-### Initial Run with Seeding
+### Initial Run With Seeding
 
 Fill the database with initial documents and spin up the server. Warning, the database and the uploaded images will be dropped.
 
@@ -38,7 +38,7 @@ Screenshots...
 
 The admin functionality is supported by a dashboard, rendered by the server using EJS templating engine.
 
-### RESTful API Documentations
+### RESTful API Documentation
 
 See [Member API Documentation](https://documenter.getpostman.com/view/9718150/2s83meoPYL)
 
