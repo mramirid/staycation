@@ -161,7 +161,7 @@ export async function getProperty(req: Request<{ id: string }>, res: Response) {
   }
 }
 
-type AddBookingReqBody = {
+export type AddBookingReqBody = {
   startDate: string;
   endDate: string;
   nights: number;
