@@ -118,9 +118,9 @@ export async function getLanding(__: Request, res: Response) {
         treasureCount: treasures.count,
         cityCount,
       },
-      // mostPicked,
-      // categories,
-      // testimonial: TESTIMONIAL,
+      mostPicked,
+      categories,
+      testimonial: TESTIMONIAL,
     });
   } catch (maybeError) {
     res

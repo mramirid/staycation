@@ -11,8 +11,8 @@ import logger from "morgan";
 import passport from "passport";
 import path from "path";
 import adminRouter from "./routes/admin";
+import clientApiRouter from "./routes/client";
 import indexRouter from "./routes/index";
-import memberRouter from "./routes/member";
 import { env, mongoUri } from "./utils/constant";
 import * as format from "./utils/format";
 
@@ -65,7 +65,7 @@ app.use((__: express.Request, res: express.Response, next) => {
 
 app.use("/", indexRouter);
 app.use("/admin", adminRouter);
-app.use("/api/v1/member", memberRouter);
+app.use("/api/v1/client", clientApiRouter);
 
 // catch 404 and forward to error handler
 app.use((_, __, next) => {

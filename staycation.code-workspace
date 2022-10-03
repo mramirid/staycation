@@ -5,14 +5,14 @@
       "path": "."
     },
     {
-      "path": "frontend"
+      "path": "client"
     },
     {
       "path": "backend"
     }
   ],
   "settings": {
-    "eslint.workingDirectories": ["frontend", "backend", "mongodb", "docker"],
-    "conventionalCommits.scopes": ["frontend", "backend"]
+    "eslint.workingDirectories": ["client", "backend", "mongodb", "docker"],
+    "conventionalCommits.scopes": ["client", "backend"]
   }
 }

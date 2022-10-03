@@ -28,7 +28,7 @@ docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml up -d -
 docker-compose up -d
 ```
 
-## The Frontend Service
+## The Client Service
 
 Screenshots...
 
@@ -36,11 +36,11 @@ Screenshots...
 
 ### Admin Dashboard
 
-The admin functionality is supported by a dashboard, rendered by the server using EJS templating engine.
+The admin functionality is supported by a dashboard; rendered by the server using EJS templating engine.
 
 ### RESTful API Documentation
 
-See [Member API Documentation](https://documenter.getpostman.com/view/9718150/2s83meoPYL)
+See [Client API Documentation](https://documenter.getpostman.com/view/9718150/2s83meoPYL)
 
 ## Techstack
 

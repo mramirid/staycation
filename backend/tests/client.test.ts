@@ -10,7 +10,7 @@ import { mongoUri } from "../utils/constant";
 
 chai.use(chaiHttp);
 
-describe("Member API", () => {
+describe("Client API", () => {
   let property: PropertyDoc;
 
   before(async () => {
@@ -28,7 +28,7 @@ describe("Member API", () => {
     it("GET the landing page data", (done) => {
       chai
         .request(app)
-        .get("/api/v1/member/landing")
+        .get("/api/v1/client/landing")
         .end((maybeError, res) => {
           chai.expect(_.isError(maybeError)).to.be.false;
           chai.expect(res).to.have.status(StatusCodes.OK);
@@ -50,7 +50,7 @@ describe("Member API", () => {
     it("GET a property detail data", (done) => {
       chai
         .request(app)
-        .get(`/api/v1/member/properties/${property.id}`)
+        .get(`/api/v1/client/properties/${property.id}`)
         .end((maybeError, res) => {
           chai.expect(_.isError(maybeError)).to.be.false;
           chai.expect(res).to.have.status(StatusCodes.OK);

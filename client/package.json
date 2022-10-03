@@ -1,5 +1,5 @@
 {
-  "name": "@staycation/frontend",
+  "name": "@staycation/client",
   "private": true,
   "version": "1.0.0",
   "scripts": {

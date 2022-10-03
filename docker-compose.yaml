@@ -24,12 +24,12 @@ services:
     depends_on:
       - mongodb
 
-  frontend:
+  client:
     build:
-      context: ./frontend
+      context: ./client
       dockerfile: Dockerfile.dev
     volumes:
-      - ./frontend/src:/app/src:ro
+      - ./client/src:/app/src:ro
     ports:
       - "5173:5173"
     stdin_open: true
