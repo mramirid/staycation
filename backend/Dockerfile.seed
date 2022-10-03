@@ -6,7 +6,8 @@ COPY package.json .
 RUN npm i
 
 COPY bin/seed.ts bin/
-COPY data/seeds/images public/images/
+COPY seeds/index.ts seeds/
+COPY seeds/images public/images/
 COPY models models/
 COPY utils utils/
 COPY tsconfig.json .

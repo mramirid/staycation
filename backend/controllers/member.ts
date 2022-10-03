@@ -96,8 +96,8 @@ export async function getLanding(__: Request, res: Response) {
     rate: 4.55,
     content:
       "What a great trip with my family and I should try again next time soon ...",
-    familyName: "Angga",
-    familyOccupation: "Product Designer",
+    memberName: "Angga",
+    memberOccupation: "Product Designer",
   });
 
   try {
@@ -118,9 +118,9 @@ export async function getLanding(__: Request, res: Response) {
         treasureCount: treasures.count,
         cityCount,
       },
-      mostPicked,
-      categories,
-      testimonial: TESTIMONIAL,
+      // mostPicked,
+      // categories,
+      // testimonial: TESTIMONIAL,
     });
   } catch (maybeError) {
     res
@@ -142,8 +142,8 @@ export async function getProperty(req: Request<{ id: string }>, res: Response) {
       rate: 4,
       content:
         "What a great trip with my family and I should try again and again next time soon...",
-      familyName: "Angga",
-      familyOccupation: "UI Designer",
+      memberName: "Angga",
+      memberOccupation: "UI Designer",
     });
 
     res

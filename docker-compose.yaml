@@ -14,7 +14,7 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./backend:/app:ro
-      - /app/data/seeds
+      - /app/seeds
       - /app/node_modules
       - public_images:/app/public/images
     env_file:
