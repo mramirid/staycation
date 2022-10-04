@@ -8,7 +8,7 @@ A web app to find providers of hotels, houses, and apartments that are closest t
 
 ### Initial Run With Seeding
 
-Fill the database with initial documents and spin up the server. Warning, the database and the uploaded images will be dropped.
+Fill the database with initial documents; add initial images into the public images; and run all services. Warning, the existing database and images will be dropped.
 
 1. Shut down running services and remove existing volumes.
 
