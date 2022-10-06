@@ -1,6 +1,7 @@
 import compression from "compression";
 import flash from "connect-flash";
 import connectMongoDBSession from "connect-mongodb-session";
+import cors from "cors";
 import express from "express";
 import session from "express-session";
 import helmet from "helmet";
@@ -17,6 +18,8 @@ import { env, mongoUri } from "./utils/constant";
 import * as format from "./utils/format";
 
 const app = express();
+
+app.use(cors());
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
