@@ -1,3 +1,4 @@
+import { differenceInDays } from "date-fns";
 import _ from "lodash";
 import {
   HydratedDocument,
@@ -71,6 +72,14 @@ const bookingSchema = new Schema<
     duration: {
       type: Number,
       required: true,
+      validate: {
+        validator: function (this: BookingDoc, v: number) {
+          const dateRangeDuration =
+            differenceInDays(this.endDate, this.startDate) + 1;
+          return v === dateRangeDuration;
+        },
+        message: "The duration does not match with the date range",
+      },
     },
     member: {
       firstName: {

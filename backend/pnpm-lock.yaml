@@ -31,6 +31,7 @@ specifiers:
   connect-mongodb-session: ^3.1.1
   cors: ^2.8.5
   csurf: ^1.11.0
+  date-fns: ^2.29.3
   debug: ^4.3.4
   ejs: ^3.1.8
   envalid: ^7.3.1
@@ -67,6 +68,7 @@ dependencies:
   connect-mongodb-session: 3.1.1
   cors: 2.8.5
   csurf: 1.11.0
+  date-fns: 2.29.3
   debug: 4.3.4
   ejs: 3.1.8
   envalid: 7.3.1
@@ -1125,6 +1127,11 @@ packages:
     resolution: {integrity: sha512-CwXixvOdinvBCLXvcTloDinWiEM7Geaz+GwyjPrZL+MXIGPcLv4Op1bbWn8ErsI1JWMIWC8Cuf1rnDU2RrFV5w==}
     dependencies:
       jquery: 3.6.0
+    dev: false
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
     dev: false
 
   /debug/2.6.9:
