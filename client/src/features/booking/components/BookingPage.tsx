@@ -2,10 +2,12 @@ import Header from "@/components/Header";
 import Main from "@/components/Main";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { isNull, isUndefined } from "lodash-es";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { bookingSchema } from "../api/booking.schema";
-import type { BookingValues } from "../types/booking-form";
+import { useLocation, type Location } from "react-router-dom";
+import { bookingSchema } from "../lib/booking.schema";
+import type { BookingValues, StartBookingData } from "../types/booking-form";
 import type { Steps } from "../types/steps";
 import {
   BookingInformationContent,
@@ -22,6 +24,10 @@ import {
 } from "./stepper";
 
 type StepNames = "bookingInformation" | "payment" | "completed";
+
+interface BookingLocation extends Location {
+  state: { startBookingData?: StartBookingData } | null;
+}
 
 export default function BookingPage() {
   useEffect(() => window.scrollTo(0, 0), []);
@@ -40,11 +46,18 @@ export default function BookingPage() {
     });
   };
 
+  const { state } = useLocation() as BookingLocation;
+  if (isNull(state) || isUndefined(state.startBookingData)) {
+    throw new Error("The booking process is incorrect. Unable to continue.");
+  }
+
   const steps: Steps<StepNames> = {
     bookingInformation: {
       title: "Booking Information",
       description: "Please fill up the blank fields below",
-      content: <BookingInformationContent />,
+      content: (
+        <BookingInformationContent duration={state.startBookingData.duration} />
+      ),
       controller: <BookingInformationController />,
     },
     payment: {

@@ -1,10 +1,12 @@
 import TitledSection from "@/components/TitledSection";
+import type { StartBookingData } from "@/features/booking";
 import { formatToUSD } from "@/utils/format";
 import { clx } from "@/utils/styling";
 import { addDays, differenceInDays } from "date-fns";
-import { isDate } from "lodash-es";
+import { isUndefined } from "lodash-es";
 import { useState, type FormEvent } from "react";
 import { type Range } from "react-date-range";
+import { useNavigate } from "react-router-dom";
 import type { Property } from "../../types";
 import InputDateRange from "./InputDateRange";
 import InputNumber from "./InputNumber";
@@ -14,7 +16,7 @@ type BookingFormProps = {
   property: Property;
 };
 
-export default function BookingForm(props: BookingFormProps) {
+export default function StartBookingForm(props: BookingFormProps) {
   const formattedPrice = formatToUSD(props.property.price);
 
   return (
@@ -38,40 +40,58 @@ export default function BookingForm(props: BookingFormProps) {
   );
 }
 
+type DateRange = Required<Pick<Range, "startDate" | "endDate" | "key">>;
+
 function Form({ className, property }: BookingFormProps) {
   const today = new Date();
   const [duration, setDuration] = useState<number>(1);
-  const [dateRange, setDateRange] = useState<Range>({
+  const [dateRange, setDateRange] = useState<DateRange>({
     startDate: today,
     endDate: addDays(today, duration - 1),
     key: "selection",
   });
 
   const updateDuration = (newDuration: number) => {
-    if (isDate(dateRange.startDate)) {
-      const newEndDate = addDays(dateRange.startDate, newDuration - 1);
-      setDateRange({ ...dateRange, endDate: newEndDate });
-    }
+    const newEndDate = addDays(dateRange.startDate, newDuration - 1);
+    setDateRange({ ...dateRange, endDate: newEndDate });
     setDuration(newDuration);
   };
 
   const updateDateRange = (newRange: Range) => {
-    if (isDate(newRange.endDate) && isDate(newRange.startDate)) {
-      const daysDiff = differenceInDays(newRange.endDate, newRange.startDate);
-      setDuration(daysDiff + 1);
+    if (
+      isUndefined(newRange.startDate) ||
+      isUndefined(newRange.endDate) ||
+      isUndefined(newRange.key)
+    ) {
+      return;
     }
-    setDateRange(newRange);
+
+    const daysDiff = differenceInDays(newRange.endDate, newRange.startDate);
+    setDuration(daysDiff + 1);
+    setDateRange({
+      startDate: newRange.startDate,
+      endDate: newRange.endDate,
+      key: newRange.key,
+    });
   };
 
-  const startBooking = (e: FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+
+  const handleStartBooking = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("Booking...");
+
+    const startBookingData: StartBookingData = {
+      duration,
+      startDate: dateRange.startDate,
+      endDate: dateRange.endDate,
+    };
+    navigate("book", { state: { startBookingData } });
   };
 
   const totalPrice = formatToUSD(property.price * duration);
 
   return (
-    <form className={className} onSubmit={startBooking}>
+    <form className={className} onSubmit={handleStartBooking}>
       <label htmlFor="duration" className="block mb-2 leading-7 text-secondary">
         How long you will stay?
       </label>

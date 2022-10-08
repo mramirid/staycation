@@ -7,11 +7,11 @@ import Testimonial from "@/components/Testimonial";
 import { useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 import { useParams } from "react-router-dom";
-import BookingForm from "./BookingForm";
 import Breadcrumbs, { type BreadcrumbsData } from "./Breadcrumbs";
 import Description from "./Description";
 import FeaturedImages from "./FeaturedImages";
 import PageTitle from "./PageTitle";
+import StartBookingForm from "./StartBookingForm";
 
 const PAGE_DETAILS_TITLE = "Detail Property";
 
@@ -61,7 +61,7 @@ export default function PropertyDetailsPage() {
               description={PROPERTY.description}
               features={PROPERTY.features}
             />
-            <BookingForm property={PROPERTY} className="col-span-5" />
+            <StartBookingForm property={PROPERTY} className="col-span-5" />
           </>
         </Fade>
 

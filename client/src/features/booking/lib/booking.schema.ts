@@ -15,9 +15,9 @@ export const bookingInformationSchema = object({
 
 export const paymentSchema = object({
   paymentProof: mixed<File>()
-    .test("Required", "You need to provide an image", (image) => {
-      return isObject(image);
-    })
+    .test("Required", "You need to provide an image", (image) =>
+      isObject(image)
+    )
     .test(
       "Image Type",
       "Please upload an image",

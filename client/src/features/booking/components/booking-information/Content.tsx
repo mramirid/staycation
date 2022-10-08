@@ -3,22 +3,25 @@ import { formatCountSuffix } from "@/utils/format";
 import { Fade } from "react-awesome-reveal";
 import { useFormContext } from "react-hook-form";
 import "yup-phone";
-import BOOKING_DATA from "../../assets/booking.data.json";
 import type { BookingForm } from "../../types/booking-form";
 import InputText from "../InputText";
 
-export function BookingInformationContent() {
+type Props = {
+  duration: number;
+};
+
+export function BookingInformationContent(props: Props) {
   return (
     <div className="grid grid-cols-[26.25rem_min-content_26.25rem] gap-x-20 justify-center">
-      <PropertyDetails />
+      <PropertyDetails {...props} />
       <div className="divider divider-horizontal w-fit before:w-1px after:w-1px m-0" />
       <Form />
     </div>
   );
 }
 
-function PropertyDetails() {
-  const formattedDuration = formatCountSuffix(BOOKING_DATA.duration, {
+function PropertyDetails(props: Props) {
+  const formattedDuration = formatCountSuffix(props.duration, {
     singular: "night",
     plural: "nights",
   });
@@ -42,7 +45,7 @@ function PropertyDetails() {
           </div>
           <div className="leading-7">
             <b className="text-semibold">
-              ${BOOKING_DATA.duration * PROPERTY.price} USD
+              ${props.duration * PROPERTY.price} USD
             </b>
             <span className="text-light"> per </span>
             <b className="text-semibold">{formattedDuration}</b>

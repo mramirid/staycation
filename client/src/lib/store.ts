@@ -8,9 +8,14 @@ import {
   useSelector,
   type TypedUseSelectorHook,
 } from "react-redux";
+import { apiV1Slice } from "./api-v1.slice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    [apiV1Slice.reducerPath]: apiV1Slice.reducer,
+  },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiV1Slice.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;
