@@ -7,7 +7,7 @@ import { isUndefined } from "lodash-es";
 import { useState, type FormEvent } from "react";
 import { type Range } from "react-date-range";
 import { useNavigate } from "react-router-dom";
-import type { Property } from "../../types";
+import type { Property } from "../../types/property";
 import InputDateRange from "./InputDateRange";
 import InputNumber from "./InputNumber";
 

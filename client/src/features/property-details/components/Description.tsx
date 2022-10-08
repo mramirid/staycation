@@ -1,6 +1,6 @@
 import TitledSection from "@/components/TitledSection";
 import { clx } from "@/utils/styling";
-import type { Feature } from "../types";
+import type { Feature } from "../types/property";
 
 type DescriptionProps = {
   description: string;

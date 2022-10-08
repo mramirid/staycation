@@ -1,6 +1,6 @@
 import { clx } from "@/utils/styling";
 import { Fade } from "react-awesome-reveal";
-import type { ImageUrl } from "../types";
+import type { ImageUrl } from "../types/property";
 
 type FeaturedImagesProps = {
   imageUrls: ImageUrl[];
