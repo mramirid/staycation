@@ -20,7 +20,7 @@ export function PaymentContent() {
 }
 
 function PaymentDetails() {
-  const subTotal = PROPERTY.price * BOOKING_DATA.nights;
+  const subTotal = PROPERTY.price * BOOKING_DATA.duration;
   const TAX_RATE = 10 / 100;
   const grandTotal = subTotal * TAX_RATE + subTotal;
 

@@ -40,25 +40,25 @@ export default function BookingForm(props: BookingFormProps) {
 
 function Form({ className, property }: BookingFormProps) {
   const today = new Date();
-  const [nights, setNights] = useState<number>(1);
+  const [duration, setDuration] = useState<number>(1);
   const [dateRange, setDateRange] = useState<Range>({
     startDate: today,
-    endDate: addDays(today, nights - 1),
+    endDate: addDays(today, duration - 1),
     key: "selection",
   });
 
-  const updateNights = (newNights: number) => {
+  const updateDuration = (newDuration: number) => {
     if (isDate(dateRange.startDate)) {
-      const newEndDate = addDays(dateRange.startDate, newNights - 1);
+      const newEndDate = addDays(dateRange.startDate, newDuration - 1);
       setDateRange({ ...dateRange, endDate: newEndDate });
     }
-    setNights(newNights);
+    setDuration(newDuration);
   };
 
   const updateDateRange = (newRange: Range) => {
     if (isDate(newRange.endDate) && isDate(newRange.startDate)) {
       const daysDiff = differenceInDays(newRange.endDate, newRange.startDate);
-      setNights(daysDiff + 1);
+      setDuration(daysDiff + 1);
     }
     setDateRange(newRange);
   };
@@ -68,19 +68,19 @@ function Form({ className, property }: BookingFormProps) {
     alert("Booking...");
   };
 
-  const totalPrice = formatToUSD(property.price * nights);
+  const totalPrice = formatToUSD(property.price * duration);
 
   return (
     <form className={className} onSubmit={startBooking}>
-      <label htmlFor="nights" className="block mb-2 leading-7 text-secondary">
+      <label htmlFor="duration" className="block mb-2 leading-7 text-secondary">
         How long you will stay?
       </label>
       <InputNumber
-        id="nights"
-        value={nights}
+        id="duration"
+        value={duration}
         suffix={{ singular: "night", plural: "nights" }}
         min={1}
-        onChange={updateNights}
+        onChange={updateDuration}
       />
 
       <label
@@ -97,8 +97,9 @@ function Form({ className, property }: BookingFormProps) {
       />
 
       <h6 className="text-light mt-14px">
-        You will pay <b className="text-semibold">{totalPrice}</b> per{" "}
-        <b className="text-semibold">{nights} nights</b>
+        You will pay <b className="text-semibold">{totalPrice}</b>
+        {" per "}
+        <b className="text-semibold">{duration} nights</b>
       </h6>
 
       <button className="app-btn app-btn-primary btn-block mt-10" type="submit">

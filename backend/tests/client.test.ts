@@ -74,7 +74,7 @@ describe("Client API", () => {
     const reqBody = Object.freeze<AddBookingReqBody>({
       startDate: new Date(2022, 0, 20).toISOString(),
       endDate: new Date(2022, 0, 22).toISOString(),
-      nights: 3,
+      duration: 3,
       firstName: "Amir",
       lastName: "Muhammad Hakim",
       email: "amir.muh.hakim@gmail.com",

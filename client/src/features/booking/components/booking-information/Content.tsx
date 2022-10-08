@@ -18,7 +18,7 @@ export function BookingInformationContent() {
 }
 
 function PropertyDetails() {
-  const formattedNights = formatCountSuffix(BOOKING_DATA.nights, {
+  const formattedDuration = formatCountSuffix(BOOKING_DATA.duration, {
     singular: "night",
     plural: "nights",
   });
@@ -42,10 +42,10 @@ function PropertyDetails() {
           </div>
           <div className="leading-7">
             <b className="text-semibold">
-              ${BOOKING_DATA.nights * PROPERTY.price} USD
+              ${BOOKING_DATA.duration * PROPERTY.price} USD
             </b>
             <span className="text-light"> per </span>
-            <b className="text-semibold">{formattedNights}</b>
+            <b className="text-semibold">{formattedDuration}</b>
           </div>
         </div>
       </>

@@ -164,7 +164,7 @@ export async function getProperty(req: Request<{ id: string }>, res: Response) {
 export type AddBookingReqBody = {
   startDate: string;
   endDate: string;
-  nights: number;
+  duration: number;
   firstName: string;
   lastName: string;
   email: string;
@@ -183,7 +183,7 @@ export async function addBooking(
     await Booking.create({
       startDate: req.body.startDate,
       endDate: req.body.endDate,
-      nights: req.body.nights,
+      duration: req.body.duration,
       member: {
         firstName: req.body.firstName,
         lastName: req.body.lastName,

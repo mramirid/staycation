@@ -217,7 +217,7 @@ export async function seed(): Promise<SeedResult> {
   const elfinBooking = new Booking({
     startDate: new Date(2022, 0, 20),
     endDate: new Date(2022, 0, 22),
-    nights: 3,
+    duration: 3,
     member: {
       firstName: "Elfin",
       lastName: "Sanjaya",
@@ -237,7 +237,7 @@ export async function seed(): Promise<SeedResult> {
   const yeinBooking = new Booking({
     startDate: new Date(2022, 4, 15),
     endDate: new Date(2022, 5, 10),
-    nights: 27,
+    duration: 27,
     member: {
       firstName: "Yein",
       lastName: "Narayana",

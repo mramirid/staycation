@@ -13,7 +13,7 @@ import Property from "./Property";
 interface IBooking {
   startDate: Date;
   endDate: Date;
-  nights: number;
+  duration: number;
   member: {
     firstName: string;
     lastName: string;
@@ -68,7 +68,7 @@ const bookingSchema = new Schema<
       type: Date,
       required: true,
     },
-    nights: {
+    duration: {
       type: Number,
       required: true,
     },
@@ -149,7 +149,7 @@ const bookingSchema = new Schema<
       },
       totalPrice: {
         get() {
-          const subTotal = _.toNumber(this.property.price) * this.nights;
+          const subTotal = _.toNumber(this.property.price) * this.duration;
           const TAX_RATE = 10 / 100;
           const totalPrice = subTotal * TAX_RATE + subTotal;
           return totalPrice;
