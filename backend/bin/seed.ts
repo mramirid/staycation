@@ -18,6 +18,7 @@ mongoose.connect(mongoUri, async (error) => {
     await seed();
     console.log("done");
   } catch (maybeError) {
+    await mongoose.connection.dropDatabase();
     throw new Error("seeding failed", { cause: toError(maybeError) });
   } finally {
     await mongoose.connection.close();
