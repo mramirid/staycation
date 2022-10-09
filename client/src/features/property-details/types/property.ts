@@ -1,9 +1,8 @@
-import type { Category } from "@/types/category";
 import type Testimonial from "@/types/testimonial";
 
 export type Property = {
   _id: string;
-  name: string;
+  title: string;
   type: string;
   imageUrls: ImageUrl[];
   country: string;
@@ -15,7 +14,6 @@ export type Property = {
   description: string;
   features: Feature[];
   activities: Activity[];
-  categories: Category[];
   testimonial: Testimonial;
 };
 
@@ -26,14 +24,15 @@ export type ImageUrl = {
 
 export type Feature = {
   _id: string;
-  qty: number;
   name: string;
-  imageUrl: string;
+  quantity: number;
+  iconUrl: string;
 };
 
-type Activity = {
+export type Activity = {
   _id: string;
   name: string;
   type: string;
   imageUrl: string;
+  isPopular: boolean;
 };

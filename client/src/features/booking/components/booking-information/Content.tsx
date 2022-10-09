@@ -32,13 +32,13 @@ function PropertyDetails(props: ContentProps) {
         <figure>
           <img
             src={PROPERTY.imageUrls[0].url}
-            alt={PROPERTY.name}
+            alt={PROPERTY.title}
             style={{ height: "16.875rem", width: "100%" }}
           />
         </figure>
         <div className="mt-4 flex justify-between items-center">
           <div>
-            <h5 className="text-xl text-secondary">{PROPERTY.name}</h5>
+            <h5 className="text-xl text-secondary">{PROPERTY.title}</h5>
             <span className="text-light">
               {PROPERTY.city}, {PROPERTY.country}
             </span>

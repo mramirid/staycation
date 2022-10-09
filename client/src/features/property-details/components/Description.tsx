@@ -37,13 +37,13 @@ function Features(props: FeaturesProps) {
       {props.features.map((feature) => (
         <figure key={feature._id}>
           <img
-            src={feature.imageUrl}
+            src={feature.iconUrl}
             alt={feature.name}
             width={38}
             height={38}
           />
           <figcaption className="mt-3 text-light">
-            <b className="text-semibold">{feature.qty}</b> {feature.name}
+            <b className="text-semibold">{feature.quantity}</b> {feature.name}
           </figcaption>
         </figure>
       ))}

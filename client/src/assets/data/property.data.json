@@ -1,6 +1,6 @@
 {
   "_id": "e0421cbb-55d3-404c-bb82-db8ae61fa8fa",
-  "name": "Village Angga",
+  "title": "Village Angga",
   "type": "Hotel",
   "imageUrls": [
     {
@@ -26,51 +26,51 @@
   "features": [
     {
       "_id": "6e39c158-e32a-49a6-913a-2ff1eaafb59a",
-      "qty": 3,
+      "quantity": 3,
       "name": "bedroom",
-      "imageUrl": "/src/features/property-details/assets/icons/bedroom.svg"
+      "iconUrl": "/src/features/property-details/assets/icons/bedroom.svg"
     },
     {
       "_id": "981e42c5-398c-4a2d-863a-7e9a19bf4ed9",
-      "qty": 1,
+      "quantity": 1,
       "name": "living room",
-      "imageUrl": "/src/features/property-details/assets/icons/living-room.svg"
+      "iconUrl": "/src/features/property-details/assets/icons/living-room.svg"
     },
     {
       "_id": "7aa387a2-7616-4e36-bdba-c48046646638",
-      "qty": 2,
+      "quantity": 2,
       "name": "bath room",
-      "imageUrl": "/src/features/property-details/assets/icons/bathroom.svg"
+      "iconUrl": "/src/features/property-details/assets/icons/bathroom.svg"
     },
     {
       "_id": "0625eb0f-81fc-405e-8f36-70756710751a",
-      "qty": 1,
+      "quantity": 1,
       "name": "dining room",
-      "imageUrl": "/src/features/property-details/assets/icons/dining-room.svg"
+      "iconUrl": "/src/features/property-details/assets/icons/dining-room.svg"
     },
     {
       "_id": "bd15814d-ca39-490b-9fb2-9d233ea08151",
-      "qty": 10,
+      "quantity": 10,
       "name": "mbps",
-      "imageUrl": "/src/features/property-details/assets/icons/wifi.svg"
+      "iconUrl": "/src/features/property-details/assets/icons/wifi.svg"
     },
     {
       "_id": "081c4537-378c-4823-99d5-c6c5435d3676",
-      "qty": 2,
+      "quantity": 2,
       "name": "units ready",
-      "imageUrl": "/src/features/property-details/assets/icons/air-conditioner.svg"
+      "iconUrl": "/src/features/property-details/assets/icons/air-conditioner.svg"
     },
     {
       "_id": "9c77c41c-7a87-4cec-9ee1-60f8feb42d82",
-      "qty": 2,
+      "quantity": 2,
       "name": "refrigerator",
-      "imageUrl": "/src/features/property-details/assets/icons/refrigerator.svg"
+      "iconUrl": "/src/features/property-details/assets/icons/refrigerator.svg"
     },
     {
       "_id": "bf6541f6-78b6-4f69-a2a5-85836ca24e54",
-      "qty": 1,
+      "quantity": 1,
       "name": "television",
-      "imageUrl": "/src/features/property-details/assets/icons/tv.svg"
+      "iconUrl": "/src/features/property-details/assets/icons/tv.svg"
     }
   ],
   "activities": [
@@ -78,65 +78,29 @@
       "_id": "3e1151f1-4d52-4350-9b32-6644ffa8bf92",
       "name": "Kebun Park",
       "type": "Nature",
-      "imageUrl": "/images/categoryItem1.png"
+      "imageUrl": "/src/features/property-details/assets/images/activity-1.jpg",
+      "isPopular": false
     },
     {
       "_id": "012ae33e-565d-421b-a7fc-52793cdcf049",
       "name": "Water land",
       "type": "Pool",
-      "imageUrl": "/images/categoryItem2.png"
+      "imageUrl": "/src/features/property-details/assets/images/activity-2.jpg",
+      "isPopular": false
     },
     {
       "_id": "87f00f1a-f01c-4959-a806-c014e9f643df",
       "name": "Kebun Park",
       "type": "Nature",
-      "imageUrl": "/images/categoryItem3.png"
+      "imageUrl": "/src/features/property-details/assets/images/activity-3.jpg",
+      "isPopular": true
     },
     {
       "_id": "67f89e3c-dfb4-4780-bcea-361d904ba6c2",
       "name": "Water land",
       "type": "Pool",
-      "imageUrl": "/images/categoryItem4.png"
-    }
-  ],
-  "categories": [
-    {
-      "_id": "f0896852-e77a-4368-bbdb-5a1aa1e0bb0e",
-      "name": "Treasure to Choose",
-      "items": [
-        {
-          "_id": "bdfdffef-77ce-46f8-b1e2-5d3d021b36e1",
-          "name": "PSW Antasari",
-          "imageUrl": "/src/features/property-details/assets/images/treasure-1.jpg",
-          "country": "South Korea",
-          "city": "Seoul Flore",
-          "isPopular": false
-        },
-        {
-          "_id": "fa50f7d0-0b8c-4462-93f9-406b41a340ea",
-          "name": "Kuretakeso",
-          "imageUrl": "/src/features/property-details/assets/images/treasure-2.jpg",
-          "country": "South Korea",
-          "city": "Seoul Flore",
-          "isPopular": false
-        },
-        {
-          "_id": "39a3c484-31c5-4006-9e7f-c5bfc0d4ca4e",
-          "name": "Arya Duta",
-          "imageUrl": "/src/features/property-details/assets/images/treasure-3.jpg",
-          "country": "South Korea",
-          "city": "Seoul Flore",
-          "isPopular": true
-        },
-        {
-          "_id": "a213e332-b918-487f-a37d-66e5b7cac419",
-          "name": "Grand Dhika",
-          "imageUrl": "/src/features/property-details/assets/images/treasure-4.jpg",
-          "country": "South Korea",
-          "city": "Seoul Flore",
-          "isPopular": false
-        }
-      ]
+      "imageUrl": "/src/features/property-details/assets/images/activity-4.jpg",
+      "isPopular": false
     }
   ],
   "testimonial": {
