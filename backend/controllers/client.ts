@@ -211,7 +211,9 @@ export async function addBooking(
     res.status(StatusCodes.CREATED).json({ message: "Property booked" });
   } catch (maybeError) {
     if (maybeError instanceof mongoose.Error.ValidationError) {
-      res.status(StatusCodes.BAD_REQUEST).json({ errors: maybeError.errors });
+      res
+        .status(StatusCodes.UNPROCESSABLE_ENTITY)
+        .json({ errors: maybeError.errors });
       return;
     }
 
