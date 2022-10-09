@@ -29,6 +29,9 @@ export async function getLanding(__: Request, res: Response) {
       foreignField: "property.current",
       as: "propertyBookings",
     })
+    .match({
+      "propertyBookings.payment.status": "Accepted",
+    })
     .addFields({
       sumBookings: { $size: "$propertyBookings" },
     })
@@ -49,18 +52,20 @@ export async function getLanding(__: Request, res: Response) {
     .addFields({
       imageUrl: { $first: "$imageUrls" },
     })
-    .lookup({
-      from: "bookings",
-      localField: "_id",
-      foreignField: "property.current",
-      as: "propertyBookings",
-    })
-    .addFields({
-      sumBookings: { $size: "$propertyBookings" },
-    })
-    .sort({
-      sumBookings: -1,
-    })
+    //* --- Sort by number of bookings (descending) ---
+    // .lookup({
+    //   from: "bookings",
+    //   localField: "_id",
+    //   foreignField: "property.current",
+    //   as: "propertyBookings",
+    // })
+    // .addFields({
+    //   sumBookings: { $size: "$propertyBookings" },
+    // })
+    // .sort({
+    //   sumBookings: -1,
+    // })
+    //* --- End sort ---
     .lookup({
       from: "categories",
       localField: "category",
