@@ -1,6 +1,9 @@
 import Tag from "@/components/Tag";
 import TitledSection from "@/components/TitledSection";
-import type { Category, CategoryItem as CategoryItemType } from "@/types";
+import type {
+  Category,
+  CategoryItem as CategoryItemType,
+} from "@/types/category";
 import { isEmpty } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";

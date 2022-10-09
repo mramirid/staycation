@@ -1,4 +1,5 @@
-import type { Category, Testimonial } from "@/types";
+import type { Category } from "@/types/category";
+import type Testimonial from "@/types/testimonial";
 
 export type Property = {
   _id: string;

@@ -1,4 +1,4 @@
-import type { Testimonial as TestimonialType } from "@/types";
+import type TestimonialType from "@/types/testimonial";
 import { clx } from "@/utils/styling";
 import type { ComponentProps } from "react";
 import { Fade } from "react-awesome-reveal";
