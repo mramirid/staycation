@@ -6,11 +6,11 @@ import "yup-phone";
 import type { BookingForm } from "../../types/booking-form";
 import InputText from "../InputText";
 
-type Props = {
+type ContentProps = {
   duration: number;
 };
 
-export function BookingInformationContent(props: Props) {
+export function BookingInformationContent(props: ContentProps) {
   return (
     <div className="grid grid-cols-[26.25rem_min-content_26.25rem] gap-x-20 justify-center">
       <PropertyDetails {...props} />
@@ -20,7 +20,7 @@ export function BookingInformationContent(props: Props) {
   );
 }
 
-function PropertyDetails(props: Props) {
+function PropertyDetails(props: ContentProps) {
   const formattedDuration = formatCountSuffix(props.duration, {
     singular: "night",
     plural: "nights",

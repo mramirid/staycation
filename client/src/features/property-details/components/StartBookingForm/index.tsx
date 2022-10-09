@@ -1,5 +1,6 @@
 import TitledSection from "@/components/TitledSection";
-import type { StartBookingData } from "@/features/booking";
+import type { BookingLocationState } from "@/features/booking";
+import type { StatefulNavigate } from "@/types/react-router";
 import { formatToUSD } from "@/utils/format";
 import { clx } from "@/utils/styling";
 import { addDays, differenceInDays } from "date-fns";
@@ -75,17 +76,20 @@ function Form({ className, property }: BookingFormProps) {
     });
   };
 
-  const navigate = useNavigate();
+  const navigate = useNavigate() as StatefulNavigate<BookingLocationState>;
 
   const handleStartBooking = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const startBookingData: StartBookingData = {
-      duration,
-      startDate: dateRange.startDate,
-      endDate: dateRange.endDate,
-    };
-    navigate("book", { state: { startBookingData } });
+    navigate("book", {
+      state: {
+        startBookingData: {
+          duration,
+          startDate: dateRange.startDate,
+          endDate: dateRange.endDate,
+        },
+      },
+    });
   };
 
   const totalPrice = formatToUSD(property.price * duration);

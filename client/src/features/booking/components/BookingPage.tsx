@@ -1,13 +1,14 @@
 import Header from "@/components/Header";
 import Main from "@/components/Main";
+import type { StatefulLocation } from "@/types/react-router";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { isNull, isUndefined } from "lodash-es";
+import { isNull } from "lodash-es";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useLocation, type Location } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { bookingSchema } from "../lib/booking.schema";
-import type { BookingValues, StartBookingData } from "../types/booking-form";
+import type { BookingValues } from "../types/booking-form";
 import type { Steps } from "../types/steps";
 import {
   BookingInformationContent,
@@ -24,10 +25,6 @@ import {
 } from "./stepper";
 
 type StepNames = "bookingInformation" | "payment" | "completed";
-
-interface BookingLocation extends Location {
-  state: { startBookingData?: StartBookingData } | null;
-}
 
 export default function BookingPage() {
   useEffect(() => window.scrollTo(0, 0), []);
@@ -46,24 +43,25 @@ export default function BookingPage() {
     });
   };
 
-  const { state } = useLocation() as BookingLocation;
-  if (isNull(state) || isUndefined(state.startBookingData)) {
-    throw new Error("The booking process is incorrect. Unable to continue.");
+  const location = useLocation() as StatefulLocation<BookingLocationState>;
+  if (isNull(location.state)) {
+    throw new Error("The booking process seems incorrect. Unable to continue.");
   }
+  const { startBookingData } = location.state;
 
   const steps: Steps<StepNames> = {
     bookingInformation: {
       title: "Booking Information",
       description: "Please fill up the blank fields below",
       content: (
-        <BookingInformationContent duration={state.startBookingData.duration} />
+        <BookingInformationContent duration={startBookingData.duration} />
       ),
       controller: <BookingInformationController />,
     },
     payment: {
       title: "Payment",
       description: "Kindly follow the instructions below",
-      content: <PaymentContent />,
+      content: <PaymentContent duration={startBookingData.duration} />,
       controller: <PaymentController onSubmitBooking={submitBooking} />,
     },
     completed: {
@@ -111,3 +109,13 @@ export default function BookingPage() {
     </>
   );
 }
+
+export type BookingLocationState = {
+  startBookingData: StartBookingData;
+};
+
+type StartBookingData = {
+  duration: number;
+  startDate: Date;
+  endDate: Date;
+};

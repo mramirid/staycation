@@ -2,25 +2,28 @@ import PROPERTY from "@/assets/data/property.data.json";
 import { formatToUSD } from "@/utils/format";
 import { Fade } from "react-awesome-reveal";
 import { Controller, useFormContext } from "react-hook-form";
-import BOOKING_DATA from "../../assets/booking.data.json";
 import bcaLogo from "../../assets/images/bca-logo.jpg";
 import mandiriLogo from "../../assets/images/mandiri-logo.jpg";
 import type { BookingForm } from "../../types/booking-form";
 import InputText from "../InputText";
 import InputImage from "./InputImage";
 
-export function PaymentContent() {
+type ContentProps = {
+  duration: number;
+};
+
+export function PaymentContent(props: ContentProps) {
   return (
     <div className="grid grid-cols-[23.125rem_min-content_23.125rem] gap-x-20 justify-center">
-      <PaymentDetails />
+      <PaymentDetails {...props} />
       <div className="divider divider-horizontal w-fit before:w-1px after:w-1px m-0" />
       <Form />
     </div>
   );
 }
 
-function PaymentDetails() {
-  const subTotal = PROPERTY.price * BOOKING_DATA.duration;
+function PaymentDetails(props: ContentProps) {
+  const subTotal = PROPERTY.price * props.duration;
   const TAX_RATE = 10 / 100;
   const grandTotal = subTotal * TAX_RATE + subTotal;
 

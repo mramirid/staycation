@@ -1,2 +1,4 @@
-export { default as BookingPage } from "./components/BookingPage";
-export type { StartBookingData } from "./types/booking-form";
+export {
+  default as BookingPage,
+  type BookingLocationState,
+} from "./components/BookingPage";
