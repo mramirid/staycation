@@ -2,7 +2,6 @@ import _ from "lodash";
 import mongoose from "mongoose";
 import { seed } from "../seeds";
 import { mongoUri } from "../utils/constant";
-import { toError } from "../utils/error";
 
 mongoose.connect(mongoUri, async (error) => {
   if (_.isError(error)) {
@@ -10,16 +9,16 @@ mongoose.connect(mongoUri, async (error) => {
   }
 
   try {
-    console.log("dropping the database...");
+    console.log("[seed]", "dropping the database...");
     await mongoose.connection.dropDatabase();
-    console.log("the database has been dropped");
+    console.log("[seed]", "the database has been dropped");
 
-    console.log("seeding...");
+    console.log("[seed]", "seeding...");
     await seed();
-    console.log("done");
+    console.log("[seed]", "done");
   } catch (maybeError) {
     await mongoose.connection.dropDatabase();
-    throw new Error("seeding failed", { cause: toError(maybeError) });
+    throw new Error("Seeding failed", { cause: maybeError });
   } finally {
     await mongoose.connection.close();
   }
