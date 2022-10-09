@@ -1,9 +1,5 @@
 import Tag from "@/components/Tag";
 import TitledSection from "@/components/TitledSection";
-import type {
-  Category,
-  CategoryItem as CategoryItemType,
-} from "@/types/category";
 import { isEmpty } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
@@ -36,7 +32,7 @@ function CategoryEmpty() {
 }
 
 type CategoryListProps = {
-  items: CategoryItemType[];
+  items: CategoryProperty[];
 };
 
 function CategoryList({ items }: CategoryListProps) {
@@ -52,7 +48,7 @@ function CategoryList({ items }: CategoryListProps) {
 }
 
 type CategoryItemProps = {
-  item: CategoryItemType;
+  item: CategoryProperty;
 };
 
 function CategoryItem({ item }: CategoryItemProps) {
@@ -80,3 +76,18 @@ function CategoryItem({ item }: CategoryItemProps) {
     </article>
   );
 }
+
+type Category = {
+  _id: string;
+  name: string;
+  items: CategoryProperty[];
+};
+
+type CategoryProperty = {
+  _id: string;
+  name: string;
+  imageUrl: string;
+  country: string;
+  city: string;
+  isPopular: boolean;
+};

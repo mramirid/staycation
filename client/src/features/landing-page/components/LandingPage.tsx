@@ -1,4 +1,4 @@
-import Categories from "@/components/Categories";
+import Categories from "@/features/landing-page/components/Categories";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Main from "@/components/Main";
