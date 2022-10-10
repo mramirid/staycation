@@ -22,10 +22,10 @@ import {
 import type { StatefulLocation } from "@/types/react-router";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { isNull } from "lodash-es";
+import { isNull, isUndefined } from "lodash-es";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 
 type StepNames = "bookingInformation" | "payment" | "completed";
 
@@ -36,6 +36,11 @@ export default function BookingPage() {
     resolver: yupResolver(bookingSchema),
     mode: "onChange",
   });
+
+  const { id: propertyId } = useParams();
+  if (isUndefined(propertyId)) {
+    throw new Error("The property id cannot be undefined");
+  }
 
   const submitBooking = async (data: BookingValues) => {
     await new Promise((resolve) => {

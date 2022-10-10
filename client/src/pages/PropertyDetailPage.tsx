@@ -13,15 +13,12 @@ import {
   type PropertyFeature,
 } from "@/features/property";
 import { ResponseError } from "@/lib/error";
+import { getErrorMessage } from "@/utils/error";
 import { StatusCodes } from "http-status-codes";
 import { isUndefined } from "lodash-es";
 import { useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
-import {
-  useLoaderData,
-  useParams,
-  type LoaderFunctionArgs,
-} from "react-router-dom";
+import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
 
 const PAGE_DETAILS_TITLE = "Detail Property";
 
@@ -33,11 +30,9 @@ export default function PropertyDetailPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  const { id: propertyId } = useParams();
-
   const breadcrumbsData: BreadcrumbsData = [
     { label: "Home", to: "/" },
-    { label: PAGE_DETAILS_TITLE, to: `/properties/${propertyId}` },
+    { label: PAGE_DETAILS_TITLE, to: `/properties/${data._id}` },
   ];
 
   return (
@@ -95,7 +90,7 @@ export async function loader(args: LoaderFunctionArgs): Promise<Response> {
 
   if (isUndefined(propertyId)) {
     throw new ResponseError(
-      "The property id is undefined",
+      "The property id cannot be undefined",
       StatusCodes.NOT_FOUND
     );
   }
@@ -108,7 +103,8 @@ export async function loader(args: LoaderFunctionArgs): Promise<Response> {
 
   if (!response.ok) {
     const resBody = await response.json();
-    throw new ResponseError(resBody.error, response.status);
+    const errorMessage = getErrorMessage(resBody.error);
+    throw new ResponseError(errorMessage, response.status);
   }
 
   return response;

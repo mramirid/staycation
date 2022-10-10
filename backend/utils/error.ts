@@ -4,9 +4,13 @@ export function getErrorMessage(maybeError: unknown) {
   return toError(maybeError).message;
 }
 
-export function toError(maybeError: unknown): Error {
+export function toError(maybeError: unknown) {
   if (_.isError(maybeError)) {
     return maybeError;
+  }
+
+  if (isErrorWithMessage(maybeError)) {
+    return new Error(maybeError.message);
   }
 
   try {
@@ -16,4 +20,15 @@ export function toError(maybeError: unknown): Error {
     // like with circular references for example.
     return new Error(String(maybeError));
   }
+}
+
+function isErrorWithMessage(
+  maybeError: unknown
+): maybeError is { message: string } {
+  return (
+    typeof maybeError === "object" &&
+    maybeError !== null &&
+    "message" in maybeError &&
+    typeof (maybeError as Record<string, unknown>).message === "string"
+  );
 }

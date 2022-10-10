@@ -11,13 +11,12 @@ import {
   type MostPickedProperty,
 } from "@/features/landing";
 import { ResponseError } from "@/lib/error";
+import { getErrorMessage } from "@/utils/error";
 import { isNumber } from "lodash-es";
 import { createRef, useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 
 export default function LandingPage() {
-  const data = useLoaderData() as LandingPageData;
-
   useEffect(() => {
     document.title = "Home - Staycation";
   }, []);
@@ -30,6 +29,8 @@ export default function LandingPage() {
       window.scrollTo({ behavior: "smooth", top: mostPickedOffsetTop - 30 });
     }
   };
+
+  const data = useLoaderData() as LandingPageData;
 
   return (
     <>
@@ -56,10 +57,13 @@ export async function loader(): Promise<Response> {
   const response = await fetch(
     import.meta.env.VITE_BACKEND_BASE_URL + "/api/v1/client/landing"
   );
+
   if (!response.ok) {
     const resBody = await response.json();
-    throw new ResponseError(resBody.error, response.status);
+    const errorMessage = getErrorMessage(resBody.error);
+    throw new ResponseError(errorMessage, response.status);
   }
+
   return response;
 }
 
