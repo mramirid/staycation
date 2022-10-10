@@ -24,14 +24,14 @@
                         name="password" placeholder="Password">
                     </div>
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button type="submit" class="btn btn-primary btn-block">
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
                       Login
                     </button>
                   </form>
                   <hr class="mt-4">
-                  <a href="/admin/signup" class="btn btn-link btn-block">
-                    Sign Up
-                  </a>
+                  <div class="text-center">
+                    Not an admin? <a href="/admin/signup">SIGN UP</a>
+                  </div>
                 </div>
               </div>
             </div>
