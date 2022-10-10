@@ -4,7 +4,7 @@ services:
     volumes:
       - db:/data/db
     env_file:
-      - ./backend/.env
+      - ./backend/.env.production
     ports:
       - "27017:27017"
 
@@ -16,7 +16,7 @@ services:
       - /app/node_modules
       - public_images:/app/public/images
     env_file:
-      - ./backend/.env
+      - ./backend/.env.production
     ports:
       - "3000:3000"
     depends_on:

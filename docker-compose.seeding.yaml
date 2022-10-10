@@ -4,7 +4,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile.seed
     env_file:
-      - ./backend/.env
+      - ./backend/.env.production
     volumes:
       - public_images:/app/public/images
     depends_on:
