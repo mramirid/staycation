@@ -18,4 +18,4 @@ COPY app.ts .
 COPY tsconfig.json .
 
 EXPOSE 3000
-CMD [ "npm", "run", "dev:legacy" ]
+CMD [ "npm", "run", "start" ]

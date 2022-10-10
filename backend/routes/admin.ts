@@ -1,7 +1,7 @@
 import csrf from "csurf";
 import express from "express";
 import * as controllers from "../controllers/admin";
-import * as auth from "../middlewares/admin/auth";
+import * as auth from "../middlewares/admin.auth";
 import * as imagesMulter from "../middlewares/images.multer";
 import { MAX_PROPERTY_IMAGES } from "../utils/constant";
 
@@ -12,6 +12,9 @@ adminRouter.use(csrf());
 //
 // Authentication
 //
+adminRouter.get("/signup", auth.isNotAuthenticated, controllers.viewSignup);
+adminRouter.post("/signup", auth.isNotAuthenticated, controllers.signup);
+
 adminRouter.get("/login", auth.isNotAuthenticated, controllers.viewLogin);
 adminRouter.post("/login", auth.isNotAuthenticated, controllers.login);
 

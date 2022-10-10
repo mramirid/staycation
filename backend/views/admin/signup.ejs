@@ -15,7 +15,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4"><%= pageTitle %></h1>
                   </div>
-                  <form class="user" action="/admin/login" method="POST">
+                  <form class="user" action="/admin/signup" method="POST">
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" name="username" placeholder="Username">
                     </div>
@@ -23,14 +23,18 @@
                       <input type="password" class="form-control form-control-user" id="exampleInputPassword"
                         name="password" placeholder="Password">
                     </div>
+                    <div class="form-group">
+                      <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                        name="password-confirmation" placeholder="Password Confirmation">
+                    </div>
                     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button type="submit" class="btn btn-primary btn-block">
-                      Login
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                      Sign Up
                     </button>
                   </form>
                   <hr class="mt-4">
-                  <a href="/admin/signup" class="btn btn-link btn-block">
-                    Sign Up
+                  <a href="/admin/login" class="btn btn-link btn-block">
+                    Login
                   </a>
                 </div>
               </div>

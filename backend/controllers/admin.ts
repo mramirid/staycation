@@ -4,23 +4,76 @@ import createHttpError from "http-errors";
 import _ from "lodash";
 import mongoose, { MergeType, Types } from "mongoose";
 import path from "path";
-import * as auth from "../middlewares/admin/auth";
+import * as auth from "../middlewares/admin.auth";
 import Bank, { BankDoc } from "../models/Bank";
 import Booking, { BookingDoc } from "../models/Booking";
 import Category, { CategoryDoc, ICategory } from "../models/Category";
 import Property, { PropertyDoc } from "../models/Property";
-import { IUser } from "../models/User";
+import User, { IUser, UserDoc } from "../models/User";
 import { AlertStatuses, getAlert, setAlert } from "../utils/alert";
 import { category404Error, property404Error } from "../utils/constant";
 import { getErrorMessage } from "../utils/error";
 
+export function viewSignup(req: Request, res: Response) {
+  const alert =
+    getAlert(req) ??
+    getAlert(req, { messageType: "error", status: AlertStatuses.Error });
+
+  res.render("admin/signup", {
+    pageTitle: "Sign Up Admin",
+    csrfToken: req.csrfToken(),
+    alert,
+  });
+}
+
+type SignupReqBody = MergeType<IUser, { "password-confirmation": string }>;
+
+export async function signup(
+  req: Request<unknown, unknown, SignupReqBody>,
+  res: Response,
+  next: NextFunction
+) {
+  let user: UserDoc;
+
+  try {
+    if (req.body.password !== req.body["password-confirmation"]) {
+      throw new Error(
+        "The password confirmation does not match with the password you entered"
+      );
+    }
+
+    user = await User.create({
+      username: req.body.username,
+      password: req.body.password,
+    });
+  } catch (maybeError) {
+    setAlert(req, {
+      message: getErrorMessage(maybeError),
+      status: AlertStatuses.Error,
+    });
+    res.redirect("/admin/signup");
+    return;
+  }
+
+  req.login(user, (error) => {
+    if (error) {
+      next(error);
+      return;
+    }
+
+    res.redirect("/admin/dashboard");
+  });
+}
+
 export function viewLogin(req: Request, res: Response) {
+  const alert =
+    getAlert(req) ??
+    getAlert(req, { messageType: "error", status: AlertStatuses.Error });
+
   res.render("admin/login", {
     pageTitle: "Login Admin",
     csrfToken: req.csrfToken(),
-    alert:
-      getAlert(req) ??
-      getAlert(req, { messageType: "error", status: AlertStatuses.Error }),
+    alert,
   });
 }
 
