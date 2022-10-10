@@ -1,4 +1,4 @@
-import type Testimonial from "@/types/testimonial";
+import { type TestimonialType } from "@/components/Testimonial";
 
 export type Property = {
   _id: string;
@@ -14,7 +14,7 @@ export type Property = {
   description: string;
   features: Feature[];
   activities: Activity[];
-  testimonial: Testimonial;
+  testimonial: TestimonialType;
 };
 
 export type ImageUrl = {

@@ -1,1 +1,4 @@
-export { default as LandingPage } from "./components/LandingPage";
+export {
+  default as LandingPage,
+  loader as landingLoader,
+} from "./components/LandingPage";

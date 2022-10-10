@@ -106,10 +106,12 @@
   "testimonial": {
     "_id": "291850b1-e2a2-4675-ab27-a990f7e82173",
     "imageUrl": "/src/features/property-details/assets/images/testimonial.jpg",
-    "name": "Happy Family",
+    "title": "Happy Family",
     "rate": 3.75,
     "content": "What a great trip with my family and I should try again and again next time soon...",
-    "familyName": "Angga",
-    "familyOccupation": "UI Designer"
+    "member": {
+      "name": "Angga",
+      "occupation": "UI Designer"
+    }
   }
 }

@@ -7,9 +7,9 @@ import { ReactComponent as IconCities } from "../assets/icons/cities.svg";
 import { ReactComponent as IconTraveler } from "../assets/icons/traveler.svg";
 import { ReactComponent as IconTreasure } from "../assets/icons/treasure.svg";
 import imageHero from "../assets/images/hero.jpg";
-import { hero as HERO_STATISTICS } from "../assets/landing-page.data.json";
 
 type HeroProps = {
+  statistics: HeroStatistics;
   onShowMeClicked: () => void;
 };
 
@@ -25,6 +25,12 @@ export default function Hero(props: HeroProps) {
 }
 
 type HeroContentProps = HeroProps & { className: string };
+
+export type HeroStatistics = {
+  travelerCount: number;
+  treasureCount: number;
+  cityCount: number;
+};
 
 function HeroContent(props: HeroContentProps) {
   return (
@@ -51,17 +57,17 @@ function HeroContent(props: HeroContentProps) {
       <div className="mt-20 grid grid-cols-3 gap-x-12">
         <Statistic
           Icon={IconTraveler}
-          total={HERO_STATISTICS.travelers}
+          total={props.statistics.travelerCount}
           unit="travelers"
         />
         <Statistic
           Icon={IconTreasure}
-          total={HERO_STATISTICS.treasures}
+          total={props.statistics.treasureCount}
           unit="treasures"
         />
         <Statistic
           Icon={IconCities}
-          total={HERO_STATISTICS.cities}
+          total={props.statistics.cityCount}
           unit="cities"
         />
       </div>

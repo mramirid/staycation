@@ -9,15 +9,30 @@ type CategoriesProps = {
   categories: Category[];
 };
 
+export type Category = {
+  _id: string;
+  name: string;
+  properties: CategoryProperty[];
+};
+
+export type CategoryProperty = {
+  _id: string;
+  title: string;
+  imageUrl: string;
+  country: string;
+  city: string;
+  isPopular: boolean;
+};
+
 export default function Categories(props: CategoriesProps) {
   return (
     <Fade direction="up" triggerOnce cascade className={props.className}>
       {props.categories.map((category) => (
         <TitledSection title={category.name} key={category._id}>
-          {isEmpty(category.items) ? (
+          {isEmpty(category.properties) ? (
             <CategoryEmpty />
           ) : (
-            <CategoryList items={category.items} />
+            <CategoryList items={category.properties} />
           )}
         </TitledSection>
       ))}
@@ -37,7 +52,7 @@ type CategoryListProps = {
 
 function CategoryList({ items }: CategoryListProps) {
   return (
-    <div className="flex gap-x-30px">
+    <div className="grid grid-cols-4 gap-x-30px">
       {items.map((categoryItem, i) => (
         <Fade direction="up" triggerOnce delay={300 * i} key={categoryItem._id}>
           <CategoryItem item={categoryItem} />
@@ -52,6 +67,8 @@ type CategoryItemProps = {
 };
 
 function CategoryItem({ item }: CategoryItemProps) {
+  const imageUrl = import.meta.env.VITE_BACKEND_BASE_URL + item.imageUrl;
+
   return (
     <article className="card rounded-b-none">
       {item.isPopular && (
@@ -61,14 +78,14 @@ function CategoryItem({ item }: CategoryItemProps) {
           text="Choice"
         />
       )}
-      <figure>
-        <img src={item.imageUrl} alt={item.name} className="object-cover" />
+      <figure className="img-wrapper !h-180px">
+        <img src={imageUrl} alt={item.title} />
       </figure>
       <Link
         to={`/properties/${item._id}`}
         className="app-link stretched-link text-secondary text-xl text-left mt-4"
       >
-        <h5>{item.name}</h5>
+        <h5>{item.title}</h5>
       </Link>
       <span className="text-light">
         {item.city},&nbsp;{item.country}
@@ -76,18 +93,3 @@ function CategoryItem({ item }: CategoryItemProps) {
     </article>
   );
 }
-
-type Category = {
-  _id: string;
-  name: string;
-  items: CategoryProperty[];
-};
-
-type CategoryProperty = {
-  _id: string;
-  name: string;
-  imageUrl: string;
-  country: string;
-  city: string;
-  isPopular: boolean;
-};

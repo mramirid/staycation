@@ -5,21 +5,10 @@ import { clx } from "@/utils/styling";
 import { forwardRef } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
-import { mostPicked as MOST_PICKED_LIST } from "../assets/landing-page.data.json";
 import classes from "./MostPicked.module.scss";
 
-type MostPickedType = {
-  _id: string;
-  name: string;
-  type: string;
-  imageUrl: string;
-  country: string;
-  city: string;
-  price: number;
-  unit: string;
-};
-
 type MostPickedProps = {
+  mostPickedProperties: MostPickedProperty[];
   className: string;
 };
 
@@ -27,7 +16,7 @@ const MostPicked = forwardRef<HTMLDivElement, MostPickedProps>((props, ref) => (
   <div ref={ref} className={props.className}>
     <Fade direction="up" triggerOnce>
       <TitledSection title="Most Picked" ref={ref}>
-        <MostPickedList />
+        <MostPickedList mostPickedProperties={props.mostPickedProperties} />
       </TitledSection>
     </Fade>
   </div>
@@ -35,18 +24,22 @@ const MostPicked = forwardRef<HTMLDivElement, MostPickedProps>((props, ref) => (
 
 export default MostPicked;
 
-function MostPickedList() {
+type MostPickedListProps = {
+  mostPickedProperties: MostPickedProperty[];
+};
+
+function MostPickedList({ mostPickedProperties }: MostPickedListProps) {
   return (
     <div className="grid grid-rows-2 grid-cols-3 gap-30px h-[28.75rem]">
-      {MOST_PICKED_LIST.map((mostPicked, i) => (
+      {mostPickedProperties.map((mostPickedProperty, i) => (
         <Fade
           className={clx({ "row-span-2": i === 0 })}
           direction="up"
           triggerOnce
           delay={500 * i}
-          key={mostPicked._id}
+          key={mostPickedProperty._id}
         >
-          <MostPickedItem mostPicked={mostPicked} />
+          <MostPickedItem mostPickedProperty={mostPickedProperty} />
         </Fade>
       ))}
     </div>
@@ -54,34 +47,50 @@ function MostPickedList() {
 }
 
 type MostPickedItemProps = {
-  mostPicked: MostPickedType;
+  mostPickedProperty: MostPickedProperty;
 };
 
-function MostPickedItem({ mostPicked }: MostPickedItemProps) {
-  const formattedPrice = formatToUSD(mostPicked.price);
+function MostPickedItem({ mostPickedProperty }: MostPickedItemProps) {
+  const formattedPrice = formatToUSD(mostPickedProperty.price);
+  const imageUrl =
+    import.meta.env.VITE_BACKEND_BASE_URL + mostPickedProperty.imageUrl;
 
   return (
     <article className={classes.mostPickedItem}>
       <figure
         className={clx("img-wrapper", classes.mostPickedItem__imgWrapper)}
       >
-        <img src={mostPicked.imageUrl} alt={mostPicked.name} />
+        <img
+          src={imageUrl}
+          alt={mostPickedProperty.title}
+          crossOrigin="anonymous"
+        />
       </figure>
       <div className={classes.mostPickedItem__metaWrapper}>
-        <h5 className="text-xl">{mostPicked.name}</h5>
+        <h5 className="text-xl">{mostPickedProperty.title}</h5>
         <span className="font-light">
-          {mostPicked.city},&nbsp;{mostPicked.country}
+          {mostPickedProperty.city},&nbsp;{mostPickedProperty.country}
         </span>
       </div>
       <Tag
         className="absolute z-10 right-0"
         highlightedText={formattedPrice}
-        text={`per ${mostPicked.unit}`}
+        text={`per ${mostPickedProperty.unit}`}
       />
       <Link
-        to={`/properties/${mostPicked._id}`}
+        to={`/properties/${mostPickedProperty._id}`}
         className="app-link stretched-link"
       />
     </article>
   );
 }
+
+export type MostPickedProperty = {
+  _id: string;
+  title: string;
+  unit: string;
+  city: string;
+  country: string;
+  imageUrl: string;
+  price: number;
+};

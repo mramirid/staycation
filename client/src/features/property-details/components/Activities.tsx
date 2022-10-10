@@ -1,6 +1,6 @@
 import Tag from "@/components/Tag";
 import TitledSection from "@/components/TitledSection";
-import { capitalize, isEmpty } from "lodash-es";
+import { isEmpty } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
 import type { Activity } from "../types/property";
@@ -34,15 +34,9 @@ type ActivityListProps = {
 
 function ActivityList({ items }: ActivityListProps) {
   return (
-    <div className="flex gap-x-30px">
+    <div className="grid grid-cols-4 gap-x-30px">
       {items.map((activityItem, i) => (
-        <Fade
-          direction="up"
-          triggerOnce
-          delay={300 * i}
-          key={activityItem._id}
-          className="flex-grow"
-        >
+        <Fade direction="up" triggerOnce delay={300 * i} key={activityItem._id}>
           <ActivityItem item={activityItem} />
         </Fade>
       ))}
@@ -64,8 +58,8 @@ function ActivityItem({ item }: FeatureItemProps) {
           text="Choice"
         />
       )}
-      <figure>
-        <img src={item.imageUrl} alt={item.name} className="object-cover" />
+      <figure className="img-wrapper !h-180px">
+        <img src={item.imageUrl} alt={item.name} />
       </figure>
       <Link
         to="#"

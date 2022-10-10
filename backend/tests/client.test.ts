@@ -35,9 +35,9 @@ describe("Client API", () => {
 
         chai.expect(res.body).to.be.an("object");
         chai
-          .expect(res.body.hero)
+          .expect(res.body.heroStatistics)
           .to.have.all.keys("travelerCount", "treasureCount", "cityCount");
-        chai.expect(res.body.mostPicked).to.be.an("array");
+        chai.expect(res.body.mostPickedProperties).to.be.an("array");
         chai.expect(res.body.categories).to.be.an("array");
         chai.expect(res.body.testimonial).to.be.an("object");
 

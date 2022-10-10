@@ -10,7 +10,7 @@ export default function Tag(props: Props) {
   return (
     <div
       className={clx(
-        "rounded-bl-2xl bg-accent w-[11.25rem] h-10 font-light",
+        "rounded-bl-2xl bg-accent w-180px h-10 font-light",
         "text-white flex justify-center items-center",
         props.className
       )}

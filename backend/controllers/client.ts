@@ -94,36 +94,43 @@ export async function getLanding(__: Request, res: Response) {
       },
     });
 
-  const TESTIMONIAL = Object.freeze({
+  const TESTIMONIAL = Object.freeze<Testimonial>({
     _id: crypto.randomUUID(),
-    imageUrl: "/images/testimonial-landing-page.seed.jpg",
-    name: "Happy Family",
+    imageUrl: "/images/testimonial-landing-page.jpg",
+    title: "Happy Family",
     rate: 4.55,
     content:
       "What a great trip with my family and I should try again next time soon ...",
-    memberName: "Angga",
-    memberOccupation: "Product Designer",
+    member: {
+      name: "Angga",
+      occupation: "Product Designer",
+    },
   });
 
   try {
-    const [travelerCount, treasureResult, cityCount, mostPicked, categories] =
-      await Promise.all([
-        travelersPromise,
-        treasuresPromise,
-        citiesPromise,
-        mostPickedPromise,
-        categoriesPromise,
-      ]);
+    const [
+      travelerCount,
+      treasureResult,
+      cityCount,
+      mostPickedProperties,
+      categories,
+    ] = await Promise.all([
+      travelersPromise,
+      treasuresPromise,
+      citiesPromise,
+      mostPickedPromise,
+      categoriesPromise,
+    ]);
 
     const treasures = treasureResult.at(0) ?? { count: 0 };
 
     res.status(StatusCodes.OK).json({
-      hero: {
+      heroStatistics: {
         travelerCount,
         treasureCount: treasures.count,
         cityCount,
       },
-      mostPicked,
+      mostPickedProperties,
       categories,
       testimonial: TESTIMONIAL,
     });
@@ -140,15 +147,17 @@ export async function getProperty(req: Request<{ id: string }>, res: Response) {
       property404Error
     );
 
-    const TESTIMONIAL = Object.freeze({
+    const TESTIMONIAL = Object.freeze<Testimonial>({
       _id: "291850b1-e2a2-4675-ab27-a990f7e82173",
       imageUrl: "/images/testimonial-property-details.seed.jpg",
-      name: "Happy Family",
+      title: "Happy Family",
       rate: 4,
       content:
         "What a great trip with my family and I should try again and again next time soon...",
-      memberName: "Angga",
-      memberOccupation: "UI Designer",
+      member: {
+        name: "Angga",
+        occupation: "UI Designer",
+      },
     });
 
     res
@@ -222,6 +231,18 @@ export async function addBooking(
       .json({ error: { message: getErrorMessage(maybeError) } });
   }
 }
+
+type Testimonial = {
+  _id: string;
+  imageUrl: string;
+  title: string;
+  rate: number;
+  content: string;
+  member: {
+    name: string;
+    occupation: string;
+  };
+};
 
 export async function getTest(__: Request, res: Response) {
   const response = new createHttpError.ImATeapot();

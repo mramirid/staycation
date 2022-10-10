@@ -1,4 +1,3 @@
-import type TestimonialType from "@/types/testimonial";
 import { clx } from "@/utils/styling";
 import type { ComponentProps } from "react";
 import { Fade } from "react-awesome-reveal";
@@ -8,6 +7,18 @@ import StarRatings from "react-star-ratings";
 type TestimonialProps = {
   className: string;
   testimonial: TestimonialType;
+};
+
+export type TestimonialType = {
+  _id: string;
+  imageUrl: string;
+  title: string;
+  rate: number;
+  content: string;
+  member: {
+    name: string;
+    occupation: string;
+  };
 };
 
 export default function Testimonial(props: TestimonialProps) {
@@ -28,7 +39,7 @@ function TestimonialContent({ testimonial, className }: TestimonialProps) {
 
   return (
     <div className={clx("self-center", className)}>
-      <h4 className="mb-10 font-medium text-2xl">{testimonial.name}</h4>
+      <h4 className="mb-10 font-medium text-2xl">{testimonial.title}</h4>
       <StarRating
         rating={testimonial.rate}
         starDimension="36px"
@@ -36,7 +47,7 @@ function TestimonialContent({ testimonial, className }: TestimonialProps) {
       />
       <h2 className="font-normal text-[2rem] my-2">{testimonial.content}</h2>
       <span className="font-light text-lg block">
-        {testimonial.familyOccupation}
+        {testimonial.member.name}, {testimonial.member.occupation}
       </span>
       <Link
         to="#"
@@ -63,7 +74,9 @@ type HeroBannerProps = {
   imageUrl: string;
 };
 
-function TestimonialPortrait({ imageUrl }: HeroBannerProps) {
+function TestimonialPortrait(props: HeroBannerProps) {
+  const imageUrl = import.meta.env.VITE_BACKEND_BASE_URL + props.imageUrl;
+
   return (
     <div>
       <div className="relative h-[34rem] w-[25.3rem]">
