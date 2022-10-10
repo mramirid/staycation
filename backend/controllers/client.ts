@@ -5,6 +5,7 @@ import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 import mongoose from "mongoose";
 import Booking from "../models/Booking";
+import { CategoryDoc } from "../models/Category";
 import Property from "../models/Property";
 import { property404Error } from "../utils/constant";
 import { getErrorMessage } from "../utils/error";
@@ -143,9 +144,9 @@ export async function getLanding(__: Request, res: Response) {
 
 export async function getProperty(req: Request<{ id: string }>, res: Response) {
   try {
-    const property = await Property.findById(req.params.id).orFail(
-      property404Error
-    );
+    const property = await Property.findById(req.params.id)
+      .populate<{ category: CategoryDoc }>("category")
+      .orFail(property404Error);
 
     const TESTIMONIAL = Object.freeze<Testimonial>({
       _id: "291850b1-e2a2-4675-ab27-a990f7e82173",

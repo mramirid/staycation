@@ -1,7 +1,7 @@
-import BrandText from "@/components/BrandText";
 import { clx } from "@/utils/styling";
 import { Fade } from "react-awesome-reveal";
 import { NavLink } from "react-router-dom";
+import BrandText from "./BrandText";
 
 type HeaderProps = {
   logoOnly?: boolean;

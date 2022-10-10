@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
-import { BookingPage } from "./features/booking";
-import { landingLoader, LandingPage } from "./features/landing-page";
-import { PropertyDetailsPage } from "./features/property-details";
+import BookingPage from "./pages/BookingPage";
+import LandingPage, { loader as landingLoader } from "./pages/LandingPage";
+import PropertyDetailPage from "./pages/PropertyDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <PropertyDetailsPage />,
+            element: <PropertyDetailPage />,
           },
           {
             path: "book",

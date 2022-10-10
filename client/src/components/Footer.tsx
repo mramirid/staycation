@@ -1,7 +1,7 @@
-import BrandText from "@/components/BrandText";
 import { clx } from "@/utils/styling";
 import type { HTMLProps, ReactElement } from "react";
 import { Link } from "react-router-dom";
+import BrandText from "./BrandText";
 import classes from "./Footer.module.scss";
 
 export default function Footer() {
