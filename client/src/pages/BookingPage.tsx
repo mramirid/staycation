@@ -14,33 +14,37 @@ import {
   bookingSchema,
   CompletedContent,
   CompletedController,
+  getBanks,
   PaymentContent,
   PaymentController,
+  type Bank,
   type BookingLocationState,
   type BookingValues,
 } from "@/features/booking";
+import { getProperty, type Property } from "@/features/property";
 import type { StatefulLocation } from "@/types/react-router";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { isNull, isUndefined } from "lodash-es";
+import { isNull } from "lodash-es";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useLocation, useParams } from "react-router-dom";
+import {
+  useLoaderData,
+  useLocation,
+  type LoaderFunctionArgs,
+} from "react-router-dom";
 
 type StepNames = "bookingInformation" | "payment" | "completed";
 
 export default function BookingPage() {
   useEffect(() => window.scrollTo(0, 0), []);
 
+  const { property, banks } = useLoaderData() as LoaderData;
+
   const form = useForm<BookingValues>({
     resolver: yupResolver(bookingSchema),
     mode: "onChange",
   });
-
-  const { id: propertyId } = useParams();
-  if (isUndefined(propertyId)) {
-    throw new Error("The property id cannot be undefined");
-  }
 
   const submitBooking = async (data: BookingValues) => {
     await new Promise((resolve) => {
@@ -62,14 +66,23 @@ export default function BookingPage() {
       title: "Booking Information",
       description: "Please fill up the blank fields below",
       content: (
-        <BookingInformationContent duration={startBookingData.duration} />
+        <BookingInformationContent
+          duration={startBookingData.duration}
+          property={property}
+        />
       ),
       controller: <BookingInformationController />,
     },
     payment: {
       title: "Payment",
       description: "Kindly follow the instructions below",
-      content: <PaymentContent duration={startBookingData.duration} />,
+      content: (
+        <PaymentContent
+          duration={startBookingData.duration}
+          propertyPrice={property.price}
+          banks={banks}
+        />
+      ),
       controller: <PaymentController onSubmitBooking={submitBooking} />,
     },
     completed: {
@@ -117,3 +130,19 @@ export default function BookingPage() {
     </>
   );
 }
+
+export async function loader(args: LoaderFunctionArgs): Promise<LoaderData> {
+  const { id: propertyId } = args.params;
+
+  const [property, banks] = await Promise.all([
+    getProperty(propertyId ?? ""),
+    getBanks(),
+  ]);
+
+  return { property, banks };
+}
+
+type LoaderData = {
+  property: Property;
+  banks: Bank[];
+};

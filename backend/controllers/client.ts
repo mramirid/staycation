@@ -4,6 +4,7 @@ import createHttpError from "http-errors";
 import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 import mongoose from "mongoose";
+import Bank from "../models/Bank";
 import Booking from "../models/Booking";
 import { CategoryDoc } from "../models/Category";
 import Property from "../models/Property";
@@ -189,6 +190,17 @@ export type AddBookingReqBody = {
   originBankName: string;
   accountHolderName: string;
 };
+
+export async function getBanks(__: Request, res: Response) {
+  try {
+    const banks = await Bank.find();
+    res.status(StatusCodes.OK).json(banks);
+  } catch (maybeError) {
+    res
+      .status(StatusCodes.INTERNAL_SERVER_ERROR)
+      .json({ message: getErrorMessage(maybeError) });
+  }
+}
 
 export async function addBooking(
   req: Request<{ id: string }, unknown, AddBookingReqBody>,

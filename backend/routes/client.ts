@@ -8,6 +8,8 @@ clientApiRouter.get("/landing", controller.getLanding);
 
 clientApiRouter.get("/properties/:id", controller.getProperty);
 
+clientApiRouter.get("/banks", controller.getBanks);
+
 clientApiRouter.post(
   "/bookings",
   imagesMulter.handleUpload("payment-proof"),

@@ -1,4 +1,3 @@
-import PROPERTY from "@/assets/data/property.data.json";
 import { useController } from "@/components/stepper";
 import { isUndefined } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
@@ -45,10 +44,7 @@ export function BookingInformationController() {
           </button>
         </Fade>
       )}
-      <Link
-        className="app-btn app-btn-light btn-block"
-        to={`/properties/${PROPERTY._id}`}
-      >
+      <Link className="app-btn app-btn-light btn-block" to="..">
         Cancel
       </Link>
     </>

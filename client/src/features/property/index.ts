@@ -9,3 +9,4 @@ export {
 export { default as PropertyHeading } from "./components/PropertyHeading";
 export { default as PropertyImages } from "./components/PropertyImages";
 export { default as PropertyTag } from "./components/PropertyTag";
+export { getProperty, type Property } from "./lib/api";

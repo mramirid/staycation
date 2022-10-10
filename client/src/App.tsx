@@ -1,9 +1,13 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
-import BookingPage from "./pages/BookingPage";
-import LandingPage, { loader as landingPageLoader } from "./pages/LandingPage";
+import BookingPage, {
+  loader as bookingPageDataLoader,
+} from "./pages/BookingPage";
+import LandingPage, {
+  loader as landingPageDataLoader,
+} from "./pages/LandingPage";
 import PropertyDetailPage, {
-  loader as propertyDetailLoader,
+  loader as propertyDataLoader,
 } from "./pages/PropertyDetailPage";
 
 const router = createBrowserRouter([
@@ -13,7 +17,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <LandingPage />,
-        loader: landingPageLoader,
+        loader: landingPageDataLoader,
       },
       {
         path: "/properties/:id",
@@ -21,11 +25,12 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <PropertyDetailPage />,
-            loader: propertyDetailLoader,
+            loader: propertyDataLoader,
           },
           {
             path: "book",
             element: <BookingPage />,
+            loader: bookingPageDataLoader,
           },
         ],
       },

@@ -1,15 +1,15 @@
-import PROPERTY from "@/assets/data/property.data.json";
 import InputImage from "@/components/forms/InputImage";
 import InputText from "@/components/forms/InputText";
 import { formatToUSD } from "@/utils/format";
 import { Fade } from "react-awesome-reveal";
 import { Controller, useFormContext } from "react-hook-form";
-import bcaLogo from "../../assets/images/bca-logo.jpg";
-import mandiriLogo from "../../assets/images/mandiri-logo.jpg";
+import { type Bank } from "../../lib/api";
 import type { BookingForm } from "../../types/booking-form";
 
 type ContentProps = {
+  propertyPrice: number;
   duration: number;
+  banks: Bank[];
 };
 
 export function PaymentContent(props: ContentProps) {
@@ -23,7 +23,7 @@ export function PaymentContent(props: ContentProps) {
 }
 
 function PaymentDetails(props: ContentProps) {
-  const subTotal = PROPERTY.price * props.duration;
+  const subTotal = props.propertyPrice * props.duration;
   const TAX_RATE = 10 / 100;
   const grandTotal = subTotal * TAX_RATE + subTotal;
 
@@ -34,36 +34,23 @@ function PaymentDetails(props: ContentProps) {
         <p className="mt-5">Tax: {TAX_RATE * 100}%</p>
         <p className="mt-10px">Sub total: {formatToUSD(subTotal)} USD</p>
         <p className="mt-10px">Total: {formatToUSD(grandTotal)} USD</p>
-        <figure className="mt-5 flex gap-x-4">
-          <img
-            src={bcaLogo}
-            alt="Bank Central Asia"
-            width={60}
-            className="self-start"
-          />
-          <figcaption>
-            <dl>
-              <dd>Bank Central Asia</dd>
-              <dd>2208 1996</dd>
-              <dd>BuildWith Angga</dd>
-            </dl>
-          </figcaption>
-        </figure>
-        <figure className="mt-5 flex gap-x-4">
-          <img
-            src={mandiriLogo}
-            alt="Mandiri"
-            width={60}
-            className="self-start"
-          />
-          <figcaption>
-            <dl>
-              <dd>Bank Mandiri</dd>
-              <dd>2208 1996</dd>
-              <dd>BuildWith Angga</dd>
-            </dl>
-          </figcaption>
-        </figure>
+        {props.banks.map((bank) => (
+          <figure className="mt-5 flex gap-x-4" key={bank._id}>
+            <img
+              src={bank.logoUrl}
+              alt={bank.name}
+              width={60}
+              className="self-start"
+            />
+            <figcaption>
+              <dl>
+                <dd>{bank.name}</dd>
+                <dd>{bank.accountNumbers}</dd>
+                <dd>{bank.accountHolderName}</dd>
+              </dl>
+            </figcaption>
+          </figure>
+        ))}
       </>
     </Fade>
   );

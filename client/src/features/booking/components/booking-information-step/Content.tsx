@@ -1,5 +1,5 @@
-import PROPERTY from "@/assets/data/property.data.json";
 import InputText from "@/components/forms/InputText";
+import { type Property } from "@/features/property";
 import { formatCountSuffix } from "@/utils/format";
 import { Fade } from "react-awesome-reveal";
 import { useFormContext } from "react-hook-form";
@@ -8,6 +8,7 @@ import type { BookingForm } from "../../types/booking-form";
 
 type ContentProps = {
   duration: number;
+  property: Property;
 };
 
 export function BookingInformationContent(props: ContentProps) {
@@ -20,8 +21,11 @@ export function BookingInformationContent(props: ContentProps) {
   );
 }
 
-function PropertyDetails(props: ContentProps) {
-  const formattedDuration = formatCountSuffix(props.duration, {
+function PropertyDetails({ property, duration }: ContentProps) {
+  const firstImageUrl =
+    import.meta.env.VITE_BACKEND_BASE_URL + property.imageUrls.at(0);
+
+  const formattedDuration = formatCountSuffix(duration, {
     singular: "night",
     plural: "nights",
   });
@@ -29,24 +33,18 @@ function PropertyDetails(props: ContentProps) {
   return (
     <Fade delay={300} className="py-9" triggerOnce>
       <>
-        <figure>
-          <img
-            src={PROPERTY.imageUrls[0].url}
-            alt={PROPERTY.title}
-            style={{ height: "16.875rem", width: "100%" }}
-          />
+        <figure className="img-wrapper !h-[16.875rem]">
+          <img src={firstImageUrl} alt={property.title} />
         </figure>
         <div className="mt-4 flex justify-between items-center">
           <div>
-            <h5 className="text-xl text-secondary">{PROPERTY.title}</h5>
+            <h5 className="text-xl text-secondary">{property.title}</h5>
             <span className="text-light">
-              {PROPERTY.city}, {PROPERTY.country}
+              {property.city}, {property.country}
             </span>
           </div>
           <div className="leading-7">
-            <b className="text-semibold">
-              ${props.duration * PROPERTY.price} USD
-            </b>
+            <b className="text-semibold">${duration * property.price} USD</b>
             <span className="text-light"> per </span>
             <b className="text-semibold">{formattedDuration}</b>
           </div>
