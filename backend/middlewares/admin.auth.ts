@@ -3,9 +3,9 @@ import { NextFunction, Request, Response } from "express";
 import _, { isObject, isUndefined } from "lodash";
 import passport from "passport";
 import { Strategy } from "passport-local";
-import User, { UserDoc } from "../../models/User";
-import { AlertStatuses, setAlert } from "../../utils/alert";
-import { toError } from "../../utils/error";
+import User, { UserDoc } from "../models/User";
+import { AlertStatuses, setAlert } from "../utils/alert";
+import { toError } from "../utils/error";
 
 const localStrategy = new Strategy(async (username, password, done) => {
   let user: UserDoc | null;
