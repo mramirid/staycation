@@ -6,12 +6,10 @@ services:
     env_file:
       - ./backend/.env
     ports:
-      - "27017:27017" # TODO: Should be removed in production
+      - "27017:27017"
 
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile.dev
+    build: ./backend
     volumes:
       - ./backend:/app:ro
       - /app/seeds
