@@ -1,10 +1,9 @@
 import TitledSection from "@/components/TitledSection";
 import { clx } from "@/utils/styling";
-import type { Feature } from "../types/property";
 
 type DescriptionProps = {
   description: string;
-  features: Feature[];
+  features: PropertyFeature[];
   className: string;
 };
 
@@ -19,34 +18,48 @@ export default function PropertyDescription(props: DescriptionProps) {
         className="text-light leading-7 flex flex-col space-y-10px"
         dangerouslySetInnerHTML={{ __html: props.description }}
       />
-      <Features className="mt-30px" features={props.features} />
+      <FeatureList className="mt-30px" features={props.features} />
     </TitledSection>
   );
 }
 
-type FeaturesProps = {
-  features: Feature[];
+type FeatureListProps = {
+  features: PropertyFeature[];
   className: string;
 };
 
-function Features(props: FeaturesProps) {
+function FeatureList(props: FeatureListProps) {
   return (
     <div
       className={clx("grid grid-cols-4 gap-x-50px gap-y-5", props.className)}
     >
       {props.features.map((feature) => (
-        <figure key={feature._id}>
-          <img
-            src={feature.iconUrl}
-            alt={feature.name}
-            width={38}
-            height={38}
-          />
-          <figcaption className="mt-3 text-light">
-            <b className="text-semibold">{feature.quantity}</b> {feature.name}
-          </figcaption>
-        </figure>
+        <FeatureItem feature={feature} />
       ))}
     </div>
   );
 }
+
+type FeatureItemProps = {
+  feature: PropertyFeature;
+};
+
+function FeatureItem({ feature }: FeatureItemProps) {
+  const iconUrl = import.meta.env.VITE_BACKEND_BASE_URL + feature.iconUrl;
+
+  return (
+    <figure key={feature._id}>
+      <img src={iconUrl} alt={feature.name} width={38} height={38} />
+      <figcaption className="mt-3 text-light">
+        <b className="text-semibold">{feature.quantity}</b> {feature.name}
+      </figcaption>
+    </figure>
+  );
+}
+
+export type PropertyFeature = {
+  _id: string;
+  name: string;
+  quantity: number;
+  iconUrl: string;
+};

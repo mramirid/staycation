@@ -2,12 +2,11 @@ import TitledSection from "@/components/TitledSection";
 import { isEmpty } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router-dom";
-import type { Activity } from "../types/property";
 import PropertyTag from "./PropertyTag";
 
 type PropertyActivitiesProps = {
   className: string;
-  activities: Activity[];
+  activities: PropertyActivity[];
 };
 
 export default function PropertyActivities(props: PropertyActivitiesProps) {
@@ -29,7 +28,7 @@ function ActivityEmpty() {
 }
 
 type ActivityListProps = {
-  items: Activity[];
+  items: PropertyActivity[];
 };
 
 function ActivityList({ items }: ActivityListProps) {
@@ -45,10 +44,12 @@ function ActivityList({ items }: ActivityListProps) {
 }
 
 type FeatureItemProps = {
-  item: Activity;
+  item: PropertyActivity;
 };
 
 function ActivityItem({ item }: FeatureItemProps) {
+  const imageUrl = import.meta.env.VITE_BACKEND_BASE_URL + item.imageUrl;
+
   return (
     <article className="card rounded-b-none">
       {item.isPopular && (
@@ -59,10 +60,10 @@ function ActivityItem({ item }: FeatureItemProps) {
         />
       )}
       <figure className="img-wrapper !h-180px">
-        <img src={item.imageUrl} alt={item.name} />
+        <img src={imageUrl} alt={item.name} />
       </figure>
       <Link
-        to="#"
+        to={`features/${item._id}`}
         className="app-link stretched-link text-secondary text-xl text-left mt-4"
       >
         <h5>{item.name}</h5>
@@ -71,3 +72,11 @@ function ActivityItem({ item }: FeatureItemProps) {
     </article>
   );
 }
+
+export type PropertyActivity = {
+  _id: string;
+  name: string;
+  type: string;
+  imageUrl: string;
+  isPopular: boolean;
+};

@@ -150,7 +150,7 @@ export async function getProperty(req: Request<{ id: string }>, res: Response) {
 
     const TESTIMONIAL = Object.freeze<Testimonial>({
       _id: "291850b1-e2a2-4675-ab27-a990f7e82173",
-      imageUrl: "/images/testimonial-property-details.seed.jpg",
+      imageUrl: "/images/testimonial-property-details.jpg",
       title: "Happy Family",
       rate: 4,
       content:

@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ErrorPage from "./components/ErrorPage";
 import BookingPage from "./pages/BookingPage";
-import LandingPage, { loader as landingLoader } from "./pages/LandingPage";
-import PropertyDetailPage from "./pages/PropertyDetailPage";
+import LandingPage, { loader as landingPageLoader } from "./pages/LandingPage";
+import PropertyDetailPage, {
+  loader as propertyDetailLoader,
+} from "./pages/PropertyDetailPage";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +13,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <LandingPage />,
-        loader: landingLoader,
+        loader: landingPageLoader,
       },
       {
         path: "/properties/:id",
@@ -19,6 +21,7 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <PropertyDetailPage />,
+            loader: propertyDetailLoader,
           },
           {
             path: "book",

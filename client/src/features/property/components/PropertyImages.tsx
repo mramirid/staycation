@@ -1,9 +1,8 @@
 import { clx } from "@/utils/styling";
 import { Fade } from "react-awesome-reveal";
-import type { ImageUrl } from "../types/property";
 
 type FeaturedImagesProps = {
-  imageUrls: ImageUrl[];
+  imageUrls: string[];
 };
 
 export default function PropertyImages({ imageUrls }: FeaturedImagesProps) {
@@ -20,9 +19,9 @@ export default function PropertyImages({ imageUrls }: FeaturedImagesProps) {
             direction="up"
             triggerOnce
             delay={300 * i}
-            key={imageUrl._id}
+            key={i}
           >
-            <FeatureImage {...imageUrl} />
+            <FeatureImage imageUrl={imageUrl} />
           </Fade>
         );
       })}
@@ -30,10 +29,16 @@ export default function PropertyImages({ imageUrls }: FeaturedImagesProps) {
   );
 }
 
-function FeatureImage(props: ImageUrl) {
+type FeaturedImageProps = {
+  imageUrl: string;
+};
+
+function FeatureImage(props: FeaturedImageProps) {
+  const imageUrl = import.meta.env.VITE_BACKEND_BASE_URL + props.imageUrl;
+
   return (
     <figure className="img-wrapper card">
-      <img src={props.url} alt={props._id} />
+      <img src={imageUrl} alt={imageUrl} />
     </figure>
   );
 }
