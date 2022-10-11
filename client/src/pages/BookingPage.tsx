@@ -41,6 +41,7 @@ import {
   useLocation,
   type LoaderFunctionArgs,
 } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const bookingProcessError = new Error(
   "The booking process seems incorrect. Unable to continue. Please try again from the beginning."
@@ -70,7 +71,7 @@ export default function BookingPage() {
       isErrorWithMessage(errors.duration) ||
       isErrorWithMessage(errors["property.price"])
     ) {
-      alert(getErrorMessage(bookingProcessError));
+      toast.error(getErrorMessage(bookingProcessError));
     }
 
     if (isErrorWithMessage(errors["member.firstName"])) {
@@ -141,7 +142,7 @@ export default function BookingPage() {
         showValidationErrors(data.errors);
         return;
       }
-      alert(getErrorMessage(maybeError));
+      toast.error(getErrorMessage(maybeError));
     }
   };
 
