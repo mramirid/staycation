@@ -25,10 +25,15 @@ import {
 } from "@/features/booking";
 import { getProperty, type Property } from "@/features/property";
 import type { StatefulLocation } from "@/types/react-router";
-import { getErrorMessage, isResponse422 } from "@/utils/error";
+import {
+  getErrorMessage,
+  isErrorWithMessage,
+  isResponse422,
+  type ErrorWithMessage,
+} from "@/utils/error";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { isNull, isObject } from "lodash-es";
+import { isNull } from "lodash-es";
 import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
@@ -59,52 +64,52 @@ export default function BookingPage() {
 
   const showValidationErrors = (errors: ValidationErrorData["errors"]) => {
     if (
-      isObject(errors["property.current"]) ||
-      isObject(errors.startDate) ||
-      isObject(errors.endDate) ||
-      isObject(errors.duration) ||
-      isObject(errors["property.price"])
+      isErrorWithMessage(errors["property.current"]) ||
+      isErrorWithMessage(errors.startDate) ||
+      isErrorWithMessage(errors.endDate) ||
+      isErrorWithMessage(errors.duration) ||
+      isErrorWithMessage(errors["property.price"])
     ) {
       alert(getErrorMessage(bookingProcessError));
     }
 
-    if (isObject(errors["member.firstName"])) {
+    if (isErrorWithMessage(errors["member.firstName"])) {
       form.setError("firstName", {
         type: "onChange",
         message: errors["member.firstName"].message,
       });
     }
-    if (isObject(errors["member.lastName"])) {
+    if (isErrorWithMessage(errors["member.lastName"])) {
       form.setError("lastName", {
         type: "onChange",
         message: errors["member.lastName"].message,
       });
     }
-    if (isObject(errors["member.email"])) {
+    if (isErrorWithMessage(errors["member.email"])) {
       form.setError("email", {
         type: "onChange",
         message: errors["member.email"].message,
       });
     }
-    if (isObject(errors["member.phone"])) {
+    if (isErrorWithMessage(errors["member.phone"])) {
       form.setError("phone", {
         type: "onChange",
         message: errors["member.phone"].message,
       });
     }
-    if (isObject(errors["payment.imageProofUrl"])) {
+    if (isErrorWithMessage(errors["payment.imageProofUrl"])) {
       form.setError("paymentProof", {
         type: "onChange",
         message: errors["payment.imageProofUrl"].message,
       });
     }
-    if (isObject(errors["payment.originBankName"])) {
+    if (isErrorWithMessage(errors["payment.originBankName"])) {
       form.setError("originBankName", {
         type: "onChange",
         message: errors["payment.originBankName"].message,
       });
     }
-    if (isObject(errors["payment.accountHolderName"])) {
+    if (isErrorWithMessage(errors["payment.accountHolderName"])) {
       form.setError("accountHolderName", {
         type: "onChange",
         message: errors["payment.accountHolderName"].message,
@@ -214,42 +219,18 @@ type StepNames = "bookingInformation" | "payment" | "completed";
 
 type ValidationErrorData = {
   errors: Partial<{
-    "payment.accountHolderName": {
-      message: "Path `payment.accountHolderName` is required.";
-    };
-    "payment.originBankName": {
-      message: "Path `payment.originBankName` is required.";
-    };
-    "payment.imageProofUrl": {
-      message: "Path `payment.imageProofUrl` is required.";
-    };
-    "property.price": {
-      message: "Path `property.price` is required.";
-    };
-    "property.current": {
-      message: "Path `property.current` is required.";
-    };
-    "member.phone": {
-      message: "Path `member.phone` is required.";
-    };
-    "member.email": {
-      message: "Path `member.email` is required.";
-    };
-    "member.lastName": {
-      message: "Path `member.lastName` is required.";
-    };
-    "member.firstName": {
-      message: "Path `member.firstName` is required.";
-    };
-    startDate: {
-      message: "Path `startDate` is required.";
-    };
-    endDate: {
-      message: "Path `endDate` is required.";
-    };
-    duration: {
-      message: "Path `duration` is required.";
-    };
+    "payment.accountHolderName": ErrorWithMessage;
+    "payment.originBankName": ErrorWithMessage;
+    "payment.imageProofUrl": ErrorWithMessage;
+    "property.price": ErrorWithMessage;
+    "property.current": ErrorWithMessage;
+    "member.phone": ErrorWithMessage;
+    "member.email": ErrorWithMessage;
+    "member.lastName": ErrorWithMessage;
+    "member.firstName": ErrorWithMessage;
+    startDate: ErrorWithMessage;
+    endDate: ErrorWithMessage;
+    duration: ErrorWithMessage;
   }>;
 };
 

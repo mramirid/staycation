@@ -23,9 +23,9 @@ function toError(maybeError: unknown) {
   }
 }
 
-function isErrorWithMessage(
+export function isErrorWithMessage(
   maybeError: unknown
-): maybeError is { message: string } {
+): maybeError is ErrorWithMessage {
   return (
     typeof maybeError === "object" &&
     maybeError !== null &&
@@ -33,6 +33,8 @@ function isErrorWithMessage(
     typeof (maybeError as Record<string, unknown>).message === "string"
   );
 }
+
+export type ErrorWithMessage = { message: string };
 
 export function isResponse422(maybeError: unknown): maybeError is Response {
   return (
