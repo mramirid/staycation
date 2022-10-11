@@ -5,31 +5,40 @@ import { useFormContext } from "react-hook-form";
 import type { BookingForm, BookingValues } from "../../types/booking-form";
 
 type Props = {
-  onSubmitBooking: (data: BookingValues) => Promise<void>;
+  onSubmitBooking: (data: BookingValues) => Promise<boolean>;
 };
 
 export function PaymentController(props: Props) {
   const form: BookingForm = useFormContext();
 
   const paymentProof = form.getFieldState("paymentProof", form.formState);
-  const originBank = form.getFieldState("originBank", form.formState);
-  const senderName = form.getFieldState("senderName", form.formState);
+  const originBankName = form.getFieldState("originBankName", form.formState);
+  const accountHolderName = form.getFieldState(
+    "accountHolderName",
+    form.formState
+  );
 
   const areInputsValid =
     paymentProof.isDirty &&
     isUndefined(paymentProof.error) &&
-    originBank.isDirty &&
-    isUndefined(originBank.error) &&
-    senderName.isDirty &&
-    isUndefined(senderName.error);
+    originBankName.isDirty &&
+    isUndefined(originBankName.error) &&
+    accountHolderName.isDirty &&
+    isUndefined(accountHolderName.error);
 
   const controller = useController();
 
   const submitBooking = async (data: BookingValues) => {
-    if (areInputsValid) {
-      await props.onSubmitBooking(data);
-      controller.toNextStep();
+    if (!areInputsValid) {
+      return;
     }
+
+    const isSuccess = await props.onSubmitBooking(data);
+    if (!isSuccess) {
+      return;
+    }
+
+    controller.toNextStep();
   };
 
   return (
@@ -40,6 +49,7 @@ export function PaymentController(props: Props) {
             className="app-btn app-btn-primary btn-block"
             type="button"
             onClick={form.handleSubmit(submitBooking)}
+            disabled={form.formState.isSubmitting}
           >
             Continue to Book
           </button>
@@ -49,7 +59,7 @@ export function PaymentController(props: Props) {
         className="app-btn app-btn-light btn-block"
         onClick={controller.toPrevStep}
       >
-        Cancel
+        Back
       </button>
     </>
   );

@@ -29,8 +29,8 @@ export const paymentSchema = object({
       (image) => isObject(image) && image.size <= 2_000_000 // In bytes | 2 MB
     )
     .required(),
-  originBank: string().trim().required("Origin bank is required"),
-  senderName: string().trim().required("Sender name is required"),
+  originBankName: string().trim().required("Origin bank is required"),
+  accountHolderName: string().trim().required("Sender name is required"),
 });
 
 export const bookingSchema = bookingInformationSchema

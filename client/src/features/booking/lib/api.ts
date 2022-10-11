@@ -29,3 +29,17 @@ export type Bank = {
   accountNumbers: string;
   accountHolderName: string;
 };
+
+export async function bookProperty(formData: FormData): Promise<Response> {
+  const response = await fetch(
+    import.meta.env.VITE_BACKEND_BASE_URL + "/api/v1/client/bookings",
+    {
+      method: "post",
+      body: formData,
+    }
+  );
+  if (!response.ok) {
+    throw response;
+  }
+  return response;
+}

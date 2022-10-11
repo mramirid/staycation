@@ -86,8 +86,8 @@ function Form() {
             id="origin-bank"
             type="text"
             containerClass="mt-2"
-            {...form.register("originBank")}
-            errorMessage={form.formState.errors.originBank?.message}
+            {...form.register("originBankName")}
+            errorMessage={form.formState.errors.originBankName?.message}
           />
         </div>
 
@@ -97,8 +97,8 @@ function Form() {
             id="name"
             type="text"
             containerClass="mt-2"
-            {...form.register("senderName")}
-            errorMessage={form.formState.errors.senderName?.message}
+            {...form.register("accountHolderName")}
+            errorMessage={form.formState.errors.accountHolderName?.message}
           />
         </div>
       </form>
