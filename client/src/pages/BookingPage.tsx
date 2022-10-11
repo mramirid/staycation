@@ -24,13 +24,9 @@ import {
   type SubmitBookingHandler,
 } from "@/features/booking";
 import { getProperty, type Property } from "@/features/property";
+import { ResponseValidationError, type ValidationErrorData } from "@/lib/error";
 import type { StatefulLocation } from "@/types/react-router";
-import {
-  getErrorMessage,
-  isErrorWithMessage,
-  isResponse422,
-  type ErrorWithMessage,
-} from "@/utils/error";
+import { getErrorMessage, isErrorWithMessage } from "@/utils/error";
 import { DevTool } from "@hookform/devtools";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { isNull } from "lodash-es";
@@ -128,7 +124,7 @@ export default function BookingPage() {
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
     formData.append("email", data.email);
-    formData.append("phone", data.phone);
+    formData.append("phone", "");
     formData.append("payment-proof", data.paymentProof, data.paymentProof.name);
     formData.append("originBankName", data.originBankName);
     formData.append("accountHolderName", data.accountHolderName);
@@ -137,9 +133,9 @@ export default function BookingPage() {
       await bookProperty(formData);
       toNextStep();
     } catch (maybeError) {
-      if (isResponse422(maybeError)) {
-        const data: ValidationErrorData = await maybeError.json();
-        showValidationErrors(data.errors);
+      if (maybeError instanceof ResponseValidationError) {
+        toast.error("Validation failed. Please check your inputs.");
+        showValidationErrors(maybeError.errors);
         return;
       }
       toast.error(getErrorMessage(maybeError));
@@ -217,23 +213,6 @@ export default function BookingPage() {
 }
 
 type StepNames = "bookingInformation" | "payment" | "completed";
-
-type ValidationErrorData = {
-  errors: Partial<{
-    "payment.accountHolderName": ErrorWithMessage;
-    "payment.originBankName": ErrorWithMessage;
-    "payment.imageProofUrl": ErrorWithMessage;
-    "property.price": ErrorWithMessage;
-    "property.current": ErrorWithMessage;
-    "member.phone": ErrorWithMessage;
-    "member.email": ErrorWithMessage;
-    "member.lastName": ErrorWithMessage;
-    "member.firstName": ErrorWithMessage;
-    startDate: ErrorWithMessage;
-    endDate: ErrorWithMessage;
-    duration: ErrorWithMessage;
-  }>;
-};
 
 export async function loader(args: LoaderFunctionArgs): Promise<LoaderData> {
   const { id: propertyId } = args.params;

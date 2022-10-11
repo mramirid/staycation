@@ -1,4 +1,3 @@
-import { StatusCodes } from "http-status-codes";
 import { isError } from "lodash-es";
 
 export function getErrorMessage(maybeError: unknown) {
@@ -35,10 +34,3 @@ export function isErrorWithMessage(
 }
 
 export type ErrorWithMessage = { message: string };
-
-export function isResponse422(maybeError: unknown): maybeError is Response {
-  return (
-    maybeError instanceof Response &&
-    maybeError.status === StatusCodes.UNPROCESSABLE_ENTITY
-  );
-}

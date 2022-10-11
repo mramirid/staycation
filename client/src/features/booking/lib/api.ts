@@ -1,5 +1,10 @@
-import { ResponseError } from "@/lib/error";
+import {
+  ResponseError,
+  ResponseValidationError,
+  type ValidationErrorData,
+} from "@/lib/error";
 import { getErrorMessage } from "@/utils/error";
+import { StatusCodes } from "http-status-codes";
 
 export async function getBanks(): Promise<Bank[]> {
   const backendBaseUrl = import.meta.env.VITE_BACKEND_BASE_URL;
@@ -7,9 +12,8 @@ export async function getBanks(): Promise<Bank[]> {
   const response = await fetch(backendBaseUrl + "/api/v1/client/banks");
 
   if (!response.ok) {
-    const resBody = await response.json();
-    const errorMessage = getErrorMessage(resBody.error);
-    throw new ResponseError(errorMessage, response.status);
+    const error = await response.json();
+    throw new ResponseError(getErrorMessage(error), response.status);
   }
 
   let banks: Bank[] = await response.json();
@@ -38,7 +42,14 @@ export async function bookProperty(formData: FormData): Promise<void> {
       body: formData,
     }
   );
-  if (!response.ok) {
-    throw response;
+  if (response.ok) {
+    return;
   }
+
+  const data: ValidationErrorData = await response.json();
+  if (response.status === StatusCodes.UNPROCESSABLE_ENTITY) {
+    const response422Error = new ResponseValidationError(data);
+    throw response422Error;
+  }
+  throw new ResponseError(getErrorMessage(data), response.status);
 }

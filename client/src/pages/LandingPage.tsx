@@ -59,9 +59,8 @@ export async function loader(): Promise<Response> {
   );
 
   if (!response.ok) {
-    const resBody = await response.json();
-    const errorMessage = getErrorMessage(resBody.error);
-    throw new ResponseError(errorMessage, response.status);
+    const error = await response.json();
+    throw new ResponseError(getErrorMessage(error), response.status);
   }
 
   return response;

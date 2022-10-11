@@ -167,13 +167,13 @@ export async function getProperty(req: Request<{ id: string }>, res: Response) {
       .json({ ...property.toJSON(), testimonial: TESTIMONIAL });
   } catch (maybeError) {
     if (createHttpError.isHttpError(maybeError)) {
-      res.status(maybeError.statusCode).json({ error: maybeError });
+      res.status(maybeError.statusCode).json({ message: maybeError.message });
       return;
     }
 
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ error: { message: getErrorMessage(maybeError) } });
+      .json({ message: getErrorMessage(maybeError) });
   }
 }
 
@@ -235,13 +235,13 @@ export async function addBooking(
     if (maybeError instanceof mongoose.Error.ValidationError) {
       res
         .status(StatusCodes.UNPROCESSABLE_ENTITY)
-        .json({ errors: maybeError.errors });
+        .json({ message: maybeError.message, errors: maybeError.errors });
       return;
     }
 
     res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ error: { message: getErrorMessage(maybeError) } });
+      .json({ message: getErrorMessage(maybeError) });
   }
 }
 
