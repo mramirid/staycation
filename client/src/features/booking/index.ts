@@ -6,13 +6,15 @@ export {
   CompletedContent,
   CompletedController,
 } from "./components/completed-step";
-export { PaymentContent, PaymentController } from "./components/payment-step";
+export {
+  PaymentContent,
+  PaymentController,
+  type SubmitBookingHandler,
+} from "./components/payment-step";
 export {
   default as StartBookingForm,
   type BookingLocationState,
 } from "./components/StartBookingForm";
-
-export { getBanks, type Bank, bookProperty } from "./lib/api";
+export { bookProperty, getBanks, type Bank } from "./lib/api";
 export { bookingSchema } from "./lib/booking.schema";
-
 export type { BookingValues } from "./types/booking-form";

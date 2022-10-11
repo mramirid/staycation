@@ -21,6 +21,7 @@ import {
   type Bank,
   type BookingLocationState,
   type BookingValues,
+  type SubmitBookingHandler,
 } from "@/features/booking";
 import { getProperty, type Property } from "@/features/property";
 import type { StatefulLocation } from "@/types/react-router";
@@ -56,7 +57,7 @@ export default function BookingPage() {
     mode: "onChange",
   });
 
-  const showValidationErrors = ({ errors }: ValidationErrorData) => {
+  const showValidationErrors = (errors: ValidationErrorData["errors"]) => {
     if (
       isObject(errors["property.current"]) ||
       isObject(errors.startDate) ||
@@ -111,7 +112,7 @@ export default function BookingPage() {
     }
   };
 
-  const submitBooking = async (data: BookingValues) => {
+  const submitBooking: SubmitBookingHandler = async (data, toNextStep) => {
     const formData = new FormData();
     formData.append("propertyId", property._id);
     formData.append("startDate", startBookingData.startDate.toISOString());
@@ -128,15 +129,14 @@ export default function BookingPage() {
 
     try {
       await bookProperty(formData);
-      return true;
+      toNextStep();
     } catch (maybeError) {
       if (isResponse422(maybeError)) {
         const data: ValidationErrorData = await maybeError.json();
-        showValidationErrors(data);
-      } else {
-        alert(getErrorMessage(maybeError));
+        showValidationErrors(data.errors);
+        return;
       }
-      return false;
+      alert(getErrorMessage(maybeError));
     }
   };
 

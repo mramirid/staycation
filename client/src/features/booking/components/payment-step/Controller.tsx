@@ -1,12 +1,18 @@
 import { useController } from "@/components/stepper";
+import { clx } from "@/utils/styling";
 import { isUndefined } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { useFormContext } from "react-hook-form";
 import type { BookingForm, BookingValues } from "../../types/booking-form";
 
 type Props = {
-  onSubmitBooking: (data: BookingValues) => Promise<boolean>;
+  onSubmitBooking: SubmitBookingHandler;
 };
+
+export type SubmitBookingHandler = (
+  data: BookingValues,
+  toNextStep: () => void
+) => Promise<void>;
 
 export function PaymentController(props: Props) {
   const form: BookingForm = useFormContext();
@@ -29,16 +35,9 @@ export function PaymentController(props: Props) {
   const controller = useController();
 
   const submitBooking = async (data: BookingValues) => {
-    if (!areInputsValid) {
-      return;
+    if (areInputsValid) {
+      await props.onSubmitBooking(data, controller.toNextStep);
     }
-
-    const isSuccess = await props.onSubmitBooking(data);
-    if (!isSuccess) {
-      return;
-    }
-
-    controller.toNextStep();
   };
 
   return (
@@ -46,10 +45,11 @@ export function PaymentController(props: Props) {
       {areInputsValid && (
         <Fade triggerOnce direction="down">
           <button
-            className="app-btn app-btn-primary btn-block"
+            className={clx("app-btn app-btn-primary btn-block", {
+              loading: form.formState.isSubmitting,
+            })}
             type="button"
             onClick={form.handleSubmit(submitBooking)}
-            disabled={form.formState.isSubmitting}
           >
             Continue to Book
           </button>

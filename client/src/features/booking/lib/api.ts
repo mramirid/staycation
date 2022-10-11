@@ -30,7 +30,7 @@ export type Bank = {
   accountHolderName: string;
 };
 
-export async function bookProperty(formData: FormData): Promise<Response> {
+export async function bookProperty(formData: FormData): Promise<void> {
   const response = await fetch(
     import.meta.env.VITE_BACKEND_BASE_URL + "/api/v1/client/bookings",
     {
@@ -41,5 +41,4 @@ export async function bookProperty(formData: FormData): Promise<Response> {
   if (!response.ok) {
     throw response;
   }
-  return response;
 }

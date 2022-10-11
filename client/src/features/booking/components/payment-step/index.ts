@@ -1,2 +1,2 @@
 export { PaymentContent } from "./Content";
-export { PaymentController } from "./Controller";
+export { PaymentController, type SubmitBookingHandler } from "./Controller";

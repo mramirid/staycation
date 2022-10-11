@@ -39,7 +39,6 @@ export function BookingInformationController() {
             className="app-btn app-btn-primary btn-block"
             type="button"
             onClick={handleContinue}
-            disabled={form.formState.isSubmitting}
           >
             Continue to Payment
           </button>

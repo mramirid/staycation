@@ -8,7 +8,7 @@ import { addDays, differenceInDays } from "date-fns";
 import { isUndefined } from "lodash-es";
 import { useState, type FormEvent } from "react";
 import { type Range } from "react-date-range";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 type BookingFormProps = {
   className: string;
@@ -80,6 +80,7 @@ function Form({ className, propertyPrice }: FormProps) {
     });
   };
 
+  const navigation = useNavigation();
   const navigate = useNavigate() as StatefulNavigate<BookingLocationState>;
 
   const handleStartBooking = (e: FormEvent<HTMLFormElement>) => {
@@ -130,7 +131,12 @@ function Form({ className, propertyPrice }: FormProps) {
         <b className="text-semibold">{duration} nights</b>
       </h6>
 
-      <button className="app-btn app-btn-primary btn-block mt-10" type="submit">
+      <button
+        className={clx("app-btn app-btn-primary btn-block mt-10", {
+          loading: navigation.state === "loading",
+        })}
+        type="submit"
+      >
         Continue to Book
       </button>
     </form>
