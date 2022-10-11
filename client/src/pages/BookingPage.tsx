@@ -124,7 +124,7 @@ export default function BookingPage() {
     formData.append("firstName", data.firstName);
     formData.append("lastName", data.lastName);
     formData.append("email", data.email);
-    formData.append("phone", "");
+    formData.append("phone", data.phone);
     formData.append("payment-proof", data.paymentProof, data.paymentProof.name);
     formData.append("originBankName", data.originBankName);
     formData.append("accountHolderName", data.accountHolderName);
