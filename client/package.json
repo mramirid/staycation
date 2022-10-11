@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.7",
-    "@reduxjs/toolkit": "^1.8.4",
     "@tailwindcss/line-clamp": "^0.4.2",
     "classnames": "^2.3.1",
     "daisyui": "^2.24.0",

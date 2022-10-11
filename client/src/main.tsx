@@ -1,10 +1,8 @@
 import { isNull } from "lodash-es";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Provider } from "react-redux";
 import App from "./App";
 import "./index.scss";
-import { store } from "./lib/store";
 
 const rootElement = document.getElementById("root");
 if (isNull(rootElement)) {
@@ -13,8 +11,6 @@ if (isNull(rootElement)) {
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <App />
   </React.StrictMode>
 );

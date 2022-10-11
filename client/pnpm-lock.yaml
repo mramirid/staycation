@@ -3,7 +3,6 @@ lockfileVersion: 5.4
 specifiers:
   '@hookform/devtools': ^4.2.2
   '@hookform/resolvers': ^2.9.7
-  '@reduxjs/toolkit': ^1.8.4
   '@tailwindcss/line-clamp': ^0.4.2
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/react': ^13.3.0
@@ -50,7 +49,6 @@ specifiers:
 
 dependencies:
   '@hookform/resolvers': 2.9.7_react-hook-form@7.34.2
-  '@reduxjs/toolkit': 1.8.4_kkwg4cbsojnjnupd3btipussee
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.1.8
   classnames: 2.3.1
   daisyui: 2.24.0_25hquoklqeoqwmt7fwvvcyxm5e
@@ -62,7 +60,7 @@ dependencies:
   react-date-range: 1.4.0_5oiey6di7lwi3i4adxmhjxbjq4
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.34.2_react@18.2.0
-  react-redux: 8.0.2_ps4ywwwjjeajezffxxirqk36qa
+  react-redux: 8.0.2_76am3hp3mjvgy3cckgdecixdi4
   react-router-dom: 6.4.2_biqbaboplfbrettd7655fr4n2y
   react-star-ratings: 2.3.0
   yup: 0.32.11
@@ -1704,25 +1702,6 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
-
-  /@reduxjs/toolkit/1.8.4_kkwg4cbsojnjnupd3btipussee:
-    resolution: {integrity: sha512-IpFq1WI7sCYeLQpDCGvlcQY9wn70UpAM3cOLq78HRnVn1746RI+l3y5xcuOeVOxORaxABJh3cfJMxycD2IwH5w==}
-    peerDependencies:
-      react: ^16.9.0 || ^17.0.0 || ^18
-      react-redux: ^7.2.1 || ^8.0.2
-    peerDependenciesMeta:
-      react:
-        optional: true
-      react-redux:
-        optional: true
-    dependencies:
-      immer: 9.0.15
-      react: 18.2.0
-      react-redux: 8.0.2_ps4ywwwjjeajezffxxirqk36qa
-      redux: 4.2.0
-      redux-thunk: 2.4.1_redux@4.2.0
-      reselect: 4.1.6
-    dev: false
 
   /@remix-run/router/1.0.2:
     resolution: {integrity: sha512-GRSOFhJzjGN+d4sKHTMSvNeUPoZiDHWmRnXfzaxrqe7dE/Nzlc8BiMSJdLDESZlndM7jIUrZ/F4yWqVYlI0rwQ==}
@@ -3887,10 +3866,6 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
-  /immer/9.0.15:
-    resolution: {integrity: sha512-2eB/sswms9AEUSkOm4SbV5Y7Vmt/bKRwByd52jfLkW4OLYeaTP3EEiJ9agqU0O/tq6Dk62Zfj+TJSqfm1rLVGQ==}
-    dev: false
-
   /immutable/4.1.0:
     resolution: {integrity: sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==}
     dev: true
@@ -4812,7 +4787,7 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-redux/8.0.2_ps4ywwwjjeajezffxxirqk36qa:
+  /react-redux/8.0.2_76am3hp3mjvgy3cckgdecixdi4:
     resolution: {integrity: sha512-nBwiscMw3NoP59NFCXFf02f8xdo+vSHT/uZ1ldDwF7XaTpzm+Phk97VT4urYBl5TYAPNVaFm12UHAEyzkpNzRA==}
     peerDependencies:
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -4842,7 +4817,6 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       react-is: 18.2.0
-      redux: 4.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
@@ -4933,20 +4907,6 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
-  /redux-thunk/2.4.1_redux@4.2.0:
-    resolution: {integrity: sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q==}
-    peerDependencies:
-      redux: ^4
-    dependencies:
-      redux: 4.2.0
-    dev: false
-
-  /redux/4.2.0:
-    resolution: {integrity: sha512-oSBmcKKIuIR4ME29/AeNUnl5L+hvBq7OaJWzaptTQJAntaPvxIJqfnjbaEiCzzaIz+XmVILfqAM3Ob0aXLPfjA==}
-    dependencies:
-      '@babel/runtime': 7.18.9
-    dev: false
-
   /regenerate-unicode-properties/10.0.1:
     resolution: {integrity: sha512-vn5DU6yg6h8hP/2OkQo3K7uVILvY4iu0oI4t3HFa81UPkhGJwkRwM10JEc3upjdhHjs/k8GJY1sRBhk5sr69Bw==}
     engines: {node: '>=4'}
@@ -5002,10 +4962,6 @@ packages:
     dependencies:
       jsesc: 0.5.0
     dev: true
-
-  /reselect/4.1.6:
-    resolution: {integrity: sha512-ZovIuXqto7elwnxyXbBtCPo9YFEr3uJqj2rRbcOOog1bmu2Ag85M4hixSwFWyaBMKXNgvPaJ9OSu9SkBPIeJHQ==}
-    dev: false
 
   /resolve-from/4.0.0:
     resolution: {integrity: sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g==}
