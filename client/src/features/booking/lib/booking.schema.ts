@@ -9,7 +9,7 @@ export const bookingInformationSchema = object({
     .email("Enter a valid email address")
     .required("Email is required"),
   phone: string()
-    .phone("Enter a valid phone number")
+    .phone("US", undefined, "Enter a valid phone number")
     .required("Phone number is required"),
 });
 
