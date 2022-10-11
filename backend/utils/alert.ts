@@ -12,7 +12,7 @@ export enum AlertStatuses {
   Info = "info",
 }
 
-export type Alert = {
+type Alert = {
   message: string;
   status: AlertStatuses;
 };

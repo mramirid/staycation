@@ -15,7 +15,7 @@ export type Category = {
   properties: CategoryProperty[];
 };
 
-export type CategoryProperty = {
+type CategoryProperty = {
   _id: string;
   title: string;
   imageUrl: string;

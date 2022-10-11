@@ -718,7 +718,7 @@ export async function seed(): Promise<SeedResult> {
   };
 }
 
-export type SeedResult = {
+type SeedResult = {
   categories: {
     [name: string]: CategoryDoc;
   };
