@@ -34,7 +34,7 @@ function FeatureList(props: FeatureListProps) {
       className={clx("grid grid-cols-4 gap-x-50px gap-y-5", props.className)}
     >
       {props.features.map((feature) => (
-        <FeatureItem feature={feature} />
+        <FeatureItem feature={feature} key={feature._id} />
       ))}
     </div>
   );
