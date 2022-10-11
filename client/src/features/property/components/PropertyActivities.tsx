@@ -33,7 +33,7 @@ type ActivityListProps = {
 
 function ActivityList({ items }: ActivityListProps) {
   return (
-    <div className="grid grid-cols-4 gap-x-30px">
+    <div className="grid grid-cols-4 gap-30px">
       {items.map((activityItem, i) => (
         <Fade direction="up" triggerOnce delay={300 * i} key={activityItem._id}>
           <ActivityItem item={activityItem} />
