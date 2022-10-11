@@ -1,8 +1,9 @@
 import { isObject } from "lodash-es";
-import { mixed, object, string } from "yup";
+import { type UseFormReturn } from "react-hook-form";
+import { mixed, object, string, type InferType } from "yup";
 import "yup-phone";
 
-export const bookingInformationSchema = object({
+const bookingInformationSchema = object({
   firstName: string().trim().required("First name is required"),
   lastName: string().trim().required("Last name is required"),
   email: string()
@@ -13,7 +14,7 @@ export const bookingInformationSchema = object({
     .required("Phone number is required"),
 });
 
-export const paymentSchema = object({
+const paymentSchema = object({
   paymentProof: mixed<File>()
     .test("Required", "You need to provide an image", (image) =>
       isObject(image)
@@ -36,3 +37,7 @@ export const paymentSchema = object({
 export const bookingSchema = bookingInformationSchema
   .clone()
   .concat(paymentSchema);
+
+export type BookingFieldValues = InferType<typeof bookingSchema>;
+
+export type BookingForm = UseFormReturn<BookingFieldValues>;

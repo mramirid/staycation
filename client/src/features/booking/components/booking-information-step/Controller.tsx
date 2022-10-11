@@ -3,7 +3,7 @@ import { isUndefined } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { useFormContext } from "react-hook-form";
 import { Link } from "react-router-dom";
-import type { BookingForm } from "../../types/booking-form";
+import type { BookingForm } from "../../lib/schema";
 
 export function BookingInformationController() {
   const form: BookingForm = useFormContext();

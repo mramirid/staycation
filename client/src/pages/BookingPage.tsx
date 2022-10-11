@@ -20,7 +20,7 @@ import {
   PaymentController,
   type Bank,
   type BookingLocationState,
-  type BookingValues,
+  type BookingFieldValues,
   type SubmitBookingHandler,
 } from "@/features/booking";
 import { getProperty, type Property } from "@/features/property";
@@ -54,7 +54,7 @@ export default function BookingPage() {
   }
   const { startBookingData } = location.state;
 
-  const form = useForm<BookingValues>({
+  const form = useForm<BookingFieldValues>({
     resolver: yupResolver(bookingSchema),
     mode: "onChange",
   });

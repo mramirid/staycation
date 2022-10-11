@@ -3,14 +3,14 @@ import { clx } from "@/utils/styling";
 import { isUndefined } from "lodash-es";
 import { Fade } from "react-awesome-reveal";
 import { useFormContext } from "react-hook-form";
-import type { BookingForm, BookingValues } from "../../types/booking-form";
+import type { BookingFieldValues, BookingForm } from "../../lib/schema";
 
 type Props = {
   onSubmitBooking: SubmitBookingHandler;
 };
 
 export type SubmitBookingHandler = (
-  data: BookingValues,
+  data: BookingFieldValues,
   toNextStep: () => void
 ) => Promise<void>;
 
@@ -34,7 +34,7 @@ export function PaymentController(props: Props) {
 
   const controller = useController();
 
-  const submitBooking = async (data: BookingValues) => {
+  const submitBooking = async (data: BookingFieldValues) => {
     if (areInputsValid) {
       await props.onSubmitBooking(data, controller.toNextStep);
     }

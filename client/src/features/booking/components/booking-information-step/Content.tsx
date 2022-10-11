@@ -4,7 +4,7 @@ import { formatCountSuffix } from "@/utils/format";
 import { Fade } from "react-awesome-reveal";
 import { useFormContext } from "react-hook-form";
 import "yup-phone";
-import type { BookingForm } from "../../types/booking-form";
+import type { BookingForm } from "../../lib/schema";
 
 type ContentProps = {
   duration: number;

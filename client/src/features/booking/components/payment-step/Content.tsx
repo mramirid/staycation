@@ -4,7 +4,7 @@ import { formatToUSD } from "@/utils/format";
 import { Fade } from "react-awesome-reveal";
 import { Controller, useFormContext } from "react-hook-form";
 import { type Bank } from "../../lib/api";
-import type { BookingForm } from "../../types/booking-form";
+import type { BookingForm } from "../../lib/schema";
 
 type ContentProps = {
   propertyPrice: number;

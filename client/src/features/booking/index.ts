@@ -16,5 +16,4 @@ export {
   type BookingLocationState,
 } from "./components/StartBookingForm";
 export { bookProperty, getBanks, type Bank } from "./lib/api";
-export { bookingSchema } from "./lib/booking.schema";
-export type { BookingValues } from "./types/booking-form";
+export { bookingSchema, type BookingFieldValues } from "./lib/schema";
