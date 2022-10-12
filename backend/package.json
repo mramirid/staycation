@@ -108,7 +108,8 @@
         "error",
         {
           "allowModules": [
-            "chai"
+            "chai",
+            "chai-http"
           ]
         }
       ]
