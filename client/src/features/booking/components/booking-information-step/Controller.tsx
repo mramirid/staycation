@@ -44,7 +44,7 @@ export function BookingInformationController() {
           </button>
         </Fade>
       )}
-      <Link className="app-btn app-btn-light btn-block" to="..">
+      <Link className="app-btn app-btn-light btn-block" to=".." replace>
         Cancel
       </Link>
     </>
