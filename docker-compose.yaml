@@ -23,13 +23,11 @@ services:
       - mongodb
 
   client:
-    build:
-      context: ./client
-      dockerfile: Dockerfile.dev
+    build: ./client
     volumes:
       - ./client/src:/app/src:ro
     ports:
-      - "5173:5173"
+      - "8080:80"
     stdin_open: true
     tty: true
     depends_on:
