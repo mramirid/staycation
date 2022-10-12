@@ -45,7 +45,7 @@ describe("Client API", () => {
       });
   });
 
-  it("should get a property detail data", (done) => {
+  it("should get a property details data", (done) => {
     chai
       .request(app)
       .get(`/api/v1/client/properties/${property.id}`)

@@ -48,6 +48,11 @@ export default function BookingPage() {
 
   const { property, banks } = useLoaderData() as LoaderData;
 
+  useEffect(() => {
+    document.title = `Booking ${property.title} - Staycation`;
+    window.scrollTo(0, 0);
+  }, [property.title]);
+
   const location = useLocation() as StatefulLocation<BookingLocationState>;
   if (isNull(location.state)) {
     throw bookingProcessError;

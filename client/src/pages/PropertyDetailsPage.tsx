@@ -16,19 +16,17 @@ import { useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom";
 
-const PAGE_DETAILS_TITLE = "Detail Property";
-
-export default function PropertyDetailPage() {
+export default function PropertyDetailsPage() {
   const property = useLoaderData() as Property;
 
   useEffect(() => {
-    document.title = `${PAGE_DETAILS_TITLE} - Staycation`;
+    document.title = `${property.title} - Staycation`;
     window.scrollTo(0, 0);
-  }, []);
+  }, [property.title]);
 
   const breadcrumbsData: BreadcrumbsData = [
     { label: "Home", to: "/" },
-    { label: PAGE_DETAILS_TITLE, to: `/properties/${property._id}` },
+    { label: property.title, to: `/properties/${property._id}` },
   ];
 
   return (

@@ -1,13 +1,13 @@
 import { clx } from "@/utils/styling";
 
-type PageDetailTitleProps = {
+type PropertyHeadingProps = {
   title: string;
   city: string;
   country: string;
   className: string;
 };
 
-export default function PropertyHeading(props: PageDetailTitleProps) {
+export default function PropertyHeading(props: PropertyHeadingProps) {
   return (
     <section className={clx(props.className, "text-center")}>
       <h1 className="font-semibold text-4xl">{props.title}</h1>

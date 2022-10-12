@@ -8,9 +8,9 @@ import BookingPage, {
 import LandingPage, {
   loader as landingPageDataLoader,
 } from "./pages/LandingPage";
-import PropertyDetailPage, {
+import PropertyDetailsPage, {
   loader as propertyDataLoader,
-} from "./pages/PropertyDetailPage";
+} from "./pages/PropertyDetailsPage";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         children: [
           {
             index: true,
-            element: <PropertyDetailPage />,
+            element: <PropertyDetailsPage />,
             loader: propertyDataLoader,
           },
           {
