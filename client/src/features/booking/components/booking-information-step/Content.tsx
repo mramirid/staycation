@@ -4,6 +4,7 @@ import { formatCountSuffix } from "@/utils/format";
 import { Fade } from "react-awesome-reveal";
 import { useFormContext } from "react-hook-form";
 import "yup-phone";
+import classes from "../booking-step-content.module.scss";
 import type { BookingForm } from "../../lib/schema";
 
 type ContentProps = {
@@ -13,38 +14,46 @@ type ContentProps = {
 
 export function BookingInformationContent(props: ContentProps) {
   return (
-    <div className="grid grid-cols-[26.25rem_min-content_26.25rem] gap-x-20 justify-center">
-      <PropertyDetails {...props} />
-      <div className="divider divider-horizontal w-fit before:w-1px after:w-1px m-0" />
-      <Form />
+    <div className={classes.bookingStepContent}>
+      <PropertyDetails
+        className={classes.bookingStepContent__details}
+        duration={props.duration}
+        property={props.property}
+      />
+      <div className={classes.bookingStepContent__divider} />
+      <Form className={classes.bookingStepContent__form} />
     </div>
   );
 }
 
-function PropertyDetails({ property, duration }: ContentProps) {
-  const firstImageUrl =
-    import.meta.env.VITE_BACKEND_BASE_URL + property.imageUrls.at(0);
+type PropertyDetailsProps = ContentProps & { className: string };
 
-  const formattedDuration = formatCountSuffix(duration, {
+function PropertyDetails(props: PropertyDetailsProps) {
+  const firstImageUrl =
+    import.meta.env.VITE_BACKEND_BASE_URL + props.property.imageUrls.at(0);
+
+  const formattedDuration = formatCountSuffix(props.duration, {
     singular: "night",
     plural: "nights",
   });
 
   return (
-    <Fade delay={300} className="py-9" triggerOnce>
+    <Fade delay={300} className={props.className} triggerOnce>
       <>
-        <figure className="img-wrapper !h-[16.875rem]">
-          <img src={firstImageUrl} alt={property.title} />
+        <figure className="img-wrapper lg:h-[16.875rem] aspect-[14/9]">
+          <img src={firstImageUrl} alt={props.property.title} />
         </figure>
         <div className="mt-4 flex justify-between items-center">
           <div>
-            <h5 className="text-xl text-secondary">{property.title}</h5>
+            <h5 className="text-xl text-secondary">{props.property.title}</h5>
             <span className="text-light">
-              {property.city}, {property.country}
+              {props.property.city}, {props.property.country}
             </span>
           </div>
           <div className="leading-7">
-            <b className="text-semibold">${duration * property.price} USD</b>
+            <b className="text-semibold">
+              ${props.duration * props.property.price} USD
+            </b>
             <span className="text-light"> per </span>
             <b className="text-semibold">{formattedDuration}</b>
           </div>
@@ -54,11 +63,15 @@ function PropertyDetails({ property, duration }: ContentProps) {
   );
 }
 
-function Form() {
+type FormProps = {
+  className: string;
+};
+
+function Form({ className }: FormProps) {
   const form: BookingForm = useFormContext();
 
   return (
-    <Fade className="py-9 max-w-xs" delay={600} triggerOnce>
+    <Fade className={className} delay={600} triggerOnce>
       <form className="flex flex-col gap-y-5">
         <div>
           <label htmlFor="first-name">First Name</label>

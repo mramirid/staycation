@@ -12,7 +12,7 @@
 
 @layer utilities {
   .app-container {
-    @apply container mx-auto px-36;
+    @apply container mx-auto px-4 lg:px-36;
   }
 
   .text-light {

@@ -7,9 +7,14 @@ import classes from "./Footer.module.scss";
 export default function Footer() {
   return (
     <footer className="border-t border-base-200">
-      <div className="app-container grid grid-cols-3 gap-x-30px mt-50px">
-        <Brand className="col-span-1" />
-        <Menu className="col-span-2" />
+      <div
+        className={clx(
+          "app-container mt-50px grid gap-30px text-center",
+          "lg:grid-cols-3 lg:text-left"
+        )}
+      >
+        <Brand className="lg:col-span-1" />
+        <Menu className="lg:col-span-2" />
       </div>
       <Copyright className="mt-50px text-center mb-100px" />
     </footer>
@@ -34,7 +39,12 @@ type MenuProps = { className: string };
 
 function Menu(props: MenuProps) {
   return (
-    <nav className={clx("flex justify-between", props.className)}>
+    <nav
+      className={clx(
+        "flex flex-col gap-y-30px lg:flex-row lg:justify-between",
+        props.className
+      )}
+    >
       <div>
         <h6 className={classes.menu__title}>For Beginners</h6>
         <ul className={classes.menu__list}>

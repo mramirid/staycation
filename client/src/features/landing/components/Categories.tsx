@@ -52,9 +52,15 @@ type CategoryListProps = {
 
 function CategoryList({ items }: CategoryListProps) {
   return (
-    <div className="grid grid-cols-4 gap-x-30px">
+    <div className="grid gap-30px grid-cols-4">
       {items.map((categoryItem, i) => (
-        <Fade direction="up" triggerOnce delay={300 * i} key={categoryItem._id}>
+        <Fade
+          className="col-span-full sm:col-span-2 xl:col-span-1"
+          direction="up"
+          triggerOnce
+          delay={300 * i}
+          key={categoryItem._id}
+        >
           <CategoryItem item={categoryItem} />
         </Fade>
       ))}

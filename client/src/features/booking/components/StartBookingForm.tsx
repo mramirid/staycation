@@ -23,13 +23,14 @@ export default function StartBookingForm(props: BookingFormProps) {
     <TitledSection
       title="Start Booking"
       sectionClass={clx(
-        "card self-start border border-base-200 px-[5.25rem] py-[3.875rem]",
+        "card self-start border border-base-200 p-16 sm:px-[5.25rem] sm:py-[3.875rem]",
         props.className
       )}
       titleClass="mb-14px"
     >
       <h5 className="font-medium text-4xl text-success">
-        {formattedPrice}{" "}
+        {formattedPrice}
+        &nbsp;
         <span className="text-base-300 font-extralight">
           per {props.propertyUnit}
         </span>

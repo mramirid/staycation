@@ -35,7 +35,7 @@ export default function LandingPage() {
   return (
     <>
       <Header />
-      <Main withContainer>
+      <Main>
         <Hero
           onShowMeClicked={scrollToMostPicked}
           statistics={data.heroStatistics}

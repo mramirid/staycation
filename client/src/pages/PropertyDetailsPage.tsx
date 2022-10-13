@@ -32,19 +32,22 @@ export default function PropertyDetailsPage() {
   return (
     <>
       <Header />
-      <Main withContainer>
+      <Main>
         <Fade
           direction="up"
           triggerOnce
-          className="my-50px grid grid-cols-4 items-center"
+          className="my-50px grid grid-cols-4 gap-y-7 items-center"
         >
           <>
-            <Breadcrumbs data={breadcrumbsData} />
+            <Breadcrumbs
+              data={breadcrumbsData}
+              className="col-span-full xl:col-span-1"
+            />
             <PropertyHeading
               title={property.title}
               city={property.city}
               country={property.country}
-              className="col-span-2"
+              className="col-span-full xl:col-span-2"
             />
           </>
         </Fade>
@@ -52,18 +55,18 @@ export default function PropertyDetailsPage() {
         <PropertyImages imageUrls={property.imageUrls} />
 
         <Fade
-          className="mt-50px grid grid-cols-12 gap-x-50px"
+          className="mt-50px grid gap-50px grid-cols-1 xl:grid-cols-12"
           direction="up"
           triggerOnce
         >
           <>
             <PropertyDescription
-              className="col-span-7"
+              className="xl:col-span-7"
               description={property.description}
               features={property.features}
             />
             <StartBookingForm
-              className="col-span-5"
+              className="xl:col-span-5"
               propertyPrice={property.price}
               propertyUnit={property.unit}
             />

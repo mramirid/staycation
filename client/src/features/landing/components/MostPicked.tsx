@@ -30,10 +30,16 @@ type MostPickedListProps = {
 
 function MostPickedList({ mostPickedProperties }: MostPickedListProps) {
   return (
-    <div className="grid grid-rows-2 grid-cols-3 gap-30px h-[28.75rem]">
+    <div
+      className={clx(
+        "grid gap-30px grid-rows-[repeat(6,_13.5rem)]",
+        "sm:grid-rows-[repeat(4,_13.5rem)] sm:grid-cols-2",
+        "xl:grid-rows-[repeat(2,_13.5rem)] xl:grid-cols-3"
+      )}
+    >
       {mostPickedProperties.map((mostPickedProperty, i) => (
         <Fade
-          className={clx({ "row-span-2": i === 0 })}
+          className={clx({ "row-span-2 col-span-full xl:col-span-1": i === 0 })}
           direction="up"
           triggerOnce
           delay={500 * i}
@@ -60,11 +66,7 @@ function MostPickedItem({ mostPickedProperty }: MostPickedItemProps) {
       <figure
         className={clx("img-wrapper", classes.mostPickedItem__imgWrapper)}
       >
-        <img
-          src={imageUrl}
-          alt={mostPickedProperty.title}
-          crossOrigin="anonymous"
-        />
+        <img src={imageUrl} alt={mostPickedProperty.title} />
       </figure>
       <div className={classes.mostPickedItem__metaWrapper}>
         <h5 className="text-xl">{mostPickedProperty.title}</h5>

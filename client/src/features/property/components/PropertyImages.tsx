@@ -7,15 +7,20 @@ type FeaturedImagesProps = {
 
 export default function PropertyImages({ imageUrls }: FeaturedImagesProps) {
   return (
-    <section className="h-[31.25rem] grid grid-rows-2 grid-cols-12 gap-10px">
+    <section
+      className={clx(
+        "grid grid-rows-[repeat(4,_15.3rem)] grid-cols-12 gap-10px",
+        "sm:grid-rows-[repeat(2,_15.3rem)]"
+      )}
+    >
       {imageUrls.map((imageUrl, i) => {
         const isFirst = i === 0;
         return (
           <Fade
-            className={clx(
-              { "row-span-2": isFirst },
-              isFirst ? "col-span-7" : "col-span-5"
-            )}
+            className={clx("col-span-full", {
+              "row-span-2 sm:col-span-7": isFirst,
+              "sm:col-span-5": !isFirst,
+            })}
             direction="up"
             triggerOnce
             delay={300 * i}

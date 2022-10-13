@@ -1,0 +1,31 @@
+.bookingStepContent {
+  @apply grid gap-x-20 gap-y-10 grid-rows-[auto_min-content_auto] place-items-center;
+
+  &__details {
+    @apply px-9;
+  }
+
+  &__divider {
+    @apply divider m-0 before:w-1px after:w-1px divider-vertical h-fit place-self-stretch;
+  }
+
+  &__form {
+    @apply px-9 w-full;
+  }
+
+  @media (min-width: 64rem) {
+    @apply grid-rows-1 grid-cols-[26.25rem_min-content_26.25rem] justify-center place-items-stretch;
+
+    &__details {
+      @apply py-9 px-0;
+    }
+
+    &__divider {
+      @apply divider-horizontal h-auto w-fit;
+    }
+
+    &__form {
+      @apply py-9 px-0 w-80;
+    }
+  }
+}

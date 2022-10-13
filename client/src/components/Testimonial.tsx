@@ -24,21 +24,25 @@ export type TestimonialType = {
 export default function Testimonial(props: TestimonialProps) {
   return (
     <Fade direction="up" triggerOnce className={props.className}>
-      <section className="flex">
+      <section className="flex flex-col gap-14 lg:flex-row">
         <TestimonialPortrait imageUrl={props.testimonial.imageUrl} />
-        <TestimonialContent className="ml-14" testimonial={props.testimonial} />
+        <TestimonialContent testimonial={props.testimonial} />
       </section>
     </Fade>
   );
 }
 
-function TestimonialContent({ testimonial, className }: TestimonialProps) {
+type TestimonialContentProps = {
+  testimonial: TestimonialType;
+};
+
+function TestimonialContent({ testimonial }: TestimonialContentProps) {
   const gotoTestimonialStory = () => {
     // TODO: I don't know
   };
 
   return (
-    <div className={clx("self-center", className)}>
+    <div className="self-center">
       <h4 className="mb-10 font-medium text-2xl">{testimonial.title}</h4>
       <StarRating
         rating={testimonial.rate}
@@ -79,12 +83,12 @@ function TestimonialPortrait(props: HeroBannerProps) {
 
   return (
     <div>
-      <div className="relative h-[34rem] w-[25.3rem]">
-        <div className="absolute top-0 bottom-10 w-[23rem] border-2 rounded-2xl" />
+      <div className="relative aspect-[0.75] max-w-[25.3rem] self-center lg:w-[25.3rem]">
+        <div className="absolute top-0 bottom-10 left-0 right-10 border-2 rounded-2xl" />
         <div
           className={clx(
-            "absolute bg-cover bg-no-repeat w-[23rem] h-[31.25rem] bottom-0",
-            "left-10 top-10 rounded-2xl rounded-br-[100px] bg-base-300"
+            "absolute bg-cover bg-no-repeat right-0 bottom-0 left-10 top-10",
+            "rounded-2xl rounded-br-[100px] bg-base-300"
           )}
           style={{ backgroundImage: `url(${imageUrl})` }}
         />

@@ -16,9 +16,9 @@ type HeroProps = {
 export default function Hero(props: HeroProps) {
   return (
     <Fade direction="up" triggerOnce>
-      <section className="mt-70px grid grid-cols-12">
-        <HeroContent className="col-span-5" {...props} />
-        <HeroBanner className="col-span-7" />
+      <section className="mt-70px grid gap-y-20 grid-cols-12">
+        <HeroContent className="col-span-full xl:col-span-5" {...props} />
+        <HeroBanner className="col-span-full xl:col-span-7" />
       </section>
     </Fade>
   );
@@ -101,12 +101,18 @@ type HeroBannerProps = {
 
 function HeroBanner(props: HeroBannerProps) {
   return (
-    <div className={clx("relative", props.className)}>
-      <div className="absolute bottom-0 right-0 top-10 w-[31rem] border-2 rounded-2xl" />
+    <div
+      className={clx(
+        "relative aspect-square w-full justify-self-center",
+        "xl:h-full xl:w-auto xl:justify-self-end",
+        props.className
+      )}
+    >
+      <div className="absolute bottom-0 right-0 top-10 left-10 border-2 rounded-2xl" />
       <div
         className={clx(
-          "absolute bg-cover bg-no-repeat w-[31rem] bottom-10",
-          "right-10 top-0 rounded-2xl rounded-tl-[100px]"
+          "absolute bg-cover bg-no-repeat bottom-10",
+          "right-10 left-0 top-0 rounded-2xl rounded-tl-[100px]"
         )}
         style={{ backgroundImage: `url(${imageHero})` }}
       />

@@ -1,10 +1,12 @@
 import InputImage from "@/components/forms/InputImage";
 import InputText from "@/components/forms/InputText";
 import { formatToUSD } from "@/utils/format";
+import { clx } from "@/utils/styling";
 import { Fade } from "react-awesome-reveal";
 import { Controller, useFormContext } from "react-hook-form";
 import { type Bank } from "../../lib/api";
 import type { BookingForm } from "../../lib/schema";
+import classes from "../booking-step-content.module.scss";
 
 type ContentProps = {
   propertyPrice: number;
@@ -14,21 +16,28 @@ type ContentProps = {
 
 export function PaymentContent(props: ContentProps) {
   return (
-    <div className="grid grid-cols-[23.125rem_min-content_23.125rem] gap-x-20 justify-center">
-      <PaymentDetails {...props} />
-      <div className="divider divider-horizontal w-fit before:w-1px after:w-1px m-0" />
-      <Form />
+    <div className={classes.bookingStepContent}>
+      <PaymentDetails
+        className={clx(classes.bookingStepContent__details)}
+        duration={props.duration}
+        propertyPrice={props.propertyPrice}
+        banks={props.banks}
+      />
+      <div className={classes.bookingStepContent__divider} />
+      <Form className={classes.bookingStepContent__form} />
     </div>
   );
 }
 
-function PaymentDetails(props: ContentProps) {
+type PaymentDetailsProps = ContentProps & { className: string };
+
+function PaymentDetails(props: PaymentDetailsProps) {
   const subTotal = props.propertyPrice * props.duration;
   const TAX_RATE = 10 / 100;
   const grandTotal = subTotal * TAX_RATE + subTotal;
 
   return (
-    <Fade className="py-9 leading-7" delay={300} triggerOnce>
+    <Fade className={clx("leading-7", props.className)} delay={300} triggerOnce>
       <>
         <h5>Transfer Pembayaran:</h5>
         <p className="mt-5">Tax: {TAX_RATE * 100}%</p>
@@ -56,11 +65,15 @@ function PaymentDetails(props: ContentProps) {
   );
 }
 
-function Form() {
+type FormProps = {
+  className: string;
+};
+
+function Form({ className }: FormProps) {
   const form: BookingForm = useFormContext();
 
   return (
-    <Fade className="py-9 max-w-xs" delay={600} triggerOnce>
+    <Fade className={className} delay={600} triggerOnce>
       <form className="flex flex-col gap-y-5">
         <div>
           <label htmlFor="payment-proof">Upload Bukti Transfer</label>

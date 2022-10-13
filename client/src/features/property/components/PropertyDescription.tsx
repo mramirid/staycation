@@ -31,7 +31,10 @@ type FeatureListProps = {
 function FeatureList(props: FeatureListProps) {
   return (
     <div
-      className={clx("grid grid-cols-4 gap-x-50px gap-y-5", props.className)}
+      className={clx(
+        "grid grid-cols-3 sm:grid-cols-4 gap-x-50px gap-y-5",
+        props.className
+      )}
     >
       {props.features.map((feature) => (
         <FeatureItem feature={feature} key={feature._id} />
@@ -48,7 +51,7 @@ function FeatureItem({ feature }: FeatureItemProps) {
   const iconUrl = import.meta.env.VITE_BACKEND_BASE_URL + feature.iconUrl;
 
   return (
-    <figure key={feature._id}>
+    <figure>
       <img src={iconUrl} alt={feature.name} width={38} height={38} />
       <figcaption className="mt-3 text-light">
         <b className="text-semibold">{feature.quantity}</b> {feature.name}
