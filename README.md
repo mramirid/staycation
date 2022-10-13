@@ -28,21 +28,25 @@ docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml up -d -
 docker-compose up -d
 ```
 
-## The Client Service
+## User Interface Design
+
+See [Staycation Website UI Design](https://www.figma.com/file/WUxx1tjQ7r5MVrMDBO7suP/Staycation-Website?node-id=0%3A1).
+
+## Client Service
 
 | Landing Page                                                                                                                                      | Property Details                                                                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <img src="https://user-images.githubusercontent.com/30113370/195056729-2c144efa-889d-4690-b976-6e5bb26fe7c6.jpeg" alt="Landing Page" width="400"> | <img src="https://user-images.githubusercontent.com/30113370/195056750-951b1ec2-aac1-4e60-b44d-020aa79bcda4.jpeg" width="400" alt="Property Details"> |
 
-| Step 1 ~ Booking Information Form                                                                                                                                      | Step 2 ~ Booking Payment Form                                                                                                                                      |
+| Step 1 ~ Booking Information Form                                                                                                                             | Step 2 ~ Booking Payment Form                                                                                                                             |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <img src="https://user-images.githubusercontent.com/30113370/195056754-fd0c15c2-8ec0-4559-8158-e53af304f43d.jpeg" alt="Booking Information Form" width="400"> | <img src="https://user-images.githubusercontent.com/30113370/195056765-3e9c0a84-a059-445a-a1a1-a33a0bba4fdb.jpeg" width="400" alt="Booking Payment Form"> |
 
-| Step 3 ~ Booking Completed                                                                                                                                      |
+| Step 3 ~ Booking Completed                                                                                                                             |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <img src="https://user-images.githubusercontent.com/30113370/195056759-9fde17b6-ec44-4b64-a70e-feaf8760818a.jpeg" alt="Booking Completed" width="400"> |
 
-## The Backend Service
+## Backend Service
 
 ### Admin Dashboard
 
@@ -50,7 +54,7 @@ The admin functionality is supported by a dashboard; rendered by the server usin
 
 ### RESTful API Documentation
 
-See [Client API Documentation](https://documenter.getpostman.com/view/9718150/2s83meoPYL)
+See [Client API Documentation](https://documenter.getpostman.com/view/9718150/2s83meoPYL).
 
 ## Techstack
 
