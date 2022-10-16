@@ -11,9 +11,6 @@ services:
   backend:
     build: ./backend
     volumes:
-      - ./backend:/app:ro
-      - /app/seeds
-      - /app/node_modules
       - public_images:/app/public/images
     env_file:
       - ./backend/.env.production
@@ -24,8 +21,6 @@ services:
 
   client:
     build: ./client
-    volumes:
-      - ./client/src:/app/src:ro
     ports:
       - "8080:80"
     stdin_open: true
