@@ -6,9 +6,9 @@ A web app to find providers of hotels, houses, and apartments that are closest t
 
 ## How to Run
 
-### Initial Run With Seeding
+### Initial Run With Data Seeding
 
-Fill the database with initial documents; add initial images into the public images; and run all services. Warning, the existing database and images will be dropped.
+Populate the database with initial documents; populate the public images with initial images; run all services. Warning, the existing database and images will be dropped.
 
 1. Shut down running services and remove existing volumes.
 
@@ -22,7 +22,7 @@ docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml down -v
 docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml up -d --build
 ```
 
-### Run Without Seeding
+### Run Without Data Seeding
 
 ```bash
 docker-compose up -d
