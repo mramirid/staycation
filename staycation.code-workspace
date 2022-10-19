@@ -12,7 +12,7 @@
     }
   ],
   "settings": {
-    "eslint.workingDirectories": ["client", "backend", "mongodb", "docker"],
+    "eslint.workingDirectories": ["client", "backend"],
     "conventionalCommits.scopes": ["client", "backend"]
   }
 }
