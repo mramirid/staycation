@@ -1,6 +1,6 @@
 # Staycation
 
-A web app to find providers of hotels, houses, and apartments that are closest to tourist attractions.
+A web app for finding hotels, houses, and apartments near tourist attractions.
 
 > A course project from [BWA Full-Stack JavaScript Developer: Website Travel](https://www.buildwithangga.com/kelas/full-stack-javascript-developer-website-travel).
 
