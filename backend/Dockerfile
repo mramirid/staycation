@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json .
 COPY package-lock.json .
-RUN npm i --production
+RUN npm i --omit=dev
 
 COPY bin/www.ts bin/
 COPY controllers controllers/
