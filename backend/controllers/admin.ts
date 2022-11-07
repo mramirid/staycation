@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import fs from "fs/promises";
 import createHttpError from "http-errors";
 import _ from "lodash";

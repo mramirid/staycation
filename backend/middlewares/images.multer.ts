@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { RequestHandler } from "express";
+import type { RequestHandler } from "express";
 import fs from "fs";
 import _ from "lodash";
 import multer from "multer";

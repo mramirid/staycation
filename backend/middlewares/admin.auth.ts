@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
-import { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response } from "express";
 import _, { isObject, isUndefined } from "lodash";
 import passport from "passport";
 import { Strategy } from "passport-local";

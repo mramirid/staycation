@@ -1,12 +1,12 @@
 import crypto from "crypto";
-import { Request, Response } from "express";
+import type { Request, Response } from "express";
 import createHttpError from "http-errors";
 import { StatusCodes } from "http-status-codes";
 import _ from "lodash";
 import mongoose from "mongoose";
 import Bank from "../models/Bank";
 import Booking from "../models/Booking";
-import { CategoryDoc } from "../models/Category";
+import type { CategoryDoc } from "../models/Category";
 import Property from "../models/Property";
 import { property404Error } from "../utils/constant";
 import { getErrorMessage } from "../utils/error";

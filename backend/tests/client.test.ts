@@ -6,21 +6,21 @@ import _ from "lodash";
 import mongoose from "mongoose";
 import path from "path";
 import app from "../app";
-import { AddBookingReqBody } from "../controllers/client";
-import { PropertyDoc } from "../models/Property";
+import type { AddBookingReqBody } from "../controllers/client";
+import type { PropertyDoc } from "../models/Property";
 import { seed } from "../seeds";
 import { mongoUri } from "../utils/constant";
 
 chai.use(chaiHttp);
 
 describe("Client API", () => {
-  let property: PropertyDoc;
+  let property: PropertyDoc | undefined;
 
   before(async () => {
     await mongoose.connect(mongoUri);
 
     const seedResult = await seed();
-    property = seedResult.properties.tabbyTown;
+    property = seedResult.properties["tabbyTown"];
   });
 
   after(() => mongoose.connection.dropDatabase());
@@ -48,7 +48,7 @@ describe("Client API", () => {
   it("should get a property details data", (done) => {
     chai
       .request(app)
-      .get(`/api/v1/client/properties/${property.id}`)
+      .get(`/api/v1/client/properties/${property?.id}`)
       .end((maybeError, res) => {
         chai.expect(_.isError(maybeError)).to.be.false;
         chai.expect(res).to.have.status(StatusCodes.OK);
@@ -79,7 +79,7 @@ describe("Client API", () => {
       lastName: "Muhammad Hakim",
       email: "amir.muh.hakim@gmail.com",
       phone: "087553445562",
-      propertyId: property.id,
+      propertyId: property?.id,
       price: 5_900_000,
       originBankName: "BSI",
       accountHolderName: "Amir Muhammad Hakim",

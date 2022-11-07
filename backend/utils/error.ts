@@ -29,6 +29,6 @@ function isErrorWithMessage(
     typeof maybeError === "object" &&
     maybeError !== null &&
     "message" in maybeError &&
-    typeof (maybeError as Record<string, unknown>).message === "string"
+    typeof (maybeError as Record<string, unknown>)["message"] === "string"
   );
 }

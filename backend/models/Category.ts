@@ -1,5 +1,5 @@
 import { HydratedDocument, model, Query, Schema } from "mongoose";
-import { IProperty } from "./Property";
+import type { IProperty } from "./Property";
 
 export interface ICategory {
   name: string;

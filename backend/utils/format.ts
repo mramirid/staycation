@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { Types } from "mongoose";
+import type { Types } from "mongoose";
 
 export function toUSD(amount: number | Types.Decimal128) {
   const formattedAmount = _.toNumber(amount).toLocaleString("en-US", {

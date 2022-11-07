@@ -60,8 +60,8 @@ app.use(passport.authenticate("session"));
 app.use(flash());
 
 app.use((__: express.Request, res: express.Response, next) => {
-  res.locals._ = _;
-  res.locals.format = format;
+  res.locals["_"] = _;
+  res.locals["format"] = format;
 
   next();
 });
@@ -78,8 +78,8 @@ app.use((_, __, next) => {
 // error handler
 const errorHandler: express.ErrorRequestHandler = (err, req, res) => {
   // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  res.locals["message"] = err.message;
+  res.locals["error"] = req.app.get("env") === "development" ? err : {};
 
   // render the error page
   res.status(err.status || 500);
