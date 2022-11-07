@@ -1,5 +1,5 @@
 .mostPickedItem {
-  @apply h-full w-full card;
+  @apply h-full w-full card overflow-hidden;
 
   &:after {
     content: "";
