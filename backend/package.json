@@ -5,7 +5,7 @@
   "scripts": {
     "seed": "ts-node --transpile-only ./bin/seed.ts",
     "start": "ts-node --transpile-only ./bin/www.ts",
-    "dev": "env-cmd -f ./.env.development.local nodemon ./bin/www.ts",
+    "dev": "@powershell -Command $env:DEBUG='*'; env-cmd -f ./.env.development.local nodemon ./bin/www.ts",
     "test": "env-cmd -f ./.env.test.local mocha",
     "test:watch": "env-cmd -f ./.env.test.local mocha --watch",
     "prettier": "prettier --write \"**/*.{js,ts}\"",

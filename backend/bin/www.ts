@@ -89,5 +89,5 @@ function onListening() {
   const bind = _.isString(address)
     ? `pipe ${address}`
     : `port ${address?.port}`;
-  debug("Listening on " + bind);
+  debug("http")("Listening on " + bind);
 }
