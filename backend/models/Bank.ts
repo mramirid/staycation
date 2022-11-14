@@ -26,9 +26,8 @@ const bankSchema = new Schema<IBank>({
     required: true,
     trim: true,
     validate: {
-      validator: (v: string) => {
-        return validator.isInt(v, { allow_leading_zeroes: true, min: 0 });
-      },
+      validator: (v: unknown) =>
+        validator.isInt(String(v), { allow_leading_zeroes: true, min: 0 }),
       message: "Account numbers must be integers only",
     },
   },

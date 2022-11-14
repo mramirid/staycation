@@ -73,7 +73,7 @@ const bookingSchema = new Schema<
       type: Number,
       required: true,
       validate: {
-        validator: function (this: BookingDoc, v: number) {
+        validator: function (this: BookingDoc, v: unknown) {
           const dateRangeDuration =
             differenceInDays(this.endDate, this.startDate) + 1;
           return v === dateRangeDuration;
@@ -106,11 +106,11 @@ const bookingSchema = new Schema<
         required: true,
         validate: [
           {
-            validator: (v: Types.ObjectId) => isValidObjectId(v),
+            validator: (v: unknown) => isValidObjectId(v),
             message: "Invalid category id",
           },
           {
-            validator: (v: Types.ObjectId) =>
+            validator: (v: unknown) =>
               Property.findById(v).orFail(property404Error),
           },
         ],

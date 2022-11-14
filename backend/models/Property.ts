@@ -45,8 +45,7 @@ const propertySchema = new Schema<IProperty>({
     type: Schema.Types.Decimal128,
     required: true,
     validate: {
-      validator: (v: Types.Decimal128) =>
-        validator.isFloat(v.toString(), { min: 0 }),
+      validator: (v: unknown) => validator.isFloat(String(v), { min: 0 }),
       message: "The price must be a positive float",
     },
     transform: (v: Types.Decimal128) => _.toNumber(v),
@@ -77,11 +76,11 @@ const propertySchema = new Schema<IProperty>({
     index: true,
     validate: [
       {
-        validator: (v: Types.ObjectId) => isValidObjectId(v),
+        validator: (v: unknown) => isValidObjectId(v),
         message: "Invalid category id",
       },
       {
-        validator: (v: Types.ObjectId) =>
+        validator: (v: unknown) =>
           Category.findById(v).orFail(category404Error),
       },
     ],
@@ -94,7 +93,7 @@ const propertySchema = new Schema<IProperty>({
   imageUrls: {
     type: [{ type: String, required: true, trim: true }],
     validate: {
-      validator: (v: string[]) => v.length === MAX_PROPERTY_IMAGES,
+      validator: (v: unknown[]) => v.length === MAX_PROPERTY_IMAGES,
       message: `Please provide ${MAX_PROPERTY_IMAGES} images for the property`,
     },
   },
@@ -110,7 +109,7 @@ const propertySchema = new Schema<IProperty>({
         required: true,
         min: 0,
         validate: {
-          validator: (v: number) => validator.isInt(v.toString()),
+          validator: (v: unknown) => validator.isInt(String(v)),
           message: "The feature quantity must be an integer",
         },
       },
