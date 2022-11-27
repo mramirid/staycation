@@ -1,0 +1,816 @@
+{
+	"info": {
+		"_postman_id": "22f5e5cf-9e87-46fb-af0e-1d877d78b767",
+		"name": "Client API",
+		"description": "API endpoints for the staycation's client",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9718150"
+	},
+	"item": [
+		{
+			"name": "Landing Page Data",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/client/landing",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"client",
+						"landing"
+					]
+				},
+				"description": "API endpoint for the landing page (client path: `/`).\n\nThis endpoint returns the statistics, the topmost properties, and the topmost properties for each category."
+			},
+			"response": [
+				{
+					"name": "Landing Page Data",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/client/landing",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"landing"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Embedder-Policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"d2a-L/aN4msNqSpbDXyLsRuaJngVJmU\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 10 Oct 2022 03:42:43 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"heroStatistics\": {\n        \"travelerCount\": 6,\n        \"treasureCount\": 14,\n        \"cityCount\": 17\n    },\n    \"mostPickedProperties\": [\n        {\n            \"_id\": \"6342c94a360ccbc5329b77d6\",\n            \"title\": \"Blue Origin Fams\",\n            \"unit\": \"night\",\n            \"city\": \"Jakarta\",\n            \"country\": \"Indonesia\",\n            \"imageUrl\": \"/images/property-blue-origin.jpg\",\n            \"price\": 149.99\n        },\n        {\n            \"_id\": \"6342c94a360ccbc5329b77e3\",\n            \"title\": \"Ocean Land\",\n            \"unit\": \"night\",\n            \"city\": \"Bandung\",\n            \"country\": \"Indonesia\",\n            \"imageUrl\": \"/images/property-ocean-land.jpg\",\n            \"price\": 130\n        },\n        {\n            \"_id\": \"6342c94a360ccbc5329b77e5\",\n            \"title\": \"Vinna Villa\",\n            \"unit\": \"night\",\n            \"city\": \"Malang\",\n            \"country\": \"Indonesia\",\n            \"imageUrl\": \"/images/property-vinna-villa.jpg\",\n            \"price\": 120.5\n        },\n        {\n            \"_id\": \"6342c94a360ccbc5329b77e6\",\n            \"title\": \"Bobox\",\n            \"unit\": \"night\",\n            \"city\": \"Medan\",\n            \"country\": \"Indonesia\",\n            \"imageUrl\": \"/images/property-bobox.jpg\",\n            \"price\": 114.5\n        },\n        {\n            \"_id\": \"6342c94a360ccbc5329b77e4\",\n            \"title\": \"Stark House\",\n            \"unit\": \"night\",\n            \"city\": \"Malang\",\n            \"country\": \"Indonesia\",\n            \"imageUrl\": \"/images/property-stark-house.jpg\",\n            \"price\": 124.25\n        }\n    ],\n    \"categories\": [\n        {\n            \"_id\": \"6342c94a360ccbc5329b77a9\",\n            \"name\": \"Houses with beauty backyard\",\n            \"properties\": [\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77ad\",\n                    \"title\": \"Tabby Town\",\n                    \"city\": \"Lampung\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": true,\n                    \"imageUrl\": \"/images/property-angga-1.png\"\n                },\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77ba\",\n                    \"title\": \"Anggana\",\n                    \"city\": \"Bogor\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-anggana.png\"\n                },\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77bb\",\n                    \"title\": \"Seattle Rain\",\n                    \"city\": \"Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-seattle-rain.jpg\"\n                },\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77bc\",\n                    \"title\": \"Wooden Pit\",\n                    \"city\": \"Wonosobo\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-wooden-pit.png\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"6342c94a360ccbc5329b77aa\",\n            \"name\": \"Hotels with large living room\",\n            \"properties\": [\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77bd\",\n                    \"title\": \"Green Park\",\n                    \"city\": \"Tanggerang\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-green-park.png\"\n                },\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77be\",\n                    \"title\": \"Podo Wae\",\n                    \"city\": \"Madiun\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-podo-wae.jpg\"\n                },\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77bf\",\n                    \"title\": \"Silver Rain\",\n                    \"city\": \"Bandung\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-silver-rain.jpg\"\n                },\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77c0\",\n                    \"title\": \"Cashville\",\n                    \"city\": \"Kemang\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": true,\n                    \"imageUrl\": \"/images/property-cashville.jpg\"\n                }\n            ]\n        },\n        {\n            \"_id\": \"6342c94a360ccbc5329b77ab\",\n            \"name\": \"Apartments with kitchen\",\n            \"properties\": [\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77c8\",\n                    \"title\": \"PS Wood\",\n                    \"city\": \"Depok\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-ps-wood.jpg\"\n                },\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77c9\",\n                    \"title\": \"One Five\",\n                    \"city\": \"Jakarta\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-one-five.jpg\"\n                },\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77ca\",\n                    \"title\": \"Minimal\",\n                    \"city\": \"Bogor\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-minimal.jpg\"\n                },\n                {\n                    \"_id\": \"6342c94a360ccbc5329b77d5\",\n                    \"title\": \"Stays Home\",\n                    \"city\": \"Wonosobo\",\n                    \"country\": \"Indonesia\",\n                    \"isPopular\": false,\n                    \"imageUrl\": \"/images/property-stays-home.jpg\"\n                }\n            ]\n        }\n    ],\n    \"testimonial\": {\n        \"_id\": \"c0a2b10d-cc50-4602-8b78-8e53137fff4a\",\n        \"imageUrl\": \"/images/testimonial-landing-page.jpg\",\n        \"title\": \"Happy Family\",\n        \"rate\": 4.55,\n        \"content\": \"What a great trip with my family and I should try again next time soon ...\",\n        \"member\": {\n            \"name\": \"Angga\",\n            \"occupation\": \"Product Designer\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Property Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/client/properties/6341057ac28ec6edf0106f95",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"client",
+						"properties",
+						"6341057ac28ec6edf0106f95"
+					]
+				},
+				"description": "API endpoint for the property detail page (client path: `/properties/:propertyId`).\n\nThis endpoint returns detailed information about a property as well as a testimonial about that property."
+			},
+			"response": [
+				{
+					"name": "Property Details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/client/properties/6341057ac28ec6edf0106f95",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"properties",
+								"6341057ac28ec6edf0106f95"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Embedder-Policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"df4-ziP4qypHcmfQt5gEUlWRyIdWZi0\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 08 Oct 2022 05:12:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"_id\": \"6341057ac28ec6edf0106f95\",\n    \"title\": \"Tabby Town\",\n    \"price\": 12,\n    \"unit\": \"night\",\n    \"city\": \"Lampung\",\n    \"country\": \"Indonesia\",\n    \"isPopular\": true,\n    \"category\": \"6341057ac28ec6edf0106f91\",\n    \"description\": \"<p>Labore gubergren consetetur qui hendrerit no takimata est invidunt. Est sit nonumy. Dolor clita justo ut et sea labore ut ea stet labore dolor suscipit. Takimata erat ut iriure odio accusam magna blandit kasd eu et rebum facilisi nulla ullamcorper exerci consetetur at. Ea dolores nostrud takimata sanctus et accusam duis praesent amet magna amet dolore adipiscing clita lorem nulla. Sadipscing ipsum sit feugait clita sit est aliquyam dolore qui sed feugait et justo minim. No dolor wisi est lorem vel duis sed sanctus. Magna dolor tation quis doming id dolores tempor labore elitr et sanctus et. Dolor duo facilisis et eos no et kasd vero justo sed dolor. Dolor lorem nonummy autem kasd esse accusam accusam sea. Takimata vero zzril hendrerit labore invidunt qui feugait. Accusam sanctus lorem diam duo rebum. Dolor justo et feugait mazim. Sed elitr ea consequat eirmod. Eos velit dolor nonumy exerci vero molestie dolor suscipit ut eirmod eros erat sadipscing eirmod aliquyam imperdiet. Vel quis nisl sadipscing placerat qui amet lorem et et nulla et nonummy magna ipsum facilisis ut dolores. Consectetuer diam stet no et consetetur nonummy illum feugiat tempor lorem amet dolor ea et ipsum iriure suscipit nulla. &nbsp;</p><p>Assum sed lorem praesent luptatum dolor takimata velit vero aliquyam facilisi consequat clita gubergren et. Et lorem lorem kasd nonumy sed clita accusam. Dolore at minim aliquam tincidunt dolores sanctus diam sit ipsum eos euismod imperdiet duo voluptua. Consetetur luptatum laoreet feugait rebum.</p>\",\n    \"imageUrls\": [\n        \"/images/property-details-1.png\",\n        \"/images/property-details-2.png\",\n        \"/images/property-details-3.png\"\n    ],\n    \"features\": [\n        {\n            \"name\": \"televison\",\n            \"quantity\": 12,\n            \"iconUrl\": \"/images/feature-television.png\",\n            \"_id\": \"6341057ac28ec6edf0106f96\"\n        },\n        {\n            \"name\": \"bedroom\",\n            \"quantity\": 2,\n            \"iconUrl\": \"/images/feature-bedroom.png\",\n            \"_id\": \"6341057ac28ec6edf0106f97\"\n        },\n        {\n            \"name\": \"living room\",\n            \"quantity\": 23,\n            \"iconUrl\": \"/images/feature-living-room.png\",\n            \"_id\": \"6341057ac28ec6edf0106f98\"\n        },\n        {\n            \"name\": \"mb/s\",\n            \"quantity\": 5,\n            \"iconUrl\": \"/images/feature-wifi.png\",\n            \"_id\": \"6341057ac28ec6edf0106f99\"\n        },\n        {\n            \"name\": \"unit ready\",\n            \"quantity\": 4,\n            \"iconUrl\": \"/images/feature-ac.png\",\n            \"_id\": \"6341057ac28ec6edf0106f9a\"\n        },\n        {\n            \"name\": \"refrigerator\",\n            \"quantity\": 6,\n            \"iconUrl\": \"/images/feature-refrigerator.png\",\n            \"_id\": \"6341057ac28ec6edf0106f9b\"\n        },\n        {\n            \"name\": \"bathroom\",\n            \"quantity\": 2,\n            \"iconUrl\": \"/images/feature-bathroom.png\",\n            \"_id\": \"6341057ac28ec6edf0106f9c\"\n        },\n        {\n            \"name\": \"dining room\",\n            \"quantity\": 1,\n            \"iconUrl\": \"/images/feature-dining-room.png\",\n            \"_id\": \"6341057ac28ec6edf0106f9d\"\n        }\n    ],\n    \"activities\": [\n        {\n            \"name\": \"Green Lake\",\n            \"type\": \"Nature\",\n            \"imageUrl\": \"/images/activity-nature.png\",\n            \"isPopular\": false,\n            \"_id\": \"6341057ac28ec6edf0106f9e\"\n        },\n        {\n            \"name\": \"Water Polo\",\n            \"type\": \"Pool\",\n            \"imageUrl\": \"/images/activity-water-polo.jpg\",\n            \"isPopular\": false,\n            \"_id\": \"6341057ac28ec6edf0106f9f\"\n        },\n        {\n            \"name\": \"Labour and Wait\",\n            \"type\": \"Shopping\",\n            \"imageUrl\": \"/images/activity-shopping.png\",\n            \"isPopular\": false,\n            \"_id\": \"6341057ac28ec6edf0106fa0\"\n        },\n        {\n            \"name\": \"Snorkeling\",\n            \"type\": \"Beach\",\n            \"imageUrl\": \"/images/activity-beach.png\",\n            \"isPopular\": false,\n            \"_id\": \"6341057ac28ec6edf0106fa1\"\n        }\n    ],\n    \"__v\": 0,\n    \"testimonial\": {\n        \"_id\": \"291850b1-e2a2-4675-ab27-a990f7e82173\",\n        \"imageUrl\": \"/images/testimonial-property-details.seed.jpg\",\n        \"name\": \"Happy Family\",\n        \"rate\": 4,\n        \"content\": \"What a great trip with my family and I should try again and again next time soon...\",\n        \"memberName\": \"Angga\",\n        \"memberOccupation\": \"UI Designer\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Booking",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "payment-proof",
+							"type": "file",
+							"src": "payment-proof.jpeg"
+						},
+						{
+							"key": "startDate",
+							"value": "2022-01-19T17:00:00.000Z",
+							"type": "text"
+						},
+						{
+							"key": "endDate",
+							"value": "2022-01-21T17:00:00.000Z",
+							"type": "text"
+						},
+						{
+							"key": "duration",
+							"value": "3",
+							"type": "text"
+						},
+						{
+							"key": "firstName",
+							"value": "Amir",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Muhammad Hakim",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "amir.muh.hakim@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "087553445562",
+							"type": "text"
+						},
+						{
+							"key": "propertyId",
+							"value": "6341057ac28ec6edf0106f95",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "5900000",
+							"type": "text"
+						},
+						{
+							"key": "originBankName",
+							"value": "BSI",
+							"type": "text"
+						},
+						{
+							"key": "accountHolderName",
+							"value": "Amir Muhammad Hakim",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/api/v1/client/bookings",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"client",
+						"bookings"
+					]
+				},
+				"description": "This endpoint serves to record user bookings"
+			},
+			"response": [
+				{
+					"name": "Add Booking",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "payment-proof",
+									"type": "file",
+									"src": "payment-proof.jpeg"
+								},
+								{
+									"key": "startDate",
+									"value": "2022-01-19T17:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "endDate",
+									"value": "2022-01-21T17:00:00.000Z",
+									"type": "text"
+								},
+								{
+									"key": "duration",
+									"value": "3",
+									"type": "text"
+								},
+								{
+									"key": "firstName",
+									"value": "Amir",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Muhammad Hakim",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "amir.muh.hakim@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "087553445562",
+									"type": "text"
+								},
+								{
+									"key": "propertyId",
+									"value": "6341057ac28ec6edf0106f95",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "5900000",
+									"type": "text"
+								},
+								{
+									"key": "originBankName",
+									"value": "BSI",
+									"type": "text"
+								},
+								{
+									"key": "accountHolderName",
+									"value": "Amir Muhammad Hakim",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:3000/api/v1/client/bookings",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"bookings"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Embedder-Policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "29"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1d-/qUeOyBesVN2pA5WcefFCXcFo3Q\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 08 Oct 2022 05:14:16 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Property booked\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Banks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/client/banks",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"client",
+						"banks"
+					]
+				},
+				"description": "This endpoint returns all the banks that have been registered by the admin."
+			},
+			"response": [
+				{
+					"name": "Banks",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/client/banks",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"client",
+								"banks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Embedder-Policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "362"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"16a-O744fh4TGgG25W9l+1THCQyU/m4\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 10 Oct 2022 19:23:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"_id\": \"6342c94a360ccbc5329b77f9\",\n        \"name\": \"Bank Syariah Indonesia\",\n        \"logoUrl\": \"/images/bsi-logo.png\",\n        \"accountNumbers\": \"22081544\",\n        \"accountHolderName\": \"Amir Muhammad Hakim\",\n        \"__v\": 0\n    },\n    {\n        \"_id\": \"6342c94a360ccbc5329b77fa\",\n        \"name\": \"Bank Syariah Mandiri\",\n        \"logoUrl\": \"/images/mandiri-syariah-logo.png\",\n        \"accountNumbers\": \"77542493\",\n        \"accountHolderName\": \"Muhammad Avdol\",\n        \"__v\": 0\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "Test",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/v1/client/test",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"client",
+						"test"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Test",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:3000/api/v1/member/test",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"member",
+								"test"
+							]
+						}
+					},
+					"status": "I'm a Teapot",
+					"code": 418,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Embedder-Policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "26"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1a-JPgoBqDgBAAzpOg3tgLmjXHdDtg\""
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 29 Sep 2022 05:25:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"I'm a Teapot\"\n}"
+				}
+			]
+		}
+	]
+}
