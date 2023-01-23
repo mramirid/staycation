@@ -6,28 +6,20 @@ A web app for finding hotels, houses, and apartments near tourist attractions.
 
 ## How to Run
 
-### Initial Run With Data Seeding
+### Initial Run
 
-Do the following steps to populate the database with some initial documents; to populate the public images directory with some initial images; and to run all services.
-
-Warning, the existing database and images will be dropped.
-
-1. Shut down running services and remove existing volumes.
+Run the following command to populate the database with some initial documents; to populate the public images directory with some initial images; and to run all services.
 
 ```bash
-docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml down -v
+docker compose --profile initial-run up -d --build
 ```
 
-2. Run all services.
+### Run
+
+Just run all services without data seeding.
 
 ```bash
-docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml up -d --build
-```
-
-### Run Without Data Seeding
-
-```bash
-docker-compose up -d
+docker compose --profile run up -d
 ```
 
 ### Running Ports
@@ -38,7 +30,7 @@ docker-compose up -d
 | CMS     | 3000  |
 | MongoDB | 27017 |
 
-## User Interface Design
+## The User Interface Design
 
 See [Staycation Website UI Design](https://www.figma.com/file/WUxx1tjQ7r5MVrMDBO7suP/Staycation-Website?node-id=0%3A1).
 

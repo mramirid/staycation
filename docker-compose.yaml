@@ -7,6 +7,22 @@ services:
       - ./cms/.env.production
     ports:
       - "27017:27017"
+    profiles:
+      - initial-run
+      - run
+
+  seed:
+    build:
+      context: ./cms
+      dockerfile: Dockerfile.seed
+    env_file:
+      - ./cms/.env.production
+    volumes:
+      - public_images:/app/public/images
+    depends_on:
+      - mongodb
+    profiles:
+      - initial-run
 
   cms:
     build: ./cms
@@ -17,7 +33,10 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      - mongodb
+      - seed
+    profiles:
+      - initial-run
+      - run
 
   client:
     build: ./client
@@ -27,6 +46,9 @@ services:
     tty: true
     depends_on:
       - cms
+    profiles:
+      - initial-run
+      - run
 
 volumes:
   db:
