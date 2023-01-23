@@ -36,7 +36,9 @@ See [Staycation Website UI Design](https://www.figma.com/file/WUxx1tjQ7r5MVrMDBO
 
 ## The Client Service
 
-| Landing Page                                                                                                                                      | Property Details                                                                                                                                      |
+<img src="https://res.cloudinary.com/mramirid/image/upload/v1674457923/Hasil_Karya_BWAMERN_2020_wjfeqa.jpg" alt="Presentation" />
+
+<!-- | Landing Page                                                                                                                                      | Property Details                                                                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <img src="https://user-images.githubusercontent.com/30113370/195056729-2c144efa-889d-4690-b976-6e5bb26fe7c6.jpeg" alt="Landing Page" width="400"> | <img src="https://user-images.githubusercontent.com/30113370/195056750-951b1ec2-aac1-4e60-b44d-020aa79bcda4.jpeg" width="400" alt="Property Details"> |
 
@@ -46,7 +48,7 @@ See [Staycation Website UI Design](https://www.figma.com/file/WUxx1tjQ7r5MVrMDBO
 
 | Step 3 ~ Booking Completed                                                                                                                             |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| <img src="https://user-images.githubusercontent.com/30113370/195056759-9fde17b6-ec44-4b64-a70e-feaf8760818a.jpeg" alt="Booking Completed" width="400"> |
+| <img src="https://user-images.githubusercontent.com/30113370/195056759-9fde17b6-ec44-4b64-a70e-feaf8760818a.jpeg" alt="Booking Completed" width="400"> | -->
 
 ## The CMS Service
 
