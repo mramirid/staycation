@@ -30,7 +30,7 @@ type PropertyDetailsProps = ContentProps & { className: string };
 
 function PropertyDetails(props: PropertyDetailsProps) {
   const firstImageUrl =
-    import.meta.env.VITE_BACKEND_BASE_URL + props.property.imageUrls.at(0);
+    import.meta.env.VITE_CMS_BASE_URL + props.property.imageUrls.at(0);
 
   const formattedDuration = formatCountSuffix(props.duration, {
     singular: "night",

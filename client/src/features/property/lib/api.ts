@@ -19,7 +19,7 @@ export async function getProperty(id: string): Promise<Property> {
   }
 
   const response = await fetch(
-    import.meta.env.VITE_BACKEND_BASE_URL + "/api/v1/client/properties/" + id
+    import.meta.env.VITE_CMS_BASE_URL + "/api/v1/client/properties/" + id
   );
 
   if (!response.ok) {

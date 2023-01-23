@@ -48,7 +48,7 @@ type FeatureItemProps = {
 };
 
 function FeatureItem({ feature }: FeatureItemProps) {
-  const iconUrl = import.meta.env.VITE_BACKEND_BASE_URL + feature.iconUrl;
+  const iconUrl = import.meta.env.VITE_CMS_BASE_URL + feature.iconUrl;
 
   return (
     <figure>

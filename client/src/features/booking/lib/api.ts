@@ -7,9 +7,9 @@ import { getErrorMessage } from "@/utils/error";
 import { StatusCodes } from "http-status-codes";
 
 export async function getBanks(): Promise<Bank[]> {
-  const backendBaseUrl = import.meta.env.VITE_BACKEND_BASE_URL;
+  const cmsBaseUrl = import.meta.env.VITE_CMS_BASE_URL;
 
-  const response = await fetch(backendBaseUrl + "/api/v1/client/banks");
+  const response = await fetch(cmsBaseUrl + "/api/v1/client/banks");
 
   if (!response.ok) {
     const error = await response.json();
@@ -20,7 +20,7 @@ export async function getBanks(): Promise<Bank[]> {
 
   banks = banks.map<Bank>((bank) => ({
     ...bank,
-    logoUrl: backendBaseUrl + bank.logoUrl,
+    logoUrl: cmsBaseUrl + bank.logoUrl,
   }));
 
   return banks;
@@ -36,7 +36,7 @@ export type Bank = {
 
 export async function bookProperty(formData: FormData): Promise<void> {
   const response = await fetch(
-    import.meta.env.VITE_BACKEND_BASE_URL + "/api/v1/client/bookings",
+    import.meta.env.VITE_CMS_BASE_URL + "/api/v1/client/bookings",
     {
       method: "post",
       body: formData,

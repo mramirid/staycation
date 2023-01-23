@@ -54,7 +54,7 @@ type FeatureItemProps = {
 };
 
 function ActivityItem({ item }: FeatureItemProps) {
-  const imageUrl = import.meta.env.VITE_BACKEND_BASE_URL + item.imageUrl;
+  const imageUrl = import.meta.env.VITE_CMS_BASE_URL + item.imageUrl;
 
   return (
     <article className="card rounded-b-none">

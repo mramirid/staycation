@@ -55,7 +55,7 @@ export default function LandingPage() {
 
 export async function loader(): Promise<Response> {
   const response = await fetch(
-    import.meta.env.VITE_BACKEND_BASE_URL + "/api/v1/client/landing"
+    import.meta.env.VITE_CMS_BASE_URL + "/api/v1/client/landing"
   );
 
   if (!response.ok) {

@@ -39,7 +39,7 @@ type FeaturedImageProps = {
 };
 
 function FeatureImage(props: FeaturedImageProps) {
-  const imageUrl = import.meta.env.VITE_BACKEND_BASE_URL + props.imageUrl;
+  const imageUrl = import.meta.env.VITE_CMS_BASE_URL + props.imageUrl;
 
   return (
     <figure className="img-wrapper card">

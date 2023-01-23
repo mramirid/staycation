@@ -79,7 +79,7 @@ type HeroBannerProps = {
 };
 
 function TestimonialPortrait(props: HeroBannerProps) {
-  const imageUrl = import.meta.env.VITE_BACKEND_BASE_URL + props.imageUrl;
+  const imageUrl = import.meta.env.VITE_CMS_BASE_URL + props.imageUrl;
 
   return (
     <div>

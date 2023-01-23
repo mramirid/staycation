@@ -8,7 +8,9 @@ A web app for finding hotels, houses, and apartments near tourist attractions.
 
 ### Initial Run With Data Seeding
 
-Populate the database with initial documents; populate the public images with initial images; run all services. Warning, the existing database and images will be dropped.
+Do the following steps to populate the database with some initial documents; to populate the public images directory with some initial images; and to run all services.
+
+Warning, the existing database and images will be dropped.
 
 1. Shut down running services and remove existing volumes.
 
@@ -28,11 +30,11 @@ docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml up -d -
 docker-compose up -d
 ```
 
-## User Interface Design
+## The User Interface Design
 
 See [Staycation Website UI Design](https://www.figma.com/file/WUxx1tjQ7r5MVrMDBO7suP/Staycation-Website?node-id=0%3A1).
 
-## Client Service
+## The Client Service
 
 | Landing Page                                                                                                                                      | Property Details                                                                                                                                      |
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -46,7 +48,7 @@ See [Staycation Website UI Design](https://www.figma.com/file/WUxx1tjQ7r5MVrMDBO
 | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | <img src="https://user-images.githubusercontent.com/30113370/195056759-9fde17b6-ec44-4b64-a70e-feaf8760818a.jpeg" alt="Booking Completed" width="400"> |
 
-## Backend Service
+## The CMS Service
 
 ### Admin Dashboard
 

@@ -59,7 +59,7 @@ type MostPickedItemProps = {
 function MostPickedItem({ mostPickedProperty }: MostPickedItemProps) {
   const formattedPrice = formatToUSD(mostPickedProperty.price);
   const imageUrl =
-    import.meta.env.VITE_BACKEND_BASE_URL + mostPickedProperty.imageUrl;
+    import.meta.env.VITE_CMS_BASE_URL + mostPickedProperty.imageUrl;
 
   return (
     <article className={classes.mostPickedItem}>

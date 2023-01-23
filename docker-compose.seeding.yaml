@@ -1,10 +1,10 @@
 services:
   seeding:
     build:
-      context: ./backend
+      context: ./cms
       dockerfile: Dockerfile.seed
     env_file:
-      - ./backend/.env.production
+      - ./cms/.env.production
     volumes:
       - public_images:/app/public/images
     depends_on:

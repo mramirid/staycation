@@ -4,16 +4,16 @@ services:
     volumes:
       - db:/data/db
     env_file:
-      - ./backend/.env.production
+      - ./cms/.env.production
     ports:
       - "27017:27017"
 
-  backend:
-    build: ./backend
+  cms:
+    build: ./cms
     volumes:
       - public_images:/app/public/images
     env_file:
-      - ./backend/.env.production
+      - ./cms/.env.production
     ports:
       - "3000:3000"
     depends_on:
@@ -26,7 +26,7 @@ services:
     stdin_open: true
     tty: true
     depends_on:
-      - backend
+      - cms
 
 volumes:
   db:

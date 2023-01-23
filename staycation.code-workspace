@@ -8,11 +8,11 @@
       "path": "client"
     },
     {
-      "path": "backend"
+      "path": "cms"
     }
   ],
   "settings": {
-    "eslint.workingDirectories": ["client", "backend"],
-    "conventionalCommits.scopes": ["client", "backend"]
+    "eslint.workingDirectories": ["client", "cms"],
+    "conventionalCommits.scopes": ["client", "cms"]
   }
 }

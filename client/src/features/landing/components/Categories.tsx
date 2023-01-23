@@ -73,7 +73,7 @@ type CategoryItemProps = {
 };
 
 function CategoryItem({ item }: CategoryItemProps) {
-  const imageUrl = import.meta.env.VITE_BACKEND_BASE_URL + item.imageUrl;
+  const imageUrl = import.meta.env.VITE_CMS_BASE_URL + item.imageUrl;
 
   return (
     <article className="card rounded-b-none">
