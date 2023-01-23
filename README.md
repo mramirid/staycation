@@ -2,7 +2,7 @@
 
 A web app for finding hotels, houses, and apartments near tourist attractions.
 
-> A course project from [BWA Full-Stack JavaScript Developer: Website Travel](https://www.buildwithangga.com/kelas/full-stack-javascript-developer-website-travel).
+> A course project from [BWA Full-Stack JavaScript Developer: Website Travel](https://www.buildwithangga.com/kelas/full-stack-javascript-developer-website-travel) with massive customizations.
 
 ## How to Run
 
@@ -30,7 +30,15 @@ docker-compose -f ./docker-compose.yaml -f ./docker-compose.seeding.yaml up -d -
 docker-compose up -d
 ```
 
-## The User Interface Design
+### Running Ports
+
+| Service | Port  |
+| ------- | ----- |
+| Client  | 8080  |
+| CMS     | 3000  |
+| MongoDB | 27017 |
+
+## User Interface Design
 
 See [Staycation Website UI Design](https://www.figma.com/file/WUxx1tjQ7r5MVrMDBO7suP/Staycation-Website?node-id=0%3A1).
 
